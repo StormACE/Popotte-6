@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\krypt\\Documents\\GitHub\\Popotte_NET10_6.0\\Popotte\\ExtendedRichTextBox\\ExtendedRichTextBox.vbproj": {}
+    "C:\\Users\\krypt\\Documents\\GitHub\\Popotte-6\\ExtendedRichTextBox\\ExtendedRichTextBox.vbproj": {}
   },
   "projects": {
-    "C:\\Users\\krypt\\Documents\\GitHub\\Popotte_NET10_6.0\\Popotte\\ExtendedRichTextBox\\ExtendedRichTextBox.vbproj": {
+    "C:\\Users\\krypt\\Documents\\GitHub\\Popotte-6\\ExtendedRichTextBox\\ExtendedRichTextBox.vbproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\krypt\\Documents\\GitHub\\Popotte_NET10_6.0\\Popotte\\ExtendedRichTextBox\\ExtendedRichTextBox.vbproj",
+        "projectUniqueName": "C:\\Users\\krypt\\Documents\\GitHub\\Popotte-6\\ExtendedRichTextBox\\ExtendedRichTextBox.vbproj",
         "projectName": "AdvRTB",
-        "projectPath": "C:\\Users\\krypt\\Documents\\GitHub\\Popotte_NET10_6.0\\Popotte\\ExtendedRichTextBox\\ExtendedRichTextBox.vbproj",
+        "projectPath": "C:\\Users\\krypt\\Documents\\GitHub\\Popotte-6\\ExtendedRichTextBox\\ExtendedRichTextBox.vbproj",
         "packagesPath": "C:\\Users\\krypt\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\krypt\\Documents\\GitHub\\Popotte_NET10_6.0\\Popotte\\ExtendedRichTextBox\\obj\\",
+        "outputPath": "C:\\Users\\krypt\\Documents\\GitHub\\Popotte-6\\ExtendedRichTextBox\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\krypt\\AppData\\Roaming\\NuGet\\NuGet.Config",
