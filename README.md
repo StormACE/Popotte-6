@@ -1,4 +1,4 @@
-# Popotte 6
+# Popotte 6 ALPHA
 Logiciel de gestion de recettes Lisez License.txt avant d'utiliser ou modifier!!!
 
 Recipes management software Read licence.txt before use or modification!!!
