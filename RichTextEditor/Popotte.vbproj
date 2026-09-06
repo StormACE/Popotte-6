@@ -1,0 +1,109 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <EnableDefaultApplicationDefinition>true</EnableDefaultApplicationDefinition>
+    <MyType>WindowsForms</MyType>
+    <StartupObject>Popotte.My.MyApplication</StartupObject>
+    <RootNamespace>Popotte</RootNamespace>
+    <AssemblyName>Popotte</AssemblyName>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <ImplicitUsings>false</ImplicitUsings>
+    <TargetPlatformMinVersion>6.1</TargetPlatformMinVersion>
+    <ApplicationIcon>Popotte256-GoldMember.ico</ApplicationIcon>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <Version>6.0.0.1</Version>
+    <Authors>Martin Laflamme</Authors>
+    <Copyright>Martin Laflamme 2003/2026</Copyright>
+    <FileVersion>6.0.0</FileVersion>
+    <AssemblyVersion>6.0.0</AssemblyVersion>
+    <PackageId>Popotte</PackageId>
+    <Title>Popotte 6</Title>
+    <Product>Popotte</Product>
+    <PackageOutputPath />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <PlatformTarget>x64</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <DefineTrace>true</DefineTrace>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <PlatformTarget>x64</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <DefineTrace>true</DefineTrace>
+    <PlatformTarget>x64</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <DefineTrace>true</DefineTrace>
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ExtendedRichTextBox\ExtendedRichTextBox.vbproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="dlgAboutBox.resx"><DependentUpon>dlgAboutBox.vb</DependentUpon></EmbeddedResource>
+    <EmbeddedResource Update="dlgAddMenu.resx"><DependentUpon>dlgAddMenu.vb</DependentUpon></EmbeddedResource>
+    <EmbeddedResource Update="dlgLanguage.resx"><DependentUpon>dlgLanguage.vb</DependentUpon></EmbeddedResource>
+    <EmbeddedResource Update="dlgmodifymenu.resx"><DependentUpon>dlgmodifymenu.vb</DependentUpon></EmbeddedResource>
+    <EmbeddedResource Update="dlgMultiModInfo.resx"><DependentUpon>dlgMultiModInfo.vb</DependentUpon></EmbeddedResource>
+    <EmbeddedResource Update="dlgCrypterDécrypter.resx"><DependentUpon>dlgCrypterDécrypter.vb</DependentUpon></EmbeddedResource>
+    <EmbeddedResource Update="dlgConverter.resx"><DependentUpon>dlgConverter.vb</DependentUpon></EmbeddedResource>
+    <EmbeddedResource Update="dlgInfoRecette.resx"><DependentUpon>dlgInfoRecette.vb</DependentUpon></EmbeddedResource>
+    <EmbeddedResource Update="dlgNouveauLivre.resx"><DependentUpon>dlgNouveauLivre.vb</DependentUpon></EmbeddedResource>
+    <EmbeddedResource Update="dlgRenameLivre.resx"><DependentUpon>dlgRenameLivre.vb</DependentUpon></EmbeddedResource>
+    <EmbeddedResource Update="dlgFind.resx"><DependentUpon>dlgFind.vb</DependentUpon></EmbeddedResource>
+    <EmbeddedResource Update="dlgStartup.resx"><DependentUpon>dlgStartup.vb</DependentUpon></EmbeddedResource>
+    <EmbeddedResource Update="frmMain.resx"><DependentUpon>frmMain.vb</DependentUpon></EmbeddedResource>
+    <EmbeddedResource Update="dlgReplace.resx"><DependentUpon>dlgReplace.vb</DependentUpon></EmbeddedResource>
+    <EmbeddedResource Update="dlgResearchCenter.resx"><DependentUpon>dlgResearchCenter.vb</DependentUpon></EmbeddedResource>
+    <EmbeddedResource Update="dlgLivres.resx"><DependentUpon>dlgLivres.vb</DependentUpon></EmbeddedResource>
+    <EmbeddedResource Update="frmMenu.resx"><DependentUpon>frmMenu.vb</DependentUpon></EmbeddedResource>
+    <EmbeddedResource Update="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <Compile Update="My Project\Application.Designer.vb"><AutoGen>true</AutoGen><DesignTime>true</DesignTime><DependentUpon>Application.myapp</DependentUpon></Compile>
+    <Compile Update="My Project\Resources.Designer.vb"><AutoGen>true</AutoGen><DesignTime>true</DesignTime><DependentUpon>Resources.resx</DependentUpon></Compile>
+    <Compile Update="My Project\Settings.Designer.vb"><AutoGen>true</AutoGen><DesignTime>true</DesignTime><DependentUpon>Settings.settings</DependentUpon></Compile>
+    <None Update="My Project\Application.myapp"><Generator>MyApplicationCodeGenerator</Generator><LastGenOutput>Application.Designer.vb</LastGenOutput></None>
+    <None Update="My Project\Settings.settings"><Generator>SettingsSingleFileGenerator</Generator><CustomToolNamespace>My</CustomToolNamespace><LastGenOutput>Settings.Designer.vb</LastGenOutput></None>
+    <None Update="Popotte256-GoldMember.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="System" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Windows.Forms" />
+  </ItemGroup>
+</Project>

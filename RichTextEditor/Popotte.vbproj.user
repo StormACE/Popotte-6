@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <Compile Update="dlgAboutBox.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="dlgAddMenu.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="dlgConverter.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="dlgFind.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="dlgInfoRecette.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="dlgLanguage.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="dlgLivres.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="dlgmodifymenu.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="dlgMultiModInfo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="dlgNouveauLivre.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="dlgRenameLivre.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="dlgReplace.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="dlgResearchCenter.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="dlgStartup.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="frmMain.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="frmMenu.vb">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>

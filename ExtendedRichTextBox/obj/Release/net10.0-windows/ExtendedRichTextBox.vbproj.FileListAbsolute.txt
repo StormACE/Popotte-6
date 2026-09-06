@@ -1,0 +1,11 @@
+C:\Users\krypt\Documents\GitHub\Popotte_NET10_6.0\Popotte\ExtendedRichTextBox\bin\Release\net10.0-windows\AdvRTB.deps.json
+C:\Users\krypt\Documents\GitHub\Popotte_NET10_6.0\Popotte\ExtendedRichTextBox\bin\Release\net10.0-windows\AdvRTB.dll
+C:\Users\krypt\Documents\GitHub\Popotte_NET10_6.0\Popotte\ExtendedRichTextBox\bin\Release\net10.0-windows\AdvRTB.pdb
+C:\Users\krypt\Documents\GitHub\Popotte_NET10_6.0\Popotte\ExtendedRichTextBox\obj\Release\net10.0-windows\ExtendedRichTextBox.Resources.resources
+C:\Users\krypt\Documents\GitHub\Popotte_NET10_6.0\Popotte\ExtendedRichTextBox\obj\Release\net10.0-windows\ExtendedRichTextBox.vbproj.GenerateResource.cache
+C:\Users\krypt\Documents\GitHub\Popotte_NET10_6.0\Popotte\ExtendedRichTextBox\obj\Release\net10.0-windows\ExtendedRichTextBox.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\krypt\Documents\GitHub\Popotte_NET10_6.0\Popotte\ExtendedRichTextBox\obj\Release\net10.0-windows\ExtendedRichTextBox.vbproj.CoreCompileInputs.cache
+C:\Users\krypt\Documents\GitHub\Popotte_NET10_6.0\Popotte\ExtendedRichTextBox\obj\Release\net10.0-windows\AdvRTB.dll
+C:\Users\krypt\Documents\GitHub\Popotte_NET10_6.0\Popotte\ExtendedRichTextBox\obj\Release\net10.0-windows\refint\AdvRTB.dll
+C:\Users\krypt\Documents\GitHub\Popotte_NET10_6.0\Popotte\ExtendedRichTextBox\obj\Release\net10.0-windows\AdvRTB.pdb
+C:\Users\krypt\Documents\GitHub\Popotte_NET10_6.0\Popotte\ExtendedRichTextBox\obj\Release\net10.0-windows\ref\AdvRTB.dll
