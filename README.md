@@ -1,9 +1,9 @@
-# Popotte 5
+# Popotte 6
 Logiciel de gestion de recettes Lisez License.txt avant d'utiliser ou modifier!!!
 
 Recipes management software Read licence.txt before use or modification!!!
 
-La nouvelle version 5.4.2.107 Master est en-ligne.
+La nouvelle version 6.0.0.1 Master est en-ligne.
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -98,7 +98,7 @@ licence.txt
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-To build the software you need Visual Studio 2022 Community Edition
+To build the software you need Visual Studio 2026 Community Edition
 
 Don't forget to read the "Licence.txt" file before using, modifying and/or distribute the software!
 
