@@ -3,7 +3,7 @@ Logiciel de gestion de recettes Lisez License.txt avant d'utiliser ou modifier!!
 
 Recipes management software Read licence.txt before use or modification!!!
 
-La nouvelle version 6.0.0.1 est en-ligne.
+La nouvelle version 6.0.0.2 est en-ligne.
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -67,7 +67,7 @@ Here are some functionality characteristics :
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Structure tree to get the build to work...
-Folders and files needed can be found in RichTextEditor/bin/x64/Release/
+Folders and files needed can be found in Folder "Files Needed"
 
 Folder needed in the root of the software folder:
 
@@ -82,17 +82,11 @@ Files needed in the root of the software folder:
 
 AdvRTB.dll
 
-Ionic.Zip.dll
-
 Popotte English.pdf
 
 Popotte Francais.pdf
 
 Popotte.exe
-
-Apache v2.txt
-
-Licence Ionic Zip.txt
 
 licence.txt
 
