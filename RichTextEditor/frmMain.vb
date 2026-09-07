@@ -1142,7 +1142,36 @@ Public Class frmMain
     'Hyperlink clicked in RTB
     Private Sub rtbDoc_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkClickedEventArgs) Handles rtbDoc.LinkClicked
         Try
-            Process.Start(e.LinkText)
+
+            Try
+                Dim link As String = e.LinkText
+
+                ' Normaliser les préfixes file:
+                If link.StartsWith("file:", StringComparison.OrdinalIgnoreCase) Then
+                    link = link.Replace("file:///", "file:/") ' uniformiser
+                    If link.StartsWith("file:/") Then
+                        link = link.Substring("file:/".Length)
+                        ' cas "/C:/..." -> retirer le slash initial
+                        If link.StartsWith("/") AndAlso link.Length > 2 AndAlso link(2) = ":"c Then
+                            link = link.Substring(1)
+                        End If
+                    End If
+                End If
+
+                ' Décoder les escapes (%20 -> espace)
+                link = Uri.UnescapeDataString(link)
+
+                ' Ouvrir si le fichier existe
+                If System.IO.File.Exists(link) Then
+                    Dim psi As New ProcessStartInfo(link) With {.UseShellExecute = True}
+                    Process.Start(psi)
+                Else
+                    MessageBox.Show(LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "9"), LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "7"), MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                End If
+            Catch ex As Exception
+                MessageBox.Show("Erreur lors de l'ouverture du lien : " & ex.Message, "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+
         Catch ex As Win32Exception
             MessageBox.Show(LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "9"), LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "7"), MessageBoxButtons.OK, MessageBoxIcon.Warning)
         Catch ex As FileNotFoundException
@@ -3308,6 +3337,8 @@ Public Class frmMain
         Dim mn As New frmMenu
         mn.Show()
     End Sub
+
+
 
 
 
