@@ -1494,7 +1494,7 @@ Partial Class frmMain
         rtbDoc.ContextMenuStrip = ContextMenuStrip1
         rtbDoc.Cursor = Cursors.IBeam
         rtbDoc.Dock = DockStyle.Fill
-        rtbDoc.Font = New Font("Times New Roman", 14F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        rtbDoc.Font = New Font("Calibri", 16F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         rtbDoc.HideSelection = False
         rtbDoc.ImeMode = ImeMode.NoControl
         rtbDoc.Location = New Point(0, 163)
