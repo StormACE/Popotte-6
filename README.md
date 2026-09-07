@@ -67,7 +67,7 @@ Here are some functionality characteristics :
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Structure tree to get the build to work...
-Folders and files needed can be found in RichTextEditor/bin/x64/Release/
+Folders and files needed can be found in Folder "Files Needed"
 
 Folder needed in the root of the software folder:
 
@@ -82,17 +82,11 @@ Files needed in the root of the software folder:
 
 AdvRTB.dll
 
-Ionic.Zip.dll
-
 Popotte English.pdf
 
 Popotte Francais.pdf
 
 Popotte.exe
-
-Apache v2.txt
-
-Licence Ionic Zip.txt
 
 licence.txt
 
