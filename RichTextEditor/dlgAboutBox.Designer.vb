@@ -23,128 +23,112 @@ Partial Class dlgAboutBox
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgAboutBox))
-        Me.TextBoxDescription = New System.Windows.Forms.TextBox()
-        Me.LabelCopyright = New System.Windows.Forms.Label()
-        Me.LabelVersion = New System.Windows.Forms.Label()
-        Me.LabelProductName = New System.Windows.Forms.Label()
-        Me.LogoPictureBox = New System.Windows.Forms.PictureBox()
-        Me.TableLayoutPanel = New System.Windows.Forms.TableLayoutPanel()
-        CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TableLayoutPanel.SuspendLayout()
-        Me.SuspendLayout()
-        '
-        'TextBoxDescription
-        '
-        Me.TextBoxDescription.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
-        Me.TextBoxDescription.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextBoxDescription.Location = New System.Drawing.Point(206, 134)
-        Me.TextBoxDescription.Margin = New System.Windows.Forms.Padding(7, 3, 3, 3)
-        Me.TextBoxDescription.Multiline = True
-        Me.TextBoxDescription.Name = "TextBoxDescription"
-        Me.TextBoxDescription.ReadOnly = True
-        Me.TextBoxDescription.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.TextBoxDescription.Size = New System.Drawing.Size(282, 163)
-        Me.TextBoxDescription.TabIndex = 0
-        Me.TextBoxDescription.TabStop = False
-        Me.TextBoxDescription.Text = resources.GetString("TextBoxDescription.Text")
-        '
-        'LabelCopyright
-        '
-        Me.LabelCopyright.AutoSize = True
-        Me.LabelCopyright.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.LabelCopyright.Location = New System.Drawing.Point(206, 66)
-        Me.LabelCopyright.Margin = New System.Windows.Forms.Padding(7, 0, 3, 0)
-        Me.LabelCopyright.MaximumSize = New System.Drawing.Size(0, 18)
-        Me.LabelCopyright.Name = "LabelCopyright"
-        Me.LabelCopyright.Size = New System.Drawing.Size(282, 18)
-        Me.LabelCopyright.TabIndex = 0
-        Me.LabelCopyright.Text = "Copyright"
-        Me.LabelCopyright.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'LabelVersion
-        '
-        Me.LabelVersion.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.LabelVersion.Location = New System.Drawing.Point(206, 33)
-        Me.LabelVersion.Margin = New System.Windows.Forms.Padding(7, 0, 3, 0)
-        Me.LabelVersion.MaximumSize = New System.Drawing.Size(0, 18)
-        Me.LabelVersion.Name = "LabelVersion"
-        Me.LabelVersion.Size = New System.Drawing.Size(282, 18)
-        Me.LabelVersion.TabIndex = 0
-        Me.LabelVersion.Text = "Version"
-        Me.LabelVersion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'LabelProductName
-        '
-        Me.LabelProductName.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.LabelProductName.Location = New System.Drawing.Point(206, 0)
-        Me.LabelProductName.Margin = New System.Windows.Forms.Padding(7, 0, 3, 0)
-        Me.LabelProductName.MaximumSize = New System.Drawing.Size(0, 18)
-        Me.LabelProductName.Name = "LabelProductName"
-        Me.LabelProductName.Size = New System.Drawing.Size(282, 18)
-        Me.LabelProductName.TabIndex = 0
-        Me.LabelProductName.Text = "Nom du produit"
-        Me.LabelProductName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'LogoPictureBox
-        '
-        Me.LogoPictureBox.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.LogoPictureBox.Image = CType(resources.GetObject("LogoPictureBox.Image"), System.Drawing.Image)
-        Me.LogoPictureBox.Location = New System.Drawing.Point(3, 3)
-        Me.LogoPictureBox.Name = "LogoPictureBox"
-        Me.TableLayoutPanel.SetRowSpan(Me.LogoPictureBox, 6)
-        Me.LogoPictureBox.Size = New System.Drawing.Size(193, 331)
-        Me.LogoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.LogoPictureBox.TabIndex = 0
-        Me.LogoPictureBox.TabStop = False
-        '
-        'TableLayoutPanel
-        '
-        Me.TableLayoutPanel.ColumnCount = 2
-        Me.TableLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40.63205!))
-        Me.TableLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 59.36795!))
-        Me.TableLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel.Controls.Add(Me.LogoPictureBox, 0, 0)
-        Me.TableLayoutPanel.Controls.Add(Me.LabelProductName, 1, 0)
-        Me.TableLayoutPanel.Controls.Add(Me.LabelVersion, 1, 1)
-        Me.TableLayoutPanel.Controls.Add(Me.LabelCopyright, 1, 2)
-        Me.TableLayoutPanel.Controls.Add(Me.TextBoxDescription, 1, 4)
-        Me.TableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel.Location = New System.Drawing.Point(11, 10)
-        Me.TableLayoutPanel.Name = "TableLayoutPanel"
-        Me.TableLayoutPanel.RowCount = 6
-        Me.TableLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
-        Me.TableLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
-        Me.TableLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.27907!))
-        Me.TableLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 3.100775!))
-        Me.TableLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
-        Me.TableLayoutPanel.Size = New System.Drawing.Size(491, 337)
-        Me.TableLayoutPanel.TabIndex = 0
-        '
-        'dlgAboutBox
-        '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(513, 357)
-        Me.Controls.Add(Me.TableLayoutPanel)
-        Me.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.MaximizeBox = False
-        Me.MinimizeBox = False
-        Me.Name = "dlgAboutBox"
-        Me.Padding = New System.Windows.Forms.Padding(11, 10, 11, 10)
-        Me.ShowInTaskbar = False
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "AboutBox1"
-        CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TableLayoutPanel.ResumeLayout(False)
-        Me.TableLayoutPanel.PerformLayout()
-        Me.ResumeLayout(False)
+        LabelCopyright = New Label()
+        LabelVersion = New Label()
+        LabelProductName = New Label()
+        LogoPictureBox = New PictureBox()
+        TableLayoutPanel = New TableLayoutPanel()
+        CType(LogoPictureBox, ComponentModel.ISupportInitialize).BeginInit()
+        TableLayoutPanel.SuspendLayout()
+        SuspendLayout()
+        ' 
+        ' LabelCopyright
+        ' 
+        LabelCopyright.AutoSize = True
+        LabelCopyright.Location = New Point(351, 216)
+        LabelCopyright.Margin = New Padding(7, 0, 3, 0)
+        LabelCopyright.Name = "LabelCopyright"
+        LabelCopyright.Size = New Size(105, 28)
+        LabelCopyright.TabIndex = 0
+        LabelCopyright.Text = "Copyright"
+        LabelCopyright.TextAlign = ContentAlignment.MiddleLeft
+        ' 
+        ' LabelVersion
+        ' 
+        LabelVersion.AccessibleRole = AccessibleRole.None
+        LabelVersion.AutoSize = True
+        LabelVersion.Dock = DockStyle.Fill
+        LabelVersion.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        LabelVersion.Location = New Point(351, 61)
+        LabelVersion.Margin = New Padding(7, 0, 3, 0)
+        LabelVersion.Name = "LabelVersion"
+        LabelVersion.Size = New Size(495, 155)
+        LabelVersion.TabIndex = 0
+        LabelVersion.Text = "Version"
+        LabelVersion.TextAlign = ContentAlignment.MiddleLeft
+        ' 
+        ' LabelProductName
+        ' 
+        LabelProductName.AutoSize = True
+        LabelProductName.Dock = DockStyle.Fill
+        LabelProductName.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        LabelProductName.Location = New Point(351, 0)
+        LabelProductName.Margin = New Padding(7, 0, 3, 0)
+        LabelProductName.Name = "LabelProductName"
+        LabelProductName.Size = New Size(495, 61)
+        LabelProductName.TabIndex = 0
+        LabelProductName.Text = "Nom du produit"
+        LabelProductName.TextAlign = ContentAlignment.MiddleLeft
+        ' 
+        ' LogoPictureBox
+        ' 
+        LogoPictureBox.Dock = DockStyle.Fill
+        LogoPictureBox.Image = CType(resources.GetObject("LogoPictureBox.Image"), Image)
+        LogoPictureBox.Location = New Point(3, 3)
+        LogoPictureBox.Name = "LogoPictureBox"
+        TableLayoutPanel.SetRowSpan(LogoPictureBox, 6)
+        LogoPictureBox.Size = New Size(338, 609)
+        LogoPictureBox.SizeMode = PictureBoxSizeMode.Zoom
+        LogoPictureBox.TabIndex = 0
+        LogoPictureBox.TabStop = False
+        ' 
+        ' TableLayoutPanel
+        ' 
+        TableLayoutPanel.ColumnCount = 2
+        TableLayoutPanel.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 40.63205F))
+        TableLayoutPanel.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 59.36795F))
+        TableLayoutPanel.ColumnStyles.Add(New ColumnStyle(SizeType.Absolute, 20F))
+        TableLayoutPanel.Controls.Add(LogoPictureBox, 0, 0)
+        TableLayoutPanel.Controls.Add(LabelProductName, 1, 0)
+        TableLayoutPanel.Controls.Add(LabelVersion, 1, 1)
+        TableLayoutPanel.Controls.Add(LabelCopyright, 1, 2)
+        TableLayoutPanel.Dock = DockStyle.Fill
+        TableLayoutPanel.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        TableLayoutPanel.Location = New Point(11, 10)
+        TableLayoutPanel.Name = "TableLayoutPanel"
+        TableLayoutPanel.RowCount = 6
+        TableLayoutPanel.RowStyles.Add(New RowStyle(SizeType.Percent, 10F))
+        TableLayoutPanel.RowStyles.Add(New RowStyle(SizeType.Percent, 25.2032528F))
+        TableLayoutPanel.RowStyles.Add(New RowStyle(SizeType.Percent, 50.5691071F))
+        TableLayoutPanel.RowStyles.Add(New RowStyle(SizeType.Percent, 1.300813F))
+        TableLayoutPanel.RowStyles.Add(New RowStyle(SizeType.Percent, 10.5691061F))
+        TableLayoutPanel.RowStyles.Add(New RowStyle(SizeType.Percent, 2.113821F))
+        TableLayoutPanel.Size = New Size(849, 615)
+        TableLayoutPanel.TabIndex = 0
+        ' 
+        ' dlgAboutBox
+        ' 
+        AutoScaleDimensions = New SizeF(144F, 144F)
+        AutoScaleMode = AutoScaleMode.Dpi
+        AutoSize = True
+        ClientSize = New Size(871, 635)
+        Controls.Add(TableLayoutPanel)
+        Font = New Font("Segoe UI", 8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        FormBorderStyle = FormBorderStyle.FixedDialog
+        Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        MaximizeBox = False
+        MinimizeBox = False
+        Name = "dlgAboutBox"
+        Padding = New Padding(11, 10, 11, 10)
+        ShowInTaskbar = False
+        StartPosition = FormStartPosition.CenterParent
+        Text = "AboutBox1"
+        CType(LogoPictureBox, ComponentModel.ISupportInitialize).EndInit()
+        TableLayoutPanel.ResumeLayout(False)
+        TableLayoutPanel.PerformLayout()
+        ResumeLayout(False)
 
     End Sub
-    Friend WithEvents TextBoxDescription As TextBox
     Friend WithEvents LabelCopyright As Label
     Friend WithEvents LabelVersion As Label
     Friend WithEvents LabelProductName As Label
