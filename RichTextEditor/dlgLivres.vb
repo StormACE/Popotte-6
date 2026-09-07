@@ -58,7 +58,7 @@ Public Class dlgLivres
         ListViewLivres.MultiSelect = False
         ListViewLivres.ShowItemToolTips = True
         ListViewLivres.Sorting = SortOrder.Ascending
-        ListViewLivres.Font = New Font(New FontFamily("Arial"), 10, FontStyle.Regular)
+        ListViewLivres.Font = New Font(New FontFamily("Arial"), 12, FontStyle.Regular)
         ListViewLivres.Columns.Add(LangINI.GetKeyValue("Popotte - BooksDialog", "5"), 860)
         ListViewLivres.Columns.Add(LangINI.GetKeyValue("Popotte - BooksDialog", "6"), 120)
 
@@ -106,6 +106,7 @@ Public Class dlgLivres
         ListViewRecherche.MultiSelect = False
         ListViewRecherche.ShowItemToolTips = True
         ListViewRecherche.Sorting = SortOrder.Ascending
+        ListViewRecherche.Font = New Font(New FontFamily("Arial"), 12, FontStyle.Regular)
         ' Create Columns Headers
         ListViewRecherche.Columns.Add(LangINI.GetKeyValue("Popotte - BooksDialog", "6"), 550)
         ListViewRecherche.Columns.Add(LangINI.GetKeyValue("Popotte - BooksDialog", "7"), 160)

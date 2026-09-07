@@ -390,8 +390,7 @@ Partial Class frmMenu
         ' 
         ' frmMenu
         ' 
-        AutoScaleDimensions = New SizeF(9F, 21F)
-        AutoScaleMode = AutoScaleMode.Font
+        AutoScaleMode = AutoScaleMode.None
         ClientSize = New Size(1041, 919)
         Controls.Add(Button1Touteff)
         Controls.Add(ButtonPreview)

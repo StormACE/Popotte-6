@@ -23,112 +23,111 @@ Partial Class ResearchCenter
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ResearchCenter))
-        Me.ADD_Button = New System.Windows.Forms.Button()
-        Me.ListViewRC = New System.Windows.Forms.ListView()
-        Me.DEL_Button = New System.Windows.Forms.Button()
-        Me.TextBoxSite = New System.Windows.Forms.TextBox()
-        Me.LabelNom = New System.Windows.Forms.Label()
-        Me.TextBoxCom = New System.Windows.Forms.TextBox()
-        Me.LabelCom = New System.Windows.Forms.Label()
-        Me.SuspendLayout()
-        '
-        'ADD_Button
-        '
-        Me.ADD_Button.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.ADD_Button.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.ADD_Button.Location = New System.Drawing.Point(589, 402)
-        Me.ADD_Button.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ADD_Button.Name = "ADD_Button"
-        Me.ADD_Button.Size = New System.Drawing.Size(111, 37)
-        Me.ADD_Button.TabIndex = 2
-        Me.ADD_Button.Text = "Ajouter"
-        '
-        'ListViewRC
-        '
-        Me.ListViewRC.BackColor = System.Drawing.SystemColors.InactiveBorder
-        Me.ListViewRC.Location = New System.Drawing.Point(22, 21)
-        Me.ListViewRC.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ListViewRC.Name = "ListViewRC"
-        Me.ListViewRC.ShowItemToolTips = True
-        Me.ListViewRC.Size = New System.Drawing.Size(681, 349)
-        Me.ListViewRC.TabIndex = 3
-        Me.ListViewRC.UseCompatibleStateImageBehavior = False
-        '
-        'DEL_Button
-        '
-        Me.DEL_Button.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.DEL_Button.Location = New System.Drawing.Point(589, 444)
-        Me.DEL_Button.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.DEL_Button.Name = "DEL_Button"
-        Me.DEL_Button.Size = New System.Drawing.Size(111, 37)
-        Me.DEL_Button.TabIndex = 4
-        Me.DEL_Button.Text = "Enlever"
-        Me.DEL_Button.UseVisualStyleBackColor = True
-        '
-        'TextBoxSite
-        '
-        Me.TextBoxSite.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
-        Me.TextBoxSite.Location = New System.Drawing.Point(144, 405)
-        Me.TextBoxSite.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.TextBoxSite.Name = "TextBoxSite"
-        Me.TextBoxSite.Size = New System.Drawing.Size(428, 29)
-        Me.TextBoxSite.TabIndex = 0
-        '
-        'LabelNom
-        '
-        Me.LabelNom.AutoSize = True
-        Me.LabelNom.Location = New System.Drawing.Point(17, 410)
-        Me.LabelNom.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LabelNom.Name = "LabelNom"
-        Me.LabelNom.Size = New System.Drawing.Size(113, 21)
-        Me.LabelNom.TabIndex = 4
-        Me.LabelNom.Text = "Nom du Site :"
-        '
-        'TextBoxCom
-        '
-        Me.TextBoxCom.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
-        Me.TextBoxCom.Location = New System.Drawing.Point(144, 447)
-        Me.TextBoxCom.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.TextBoxCom.Name = "TextBoxCom"
-        Me.TextBoxCom.Size = New System.Drawing.Size(428, 29)
-        Me.TextBoxCom.TabIndex = 1
-        '
-        'LabelCom
-        '
-        Me.LabelCom.AutoSize = True
-        Me.LabelCom.Location = New System.Drawing.Point(24, 452)
-        Me.LabelCom.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LabelCom.Name = "LabelCom"
-        Me.LabelCom.Size = New System.Drawing.Size(106, 21)
-        Me.LabelCom.TabIndex = 6
-        Me.LabelCom.Text = "Commande :"
-        '
-        'ResearchCenter
-        '
-        Me.AcceptButton = Me.ADD_Button
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(724, 509)
-        Me.Controls.Add(Me.LabelCom)
-        Me.Controls.Add(Me.TextBoxCom)
-        Me.Controls.Add(Me.LabelNom)
-        Me.Controls.Add(Me.TextBoxSite)
-        Me.Controls.Add(Me.DEL_Button)
-        Me.Controls.Add(Me.ADD_Button)
-        Me.Controls.Add(Me.ListViewRC)
-        Me.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.MaximizeBox = False
-        Me.MinimizeBox = False
-        Me.Name = "ResearchCenter"
-        Me.ShowInTaskbar = False
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Popotte - Centre de Recherche"
-        Me.ResumeLayout(False)
-        Me.PerformLayout()
+        ADD_Button = New Button()
+        ListViewRC = New ListView()
+        DEL_Button = New Button()
+        TextBoxSite = New TextBox()
+        LabelNom = New Label()
+        TextBoxCom = New TextBox()
+        LabelCom = New Label()
+        SuspendLayout()
+        ' 
+        ' ADD_Button
+        ' 
+        ADD_Button.Anchor = AnchorStyles.None
+        ADD_Button.FlatStyle = FlatStyle.System
+        ADD_Button.Location = New Point(589, 402)
+        ADD_Button.Margin = New Padding(4, 5, 4, 5)
+        ADD_Button.Name = "ADD_Button"
+        ADD_Button.Size = New Size(111, 37)
+        ADD_Button.TabIndex = 2
+        ADD_Button.Text = "Ajouter"
+        ' 
+        ' ListViewRC
+        ' 
+        ListViewRC.BackColor = SystemColors.InactiveBorder
+        ListViewRC.Location = New Point(22, 21)
+        ListViewRC.Margin = New Padding(4, 5, 4, 5)
+        ListViewRC.Name = "ListViewRC"
+        ListViewRC.ShowItemToolTips = True
+        ListViewRC.Size = New Size(681, 349)
+        ListViewRC.TabIndex = 3
+        ListViewRC.UseCompatibleStateImageBehavior = False
+        ' 
+        ' DEL_Button
+        ' 
+        DEL_Button.FlatStyle = FlatStyle.System
+        DEL_Button.Location = New Point(589, 444)
+        DEL_Button.Margin = New Padding(4, 5, 4, 5)
+        DEL_Button.Name = "DEL_Button"
+        DEL_Button.Size = New Size(111, 37)
+        DEL_Button.TabIndex = 4
+        DEL_Button.Text = "Enlever"
+        DEL_Button.UseVisualStyleBackColor = True
+        ' 
+        ' TextBoxSite
+        ' 
+        TextBoxSite.BackColor = SystemColors.GradientInactiveCaption
+        TextBoxSite.Location = New Point(144, 405)
+        TextBoxSite.Margin = New Padding(4, 5, 4, 5)
+        TextBoxSite.Name = "TextBoxSite"
+        TextBoxSite.Size = New Size(428, 25)
+        TextBoxSite.TabIndex = 0
+        ' 
+        ' LabelNom
+        ' 
+        LabelNom.AutoSize = True
+        LabelNom.Location = New Point(17, 410)
+        LabelNom.Margin = New Padding(4, 0, 4, 0)
+        LabelNom.Name = "LabelNom"
+        LabelNom.Size = New Size(100, 19)
+        LabelNom.TabIndex = 4
+        LabelNom.Text = "Nom du Site :"
+        ' 
+        ' TextBoxCom
+        ' 
+        TextBoxCom.BackColor = SystemColors.GradientInactiveCaption
+        TextBoxCom.Location = New Point(144, 447)
+        TextBoxCom.Margin = New Padding(4, 5, 4, 5)
+        TextBoxCom.Name = "TextBoxCom"
+        TextBoxCom.Size = New Size(428, 25)
+        TextBoxCom.TabIndex = 1
+        ' 
+        ' LabelCom
+        ' 
+        LabelCom.AutoSize = True
+        LabelCom.Location = New Point(24, 452)
+        LabelCom.Margin = New Padding(4, 0, 4, 0)
+        LabelCom.Name = "LabelCom"
+        LabelCom.Size = New Size(94, 19)
+        LabelCom.TabIndex = 6
+        LabelCom.Text = "Commande :"
+        ' 
+        ' ResearchCenter
+        ' 
+        AcceptButton = ADD_Button
+        AutoScaleMode = AutoScaleMode.None
+        AutoSize = True
+        ClientSize = New Size(724, 509)
+        Controls.Add(LabelCom)
+        Controls.Add(TextBoxCom)
+        Controls.Add(LabelNom)
+        Controls.Add(TextBoxSite)
+        Controls.Add(DEL_Button)
+        Controls.Add(ADD_Button)
+        Controls.Add(ListViewRC)
+        Font = New Font("Segoe UI", 8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        FormBorderStyle = FormBorderStyle.FixedDialog
+        Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        Margin = New Padding(4, 5, 4, 5)
+        MaximizeBox = False
+        MinimizeBox = False
+        Name = "ResearchCenter"
+        ShowInTaskbar = False
+        StartPosition = FormStartPosition.CenterParent
+        Text = "Popotte - Centre de Recherche"
+        ResumeLayout(False)
+        PerformLayout()
 
     End Sub
     Friend WithEvents ADD_Button As System.Windows.Forms.Button
