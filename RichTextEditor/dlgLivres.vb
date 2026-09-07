@@ -5,8 +5,8 @@ Imports System.Text
 ''' <summary>
 ''' Popotte v6
 ''' 
-''' Work on Windows 7 sp1, windows 8, Windows 8.1, Windows 10, Windows 11 Need .Net Framework 4.0
-''' Copyright Martin Laflamme 2003/2023
+''' Work on Windows 7 sp1, windows 8, Windows 8.1, Windows 10, Windows 11 .NET10
+''' Copyright Martin Laflamme 2003/2026
 ''' Read licence.txt
 ''' </summary>
 
@@ -59,8 +59,6 @@ Public Class dlgLivres
         ListViewLivres.ShowItemToolTips = True
         ListViewLivres.Sorting = SortOrder.Ascending
         ListViewLivres.Font = New Font(New FontFamily("Arial"), 10, FontStyle.Regular)
-        'Select Case frmMain.DPI
-        'Case 96 '100% et 150%
         ListViewLivres.Columns.Add(LangINI.GetKeyValue("Popotte - BooksDialog", "5"), 860)
         ListViewLivres.Columns.Add(LangINI.GetKeyValue("Popotte - BooksDialog", "6"), 120)
 
@@ -79,7 +77,7 @@ Public Class dlgLivres
         ListViewRecettes.MultiSelect = True
         ListViewRecettes.ShowItemToolTips = True
         ListViewRecettes.Sorting = SortOrder.Ascending
-        ListViewRecettes.Font = New Font(New FontFamily("Arial"), 10, FontStyle.Regular)
+        ListViewRecettes.Font = New Font(New FontFamily("Arial"), 12, FontStyle.Regular)
         ListViewRecettes.Columns.Add(LangINI.GetKeyValue("Popotte - BooksDialog", "6"), 550)
         ListViewRecettes.Columns.Add(LangINI.GetKeyValue("Popotte - BooksDialog", "7"), 160)
         ListViewRecettes.Columns.Add(LangINI.GetKeyValue("Popotte - BooksDialog", "8"), 265)
