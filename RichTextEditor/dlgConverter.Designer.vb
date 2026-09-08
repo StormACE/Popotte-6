@@ -23,115 +23,116 @@ Partial Class dlgConverter
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgConverter))
-        Me.Close_Button = New System.Windows.Forms.Button()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.ConverterComboBox = New System.Windows.Forms.ComboBox()
-        Me.LabelIn = New System.Windows.Forms.Label()
-        Me.LabelConv = New System.Windows.Forms.Label()
-        Me.LabelOut = New System.Windows.Forms.Label()
-        Me.SuspendLayout()
-        '
-        'Close_Button
-        '
-        Me.Close_Button.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.Close_Button.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.Close_Button.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.Close_Button.Location = New System.Drawing.Point(271, 98)
-        Me.Close_Button.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.Close_Button.Name = "Close_Button"
-        Me.Close_Button.Size = New System.Drawing.Size(75, 25)
-        Me.Close_Button.TabIndex = 4
-        Me.Close_Button.Text = "Fermer"
-        '
-        'TextBox2
-        '
-        Me.TextBox2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
-        Me.TextBox2.Location = New System.Drawing.Point(271, 46)
-        Me.TextBox2.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(75, 22)
-        Me.TextBox2.TabIndex = 3
-        Me.TextBox2.WordWrap = False
-        '
-        'TextBox1
-        '
-        Me.TextBox1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
-        Me.TextBox1.Location = New System.Drawing.Point(13, 46)
-        Me.TextBox1.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(75, 22)
-        Me.TextBox1.TabIndex = 1
-        Me.TextBox1.WordWrap = False
-        '
-        'ConverterComboBox
-        '
-        Me.ConverterComboBox.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
-        Me.ConverterComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ConverterComboBox.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.ConverterComboBox.FormattingEnabled = True
-        Me.ConverterComboBox.Location = New System.Drawing.Point(95, 46)
-        Me.ConverterComboBox.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.ConverterComboBox.Name = "ConverterComboBox"
-        Me.ConverterComboBox.Size = New System.Drawing.Size(169, 21)
-        Me.ConverterComboBox.TabIndex = 2
-        '
-        'LabelIn
-        '
-        Me.LabelIn.AutoSize = True
-        Me.LabelIn.Location = New System.Drawing.Point(11, 29)
-        Me.LabelIn.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LabelIn.Name = "LabelIn"
-        Me.LabelIn.Size = New System.Drawing.Size(46, 13)
-        Me.LabelIn.TabIndex = 6
-        Me.LabelIn.Text = "Entrée :"
-        '
-        'LabelConv
-        '
-        Me.LabelConv.AutoSize = True
-        Me.LabelConv.Location = New System.Drawing.Point(92, 29)
-        Me.LabelConv.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LabelConv.Name = "LabelConv"
-        Me.LabelConv.Size = New System.Drawing.Size(71, 13)
-        Me.LabelConv.TabIndex = 7
-        Me.LabelConv.Text = "Convertion :"
-        '
-        'LabelOut
-        '
-        Me.LabelOut.AutoSize = True
-        Me.LabelOut.Location = New System.Drawing.Point(269, 29)
-        Me.LabelOut.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LabelOut.Name = "LabelOut"
-        Me.LabelOut.Size = New System.Drawing.Size(43, 13)
-        Me.LabelOut.TabIndex = 8
-        Me.LabelOut.Text = "Sortie :"
-        '
-        'dlgConverter
-        '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.AutoSize = True
-        Me.CancelButton = Me.Close_Button
-        Me.ClientSize = New System.Drawing.Size(359, 136)
-        Me.Controls.Add(Me.LabelOut)
-        Me.Controls.Add(Me.LabelConv)
-        Me.Controls.Add(Me.LabelIn)
-        Me.Controls.Add(Me.ConverterComboBox)
-        Me.Controls.Add(Me.TextBox1)
-        Me.Controls.Add(Me.TextBox2)
-        Me.Controls.Add(Me.Close_Button)
-        Me.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.MaximizeBox = False
-        Me.MinimizeBox = False
-        Me.Name = "dlgConverter"
-        Me.ShowInTaskbar = False
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Popotte - Convertisseur"
-        Me.ResumeLayout(False)
-        Me.PerformLayout()
+        Close_Button = New Button()
+        TextBox2 = New TextBox()
+        TextBox1 = New TextBox()
+        ConverterComboBox = New ComboBox()
+        LabelIn = New Label()
+        LabelConv = New Label()
+        LabelOut = New Label()
+        SuspendLayout()
+        ' 
+        ' Close_Button
+        ' 
+        Close_Button.Anchor = AnchorStyles.None
+        Close_Button.DialogResult = DialogResult.Cancel
+        Close_Button.FlatStyle = FlatStyle.System
+        Close_Button.Location = New Point(347, 129)
+        Close_Button.Margin = New Padding(4, 3, 4, 3)
+        Close_Button.Name = "Close_Button"
+        Close_Button.Size = New Size(101, 35)
+        Close_Button.TabIndex = 4
+        Close_Button.Text = "Fermer"
+        ' 
+        ' TextBox2
+        ' 
+        TextBox2.BackColor = SystemColors.GradientInactiveCaption
+        TextBox2.Location = New Point(373, 60)
+        TextBox2.Margin = New Padding(4, 3, 4, 3)
+        TextBox2.Name = "TextBox2"
+        TextBox2.Size = New Size(75, 29)
+        TextBox2.TabIndex = 3
+        TextBox2.WordWrap = False
+        ' 
+        ' TextBox1
+        ' 
+        TextBox1.BackColor = SystemColors.GradientInactiveCaption
+        TextBox1.Location = New Point(13, 60)
+        TextBox1.Margin = New Padding(4, 3, 4, 3)
+        TextBox1.Name = "TextBox1"
+        TextBox1.Size = New Size(75, 29)
+        TextBox1.TabIndex = 1
+        TextBox1.WordWrap = False
+        ' 
+        ' ConverterComboBox
+        ' 
+        ConverterComboBox.BackColor = SystemColors.GradientInactiveCaption
+        ConverterComboBox.DropDownStyle = ComboBoxStyle.DropDownList
+        ConverterComboBox.FlatStyle = FlatStyle.System
+        ConverterComboBox.FormattingEnabled = True
+        ConverterComboBox.Location = New Point(96, 60)
+        ConverterComboBox.Margin = New Padding(4, 3, 4, 3)
+        ConverterComboBox.MaxDropDownItems = 25
+        ConverterComboBox.Name = "ConverterComboBox"
+        ConverterComboBox.Size = New Size(269, 29)
+        ConverterComboBox.TabIndex = 2
+        ' 
+        ' LabelIn
+        ' 
+        LabelIn.AutoSize = True
+        LabelIn.Location = New Point(13, 36)
+        LabelIn.Margin = New Padding(4, 0, 4, 0)
+        LabelIn.Name = "LabelIn"
+        LabelIn.Size = New Size(67, 21)
+        LabelIn.TabIndex = 6
+        LabelIn.Text = "Entrée :"
+        ' 
+        ' LabelConv
+        ' 
+        LabelConv.AutoSize = True
+        LabelConv.Location = New Point(96, 36)
+        LabelConv.Margin = New Padding(4, 0, 4, 0)
+        LabelConv.Name = "LabelConv"
+        LabelConv.Size = New Size(103, 21)
+        LabelConv.TabIndex = 7
+        LabelConv.Text = "Convertion :"
+        ' 
+        ' LabelOut
+        ' 
+        LabelOut.AutoSize = True
+        LabelOut.Location = New Point(373, 36)
+        LabelOut.Margin = New Padding(4, 0, 4, 0)
+        LabelOut.Name = "LabelOut"
+        LabelOut.Size = New Size(63, 21)
+        LabelOut.TabIndex = 8
+        LabelOut.Text = "Sortie :"
+        ' 
+        ' dlgConverter
+        ' 
+        AutoScaleDimensions = New SizeF(144F, 144F)
+        AutoScaleMode = AutoScaleMode.Dpi
+        AutoSize = True
+        CancelButton = Close_Button
+        ClientSize = New Size(461, 176)
+        Controls.Add(LabelOut)
+        Controls.Add(LabelConv)
+        Controls.Add(LabelIn)
+        Controls.Add(ConverterComboBox)
+        Controls.Add(TextBox1)
+        Controls.Add(TextBox2)
+        Controls.Add(Close_Button)
+        Font = New Font("Segoe UI", 8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        FormBorderStyle = FormBorderStyle.FixedDialog
+        Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        Margin = New Padding(4, 3, 4, 3)
+        MaximizeBox = False
+        MinimizeBox = False
+        Name = "dlgConverter"
+        ShowInTaskbar = False
+        StartPosition = FormStartPosition.CenterParent
+        Text = "Popotte - Convertisseur"
+        ResumeLayout(False)
+        PerformLayout()
 
     End Sub
     Friend WithEvents Close_Button As System.Windows.Forms.Button
