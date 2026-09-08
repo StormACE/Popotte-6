@@ -285,11 +285,19 @@ Public Class frmMain
         Next
 
         'Chargement de la police par default
-        ToolStripComboBoxPolices.ComboBox.DrawMode = DrawMode.OwnerDrawVariable
-        ToolStripComboBoxPolices.DropDownHeight = 268
-        AddHandler ToolStripComboBoxPolices.ComboBox.DrawItem, AddressOf ToolStripComboBoxPolices_DrawItem
-        AddHandler ToolStripComboBoxPolices.ComboBox.MeasureItem, AddressOf ToolStripComboBoxPolices_MeasureItem
+        With ToolStripComboBoxPolices.ComboBox
+            .BeginUpdate()
+            .DrawMode = DrawMode.OwnerDrawFixed
+            .ItemHeight = 32
+            .IntegralHeight = True
+            .MaxDropDownItems = 20
+            .RightToLeft = RightToLeft.No 'évite inversion visuelle
+            .DropDownHeight = 268
+            AddHandler .DrawItem, AddressOf ToolStripComboBoxPolices_DrawItem
+            ' MeasureItem handler not required for OwnerDrawFixed
+        End With
         GetFont()
+        ToolStripComboBoxPolices.ComboBox.EndUpdate()
         GetSize()
         regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\DefaultFont", True)
         If regKey IsNot Nothing Then
@@ -775,24 +783,22 @@ Public Class frmMain
     End Sub
 
     Private Sub GetFont()
-        ' Get the installed fonts collection.
+        ' Get the installed fonts collection and populate the combo sorted.
         Dim installed_fonts As New InstalledFontCollection
-
-        ' Get an array of the system's font families.
         Dim font_families() As FontFamily = installed_fonts.Families()
 
-        Dim Style As FontStyle
-
-        ' Display the font families.
+        Dim names As New List(Of String)
         For Each font_family As FontFamily In font_families
-            Style = FontStyle.Regular
-            'check if font as regular style
-            If font_family.IsStyleAvailable(Style) Then
-                If font_family.Name <> "" Then
-                    Me.ToolStripComboBoxPolices.Items.Add(font_family.Name)
-                End If
+            If font_family.IsStyleAvailable(FontStyle.Regular) AndAlso font_family.Name <> String.Empty Then
+                names.Add(font_family.Name)
             End If
-        Next font_family
+        Next
+
+        names.Sort()
+        Me.ToolStripComboBoxPolices.Items.Clear()
+        For Each nm As String In names
+            Me.ToolStripComboBoxPolices.Items.Add(nm)
+        Next
     End Sub
 
     Private Sub GetSize()
@@ -1193,37 +1199,45 @@ Public Class frmMain
 
     'draw font list
     Private Sub ToolStripComboBoxPolices_DrawItem(ByVal sender As Object, ByVal e As DrawItemEventArgs)
-        If e.Index >= 0 Then
-            Dim txt$ = ToolStripComboBoxPolices.Items(e.Index).ToString
-            Dim fnt As Font = New Font(e.Font.Name, 12, FontStyle.Bold) 'Default = legible text
+        If e.Index < 0 Then Return
 
-            'Selected line will draw in the default font
-            'All others will draw in the individual line's named font
-            If e.State And DrawItemState.ComboBoxEdit Then
-                fnt = e.Font    'Combobox's edit text always draws in the box's own font
+        Dim combo = DirectCast(sender, ComboBox)
+        Dim txt As String = combo.Items(e.Index).ToString()
 
-            ElseIf (e.State And DrawItemState.Selected) = 0 Then
-                'If not the selected line, create a custom font
-                'Try all permutations of regular/bold/italic/underline/strikeout
-                'If it can't do any of them, you still have the default
-                Dim ff As FontFamily = New FontFamily(txt)
-                For tStyle As FontStyle = 0 To 15
-                    If (ff.IsStyleAvailable(tStyle)) Then
-                        fnt = New Font(ff.Name, 12, tStyle)
-                        Exit For
-                    End If
-                Next
+        e.DrawBackground()
+        e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit
+
+        Dim drawFont As Font = e.Font
+        Dim createdFont As Boolean = False
+        Try
+            ' Try to create a readable sample font for the item
+            If Not String.IsNullOrEmpty(txt) Then
+                Dim ff As New FontFamily(txt)
+                If ff.IsStyleAvailable(FontStyle.Regular) Then
+                    drawFont = New Font(txt, 12.0F, FontStyle.Regular)
+                    createdFont = True
+                End If
             End If
+        Catch
+            drawFont = e.Font
+            createdFont = False
+        End Try
 
-            'Draw the drop-down item - you could easily adapt this to display a font icon, etc
-            e.DrawBackground()
-            e.DrawFocusRectangle()
-            e.Graphics.DrawString(txt, fnt, New SolidBrush(e.ForeColor), e.Bounds.X, e.Bounds.Y)
+        Using brush As New SolidBrush(e.ForeColor)
+            Dim textToDraw As String = txt & " — Abc"
+            e.Graphics.DrawString(textToDraw, drawFont, brush, New RectangleF(e.Bounds.X + 2, e.Bounds.Y + 2, e.Bounds.Width - 4, e.Bounds.Height - 4))
+        End Using
+
+        If createdFont AndAlso drawFont IsNot Nothing Then
+            drawFont.Dispose()
         End If
+
+        e.DrawFocusRectangle()
     End Sub
 
     Private Sub ToolStripComboBoxPolices_MeasureItem(ByVal sender As Object, ByVal e As MeasureItemEventArgs)
-        e.ItemHeight = 30
+        ' kept for compatibility: fixed height set on ComboBox.ItemHeight is used
+        e.ItemHeight = 32
     End Sub
 
 #End Region
