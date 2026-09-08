@@ -86,8 +86,8 @@ Public Class ResearchCenter
         ListViewRC.MultiSelect = False
         ListViewRC.Sorting = SortOrder.Ascending
         ' Create Columns Headers
-        ListViewRC.Columns.Add(LangINI.GetKeyValue("Popotte - ResearchCenter", "2"), 153)
-        ListViewRC.Columns.Add(LangINI.GetKeyValue("Popotte - ResearchCenter", "3"), 280)
+        ListViewRC.Columns.Add(LangINI.GetKeyValue("Popotte - ResearchCenter", "2"), 250)
+        ListViewRC.Columns.Add(LangINI.GetKeyValue("Popotte - ResearchCenter", "3"), 400)
 
         LoadDefaultRC()
     End Sub
