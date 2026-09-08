@@ -734,8 +734,8 @@ Public Class dlgLivres
         Return CNote
     End Function
 
-    Private Sub TextBoxRecherche_KeyPress(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles TextBoxRecherche.KeyPress
-        If e.KeyChar = ChrW(Keys.Return) Then
+    Private Sub TextBoxRecherche_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBoxRecherche.KeyDown
+        If e.KeyCode = Keys.Enter Then
             Recherche()
             e.Handled = True
         End If
