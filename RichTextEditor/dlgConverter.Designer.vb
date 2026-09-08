@@ -109,8 +109,7 @@ Partial Class dlgConverter
         ' 
         ' dlgConverter
         ' 
-        AutoScaleDimensions = New SizeF(144F, 144F)
-        AutoScaleMode = AutoScaleMode.Dpi
+        AutoScaleMode = AutoScaleMode.None
         AutoSize = True
         CancelButton = Close_Button
         ClientSize = New Size(461, 176)
