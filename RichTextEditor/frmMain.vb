@@ -1400,7 +1400,7 @@ Public Class frmMain
 
     Private Sub SaveAsToolANSIStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SaveAsANSIToolStripMenuItem.Click
 
-        SaveFileDialog1.Title = "Popotte - Sauvegarder sous... ANSI"
+        SaveFileDialog1.Title = "Popotte - Sauvegarder sous..."
         SaveFileDialog1.DefaultExt = "txt"
         SaveFileDialog1.Filter = "Tout les fichiers|*.*|Rich Text|*.rtf|Texte|*.txt"
         SaveFileDialog1.FilterIndex = 1
@@ -1415,12 +1415,23 @@ Public Class frmMain
 
         Select Case strExt
             Case ".rtf"
-                rtbDoc.SaveFile(SaveFileDialog1.FileName, RichTextBoxStreamType.RichText)
+                Try
+                    rtbDoc.SaveFile(SaveFileDialog1.FileName, RichTextBoxStreamType.RichText)
+                    MessageBox.Show("Fichier sauvegardé avec succès.", "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Catch ex As Exception
+                    MessageBox.Show("Erreur lors de la sauvegarde du fichier.", "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
+
             Case Else
                 Dim txtWriter As StreamWriter
                 'encode as ansi
                 txtWriter = New StreamWriter(SaveFileDialog1.FileName, True, System.Text.Encoding.Default)
-                txtWriter.Write(rtbDoc.Text)
+                Try
+                    txtWriter.Write(rtbDoc.Text)
+                    MessageBox.Show("Fichier sauvegardé avec succès.", "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Catch ex As Exception
+                    MessageBox.Show("Erreur lors de la sauvegarde du fichier.", "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
                 txtWriter.Close()
                 txtWriter = Nothing
                 rtbDoc.SelectionStart = 0
