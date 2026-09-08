@@ -21,6 +21,7 @@ Public Class dlgLivres
     Private regKey As RegistryKey
     'use by listviewrecette
     Private imageListSmallRecette As New ImageList
+    Private _recetteLoader As RecetteImageLoader
     'Get Language
     Private LangINI As IniFile = frmMain.LangIni
 
@@ -128,6 +129,9 @@ Public Class dlgLivres
         ListViewLivres.SmallImageList = imageListSmall
         ListViewRecettes.SmallImageList = imageListSmallRecette
         ListViewRecherche.SmallImageList = imageListSmallRecette
+
+        ' Instantiate image loader (async + cache)
+        _recetteLoader = New RecetteImageLoader(Me, ListViewRecettes, imageListSmallRecette, PopotteDir, ListViewRecherche)
 
         'Add ToolTips To Controls
         Dim buttonToolTip1 As New ToolTip()
@@ -629,11 +633,18 @@ Public Class dlgLivres
         Dim Rcount As Integer = 0
 
         Me.ListViewRecettes.Items.Clear()
+        ' Reset image list and add placeholder
         imageListSmallRecette.Images.Clear()
+        Try
+            imageListSmallRecette.Images.Add(Image.FromFile(Application.StartupPath & "\Images\Recette.bmp"))
+        Catch
+            ' ignore if missing
+        End Try
         Me.ListViewLivres.Visible = False
         Me.ListViewRecettes.Visible = True
 
         Dim imgidx As Integer = 0
+        Dim folderName As String = If(LastLivre <> "", LastLivre, frmMain.LivreOuvert)
 
         If LastLivre <> "" Then
             Me.Text = "Popotte - " & LangINI.GetKeyValue("Popotte - BooksDialog", "12") & " " & LastLivre & " (" & 0 & ")"
@@ -662,17 +673,16 @@ Public Class dlgLivres
                 description = CType(regKey.GetValue("Description", ""), String)
             End If
 
-            AddImageToImagelist(rname, "")
+            ' Async image load: get placeholder index and start background extraction
+            Dim idx As Integer = _recetteLoader.GetIndexAndLoad(rname, folderName)
 
             'Add to listview
             objItem = ListViewRecettes.Items.Add(rname)
             With objItem
                 .SubItems.Add(ConvertNote(note))
                 .SubItems.Add(description)
-                .ImageIndex = imgidx
+                .ImageIndex = idx
             End With
-
-            imgidx += 1
 
             'Count items
             Rcount += 1
