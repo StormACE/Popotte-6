@@ -632,6 +632,10 @@ Public Class dlgLivres
         'count files
         Dim Rcount As Integer = 0
 
+        If _recetteLoader IsNot Nothing Then
+            _recetteLoader.ResetImageList()
+        End If
+
         Me.ListViewRecettes.Items.Clear()
         ' Reset image list and add placeholder
         imageListSmallRecette.Images.Clear()
