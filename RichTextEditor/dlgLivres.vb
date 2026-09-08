@@ -1045,7 +1045,12 @@ FileFound:
 
     'Bouton Favorites
     Private Sub ButtonFav_Click(sender As Object, e As EventArgs) Handles ButtonFav.Click
-        imageListSmallRecette.Images.Clear()
+        ' Reset image list and loader cache
+        If _recetteLoader IsNot Nothing Then
+            _recetteLoader.ResetImageList()
+        Else
+            imageListSmallRecette.Images.Clear()
+        End If
         ListViewRecherche.Items.Clear()
         ListViewRecettes.Visible = False
         ListViewRecherche.Visible = True
@@ -1070,8 +1075,7 @@ FileFound:
                 If regKey IsNot Nothing Then
                     Dim note As Integer = CType(regKey.GetValue("Note"), Integer)
                     Dim description As String = regKey.GetValue("Description").ToString
-
-                    AddImageToImagelist(subKeyName, Livre)
+                    Dim idx As Integer = _recetteLoader.GetIndexAndLoad(subKeyName, Livre)
 
                     'Add to listview
                     objItem = ListViewRecherche.Items.Add(subKeyName)
@@ -1080,18 +1084,18 @@ FileFound:
                         .SubItems.Add(ConvertNote(note))
                         .SubItems.Add(description)
                         .SubItems.Add(Livre)
-                        .ImageIndex = imgidx
+                        .ImageIndex = idx
                     End With
                     imgidx += 1
                 Else
-                    AddImageToImagelist(subKeyName, Livre)
+                    Dim idx As Integer = _recetteLoader.GetIndexAndLoad(subKeyName, Livre)
                     'Add to listview
                     objItem = ListViewRecherche.Items.Add(subKeyName)
                     With objItem
                         .SubItems.Add("")
                         .SubItems.Add("")
                         .SubItems.Add(Livre)
-                        .ImageIndex = imgidx
+                        .ImageIndex = idx
                     End With
                     imgidx += 1
                 End If

@@ -59,6 +59,25 @@ Public Class RecetteImageLoader
         Return _placeholderIndex
     End Function
 
+    ' Réinitialise l'image list et le cache (utile avant de remplir une nouvelle vue)
+    Public Sub ResetImageList()
+        SyncLock _imageList.Images
+            _imageList.Images.Clear()
+            _cache.Clear()
+            ' recrée placeholder
+            Dim placeholderPath = Path.Combine(Application.StartupPath, "Images", "Recette.bmp")
+            If File.Exists(placeholderPath) Then
+                _imageList.Images.Add(Image.FromFile(placeholderPath))
+            Else
+                Dim bmp As New Bitmap(_imageList.ImageSize.Width, _imageList.ImageSize.Height)
+                Using g = Graphics.FromImage(bmp)
+                    g.Clear(Color.LightGray)
+                End Using
+                _imageList.Images.Add(bmp)
+            End If
+        End SyncLock
+    End Sub
+
     Private Sub LoadAndPublish(key As String, rname As String, folderName As String)
         Try
             Dim rtfPath = Path.Combine(_popotteDir, folderName, rname & ".rtf")
