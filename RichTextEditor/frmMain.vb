@@ -9,8 +9,8 @@ Imports System.Globalization
 Imports ExtendedRichTextBox.AdvRichTextBoxPrintCtrl
 
 ''' <summary>
-''' Popotte 6.0.0.3
-''' 05 sept 2026 au 08 sept 2026
+''' Popotte 6.0.0.4
+''' 05 sept 2026 au 09 sept 2026
 ''' Work on Windows 7 sp1, windows 8, Windows 8.1, Windows 10, Windows 11  .Net10
 ''' Copyright Martin Laflamme 2003/2026
 ''' Read licence.txt
@@ -1740,7 +1740,11 @@ Public Class frmMain
         PrintDialog1.Document = PrintDocument1
 
         If PrintDialog1.ShowDialog() = Global.System.Windows.Forms.DialogResult.OK Then
-            PrintDocument1.Print()
+            Try
+                PrintDocument1.Print()
+            Catch ex As Exception
+                MessageBox.Show("Le document n'a pas été imprimer", "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
             PrintPreviewDialog1.Dispose()
         End If
 
