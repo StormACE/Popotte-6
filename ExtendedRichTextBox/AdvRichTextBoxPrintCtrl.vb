@@ -1,8 +1,6 @@
 Option Explicit On
 
-Imports System.Windows.Forms
 Imports System.Runtime.InteropServices
-Imports System.Drawing
 Imports System.ComponentModel
 Imports System.Text
 Imports System.Drawing.Printing

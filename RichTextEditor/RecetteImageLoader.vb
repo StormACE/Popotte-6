@@ -2,9 +2,6 @@ Imports System.IO
 Imports System.Text
 Imports System.Text.RegularExpressions
 Imports System.Collections.Concurrent
-Imports System.Threading.Tasks
-Imports System.Drawing
-Imports System.Windows.Forms
 
 Public Class RecetteImageLoader
     Private ReadOnly _owner As Control

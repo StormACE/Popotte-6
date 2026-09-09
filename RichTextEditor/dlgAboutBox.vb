@@ -1,4 +1,4 @@
-﻿Imports System.IO
+﻿
 ''' <summary>
 ''' Popotte v5
 ''' 1 mars 2016 au 27 aout 2026

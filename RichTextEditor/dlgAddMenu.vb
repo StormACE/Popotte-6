@@ -2,7 +2,6 @@
 ''' Read licence.txt
 
 
-Imports System.Windows.Forms
 Imports Microsoft.Win32
 
 Public Class dlgAddMenu
