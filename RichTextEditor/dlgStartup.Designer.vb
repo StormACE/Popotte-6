@@ -23,157 +23,163 @@ Partial Class dlgStartup
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgStartup))
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
-        Me.RadioButton4 = New System.Windows.Forms.RadioButton()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SuspendLayout()
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Palatino Linotype", 48.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.SlateBlue
-        Me.Label1.Location = New System.Drawing.Point(596, 55)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(513, 129)
-        Me.Label1.TabIndex = 2
-        Me.Label1.Text = "Popotte v5"
-        '
-        'Label2
-        '
-        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(591, 205)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(508, 85)
-        Me.Label2.TabIndex = 9
-        Me.Label2.Text = "Veuillez choisir le dossier où seront sauvegardées vos recettes."
-        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'RadioButton1
-        '
-        Me.RadioButton1.AutoSize = True
-        Me.RadioButton1.BackgroundImage = CType(resources.GetObject("RadioButton1.BackgroundImage"), System.Drawing.Image)
-        Me.RadioButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.RadioButton1.Location = New System.Drawing.Point(669, 378)
-        Me.RadioButton1.Name = "RadioButton1"
-        Me.RadioButton1.Size = New System.Drawing.Size(21, 20)
-        Me.RadioButton1.TabIndex = 10
-        Me.RadioButton1.TabStop = True
-        Me.RadioButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        Me.RadioButton1.UseVisualStyleBackColor = True
-        '
-        'PictureBox2
-        '
-        Me.PictureBox2.BackgroundImage = CType(resources.GetObject("PictureBox2.BackgroundImage"), System.Drawing.Image)
-        Me.PictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.PictureBox2.Location = New System.Drawing.Point(706, 328)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(262, 111)
-        Me.PictureBox2.TabIndex = 11
-        Me.PictureBox2.TabStop = False
-        '
-        'PictureBox3
-        '
-        Me.PictureBox3.BackgroundImage = CType(resources.GetObject("PictureBox3.BackgroundImage"), System.Drawing.Image)
-        Me.PictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.PictureBox3.Location = New System.Drawing.Point(705, 445)
-        Me.PictureBox3.Name = "PictureBox3"
-        Me.PictureBox3.Size = New System.Drawing.Size(262, 78)
-        Me.PictureBox3.TabIndex = 12
-        Me.PictureBox3.TabStop = False
-        '
-        'RadioButton4
-        '
-        Me.RadioButton4.AutoSize = True
-        Me.RadioButton4.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RadioButton4.Location = New System.Drawing.Point(669, 557)
-        Me.RadioButton4.Name = "RadioButton4"
-        Me.RadioButton4.Size = New System.Drawing.Size(362, 36)
-        Me.RadioButton4.TabIndex = 13
-        Me.RadioButton4.TabStop = True
-        Me.RadioButton4.Text = "   Dossier Local Personnalisé"
-        Me.RadioButton4.UseVisualStyleBackColor = True
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(12, 706)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(222, 20)
-        Me.Label3.TabIndex = 14
-        Me.Label3.Text = "© Martin Laflamme 2003/2023" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
-        '
-        'Button1
-        '
-        Me.Button1.Cursor = System.Windows.Forms.Cursors.Arrow
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.Button1.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(968, 694)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(141, 38)
-        Me.Button1.TabIndex = 15
-        Me.Button1.Text = "Suivant"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'RadioButton2
-        '
-        Me.RadioButton2.AutoSize = True
-        Me.RadioButton2.Location = New System.Drawing.Point(669, 475)
-        Me.RadioButton2.Name = "RadioButton2"
-        Me.RadioButton2.Size = New System.Drawing.Size(21, 20)
-        Me.RadioButton2.TabIndex = 16
-        Me.RadioButton2.TabStop = True
-        Me.RadioButton2.UseVisualStyleBackColor = True
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.BackgroundImage = CType(resources.GetObject("PictureBox1.BackgroundImage"), System.Drawing.Image)
-        Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.PictureBox1.Location = New System.Drawing.Point(44, 55)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(518, 538)
-        Me.PictureBox1.TabIndex = 1
-        Me.PictureBox1.TabStop = False
-        '
-        'dlgStartup
-        '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1126, 775)
-        Me.Controls.Add(Me.RadioButton2)
-        Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.RadioButton4)
-        Me.Controls.Add(Me.PictureBox3)
-        Me.Controls.Add(Me.PictureBox2)
-        Me.Controls.Add(Me.RadioButton1)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.PictureBox1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.MaximizeBox = False
-        Me.MinimizeBox = False
-        Me.Name = "dlgStartup"
-        Me.ShowInTaskbar = False
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Démarrage"
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ResumeLayout(False)
-        Me.PerformLayout()
+        Label1 = New Label()
+        Label2 = New Label()
+        RadioButton1 = New RadioButton()
+        PictureBox2 = New PictureBox()
+        PictureBox3 = New PictureBox()
+        RadioButton4 = New RadioButton()
+        Label3 = New Label()
+        Button1 = New Button()
+        RadioButton2 = New RadioButton()
+        PictureBox1 = New PictureBox()
+        CType(PictureBox2, ComponentModel.ISupportInitialize).BeginInit()
+        CType(PictureBox3, ComponentModel.ISupportInitialize).BeginInit()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
+        SuspendLayout()
+        ' 
+        ' Label1
+        ' 
+        Label1.AutoSize = True
+        Label1.Font = New Font("Arial Rounded MT Bold", 48F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label1.ForeColor = Color.Crimson
+        Label1.Location = New Point(662, 69)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(545, 111)
+        Label1.TabIndex = 2
+        Label1.Text = "Popotte v6"
+        ' 
+        ' Label2
+        ' 
+        Label2.Font = New Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label2.Location = New Point(657, 256)
+        Label2.Name = "Label2"
+        Label2.Size = New Size(564, 106)
+        Label2.TabIndex = 9
+        Label2.Text = "Veuillez choisir le dossier où seront sauvegardées vos recettes."
+        Label2.TextAlign = ContentAlignment.MiddleCenter
+        ' 
+        ' RadioButton1
+        ' 
+        RadioButton1.AutoSize = True
+        RadioButton1.BackgroundImage = CType(resources.GetObject("RadioButton1.BackgroundImage"), Image)
+        RadioButton1.BackgroundImageLayout = ImageLayout.Stretch
+        RadioButton1.Location = New Point(743, 472)
+        RadioButton1.Margin = New Padding(3, 4, 3, 4)
+        RadioButton1.Name = "RadioButton1"
+        RadioButton1.Size = New Size(21, 20)
+        RadioButton1.TabIndex = 10
+        RadioButton1.TabStop = True
+        RadioButton1.TextImageRelation = TextImageRelation.ImageAboveText
+        RadioButton1.UseVisualStyleBackColor = True
+        ' 
+        ' PictureBox2
+        ' 
+        PictureBox2.BackgroundImage = CType(resources.GetObject("PictureBox2.BackgroundImage"), Image)
+        PictureBox2.BackgroundImageLayout = ImageLayout.Stretch
+        PictureBox2.Location = New Point(784, 410)
+        PictureBox2.Margin = New Padding(3, 4, 3, 4)
+        PictureBox2.Name = "PictureBox2"
+        PictureBox2.Size = New Size(291, 139)
+        PictureBox2.TabIndex = 11
+        PictureBox2.TabStop = False
+        ' 
+        ' PictureBox3
+        ' 
+        PictureBox3.BackgroundImage = CType(resources.GetObject("PictureBox3.BackgroundImage"), Image)
+        PictureBox3.BackgroundImageLayout = ImageLayout.Stretch
+        PictureBox3.Location = New Point(783, 556)
+        PictureBox3.Margin = New Padding(3, 4, 3, 4)
+        PictureBox3.Name = "PictureBox3"
+        PictureBox3.Size = New Size(291, 98)
+        PictureBox3.TabIndex = 12
+        PictureBox3.TabStop = False
+        ' 
+        ' RadioButton4
+        ' 
+        RadioButton4.AutoSize = True
+        RadioButton4.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        RadioButton4.Location = New Point(743, 696)
+        RadioButton4.Margin = New Padding(3, 4, 3, 4)
+        RadioButton4.Name = "RadioButton4"
+        RadioButton4.Size = New Size(362, 36)
+        RadioButton4.TabIndex = 13
+        RadioButton4.TabStop = True
+        RadioButton4.Text = "   Dossier Local Personnalisé"
+        RadioButton4.UseVisualStyleBackColor = True
+        ' 
+        ' Label3
+        ' 
+        Label3.AutoSize = True
+        Label3.Location = New Point(12, 919)
+        Label3.Name = "Label3"
+        Label3.Size = New Size(258, 25)
+        Label3.TabIndex = 14
+        Label3.Text = "© Martin Laflamme 2003/2026"
+        ' 
+        ' Button1
+        ' 
+        Button1.FlatStyle = FlatStyle.System
+        Button1.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Button1.Location = New Point(1050, 896)
+        Button1.Margin = New Padding(3, 4, 3, 4)
+        Button1.Name = "Button1"
+        Button1.Size = New Size(157, 48)
+        Button1.TabIndex = 15
+        Button1.Text = "Suivant"
+        Button1.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton2
+        ' 
+        RadioButton2.AutoSize = True
+        RadioButton2.Location = New Point(743, 594)
+        RadioButton2.Margin = New Padding(3, 4, 3, 4)
+        RadioButton2.Name = "RadioButton2"
+        RadioButton2.Size = New Size(21, 20)
+        RadioButton2.TabIndex = 16
+        RadioButton2.TabStop = True
+        RadioButton2.UseVisualStyleBackColor = True
+        ' 
+        ' PictureBox1
+        ' 
+        PictureBox1.BackgroundImage = CType(resources.GetObject("PictureBox1.BackgroundImage"), Image)
+        PictureBox1.BackgroundImageLayout = ImageLayout.Stretch
+        PictureBox1.Location = New Point(49, 69)
+        PictureBox1.Margin = New Padding(3, 4, 3, 4)
+        PictureBox1.Name = "PictureBox1"
+        PictureBox1.Size = New Size(576, 672)
+        PictureBox1.TabIndex = 1
+        PictureBox1.TabStop = False
+        ' 
+        ' dlgStartup
+        ' 
+        AutoScaleDimensions = New SizeF(10F, 25F)
+        AutoScaleMode = AutoScaleMode.Font
+        ClientSize = New Size(1251, 969)
+        Controls.Add(RadioButton2)
+        Controls.Add(Button1)
+        Controls.Add(Label3)
+        Controls.Add(RadioButton4)
+        Controls.Add(PictureBox3)
+        Controls.Add(PictureBox2)
+        Controls.Add(RadioButton1)
+        Controls.Add(Label2)
+        Controls.Add(Label1)
+        Controls.Add(PictureBox1)
+        FormBorderStyle = FormBorderStyle.FixedDialog
+        Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        Margin = New Padding(4, 6, 4, 6)
+        MaximizeBox = False
+        MinimizeBox = False
+        Name = "dlgStartup"
+        ShowInTaskbar = False
+        StartPosition = FormStartPosition.CenterParent
+        Text = "Démarrage"
+        CType(PictureBox2, ComponentModel.ISupportInitialize).EndInit()
+        CType(PictureBox3, ComponentModel.ISupportInitialize).EndInit()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
+        ResumeLayout(False)
+        PerformLayout()
 
     End Sub
     Friend WithEvents Label1 As Label

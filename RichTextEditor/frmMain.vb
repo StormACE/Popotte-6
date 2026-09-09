@@ -4,7 +4,7 @@ Imports Microsoft.Win32
 Imports System.Text
 Imports System.IO
 Imports System.ComponentModel
-Imports System.Threading
+'Imports System.Threading
 Imports System.Globalization
 Imports ExtendedRichTextBox.AdvRichTextBoxPrintCtrl
 
@@ -26,8 +26,8 @@ Public Class frmMain
 
     Public Shared Sub Main()
         ' Add the event handler.
-        AddHandler Application.ThreadException,
-        AddressOf CustomExceptionHandler.OnThreadException
+        'AddHandler Application.ThreadException,
+        'AddressOf CustomExceptionHandler.OnThreadException
     End Sub
 
 
@@ -54,7 +54,6 @@ Public Class frmMain
     Public FindFormOpen As Boolean = False
     Public FindReplaceFormOpen As Boolean = False
     Public ImageRecette As Boolean = True  'Option image dans la liste des recette
-    'Public DPI As Integer = 0
     Public LangIni As New IniFile
     Public currentFile As String  ' le fichier ouvert
     Public Language As String
@@ -3379,29 +3378,29 @@ End Class
 
 
 ' Create a class to handle the exception event.
-Friend Class CustomExceptionHandler
-    'Handle the exception event.
-    Public Shared Sub OnThreadException(sender As Object, t As ThreadExceptionEventArgs)
-        Dim result As DialogResult = ShowThreadExceptionDialog(t.Exception)
+'Friend Class CustomExceptionHandler
+'Handle the exception event.
+'Public Shared Sub OnThreadException(sender As Object, t As ThreadExceptionEventArgs)
+'Dim result As DialogResult = ShowThreadExceptionDialog(t.Exception)
 
-        ' Exit the program when the user clicks Abort.
-        If result = DialogResult.Abort Then
-            Application.Exit()
-        End If
-    End Sub
+' Exit the program when the user clicks Abort.
+'If result = DialogResult.Abort Then
+'Application.Exit()
+'End If
+'End Sub
 
-    ' Create and display the error message.
-    Private Shared Function ShowThreadExceptionDialog(e As Exception) As DialogResult
-        Dim errorMsg As String = "An error occurred.  Please contact the " &
-            "adminstrator with the following information:" &
-            vbCrLf & vbCrLf
-        errorMsg &= "Exception Type: " & e.GetType().Name & vbCrLf & vbCrLf
-        errorMsg &= e.Message & vbCrLf & vbCrLf
-        errorMsg &= "Stack Trace: " & vbCrLf & e.StackTrace
+' Create and display the error message.
+'Private Shared Function ShowThreadExceptionDialog(e As Exception) As DialogResult
+'Dim errorMsg As String = "An error occurred.  Please contact the " &
+'           "adminstrator with the following information:" &
+'vbCrLf & vbCrLf
+'errorMsg &= "Exception Type: " & e.GetType().Name & vbCrLf & vbCrLf
+'errorMsg &= e.Message & vbCrLf & vbCrLf
+'errorMsg &= "Stack Trace: " & vbCrLf & e.StackTrace
 
-        Return MessageBox.Show(errorMsg, "Application Error",
-               MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Stop)
-    End Function
-End Class
+'Return MessageBox.Show(errorMsg, "Application Error",
+'MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Stop)
+'End Function
+'End Class
 
 
