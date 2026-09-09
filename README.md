@@ -86,6 +86,8 @@ Popotte English.pdf
 
 Popotte Francais.pdf
 
+Popotte.dll
+
 Popotte.exe
 
 licence.txt
