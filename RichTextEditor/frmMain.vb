@@ -1416,9 +1416,9 @@ Public Class frmMain
             Case ".rtf"
                 Try
                     rtbDoc.SaveFile(SaveFileDialog1.FileName, RichTextBoxStreamType.RichText)
-                    MessageBox.Show("Fichier sauvegardé avec succès.", "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    MessageBox.Show(LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "50"), "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Catch ex As Exception
-                    MessageBox.Show("Erreur lors de la sauvegarde du fichier.", "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    MessageBox.Show(LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "49"), "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End Try
 
             Case Else
@@ -1427,9 +1427,9 @@ Public Class frmMain
                 txtWriter = New StreamWriter(SaveFileDialog1.FileName, True, System.Text.Encoding.Default)
                 Try
                     txtWriter.Write(rtbDoc.Text)
-                    MessageBox.Show("Fichier sauvegardé avec succès.", "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    MessageBox.Show(LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "50"), "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Catch ex As Exception
-                    MessageBox.Show("Erreur lors de la sauvegarde du fichier.", "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    MessageBox.Show(LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "49"), "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End Try
                 txtWriter.Close()
                 txtWriter = Nothing
@@ -1742,7 +1742,7 @@ Public Class frmMain
             Try
                 PrintDocument1.Print()
             Catch ex As Exception
-                MessageBox.Show("Le document n'a pas été imprimer", "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show(LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "51"), "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
             PrintPreviewDialog1.Dispose()
         End If
