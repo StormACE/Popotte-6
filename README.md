@@ -3,7 +3,7 @@ Logiciel de gestion de recettes Lisez License.txt avant d'utiliser ou modifier!!
 
 Recipes management software Read licence.txt before use or modification!!!
 
-La nouvelle version 6.0.0.3 est en-ligne.
+La nouvelle version 6.0.0.4 Alpha est en-ligne.
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
