@@ -1161,6 +1161,12 @@ Public Class frmMain
                             link = link.Substring(1)
                         End If
                     End If
+                Else
+                    'Le lien est pour le web, on l'ouvre dans le navigateur par défaut
+                    If link.StartsWith("http", StringComparison.OrdinalIgnoreCase) Then
+                        Process.Start("explorer.exe", link)
+                        Exit Sub
+                    End If
                 End If
 
                 ' Décoder les escapes (%20 -> espace)
