@@ -9,8 +9,8 @@ Imports System.Globalization
 Imports ExtendedRichTextBox.AdvRichTextBoxPrintCtrl
 
 ''' <summary>
-''' Popotte 6.0.0.4
-''' 05 sept 2026 au 09 sept 2026
+''' Popotte 6.0.0.5
+''' 05 sept 2026 au 11 sept 2026
 ''' Work on Windows 7 sp1, windows 8, Windows 8.1, Windows 10, Windows 11  .Net10
 ''' Copyright Martin Laflamme 2003/2026
 ''' Read licence.txt
@@ -1146,47 +1146,40 @@ Public Class frmMain
 
     'Hyperlink clicked in RTB
     Private Sub rtbDoc_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkClickedEventArgs) Handles rtbDoc.LinkClicked
+
         Try
+            Dim link As String = e.LinkText
 
-            Try
-                Dim link As String = e.LinkText
-
-                ' Normaliser les préfixes file:
-                If link.StartsWith("file:", StringComparison.OrdinalIgnoreCase) Then
-                    link = link.Replace("file:///", "file:/") ' uniformiser
-                    If link.StartsWith("file:/") Then
-                        link = link.Substring("file:/".Length)
-                        ' cas "/C:/..." -> retirer le slash initial
-                        If link.StartsWith("/") AndAlso link.Length > 2 AndAlso link(2) = ":"c Then
-                            link = link.Substring(1)
-                        End If
-                    End If
-                Else
-                    'Le lien est pour le web, on l'ouvre dans le navigateur par défaut
-                    If link.StartsWith("http", StringComparison.OrdinalIgnoreCase) Then
-                        Process.Start("explorer.exe", link)
-                        Exit Sub
+            ' Normaliser les préfixes file:
+            If link.StartsWith("file:", StringComparison.OrdinalIgnoreCase) Then
+                link = link.Replace("file:///", "file:/") ' uniformiser
+                If link.StartsWith("file:/") Then
+                    link = link.Substring("file:/".Length)
+                    ' cas "/C:/..." -> retirer le slash initial
+                    If link.StartsWith("/") AndAlso link.Length > 2 AndAlso link(2) = ":"c Then
+                        link = link.Substring(1)
                     End If
                 End If
-
-                ' Décoder les escapes (%20 -> espace)
-                link = Uri.UnescapeDataString(link)
-
-                ' Ouvrir si le fichier existe
-                If System.IO.File.Exists(link) Then
-                    Dim psi As New ProcessStartInfo(link) With {.UseShellExecute = True}
-                    Process.Start(psi)
-                Else
-                    MessageBox.Show(LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "9"), LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "7"), MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Else
+                'Le lien est pour le web, on l'ouvre dans le navigateur par défaut
+                If link.StartsWith("http://", StringComparison.OrdinalIgnoreCase) Or link.StartsWith("https://", StringComparison.OrdinalIgnoreCase) Then
+                    Process.Start("explorer.exe", link)
+                    Exit Sub
                 End If
-            Catch ex As Exception
-                MessageBox.Show("Erreur lors de l'ouverture du lien : " & ex.Message, "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End Try
+            End If
 
-        Catch ex As Win32Exception
-            MessageBox.Show(LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "9"), LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "7"), MessageBoxButtons.OK, MessageBoxIcon.Warning)
-        Catch ex As FileNotFoundException
-            MessageBox.Show(LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "9"), LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "7"), MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            ' Décoder les escapes (%20 -> espace)
+            link = Uri.UnescapeDataString(link)
+
+            ' Ouvrir si le fichier existe
+            If File.Exists(link) Then
+                Dim psi As New ProcessStartInfo(link) With {.UseShellExecute = True}
+                Process.Start(psi)
+            Else
+                MessageBox.Show(LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "9"), LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "7"), MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Erreur lors de l'ouverture du lien : " & ex.Message, "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
