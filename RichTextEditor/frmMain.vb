@@ -3,23 +3,17 @@ Imports System.Drawing.Text
 Imports Microsoft.Win32
 Imports System.Text
 Imports System.IO
-Imports System.ComponentModel
 'Imports System.Threading
 Imports System.Globalization
 Imports ExtendedRichTextBox.AdvRichTextBoxPrintCtrl
 
 ''' <summary>
-''' Popotte 6.0.0.5
-''' 05 sept 2026 au 11 sept 2026
+''' Popotte 6.0.0.6
+''' 05 sept 2026 au 14 sept 2026
 ''' Work on Windows 7 sp1, windows 8, Windows 8.1, Windows 10, Windows 11  .Net10
 ''' Copyright Martin Laflamme 2003/2026
 ''' Read licence.txt
 ''' </summary>
-''' 
-''' ////////// Changes Logs ///////////////////////
-''' ////////// English //////////////////////
-
-''' ////////// Francais /////////////////////
 
 
 Public Class frmMain
@@ -310,102 +304,58 @@ Public Class frmMain
         ToolStripButtonGauche.Checked = True
         TexteÀGaucheToolStripMenuItem.Checked = True
 
-        'Get and set indent
+        'Get and set indent (supporte ancien format en pixels et nouveau format en cm)
         regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Indent", True)
         If regKey IsNot Nothing Then
-            rtbDoc.SelectionIndent = CInt(regKey.GetValue("", 0))
-            Select Case regKey.GetValue("", 0)
-                Case 0
-                    AucunToolStripMenuItem.Checked = True
-                    APtsToolStripMenuItem.Checked = False
-                    BPtsToolStripMenuItem.Checked = False
-                    CPtsToolStripMenuItem.Checked = False
-                    DPtsToolStripMenuItem.Checked = False
-                    EPtsToolStripMenuItem.Checked = False
-                    FPtsToolStripMenuItem.Checked = False
-                    GPtsToolStripMenuItem.Checked = False
-                    HPtsToolStripMenuItem.Checked = False
-                Case 14.173228346
-                    APtsToolStripMenuItem.Checked = True
-                    AucunToolStripMenuItem.Checked = False
-                    BPtsToolStripMenuItem.Checked = False
-                    CPtsToolStripMenuItem.Checked = False
-                    DPtsToolStripMenuItem.Checked = False
-                    EPtsToolStripMenuItem.Checked = False
-                    FPtsToolStripMenuItem.Checked = False
-                    GPtsToolStripMenuItem.Checked = False
-                    HPtsToolStripMenuItem.Checked = False
-                Case 28.346456693
-                    BPtsToolStripMenuItem.Checked = True
-                    APtsToolStripMenuItem.Checked = False
-                    AucunToolStripMenuItem.Checked = False
-                    CPtsToolStripMenuItem.Checked = False
-                    DPtsToolStripMenuItem.Checked = False
-                    EPtsToolStripMenuItem.Checked = False
-                    FPtsToolStripMenuItem.Checked = False
-                    GPtsToolStripMenuItem.Checked = False
-                    HPtsToolStripMenuItem.Checked = False
-                Case 42.519685039
-                    CPtsToolStripMenuItem.Checked = True
-                    APtsToolStripMenuItem.Checked = False
-                    AucunToolStripMenuItem.Checked = False
-                    BPtsToolStripMenuItem.Checked = False
-                    DPtsToolStripMenuItem.Checked = False
-                    EPtsToolStripMenuItem.Checked = False
-                    FPtsToolStripMenuItem.Checked = False
-                    GPtsToolStripMenuItem.Checked = False
-                    HPtsToolStripMenuItem.Checked = False
-                Case 56.692913386
-                    DPtsToolStripMenuItem.Checked = True
-                    APtsToolStripMenuItem.Checked = False
-                    AucunToolStripMenuItem.Checked = False
-                    BPtsToolStripMenuItem.Checked = False
-                    CPtsToolStripMenuItem.Checked = False
-                    EPtsToolStripMenuItem.Checked = False
-                    FPtsToolStripMenuItem.Checked = False
-                    GPtsToolStripMenuItem.Checked = False
-                    HPtsToolStripMenuItem.Checked = False
-                Case 70.866141732
-                    EPtsToolStripMenuItem.Checked = True
-                    APtsToolStripMenuItem.Checked = False
-                    AucunToolStripMenuItem.Checked = False
-                    BPtsToolStripMenuItem.Checked = False
-                    CPtsToolStripMenuItem.Checked = False
-                    DPtsToolStripMenuItem.Checked = False
-                    FPtsToolStripMenuItem.Checked = False
-                    GPtsToolStripMenuItem.Checked = False
-                    HPtsToolStripMenuItem.Checked = False
-                Case 85.039370079
-                    FPtsToolStripMenuItem.Checked = True
-                    APtsToolStripMenuItem.Checked = False
-                    AucunToolStripMenuItem.Checked = False
-                    BPtsToolStripMenuItem.Checked = False
-                    CPtsToolStripMenuItem.Checked = False
-                    DPtsToolStripMenuItem.Checked = False
-                    EPtsToolStripMenuItem.Checked = False
-                    GPtsToolStripMenuItem.Checked = False
-                    HPtsToolStripMenuItem.Checked = False
-                Case 99.212598425
-                    GPtsToolStripMenuItem.Checked = True
-                    APtsToolStripMenuItem.Checked = False
-                    AucunToolStripMenuItem.Checked = False
-                    BPtsToolStripMenuItem.Checked = False
-                    CPtsToolStripMenuItem.Checked = False
-                    DPtsToolStripMenuItem.Checked = False
-                    EPtsToolStripMenuItem.Checked = False
-                    FPtsToolStripMenuItem.Checked = False
-                    HPtsToolStripMenuItem.Checked = False
-                Case 113.385826772
-                    HPtsToolStripMenuItem.Checked = True
-                    APtsToolStripMenuItem.Checked = False
-                    AucunToolStripMenuItem.Checked = False
-                    BPtsToolStripMenuItem.Checked = False
-                    CPtsToolStripMenuItem.Checked = False
-                    DPtsToolStripMenuItem.Checked = False
-                    EPtsToolStripMenuItem.Checked = False
-                    FPtsToolStripMenuItem.Checked = False
-                    GPtsToolStripMenuItem.Checked = False
-            End Select
+            Dim raw = regKey.GetValue("", "none")
+            Dim cmValue As Double = -1
+            Try
+                If TypeOf raw Is String Then
+                    Dim s = raw.ToString().ToLower()
+                    If s = "none" OrElse s = "" Then
+                        cmValue = -1
+                    Else
+                        cmValue = CDbl(raw)
+                    End If
+                Else
+                    ' Ancien format : valeur en pixels (double ou integer)
+                    Dim pixels As Double = CDbl(raw)
+                    If pixels = 0 Then
+                        cmValue = -1
+                    Else
+                        cmValue = PixelsToCm(pixels, rtbDoc)
+                    End If
+                End If
+            Catch
+                cmValue = -1
+            End Try
+
+            If cmValue > 0 Then
+                Dim pixelsToApply As Integer = CmToPixels(cmValue, rtbDoc)
+                rtbDoc.SelectionIndent = pixelsToApply
+                ' Définir l'item coché en fonction de cmValue (0.5,1.0,...4.0)
+                Dim idx As Integer = CInt(Math.Round(cmValue * 2)) ' 0.5->1, 1.0->2, ...
+                AucunToolStripMenuItem.Checked = False
+                APtsToolStripMenuItem.Checked = (idx = 1)
+                BPtsToolStripMenuItem.Checked = (idx = 2)
+                CPtsToolStripMenuItem.Checked = (idx = 3)
+                DPtsToolStripMenuItem.Checked = (idx = 4)
+                EPtsToolStripMenuItem.Checked = (idx = 5)
+                FPtsToolStripMenuItem.Checked = (idx = 6)
+                GPtsToolStripMenuItem.Checked = (idx = 7)
+                HPtsToolStripMenuItem.Checked = (idx = 8)
+            Else
+                rtbDoc.SelectionIndent = 0
+                AucunToolStripMenuItem.Checked = True
+                APtsToolStripMenuItem.Checked = False
+                BPtsToolStripMenuItem.Checked = False
+                CPtsToolStripMenuItem.Checked = False
+                DPtsToolStripMenuItem.Checked = False
+                EPtsToolStripMenuItem.Checked = False
+                FPtsToolStripMenuItem.Checked = False
+                GPtsToolStripMenuItem.Checked = False
+                HPtsToolStripMenuItem.Checked = False
+            End If
         Else
             AucunToolStripMenuItem.Checked = True
             APtsToolStripMenuItem.Checked = False
@@ -420,40 +370,54 @@ Public Class frmMain
         End If
         rtbDoc.Modified = False
 
-        'MargeDroite
+        'MargeDroite (calcul dynamique en fonction du DPI : stocke la valeur en cm dans le registre)
         regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\MargeDroite", True)
         If regKey IsNot Nothing Then
-            Dim MargeDroite As Integer
-            MargeDroite = CInt(regKey.GetValue("", 8)) 'defaut aucun
-            Select Case MargeDroite
-                Case 0
-                    rtbDoc.RightMargin = CInt(rtbDoc.Width - 30 - 14.173228346)
-                    CmToolStripMenuItem.Checked = True
-                Case 1
-                    rtbDoc.RightMargin = CInt(rtbDoc.Width - 30 - 28.346456693)
-                    CmToolStripMenuItem1.Checked = True
-                Case 2
-                    rtbDoc.RightMargin = CInt(rtbDoc.Width - 30 - 42.519685039)
-                    CmToolStripMenuItem2.Checked = True
-                Case 3
-                    rtbDoc.RightMargin = CInt(rtbDoc.Width - 30 - 56.692913386)
-                    CmToolStripMenuItem3.Checked = True
-                Case 4
-                    rtbDoc.RightMargin = CInt(rtbDoc.Width - 30 - 70.866141732)
-                    CmToolStripMenuItem4.Checked = True
-                Case 5
-                    rtbDoc.RightMargin = CInt(rtbDoc.Width - 30 - 85.039370079)
-                    CmToolStripMenuItem5.Checked = True
-                Case 6
-                    rtbDoc.RightMargin = CInt(rtbDoc.Width - 30 - 99.212598425)
-                    CmToolStripMenuItem6.Checked = True
-                Case 7
-                    rtbDoc.RightMargin = CInt(rtbDoc.Width - 30 - 113.385826772)
-                    CmToolStripMenuItem7.Checked = True
-                Case 8
-                    rtbDoc.RightMargin = rtbDoc.Width - 30
-                    CMToolStripMenuItem8.Checked = True
-            End Select
+            Dim raw = regKey.GetValue("", 8)
+            Dim cmValue As Double = -1
+            Try
+                If TypeOf raw Is Integer Then
+                    ' Ancien format : index 0..7 (0 => 0.5cm, 1 => 1.0cm, ..., 7 => 4.0cm, 8 => none)
+                    Dim idx As Integer = CInt(raw)
+                    If idx = 8 Then
+                        cmValue = -1
+                    Else
+                        cmValue = 0.5 + idx * 0.5
+                    End If
+                Else
+                    ' Nouveau format : valeur en cm (string ou double)
+                    cmValue = CDbl(raw)
+                End If
+            Catch
+                cmValue = -1
+            End Try
+
+            If cmValue > 0 Then
+                ' Appliquer la marge droite en pixels
+                rtbDoc.RightMargin = rtbDoc.Width - 30 - CmToPixels(cmValue, rtbDoc)
+                ' Décocher et cocher l'item correspondant
+                Select Case Math.Round(cmValue * 2) ' cm *2 -> 1 => 0.5cm, 2=>1.0cm...
+                    Case 1
+                        CmToolStripMenuItem.Checked = True
+                    Case 2
+                        CmToolStripMenuItem1.Checked = True
+                    Case 3
+                        CmToolStripMenuItem2.Checked = True
+                    Case 4
+                        CmToolStripMenuItem3.Checked = True
+                    Case 5
+                        CmToolStripMenuItem4.Checked = True
+                    Case 6
+                        CmToolStripMenuItem5.Checked = True
+                    Case 7
+                        CmToolStripMenuItem6.Checked = True
+                    Case 8
+                        CmToolStripMenuItem7.Checked = True
+                End Select
+            Else
+                rtbDoc.RightMargin = rtbDoc.Width - 30
+                CMToolStripMenuItem8.Checked = True
+            End If
         Else
             rtbDoc.RightMargin = rtbDoc.Width - 30
             CMToolStripMenuItem8.Checked = True
@@ -1038,99 +1002,30 @@ Public Class frmMain
                 TexteJustifiéToolStripMenuItem.Checked = False
             End If
 
-            'marge gauche indentation
-            Select Case rtbDoc.SelectionIndent
-                Case 0
-                    AucunToolStripMenuItem.Checked = True
-                    APtsToolStripMenuItem.Checked = False
-                    BPtsToolStripMenuItem.Checked = False
-                    CPtsToolStripMenuItem.Checked = False
-                    DPtsToolStripMenuItem.Checked = False
-                    EPtsToolStripMenuItem.Checked = False
-                    FPtsToolStripMenuItem.Checked = False
-                    GPtsToolStripMenuItem.Checked = False
-                    HPtsToolStripMenuItem.Checked = False
-                Case 14.173228346
-                    APtsToolStripMenuItem.Checked = True
-                    AucunToolStripMenuItem.Checked = False
-                    BPtsToolStripMenuItem.Checked = False
-                    CPtsToolStripMenuItem.Checked = False
-                    DPtsToolStripMenuItem.Checked = False
-                    EPtsToolStripMenuItem.Checked = False
-                    FPtsToolStripMenuItem.Checked = False
-                    GPtsToolStripMenuItem.Checked = False
-                    HPtsToolStripMenuItem.Checked = False
-                Case 28.346456693
-                    BPtsToolStripMenuItem.Checked = True
-                    AucunToolStripMenuItem.Checked = False
-                    APtsToolStripMenuItem.Checked = False
-                    CPtsToolStripMenuItem.Checked = False
-                    DPtsToolStripMenuItem.Checked = False
-                    EPtsToolStripMenuItem.Checked = False
-                    FPtsToolStripMenuItem.Checked = False
-                    GPtsToolStripMenuItem.Checked = False
-                    HPtsToolStripMenuItem.Checked = False
-                Case 42.519685039
-                    CPtsToolStripMenuItem.Checked = True
-                    AucunToolStripMenuItem.Checked = False
-                    APtsToolStripMenuItem.Checked = False
-                    BPtsToolStripMenuItem.Checked = False
-                    DPtsToolStripMenuItem.Checked = False
-                    EPtsToolStripMenuItem.Checked = False
-                    FPtsToolStripMenuItem.Checked = False
-                    GPtsToolStripMenuItem.Checked = False
-                    HPtsToolStripMenuItem.Checked = False
-                Case 56.692913386
-                    DPtsToolStripMenuItem.Checked = True
-                    AucunToolStripMenuItem.Checked = False
-                    APtsToolStripMenuItem.Checked = False
-                    BPtsToolStripMenuItem.Checked = False
-                    CPtsToolStripMenuItem.Checked = False
-                    EPtsToolStripMenuItem.Checked = False
-                    FPtsToolStripMenuItem.Checked = False
-                    GPtsToolStripMenuItem.Checked = False
-                    HPtsToolStripMenuItem.Checked = False
-                Case 70.866141732
-                    EPtsToolStripMenuItem.Checked = True
-                    AucunToolStripMenuItem.Checked = False
-                    APtsToolStripMenuItem.Checked = False
-                    BPtsToolStripMenuItem.Checked = False
-                    CPtsToolStripMenuItem.Checked = False
-                    DPtsToolStripMenuItem.Checked = False
-                    FPtsToolStripMenuItem.Checked = False
-                    GPtsToolStripMenuItem.Checked = False
-                    HPtsToolStripMenuItem.Checked = False
-                Case 85.039370079
-                    FPtsToolStripMenuItem.Checked = True
-                    AucunToolStripMenuItem.Checked = False
-                    APtsToolStripMenuItem.Checked = False
-                    BPtsToolStripMenuItem.Checked = False
-                    CPtsToolStripMenuItem.Checked = False
-                    DPtsToolStripMenuItem.Checked = False
-                    EPtsToolStripMenuItem.Checked = False
-                    GPtsToolStripMenuItem.Checked = False
-                    HPtsToolStripMenuItem.Checked = False
-                Case 99.212598425
-                    GPtsToolStripMenuItem.Checked = True
-                    AucunToolStripMenuItem.Checked = False
-                    APtsToolStripMenuItem.Checked = False
-                    BPtsToolStripMenuItem.Checked = False
-                    CPtsToolStripMenuItem.Checked = False
-                    DPtsToolStripMenuItem.Checked = False
-                    EPtsToolStripMenuItem.Checked = False
-                    FPtsToolStripMenuItem.Checked = False
-                    HPtsToolStripMenuItem.Checked = False
-                Case 113.385826772
-                    AucunToolStripMenuItem.Checked = False
-                    APtsToolStripMenuItem.Checked = False
-                    BPtsToolStripMenuItem.Checked = False
-                    CPtsToolStripMenuItem.Checked = False
-                    DPtsToolStripMenuItem.Checked = False
-                    EPtsToolStripMenuItem.Checked = False
-                    FPtsToolStripMenuItem.Checked = False
-                    GPtsToolStripMenuItem.Checked = False
-                    HPtsToolStripMenuItem.Checked = True
-            End Select
+            'marge gauche indentation (calcul via DPI)
+            If rtbDoc.SelectionIndent = 0 Then
+                AucunToolStripMenuItem.Checked = True
+                APtsToolStripMenuItem.Checked = False
+                BPtsToolStripMenuItem.Checked = False
+                CPtsToolStripMenuItem.Checked = False
+                DPtsToolStripMenuItem.Checked = False
+                EPtsToolStripMenuItem.Checked = False
+                FPtsToolStripMenuItem.Checked = False
+                GPtsToolStripMenuItem.Checked = False
+                HPtsToolStripMenuItem.Checked = False
+            Else
+                Dim cmSel As Double = PixelsToCm(rtbDoc.SelectionIndent, rtbDoc)
+                Dim idxSel As Integer = CInt(Math.Round(cmSel * 2))
+                AucunToolStripMenuItem.Checked = False
+                APtsToolStripMenuItem.Checked = (idxSel = 1)
+                BPtsToolStripMenuItem.Checked = (idxSel = 2)
+                CPtsToolStripMenuItem.Checked = (idxSel = 3)
+                DPtsToolStripMenuItem.Checked = (idxSel = 4)
+                EPtsToolStripMenuItem.Checked = (idxSel = 5)
+                FPtsToolStripMenuItem.Checked = (idxSel = 6)
+                GPtsToolStripMenuItem.Checked = (idxSel = 7)
+                HPtsToolStripMenuItem.Checked = (idxSel = 8)
+            End If
 
             'if list selected
             If rtbDoc.SelectionList = True Then
@@ -1851,11 +1746,22 @@ Public Class frmMain
             regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\", True)
             regKey = regKey.CreateSubKey("Indent")
         End If
-        regKey.SetValue("", 0)
+        regKey.SetValue("", "none")
     End Sub
 
+    ' Convertit des centimètres en pixels selon le DPI du contrôle
+    Private Function CmToPixels(cm As Double, ctrl As Control) As Integer
+        Using g As Graphics = ctrl.CreateGraphics()
+            Dim dpiX = g.DpiX
+            Dim inches As Double = cm / 2.54 ' 1 inch = 2.54 cm
+            Dim pixels As Double = inches * dpiX
+            Return CInt(Math.Round(pixels))
+        End Using
+    End Function
+
     Private Sub APtsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles APtsToolStripMenuItem.Click
-        rtbDoc.SelectionIndent = 14.173228346
+        ' Indentation calculée dynamiquement pour 0.5 cm (exemple A = 0.5cm)
+        rtbDoc.SelectionIndent = CmToPixels(0.5, rtbDoc)
         AucunToolStripMenuItem.Checked = False
         APtsToolStripMenuItem.Checked = True
         BPtsToolStripMenuItem.Checked = False
@@ -1870,11 +1776,12 @@ Public Class frmMain
             regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\", True)
             regKey = regKey.CreateSubKey("Indent")
         End If
-        regKey.SetValue("", 14.173228346)
+        regKey.SetValue("", "0.5")
     End Sub
 
     Private Sub BPtsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BPtsToolStripMenuItem.Click
-        rtbDoc.SelectionIndent = 28.346456693
+        ' B = 1 cm
+        rtbDoc.SelectionIndent = CmToPixels(1.0, rtbDoc)
         AucunToolStripMenuItem.Checked = False
         APtsToolStripMenuItem.Checked = False
         BPtsToolStripMenuItem.Checked = True
@@ -1889,11 +1796,12 @@ Public Class frmMain
             regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\", True)
             regKey = regKey.CreateSubKey("Indent")
         End If
-        regKey.SetValue("", 28.346456693)
+        regKey.SetValue("", "1.0")
     End Sub
 
     Private Sub CPtsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CPtsToolStripMenuItem.Click
-        rtbDoc.SelectionIndent = 42.519685039
+        ' C = 1.5 cm
+        rtbDoc.SelectionIndent = CmToPixels(1.5, rtbDoc)
         AucunToolStripMenuItem.Checked = False
         APtsToolStripMenuItem.Checked = False
         BPtsToolStripMenuItem.Checked = False
@@ -1908,11 +1816,12 @@ Public Class frmMain
             regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\", True)
             regKey = regKey.CreateSubKey("Indent")
         End If
-        regKey.SetValue("", 42.519685039)
+        regKey.SetValue("", "1.5")
     End Sub
 
     Private Sub DPtsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DPtsToolStripMenuItem.Click
-        rtbDoc.SelectionIndent = 56.692913386
+        ' D = 2 cm
+        rtbDoc.SelectionIndent = CmToPixels(2.0, rtbDoc)
         AucunToolStripMenuItem.Checked = False
         APtsToolStripMenuItem.Checked = False
         BPtsToolStripMenuItem.Checked = False
@@ -1927,11 +1836,12 @@ Public Class frmMain
             regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\", True)
             regKey = regKey.CreateSubKey("Indent")
         End If
-        regKey.SetValue("", 56.692913386)
+        regKey.SetValue("", "2.0")
     End Sub
 
     Private Sub EPtsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EPtsToolStripMenuItem.Click
-        rtbDoc.SelectionIndent = 70.866141732
+        ' E = 2.5 cm
+        rtbDoc.SelectionIndent = CmToPixels(2.5, rtbDoc)
         AucunToolStripMenuItem.Checked = False
         APtsToolStripMenuItem.Checked = False
         BPtsToolStripMenuItem.Checked = False
@@ -1946,11 +1856,12 @@ Public Class frmMain
             regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\", True)
             regKey = regKey.CreateSubKey("Indent")
         End If
-        regKey.SetValue("", 70.866141732)
+        regKey.SetValue("", "2.5")
     End Sub
 
     Private Sub FPtsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FPtsToolStripMenuItem.Click
-        rtbDoc.SelectionIndent = 85.039370079
+        ' F = 3 cm
+        rtbDoc.SelectionIndent = CmToPixels(3.0, rtbDoc)
         AucunToolStripMenuItem.Checked = False
         APtsToolStripMenuItem.Checked = False
         BPtsToolStripMenuItem.Checked = False
@@ -1965,11 +1876,11 @@ Public Class frmMain
             regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\", True)
             regKey = regKey.CreateSubKey("Indent")
         End If
-        regKey.SetValue("", 85.039370079)
+        regKey.SetValue("", "3.0")
     End Sub
 
     Private Sub GPtsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GPtsToolStripMenuItem.Click
-        rtbDoc.SelectionIndent = 99.212598425
+        rtbDoc.SelectionIndent = CmToPixels(3.5, rtbDoc)
         AucunToolStripMenuItem.Checked = False
         APtsToolStripMenuItem.Checked = False
         BPtsToolStripMenuItem.Checked = False
@@ -1984,11 +1895,11 @@ Public Class frmMain
             regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\", True)
             regKey = regKey.CreateSubKey("Indent")
         End If
-        regKey.SetValue("", 99.212598425)
+        regKey.SetValue("", "3.5")
     End Sub
 
     Private Sub HPtsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HPtsToolStripMenuItem.Click
-        rtbDoc.SelectionIndent = 113.385826772
+        rtbDoc.SelectionIndent = CmToPixels(4.0, rtbDoc)
         AucunToolStripMenuItem.Checked = False
         APtsToolStripMenuItem.Checked = False
         BPtsToolStripMenuItem.Checked = False
@@ -2003,8 +1914,18 @@ Public Class frmMain
             regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\", True)
             regKey = regKey.CreateSubKey("Indent")
         End If
-        regKey.SetValue("", 113.385826772)
+        regKey.SetValue("", "4.0")
     End Sub
+
+    ' Convertit des pixels en centimètres selon le DPI du contrôle
+    Private Function PixelsToCm(pixels As Double, ctrl As Control) As Double
+        Using g As Graphics = ctrl.CreateGraphics()
+            Dim dpiX = g.DpiX
+            Dim inches As Double = pixels / dpiX
+            Dim cm As Double = inches * 2.54
+            Return cm
+        End Using
+    End Function
 
 
     Private Sub TexteToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles TexteToolStripMenuItem.Click
@@ -2483,7 +2404,7 @@ Public Class frmMain
                 Dim ValueCount As Integer = regKey.ValueCount()
                 If ValueCount > 0 Then
                     sb.AppendLine("[HKEY_CURRENT_USER\Software\Popotte\Settings\MargeDroite\" & "]")
-                    sb.AppendLine(Chr(34) & "" & Chr(34) & "=dword:" & regKey.GetValue("").ToString())
+                    sb.AppendLine(CType(Chr(34) & "" & Chr(34) & "=" & Chr(34) & CType(regKey.GetValue(""), String) & Chr(34), String))
                     sb.AppendLine()
                 End If
             End If
@@ -2666,7 +2587,7 @@ Public Class frmMain
     End Sub
 
     Private Sub CmToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CmToolStripMenuItem.Click
-        rtbDoc.RightMargin = CInt(rtbDoc.Width - 30 - 14.173228346)
+        rtbDoc.RightMargin = rtbDoc.Width - 30 - CmToPixels(0.5, rtbDoc)
         CmToolStripMenuItem.Checked = True
         CmToolStripMenuItem1.Checked = False
         CmToolStripMenuItem2.Checked = False
@@ -2681,11 +2602,11 @@ Public Class frmMain
             regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\", True)
             regKey = regKey.CreateSubKey("MargeDroite")
         End If
-        regKey.SetValue("", 0)
+        regKey.SetValue("", "0.5")
     End Sub
 
     Private Sub CmToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles CmToolStripMenuItem1.Click
-        rtbDoc.RightMargin = CInt(rtbDoc.Width - 30 - 28.346456693)
+        rtbDoc.RightMargin = rtbDoc.Width - 30 - CmToPixels(1.0, rtbDoc)
         CmToolStripMenuItem.Checked = False
         CmToolStripMenuItem1.Checked = True
         CmToolStripMenuItem2.Checked = False
@@ -2700,11 +2621,11 @@ Public Class frmMain
             regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\", True)
             regKey = regKey.CreateSubKey("MargeDroite")
         End If
-        regKey.SetValue("", 1)
+        regKey.SetValue("", "1.0")
     End Sub
 
     Private Sub CmToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles CmToolStripMenuItem2.Click
-        rtbDoc.RightMargin = CInt(rtbDoc.Width - 30 - 42.519685039)
+        rtbDoc.RightMargin = rtbDoc.Width - 30 - CmToPixels(1.5, rtbDoc)
         CmToolStripMenuItem.Checked = False
         CmToolStripMenuItem1.Checked = False
         CmToolStripMenuItem2.Checked = True
@@ -2719,11 +2640,11 @@ Public Class frmMain
             regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\", True)
             regKey = regKey.CreateSubKey("MargeDroite")
         End If
-        regKey.SetValue("", 2)
+        regKey.SetValue("", "1.5")
     End Sub
 
     Private Sub CmToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles CmToolStripMenuItem3.Click
-        rtbDoc.RightMargin = CInt(rtbDoc.Width - 30 - 56.692913386)
+        rtbDoc.RightMargin = rtbDoc.Width - 30 - CmToPixels(2.0, rtbDoc)
         CmToolStripMenuItem.Checked = False
         CmToolStripMenuItem1.Checked = False
         CmToolStripMenuItem2.Checked = False
@@ -2738,11 +2659,11 @@ Public Class frmMain
             regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\", True)
             regKey = regKey.CreateSubKey("MargeDroite")
         End If
-        regKey.SetValue("", 3)
+        regKey.SetValue("", "2.0")
     End Sub
 
     Private Sub CmToolStripMenuItem4_Click(sender As Object, e As EventArgs) Handles CmToolStripMenuItem4.Click
-        rtbDoc.RightMargin = CInt(rtbDoc.Width - 30 - 70.866141732)
+        rtbDoc.RightMargin = rtbDoc.Width - 30 - CmToPixels(2.5, rtbDoc)
         CmToolStripMenuItem.Checked = False
         CmToolStripMenuItem1.Checked = False
         CmToolStripMenuItem2.Checked = False
@@ -2757,11 +2678,11 @@ Public Class frmMain
             regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\", True)
             regKey = regKey.CreateSubKey("MargeDroite")
         End If
-        regKey.SetValue("", 4)
+        regKey.SetValue("", "2.5")
     End Sub
 
     Private Sub CmToolStripMenuItem5_Click(sender As Object, e As EventArgs) Handles CmToolStripMenuItem5.Click
-        rtbDoc.RightMargin = CInt(rtbDoc.Width - 30 - 85.039370079)
+        rtbDoc.RightMargin = rtbDoc.Width - 30 - CmToPixels(3.0, rtbDoc)
         CmToolStripMenuItem.Checked = False
         CmToolStripMenuItem1.Checked = False
         CmToolStripMenuItem2.Checked = False
@@ -2776,11 +2697,11 @@ Public Class frmMain
             regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\", True)
             regKey = regKey.CreateSubKey("MargeDroite")
         End If
-        regKey.SetValue("", 5)
+        regKey.SetValue("", "3.0")
     End Sub
 
     Private Sub CmToolStripMenuItem6_Click(sender As Object, e As EventArgs) Handles CmToolStripMenuItem6.Click
-        rtbDoc.RightMargin = CInt(rtbDoc.Width - 30 - 99.212598425)
+        rtbDoc.RightMargin = rtbDoc.Width - 30 - CmToPixels(3.5, rtbDoc)
         CmToolStripMenuItem.Checked = False
         CmToolStripMenuItem1.Checked = False
         CmToolStripMenuItem2.Checked = False
@@ -2799,7 +2720,7 @@ Public Class frmMain
     End Sub
 
     Private Sub CmToolStripMenuItem7_Click(sender As Object, e As EventArgs) Handles CmToolStripMenuItem7.Click
-        rtbDoc.RightMargin = CInt(rtbDoc.Width - 30 - 113.385826772)
+        rtbDoc.RightMargin = rtbDoc.Width - 30 - CmToPixels(4.0, rtbDoc)
         CmToolStripMenuItem.Checked = False
         CmToolStripMenuItem1.Checked = False
         CmToolStripMenuItem2.Checked = False
@@ -2814,7 +2735,7 @@ Public Class frmMain
             regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\", True)
             regKey = regKey.CreateSubKey("MargeDroite")
         End If
-        regKey.SetValue("", 7)
+        regKey.SetValue("", "4.0")
     End Sub
 
     Private Sub CMToolStripMenuItem8_Click(sender As Object, e As EventArgs) Handles CMToolStripMenuItem8.Click
@@ -2833,7 +2754,7 @@ Public Class frmMain
             regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\", True)
             regKey = regKey.CreateSubKey("MargeDroite")
         End If
-        regKey.SetValue("", 8)
+        regKey.SetValue("", "none")
     End Sub
 
     Public Sub ToolStripMenuItemOnedrive_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemOnedrive.Click
@@ -3364,8 +3285,6 @@ Public Class frmMain
         Dim mn As New frmMenu
         mn.Show()
     End Sub
-
-
 
 
 
