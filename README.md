@@ -3,8 +3,6 @@ Logiciel de gestion de recettes Lisez License.txt avant d'utiliser ou modifier!!
 
 Recipes management software Read licence.txt before use or modification!!!
 
-La nouvelle version 6.0.0.5 Alpha est en-ligne.
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Popotte est un logiciel conçu pour Écrire, Lire et Classer des recettes facilement.
