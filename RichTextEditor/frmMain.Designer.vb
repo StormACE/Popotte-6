@@ -55,7 +55,7 @@ Partial Class frmMain
         ToolStripSeparator36 = New ToolStripSeparator()
         AnnulerLaSurbrillanceToolStripMenuItem = New ToolStripMenuItem()
         CouleurDeSurbrillanceToolStripMenuItem = New ToolStripMenuItem()
-        SurlignerLaSélectionToolStripMenuItem = New ToolStripMenuItem()
+        SurlignerLaSelectionToolStripMenuItem = New ToolStripMenuItem()
         FontToolStripMenuItem = New ToolStripMenuItem()
         SelectFontToolStripMenuItem = New ToolStripMenuItem()
         ToolStripMenuItem6 = New ToolStripSeparator()
@@ -79,9 +79,9 @@ Partial Class frmMain
         DemiToolStripMenuItem = New ToolStripMenuItem()
         Quart3ToolStripMenuItem = New ToolStripMenuItem()
         ToolStripSeparator17 = New ToolStripSeparator()
-        TableDesCharactèresToolStripMenuItem = New ToolStripMenuItem()
+        TableDesCaracteresToolStripMenuItem = New ToolStripMenuItem()
         ParagrapheToolStripMenuItem = New ToolStripMenuItem()
-        ÉchancrureToolStripMenuItem = New ToolStripMenuItem()
+        EchancrureToolStripMenuItem = New ToolStripMenuItem()
         AucunToolStripMenuItem = New ToolStripMenuItem()
         APtsToolStripMenuItem = New ToolStripMenuItem()
         BPtsToolStripMenuItem = New ToolStripMenuItem()
@@ -102,10 +102,10 @@ Partial Class frmMain
         CmToolStripMenuItem6 = New ToolStripMenuItem()
         CmToolStripMenuItem7 = New ToolStripMenuItem()
         PositionToolStripMenuItem = New ToolStripMenuItem()
-        TexteÀGaucheToolStripMenuItem = New ToolStripMenuItem()
-        TexteCentréToolStripMenuItem = New ToolStripMenuItem()
-        TexteÀDroiteToolStripMenuItem = New ToolStripMenuItem()
-        TexteJustifiéToolStripMenuItem = New ToolStripMenuItem()
+        TexteÃ€GaucheToolStripMenuItem = New ToolStripMenuItem()
+        TexteCentrÃ©ToolStripMenuItem = New ToolStripMenuItem()
+        TexteÃ€DroiteToolStripMenuItem = New ToolStripMenuItem()
+        TexteJustifiÃ©ToolStripMenuItem = New ToolStripMenuItem()
         OutilsToolStripMenuItem = New ToolStripMenuItem()
         ToolStripMenuItemMenu = New ToolStripMenuItem()
         ToolStripSeparator39 = New ToolStripSeparator()
@@ -116,7 +116,7 @@ Partial Class frmMain
         ToolStripMenuItemArchiverLesRecettes = New ToolStripMenuItem()
         SaveBD_ToolStripMenuItem = New ToolStripMenuItem()
         ToolStripSeparator13 = New ToolStripSeparator()
-        OuvrirLeRépertoireDesRecettesToolStripMenuItem = New ToolStripMenuItem()
+        OuvrirLeRepertoireDesRecettesToolStripMenuItem = New ToolStripMenuItem()
         OptionsToolStripMenuItem = New ToolStripMenuItem()
         AffichageToolStripMenuItem = New ToolStripMenuItem()
         BarDoutilsToolStripMenuItem1 = New ToolStripMenuItem()
@@ -133,17 +133,17 @@ Partial Class frmMain
         ToolStripSeparator34 = New ToolStripSeparator()
         OptRTFToolStripMenuItem = New ToolStripMenuItem()
         ToolStripSeparator26 = New ToolStripSeparator()
-        ÉditeurExterneParDéfautToolStripMenuItem = New ToolStripMenuItem()
+        EditeurExterneParDefautToolStripMenuItem = New ToolStripMenuItem()
         AutoCToolStripMenuItem = New ToolStripMenuItem()
         ToolStripSeparator11 = New ToolStripSeparator()
         ToolStripMenuItemOnedrive = New ToolStripMenuItem()
         ToolStripMenuItemDropbox = New ToolStripMenuItem()
         DossierRecetteToolStripMenuItem = New ToolStripMenuItem()
         ToolStripSeparator4 = New ToolStripSeparator()
-        OuvrirMesLivresAuDémarrageToolStripMenuItem = New ToolStripMenuItem()
-        OuvrirLaDernièrerecetteAuDémarrageToolStripMenuItem = New ToolStripMenuItem()
+        OuvrirMesLivresAuDemarrageToolStripMenuItem = New ToolStripMenuItem()
+        OuvrirLaDerniereRecetteAuDemarrageToolStripMenuItem = New ToolStripMenuItem()
         ToolStripSeparator25 = New ToolStripSeparator()
-        VérifierSiUneMiseÀJourEstDisponibleAuDémarrageToolStripMenuItem = New ToolStripMenuItem()
+        VerifierSiUneMiseAJourEstDisponibleAuDemarrageToolStripMenuItem = New ToolStripMenuItem()
         AideToolStripMenuItem = New ToolStripMenuItem()
         AidesToolStripMenuItem1 = New ToolStripMenuItem()
         ToolStripSeparator21 = New ToolStripSeparator()
@@ -213,7 +213,7 @@ Partial Class frmMain
         ToolStripButtonBulletList = New ToolStripButton()
         ListToolStripDropDownButton = New ToolStripDropDownButton()
         BalleToolStripMenuItem = New ToolStripMenuItem()
-        NumériqueToolStripMenuItem = New ToolStripMenuItem()
+        NumÃ©riqueToolStripMenuItem = New ToolStripMenuItem()
         FolderBrowserDialog1 = New FolderBrowserDialog()
         rtbDoc = New ExtendedRichTextBox.AdvRichTextBoxPrintCtrl()
         MenuStrip1.SuspendLayout()
@@ -299,7 +299,7 @@ Partial Class frmMain
         ' 
         PreviewToolStripMenuItem.Name = "PreviewToolStripMenuItem"
         PreviewToolStripMenuItem.Size = New Size(354, 34)
-        PreviewToolStripMenuItem.Text = "&Aperçu avant impression..."
+        PreviewToolStripMenuItem.Text = "&Aperï¿½u avant impression..."
         ' 
         ' PrintToolStripMenuItem
         ' 
@@ -322,10 +322,10 @@ Partial Class frmMain
         ' 
         ' EditToolStripMenuItem
         ' 
-        EditToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {mnuUndo, mnuRedo, ToolStripSeparator6, FindToolStripMenuItem, FindAndReplaceToolStripMenuItem, ToolStripMenuItem4, SelectAllToolStripMenuItem, ToolStripSeparator38, AutoCeditToolStripMenuItem, ToolStripMenuItem5, CopyToolStripMenuItem, CutToolStripMenuItem, PasteToolStripMenuItem, ToolStripMenuItem8, InsertImageToolStripMenuItem, InsertlocalfileToolStripMenuItem, ToolStripSeparator36, AnnulerLaSurbrillanceToolStripMenuItem, CouleurDeSurbrillanceToolStripMenuItem, SurlignerLaSélectionToolStripMenuItem})
+        EditToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {mnuUndo, mnuRedo, ToolStripSeparator6, FindToolStripMenuItem, FindAndReplaceToolStripMenuItem, ToolStripMenuItem4, SelectAllToolStripMenuItem, ToolStripSeparator38, AutoCeditToolStripMenuItem, ToolStripMenuItem5, CopyToolStripMenuItem, CutToolStripMenuItem, PasteToolStripMenuItem, ToolStripMenuItem8, InsertImageToolStripMenuItem, InsertlocalfileToolStripMenuItem, ToolStripSeparator36, AnnulerLaSurbrillanceToolStripMenuItem, CouleurDeSurbrillanceToolStripMenuItem, SurlignerLaSelectionToolStripMenuItem})
         EditToolStripMenuItem.Name = "EditToolStripMenuItem"
         EditToolStripMenuItem.Size = New Size(73, 29)
-        EditToolStripMenuItem.Text = "&Éditer"
+        EditToolStripMenuItem.Text = "&ï¿½diter"
         ' 
         ' mnuUndo
         ' 
@@ -341,7 +341,7 @@ Partial Class frmMain
         mnuRedo.Name = "mnuRedo"
         mnuRedo.ShortcutKeys = Keys.Control Or Keys.Y
         mnuRedo.Size = New Size(484, 34)
-        mnuRedo.Text = "&Rétablir"
+        mnuRedo.Text = "&Rï¿½tablir"
         ' 
         ' ToolStripSeparator6
         ' 
@@ -373,7 +373,7 @@ Partial Class frmMain
         SelectAllToolStripMenuItem.Name = "SelectAllToolStripMenuItem"
         SelectAllToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.A
         SelectAllToolStripMenuItem.Size = New Size(484, 34)
-        SelectAllToolStripMenuItem.Text = "&Tout sélectionner"
+        SelectAllToolStripMenuItem.Text = "&Tout sï¿½lectionner"
         ' 
         ' ToolStripSeparator38
         ' 
@@ -423,7 +423,7 @@ Partial Class frmMain
         InsertImageToolStripMenuItem.Name = "InsertImageToolStripMenuItem"
         InsertImageToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.I
         InsertImageToolStripMenuItem.Size = New Size(484, 34)
-        InsertImageToolStripMenuItem.Text = "&Insérer une image..."
+        InsertImageToolStripMenuItem.Text = "&Insï¿½rer une image..."
         ' 
         ' InsertlocalfileToolStripMenuItem
         ' 
@@ -432,7 +432,7 @@ Partial Class frmMain
         InsertlocalfileToolStripMenuItem.Name = "InsertlocalfileToolStripMenuItem"
         InsertlocalfileToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.Alt Or Keys.L
         InsertlocalfileToolStripMenuItem.Size = New Size(484, 34)
-        InsertlocalfileToolStripMenuItem.Text = "Insérer un lien vers un fichier local..."
+        InsertlocalfileToolStripMenuItem.Text = "Insï¿½rer un lien vers un fichier local..."
         ' 
         ' ToolStripSeparator36
         ' 
@@ -451,11 +451,11 @@ Partial Class frmMain
         CouleurDeSurbrillanceToolStripMenuItem.Size = New Size(484, 34)
         CouleurDeSurbrillanceToolStripMenuItem.Text = "Couleur de surbrillance"
         ' 
-        ' SurlignerLaSélectionToolStripMenuItem
+        ' SurlignerLaSelectionToolStripMenuItem
         ' 
-        SurlignerLaSélectionToolStripMenuItem.Name = "SurlignerLaSélectionToolStripMenuItem"
-        SurlignerLaSélectionToolStripMenuItem.Size = New Size(484, 34)
-        SurlignerLaSélectionToolStripMenuItem.Text = "Surligner la sélection"
+        SurlignerLaSelectionToolStripMenuItem.Name = "SurlignerLaSelectionToolStripMenuItem"
+        SurlignerLaSelectionToolStripMenuItem.Size = New Size(484, 34)
+        SurlignerLaSelectionToolStripMenuItem.Text = "Surligner la selection"
         ' 
         ' FontToolStripMenuItem
         ' 
@@ -470,7 +470,7 @@ Partial Class frmMain
         SelectFontToolStripMenuItem.Name = "SelectFontToolStripMenuItem"
         SelectFontToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.F
         SelectFontToolStripMenuItem.Size = New Size(318, 34)
-        SelectFontToolStripMenuItem.Text = "Police par &défaut..."
+        SelectFontToolStripMenuItem.Text = "Police par &dï¿½faut..."
         ' 
         ' ToolStripMenuItem6
         ' 
@@ -499,7 +499,7 @@ Partial Class frmMain
         UnderlineToolStripMenuItem.Name = "UnderlineToolStripMenuItem"
         UnderlineToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.Alt Or Keys.S
         UnderlineToolStripMenuItem.Size = New Size(318, 34)
-        UnderlineToolStripMenuItem.Text = "&Souligné"
+        UnderlineToolStripMenuItem.Text = "&Soulignï¿½"
         ' 
         ' NormalToolStripMenuItem
         ' 
@@ -510,10 +510,10 @@ Partial Class frmMain
         ' 
         ' SpecialToolStripMenuItem
         ' 
-        SpecialToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {DateToolStripMenuItem, ToolStripSeparator22, ListeToolStripMenuItem, ToolStripSeparator16, DegreToolStripMenuItem, QuartToolStripMenuItem, DemiToolStripMenuItem, Quart3ToolStripMenuItem, ToolStripSeparator17, TableDesCharactèresToolStripMenuItem})
+        SpecialToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {DateToolStripMenuItem, ToolStripSeparator22, ListeToolStripMenuItem, ToolStripSeparator16, DegreToolStripMenuItem, QuartToolStripMenuItem, DemiToolStripMenuItem, Quart3ToolStripMenuItem, ToolStripSeparator17, TableDesCaracteresToolStripMenuItem})
         SpecialToolStripMenuItem.Name = "SpecialToolStripMenuItem"
         SpecialToolStripMenuItem.Size = New Size(181, 29)
-        SpecialToolStripMenuItem.Text = "&Caractères spéciaux"
+        SpecialToolStripMenuItem.Text = "&Caractï¿½res spï¿½ciaux"
         ' 
         ' DateToolStripMenuItem
         ' 
@@ -580,7 +580,7 @@ Partial Class frmMain
         DegreToolStripMenuItem.Name = "DegreToolStripMenuItem"
         DegreToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.Alt Or Keys.D
         DegreToolStripMenuItem.Size = New Size(282, 34)
-        DegreToolStripMenuItem.Text = "&Degré"
+        DegreToolStripMenuItem.Text = "&Degrï¿½"
         ' 
         ' QuartToolStripMenuItem
         ' 
@@ -601,29 +601,29 @@ Partial Class frmMain
         Quart3ToolStripMenuItem.Text = "3/4"
         ' 
         ' ToolStripSeparator17
-        ' 
+        '
         ToolStripSeparator17.Name = "ToolStripSeparator17"
         ToolStripSeparator17.Size = New Size(279, 6)
-        ' 
-        ' TableDesCharactèresToolStripMenuItem
-        ' 
-        TableDesCharactèresToolStripMenuItem.Name = "TableDesCharactèresToolStripMenuItem"
-        TableDesCharactèresToolStripMenuItem.Size = New Size(282, 34)
-        TableDesCharactèresToolStripMenuItem.Text = "&Table des caractères..."
-        ' 
+        '
+        ' TableDesCaracteresToolStripMenuItem
+        '
+        TableDesCaracteresToolStripMenuItem.Name = "TableDesCaracteresToolStripMenuItem"
+        TableDesCaracteresToolStripMenuItem.Size = New Size(282, 34)
+        TableDesCaracteresToolStripMenuItem.Text = "&Table des caracteres..."
+        '
         ' ParagrapheToolStripMenuItem
         ' 
-        ParagrapheToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {ÉchancrureToolStripMenuItem, MargeDToolStripMenuItem, PositionToolStripMenuItem})
+        ParagrapheToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {EchancrureToolStripMenuItem, MargeDToolStripMenuItem, PositionToolStripMenuItem})
         ParagrapheToolStripMenuItem.Name = "ParagrapheToolStripMenuItem"
         ParagrapheToolStripMenuItem.Size = New Size(117, 29)
         ParagrapheToolStripMenuItem.Text = "Paragraphe"
         ' 
-        ' ÉchancrureToolStripMenuItem
+        ' ï¿½chancrureToolStripMenuItem
         ' 
-        ÉchancrureToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {AucunToolStripMenuItem, APtsToolStripMenuItem, BPtsToolStripMenuItem, CPtsToolStripMenuItem, DPtsToolStripMenuItem, EPtsToolStripMenuItem, FPtsToolStripMenuItem, GPtsToolStripMenuItem, HPtsToolStripMenuItem})
-        ÉchancrureToolStripMenuItem.Name = "ÉchancrureToolStripMenuItem"
-        ÉchancrureToolStripMenuItem.Size = New Size(244, 34)
-        ÉchancrureToolStripMenuItem.Text = "Échancrure"
+        EchancrureToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {AucunToolStripMenuItem, APtsToolStripMenuItem, BPtsToolStripMenuItem, CPtsToolStripMenuItem, DPtsToolStripMenuItem, EPtsToolStripMenuItem, FPtsToolStripMenuItem, GPtsToolStripMenuItem, HPtsToolStripMenuItem})
+        EchancrureToolStripMenuItem.Name = "EchancrureToolStripMenuItem"
+        EchancrureToolStripMenuItem.Size = New Size(244, 34)
+        EchancrureToolStripMenuItem.Text = "Echancrure"
         ' 
         ' AucunToolStripMenuItem
         ' 
@@ -742,42 +742,42 @@ Partial Class frmMain
         ' 
         ' PositionToolStripMenuItem
         ' 
-        PositionToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {TexteÀGaucheToolStripMenuItem, TexteCentréToolStripMenuItem, TexteÀDroiteToolStripMenuItem, TexteJustifiéToolStripMenuItem})
+        PositionToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {TexteÃ€GaucheToolStripMenuItem, TexteCentrÃ©ToolStripMenuItem, TexteÃ€DroiteToolStripMenuItem, TexteJustifiÃ©ToolStripMenuItem})
         PositionToolStripMenuItem.Name = "PositionToolStripMenuItem"
         PositionToolStripMenuItem.Size = New Size(244, 34)
         PositionToolStripMenuItem.Text = "Position"
         ' 
-        ' TexteÀGaucheToolStripMenuItem
+        ' Texteï¿½GaucheToolStripMenuItem
         ' 
-        TexteÀGaucheToolStripMenuItem.Image = CType(resources.GetObject("TexteÀGaucheToolStripMenuItem.Image"), Image)
-        TexteÀGaucheToolStripMenuItem.Name = "TexteÀGaucheToolStripMenuItem"
-        TexteÀGaucheToolStripMenuItem.Size = New Size(230, 34)
-        TexteÀGaucheToolStripMenuItem.Text = "Texte à Gauche"
+        TexteÃ€GaucheToolStripMenuItem.Image = CType(resources.GetObject("Texteï¿½GaucheToolStripMenuItem.Image"), Image)
+        TexteÃ€GaucheToolStripMenuItem.Name = "Texteï¿½GaucheToolStripMenuItem"
+        TexteÃ€GaucheToolStripMenuItem.Size = New Size(230, 34)
+        TexteÃ€GaucheToolStripMenuItem.Text = "Texte ï¿½ Gauche"
         ' 
-        ' TexteCentréToolStripMenuItem
+        ' TexteCentrï¿½ToolStripMenuItem
         ' 
-        TexteCentréToolStripMenuItem.Image = CType(resources.GetObject("TexteCentréToolStripMenuItem.Image"), Image)
-        TexteCentréToolStripMenuItem.Name = "TexteCentréToolStripMenuItem"
-        TexteCentréToolStripMenuItem.Size = New Size(230, 34)
-        TexteCentréToolStripMenuItem.Text = "Texte Centré"
+        TexteCentrÃ©ToolStripMenuItem.Image = CType(resources.GetObject("TexteCentrï¿½ToolStripMenuItem.Image"), Image)
+        TexteCentrÃ©ToolStripMenuItem.Name = "TexteCentrï¿½ToolStripMenuItem"
+        TexteCentrÃ©ToolStripMenuItem.Size = New Size(230, 34)
+        TexteCentrÃ©ToolStripMenuItem.Text = "Texte Centrï¿½"
         ' 
-        ' TexteÀDroiteToolStripMenuItem
+        ' Texteï¿½DroiteToolStripMenuItem
         ' 
-        TexteÀDroiteToolStripMenuItem.Image = CType(resources.GetObject("TexteÀDroiteToolStripMenuItem.Image"), Image)
-        TexteÀDroiteToolStripMenuItem.Name = "TexteÀDroiteToolStripMenuItem"
-        TexteÀDroiteToolStripMenuItem.Size = New Size(230, 34)
-        TexteÀDroiteToolStripMenuItem.Text = "Texte à Droite"
+        TexteÃ€DroiteToolStripMenuItem.Image = CType(resources.GetObject("Texteï¿½DroiteToolStripMenuItem.Image"), Image)
+        TexteÃ€DroiteToolStripMenuItem.Name = "Texteï¿½DroiteToolStripMenuItem"
+        TexteÃ€DroiteToolStripMenuItem.Size = New Size(230, 34)
+        TexteÃ€DroiteToolStripMenuItem.Text = "Texte ï¿½ Droite"
         ' 
-        ' TexteJustifiéToolStripMenuItem
+        ' TexteJustifiï¿½ToolStripMenuItem
         ' 
-        TexteJustifiéToolStripMenuItem.Image = CType(resources.GetObject("TexteJustifiéToolStripMenuItem.Image"), Image)
-        TexteJustifiéToolStripMenuItem.Name = "TexteJustifiéToolStripMenuItem"
-        TexteJustifiéToolStripMenuItem.Size = New Size(230, 34)
-        TexteJustifiéToolStripMenuItem.Text = "Texte Justifié"
+        TexteJustifiÃ©ToolStripMenuItem.Image = CType(resources.GetObject("TexteJustifiï¿½ToolStripMenuItem.Image"), Image)
+        TexteJustifiÃ©ToolStripMenuItem.Name = "TexteJustifiï¿½ToolStripMenuItem"
+        TexteJustifiÃ©ToolStripMenuItem.Size = New Size(230, 34)
+        TexteJustifiÃ©ToolStripMenuItem.Text = "Texte Justifiï¿½"
         ' 
         ' OutilsToolStripMenuItem
         ' 
-        OutilsToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {ToolStripMenuItemMenu, ToolStripSeparator39, ConvertisseurToolStripMenuItem, ToolStripSeparator12, ResearchCenter__ToolStripMenuItem, ToolStripSeparator15, ToolStripMenuItemArchiverLesRecettes, SaveBD_ToolStripMenuItem, ToolStripSeparator13, OuvrirLeRépertoireDesRecettesToolStripMenuItem})
+        OutilsToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {ToolStripMenuItemMenu, ToolStripSeparator39, ConvertisseurToolStripMenuItem, ToolStripSeparator12, ResearchCenter__ToolStripMenuItem, ToolStripSeparator15, ToolStripMenuItemArchiverLesRecettes, SaveBD_ToolStripMenuItem, ToolStripSeparator13, OuvrirLeRepertoireDesRecettesToolStripMenuItem})
         OutilsToolStripMenuItem.Name = "OutilsToolStripMenuItem"
         OutilsToolStripMenuItem.Size = New Size(74, 29)
         OutilsToolStripMenuItem.Text = "O&utils"
@@ -828,22 +828,22 @@ Partial Class frmMain
         ' 
         SaveBD_ToolStripMenuItem.Name = "SaveBD_ToolStripMenuItem"
         SaveBD_ToolStripMenuItem.Size = New Size(499, 34)
-        SaveBD_ToolStripMenuItem.Text = "Sauvegarder la Base de Données et les Options..."
+        SaveBD_ToolStripMenuItem.Text = "Sauvegarder la Base de Donnï¿½es et les Options..."
         ' 
         ' ToolStripSeparator13
         ' 
         ToolStripSeparator13.Name = "ToolStripSeparator13"
         ToolStripSeparator13.Size = New Size(496, 6)
         ' 
-        ' OuvrirLeRépertoireDesRecettesToolStripMenuItem
+        ' OuvrirLeRepertoireDesRecettesToolStripMenuItem
         ' 
-        OuvrirLeRépertoireDesRecettesToolStripMenuItem.Name = "OuvrirLeRépertoireDesRecettesToolStripMenuItem"
-        OuvrirLeRépertoireDesRecettesToolStripMenuItem.Size = New Size(499, 34)
-        OuvrirLeRépertoireDesRecettesToolStripMenuItem.Text = "&Ouvrir le dossier de sauvegarde..."
+        OuvrirLeRepertoireDesRecettesToolStripMenuItem.Name = "OuvrirLeRepertoireDesRecettesToolStripMenuItem"
+        OuvrirLeRepertoireDesRecettesToolStripMenuItem.Size = New Size(499, 34)
+        OuvrirLeRepertoireDesRecettesToolStripMenuItem.Text = "&Ouvrir le dossier de sauvegarde..."
         ' 
         ' OptionsToolStripMenuItem
         ' 
-        OptionsToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {AffichageToolStripMenuItem, ToolStripSeparator27, LanguageToolStripMenuItem, ToolStripSeparator34, OptRTFToolStripMenuItem, ToolStripSeparator26, ÉditeurExterneParDéfautToolStripMenuItem, AutoCToolStripMenuItem, ToolStripSeparator11, ToolStripMenuItemOnedrive, ToolStripMenuItemDropbox, DossierRecetteToolStripMenuItem, ToolStripSeparator4, OuvrirMesLivresAuDémarrageToolStripMenuItem, OuvrirLaDernièrerecetteAuDémarrageToolStripMenuItem, ToolStripSeparator25, VérifierSiUneMiseÀJourEstDisponibleAuDémarrageToolStripMenuItem})
+        OptionsToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {AffichageToolStripMenuItem, ToolStripSeparator27, LanguageToolStripMenuItem, ToolStripSeparator34, OptRTFToolStripMenuItem, ToolStripSeparator26, EditeurExterneParDefautToolStripMenuItem, AutoCToolStripMenuItem, ToolStripSeparator11, ToolStripMenuItemOnedrive, ToolStripMenuItemDropbox, DossierRecetteToolStripMenuItem, ToolStripSeparator4, OuvrirMesLivresAuDemarrageToolStripMenuItem, OuvrirLaDerniereRecetteAuDemarrageToolStripMenuItem, ToolStripSeparator25, VerifierSiUneMiseAJourEstDisponibleAuDemarrageToolStripMenuItem})
         OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
         OptionsToolStripMenuItem.Size = New Size(92, 29)
         OptionsToolStripMenuItem.Text = "&Options"
@@ -903,7 +903,7 @@ Partial Class frmMain
         ' 
         ToolStripMenuItemURL.Name = "ToolStripMenuItemURL"
         ToolStripMenuItemURL.Size = New Size(468, 34)
-        ToolStripMenuItemURL.Text = "&Détection automatique des liens Hypertextes"
+        ToolStripMenuItemURL.Text = "&Dï¿½tection automatique des liens Hypertextes"
         ' 
         ' ToolStripSeparator20
         ' 
@@ -944,17 +944,17 @@ Partial Class frmMain
         ToolStripSeparator26.Name = "ToolStripSeparator26"
         ToolStripSeparator26.Size = New Size(539, 6)
         ' 
-        ' ÉditeurExterneParDéfautToolStripMenuItem
+        ' ï¿½diteurExterneParDï¿½fautToolStripMenuItem
         ' 
-        ÉditeurExterneParDéfautToolStripMenuItem.Name = "ÉditeurExterneParDéfautToolStripMenuItem"
-        ÉditeurExterneParDéfautToolStripMenuItem.Size = New Size(542, 34)
-        ÉditeurExterneParDéfautToolStripMenuItem.Text = "Éditeur externe par défaut..."
+        EditeurExterneParDefautToolStripMenuItem.Name = "EditeurExterneParDefautToolStripMenuItem"
+        EditeurExterneParDefautToolStripMenuItem.Size = New Size(542, 34)
+        EditeurExterneParDefautToolStripMenuItem.Text = "Editeur externe par dÃ©faut..."
         ' 
         ' AutoCToolStripMenuItem
         ' 
         AutoCToolStripMenuItem.Name = "AutoCToolStripMenuItem"
         AutoCToolStripMenuItem.Size = New Size(542, 34)
-        AutoCToolStripMenuItem.Text = "Auto-Correcteur par défaut..."
+        AutoCToolStripMenuItem.Text = "Auto-Correcteur par dï¿½faut..."
         ' 
         ' ToolStripSeparator11
         ' 
@@ -984,28 +984,28 @@ Partial Class frmMain
         ToolStripSeparator4.Name = "ToolStripSeparator4"
         ToolStripSeparator4.Size = New Size(539, 6)
         ' 
-        ' OuvrirMesLivresAuDémarrageToolStripMenuItem
+        ' OuvrirMesLivresAuDemarrageToolStripMenuItem
         ' 
-        OuvrirMesLivresAuDémarrageToolStripMenuItem.Name = "OuvrirMesLivresAuDémarrageToolStripMenuItem"
-        OuvrirMesLivresAuDémarrageToolStripMenuItem.Size = New Size(542, 34)
-        OuvrirMesLivresAuDémarrageToolStripMenuItem.Text = "&Ouvrir Mes Livres au démarrage"
+        OuvrirMesLivresAuDemarrageToolStripMenuItem.Name = "OuvrirMesLivresAuDemarrageToolStripMenuItem"
+        OuvrirMesLivresAuDemarrageToolStripMenuItem.Size = New Size(542, 34)
+        OuvrirMesLivresAuDemarrageToolStripMenuItem.Text = "&Ouvrir Mes Livres au demarrage"
         ' 
-        ' OuvrirLaDernièrerecetteAuDémarrageToolStripMenuItem
+        ' OuvrirLaDerniereRecetteAuDemarrageToolStripMenuItem
         ' 
-        OuvrirLaDernièrerecetteAuDémarrageToolStripMenuItem.Name = "OuvrirLaDernièrerecetteAuDémarrageToolStripMenuItem"
-        OuvrirLaDernièrerecetteAuDémarrageToolStripMenuItem.Size = New Size(542, 34)
-        OuvrirLaDernièrerecetteAuDémarrageToolStripMenuItem.Text = "Ouvrir la dernière &recette au démarrage"
+        OuvrirLaDerniereRecetteAuDemarrageToolStripMenuItem.Name = "OuvrirLaDerniereRecetteAuDemarrageToolStripMenuItem"
+        OuvrirLaDerniereRecetteAuDemarrageToolStripMenuItem.Size = New Size(542, 34)
+        OuvrirLaDerniereRecetteAuDemarrageToolStripMenuItem.Text = "Ouvrir la derniere &recette au demarrage"
         ' 
         ' ToolStripSeparator25
         ' 
         ToolStripSeparator25.Name = "ToolStripSeparator25"
         ToolStripSeparator25.Size = New Size(539, 6)
         ' 
-        ' VérifierSiUneMiseÀJourEstDisponibleAuDémarrageToolStripMenuItem
+        ' VerifierSiUneMiseAJourEstDisponibleAuDemarrageToolStripMenuItem
         ' 
-        VérifierSiUneMiseÀJourEstDisponibleAuDémarrageToolStripMenuItem.Name = "VérifierSiUneMiseÀJourEstDisponibleAuDémarrageToolStripMenuItem"
-        VérifierSiUneMiseÀJourEstDisponibleAuDémarrageToolStripMenuItem.Size = New Size(542, 34)
-        VérifierSiUneMiseÀJourEstDisponibleAuDémarrageToolStripMenuItem.Text = "Vérifier si une mise à jour est disponible au démarrage"
+        VerifierSiUneMiseAJourEstDisponibleAuDemarrageToolStripMenuItem.Name = "VerifierSiUneMiseAJourEstDisponibleAuDemarrageToolStripMenuItem"
+        VerifierSiUneMiseAJourEstDisponibleAuDemarrageToolStripMenuItem.Size = New Size(542, 34)
+        VerifierSiUneMiseAJourEstDisponibleAuDemarrageToolStripMenuItem.Text = "Verifier si une mise a jour est disponible au demarrage"
         ' 
         ' AideToolStripMenuItem
         ' 
@@ -1044,7 +1044,7 @@ Partial Class frmMain
         UpdateToolStripMenuItem.Image = CType(resources.GetObject("UpdateToolStripMenuItem.Image"), Image)
         UpdateToolStripMenuItem.Name = "UpdateToolStripMenuItem"
         UpdateToolStripMenuItem.Size = New Size(314, 34)
-        UpdateToolStripMenuItem.Text = "Vérifier Mise à Jour"
+        UpdateToolStripMenuItem.Text = "Vï¿½rifier Mise ï¿½ Jour"
         ' 
         ' ToolStripSeparator10
         ' 
@@ -1056,7 +1056,7 @@ Partial Class frmMain
         AproposToolStripMenuItem.Image = CType(resources.GetObject("AproposToolStripMenuItem.Image"), Image)
         AproposToolStripMenuItem.Name = "AproposToolStripMenuItem"
         AproposToolStripMenuItem.Size = New Size(314, 34)
-        AproposToolStripMenuItem.Text = "À &propos..."
+        AproposToolStripMenuItem.Text = "ï¿½ &propos..."
         ' 
         ' FontDialog1
         ' 
@@ -1095,7 +1095,7 @@ Partial Class frmMain
         ' 
         SurlignerToolStripMenuItem.Name = "SurlignerToolStripMenuItem"
         SurlignerToolStripMenuItem.Size = New Size(369, 32)
-        SurlignerToolStripMenuItem.Text = "Surligner la sélection"
+        SurlignerToolStripMenuItem.Text = "Surligner la sï¿½lection"
         ' 
         ' AnnulerSurbrillanceToolStripMenuItem
         ' 
@@ -1123,7 +1123,7 @@ Partial Class frmMain
         ' 
         ToolStripMenuItemToutSel.Name = "ToolStripMenuItemToutSel"
         ToolStripMenuItemToutSel.Size = New Size(369, 32)
-        ToolStripMenuItemToutSel.Text = "Tout Sélectionner"
+        ToolStripMenuItemToutSel.Text = "Tout Sï¿½lectionner"
         ' 
         ' ToolStripSeparator18
         ' 
@@ -1135,14 +1135,14 @@ Partial Class frmMain
         ToolStripMenuItemImage.Image = CType(resources.GetObject("ToolStripMenuItemImage.Image"), Image)
         ToolStripMenuItemImage.Name = "ToolStripMenuItemImage"
         ToolStripMenuItemImage.Size = New Size(369, 32)
-        ToolStripMenuItemImage.Text = "&Insérer une image..."
+        ToolStripMenuItemImage.Text = "&Insï¿½rer une image..."
         ' 
         ' InsertlocalfileContextToolStripMenuItem
         ' 
         InsertlocalfileContextToolStripMenuItem.Image = CType(resources.GetObject("InsertlocalfileContextToolStripMenuItem.Image"), Image)
         InsertlocalfileContextToolStripMenuItem.Name = "InsertlocalfileContextToolStripMenuItem"
         InsertlocalfileContextToolStripMenuItem.Size = New Size(369, 32)
-        InsertlocalfileContextToolStripMenuItem.Text = "Insérer un lien vers un fichier local..."
+        InsertlocalfileContextToolStripMenuItem.Text = "Insï¿½rer un lien vers un fichier local..."
         ' 
         ' ToolStripSeparator14
         ' 
@@ -1241,7 +1241,7 @@ Partial Class frmMain
         ToolStripButtonImage.ImageTransparentColor = Color.Magenta
         ToolStripButtonImage.Name = "ToolStripButtonImage"
         ToolStripButtonImage.Size = New Size(68, 68)
-        ToolStripButtonImage.Text = "Insérer une image"
+        ToolStripButtonImage.Text = "Insï¿½rer une image"
         ' 
         ' FileLinkToolStripButton
         ' 
@@ -1250,7 +1250,7 @@ Partial Class frmMain
         FileLinkToolStripButton.ImageTransparentColor = Color.Magenta
         FileLinkToolStripButton.Name = "FileLinkToolStripButton"
         FileLinkToolStripButton.Size = New Size(68, 68)
-        FileLinkToolStripButton.Text = "Insérer un lien vers un fichier local"
+        FileLinkToolStripButton.Text = "Insï¿½rer un lien vers un fichier local"
         ' 
         ' ToolStripSeparator8
         ' 
@@ -1397,7 +1397,7 @@ Partial Class frmMain
         ToolStripButtonUnderline.ImageTransparentColor = Color.Magenta
         ToolStripButtonUnderline.Name = "ToolStripButtonUnderline"
         ToolStripButtonUnderline.Size = New Size(34, 52)
-        ToolStripButtonUnderline.Text = "Souligné"
+        ToolStripButtonUnderline.Text = "Soulignï¿½"
         ' 
         ' ToolStripSeparator32
         ' 
@@ -1416,7 +1416,7 @@ Partial Class frmMain
         ToolStripButtonGauche.ImageTransparentColor = Color.Magenta
         ToolStripButtonGauche.Name = "ToolStripButtonGauche"
         ToolStripButtonGauche.Size = New Size(34, 52)
-        ToolStripButtonGauche.Text = "Texte à gauche"
+        ToolStripButtonGauche.Text = "Texte ï¿½ gauche"
         ' 
         ' ToolStripButtonCentre
         ' 
@@ -1425,7 +1425,7 @@ Partial Class frmMain
         ToolStripButtonCentre.ImageTransparentColor = Color.Magenta
         ToolStripButtonCentre.Name = "ToolStripButtonCentre"
         ToolStripButtonCentre.Size = New Size(34, 52)
-        ToolStripButtonCentre.Text = "Texte centré"
+        ToolStripButtonCentre.Text = "Texte centrï¿½"
         ' 
         ' ToolStripButtonDroite
         ' 
@@ -1434,7 +1434,7 @@ Partial Class frmMain
         ToolStripButtonDroite.ImageTransparentColor = Color.Magenta
         ToolStripButtonDroite.Name = "ToolStripButtonDroite"
         ToolStripButtonDroite.Size = New Size(34, 52)
-        ToolStripButtonDroite.Text = "Texte à droite"
+        ToolStripButtonDroite.Text = "Texte ï¿½ droite"
         ' 
         ' JustifyToolStripButton
         ' 
@@ -1464,7 +1464,7 @@ Partial Class frmMain
         ' 
         ' ListToolStripDropDownButton
         ' 
-        ListToolStripDropDownButton.DropDownItems.AddRange(New ToolStripItem() {BalleToolStripMenuItem, NumériqueToolStripMenuItem})
+        ListToolStripDropDownButton.DropDownItems.AddRange(New ToolStripItem() {BalleToolStripMenuItem, NumÃ©riqueToolStripMenuItem})
         ListToolStripDropDownButton.Image = CType(resources.GetObject("ListToolStripDropDownButton.Image"), Image)
         ListToolStripDropDownButton.ImageTransparentColor = Color.Magenta
         ListToolStripDropDownButton.Name = "ListToolStripDropDownButton"
@@ -1479,12 +1479,12 @@ Partial Class frmMain
         BalleToolStripMenuItem.Size = New Size(202, 34)
         BalleToolStripMenuItem.Text = "Balle"
         ' 
-        ' NumériqueToolStripMenuItem
+        ' Numï¿½riqueToolStripMenuItem
         ' 
-        NumériqueToolStripMenuItem.Image = CType(resources.GetObject("NumériqueToolStripMenuItem.Image"), Image)
-        NumériqueToolStripMenuItem.Name = "NumériqueToolStripMenuItem"
-        NumériqueToolStripMenuItem.Size = New Size(202, 34)
-        NumériqueToolStripMenuItem.Text = "Numérique"
+        NumÃ©riqueToolStripMenuItem.Image = CType(resources.GetObject("Numï¿½riqueToolStripMenuItem.Image"), Image)
+        NumÃ©riqueToolStripMenuItem.Name = "Numï¿½riqueToolStripMenuItem"
+        NumÃ©riqueToolStripMenuItem.Size = New Size(202, 34)
+        NumÃ©riqueToolStripMenuItem.Text = "Numï¿½rique"
         ' 
         ' rtbDoc
         ' 
@@ -1494,7 +1494,7 @@ Partial Class frmMain
         rtbDoc.ContextMenuStrip = ContextMenuStrip1
         rtbDoc.Cursor = Cursors.IBeam
         rtbDoc.Dock = DockStyle.Fill
-        rtbDoc.Font = New Font("Calibri", 16F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        rtbDoc.Font = New Font("Calibri", 16.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         rtbDoc.HideSelection = False
         rtbDoc.ImeMode = ImeMode.NoControl
         rtbDoc.Location = New Point(0, 163)
@@ -1513,7 +1513,7 @@ Partial Class frmMain
         Controls.Add(ToolStrip1)
         Controls.Add(ToolStrip2)
         Controls.Add(MenuStrip1)
-        Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Font = New Font("Microsoft Sans Serif", 8.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         MainMenuStrip = MenuStrip1
         Margin = New Padding(4, 5, 4, 5)
@@ -1609,7 +1609,7 @@ Partial Class frmMain
     Friend WithEvents AproposToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ConvertisseurToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator13 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents OuvrirLeRépertoireDesRecettesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents OuvrirLeRepertoireDesRecettesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ContextMenuStrip1 As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents CopierToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CouperToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -1623,22 +1623,24 @@ Partial Class frmMain
     Friend WithEvents DemiToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents Quart3ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator17 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents TableDesCharactèresToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents TableDesCaracteresToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents EchancrureToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripMenuItemToutSel As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator18 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents ToolStripMenuItemImage As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator5 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents OuvrirMesLivresAuDémarrageToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents OuvrirMesLivresAuDemarrageToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AffichageToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents BarDoutilsToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents NavigationToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents EditeurExterneParDefautToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents TexteToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator19 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents ToolStripMenuItemURL As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator20 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents LireSeulementToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator4 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents OuvrirLaDernièrerecetteAuDémarrageToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents OuvrirLaDerniereRecetteAuDemarrageToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator11 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents DossierRecetteToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents FolderBrowserDialog1 As System.Windows.Forms.FolderBrowserDialog
@@ -1658,27 +1660,25 @@ Partial Class frmMain
     Friend WithEvents LongueHeureToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator24 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents UpdateToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents VérifierSiUneMiseÀJourEstDisponibleAuDémarrageToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents VerifierSiUneMiseAJourEstDisponibleAuDemarrageToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator25 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents InsertlocalfileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents InsertlocalfileContextToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents FileLinkToolStripButton As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripMenuItemArchiverLesRecettes As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator26 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents ÉditeurExterneParDéfautToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents DMLRToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AfficherLesImagesDesRecettesDansLaListeToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ParagrapheToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ÉchancrureToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AucunToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents APtsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents BPtsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CPtsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DPtsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PositionToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents TexteÀGaucheToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents TexteCentréToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents TexteÀDroiteToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents TexteÃ€GaucheToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents TexteCentrÃ©ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents TexteÃ€DroiteToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents EPtsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents FPtsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents GPtsToolStripMenuItem As ToolStripMenuItem
@@ -1698,7 +1698,7 @@ Partial Class frmMain
     Friend WithEvents PageUpToolStripButton As ToolStripButton
     Friend WithEvents ToolStripSeparator29 As ToolStripSeparator
     Friend WithEvents JustifyToolStripButton As ToolStripButton
-    Friend WithEvents TexteJustifiéToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents TexteJustifiÃ©ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator30 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator31 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator32 As ToolStripSeparator
@@ -1711,10 +1711,10 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator35 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator36 As ToolStripSeparator
     Friend WithEvents CouleurDeSurbrillanceToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents SurlignerLaSélectionToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SurlignerLaSelectionToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ListToolStripDropDownButton As ToolStripDropDownButton
     Friend WithEvents BalleToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents NumériqueToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents NumÃ©riqueToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AnnulerLaSurbrillanceToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AnnulerSurbrillanceToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripButtonBulletList As ToolStripButton
