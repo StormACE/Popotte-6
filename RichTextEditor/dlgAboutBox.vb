@@ -1,8 +1,8 @@
 ﻿
 ''' <summary>
-''' Popotte v5
-''' 1 mars 2016 au 27 aout 2026
-''' Work on Vista sp2, Windows 7 sp1, windows 8, Windows 8.1 and Windows 10. Need .Net Framework 4.0
+''' Popotte v6
+''' 5 septembre 201 au 22 septembre 2026
+''' Work on Vista sp2, Windows 7 sp1, windows 8, Windows 8.1, Windows 10, Windows 11. Need .Net10
 ''' Copyright Martin Laflamme 2003/2026
 ''' Read licence.txt
 ''' </summary>

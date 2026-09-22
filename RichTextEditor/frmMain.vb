@@ -3,14 +3,13 @@ Imports System.Drawing.Text
 Imports System.Globalization
 Imports System.IO
 Imports System.IO.Compression
-Imports System.Security.Policy
 Imports System.Text
 Imports ExtendedRichTextBox.AdvRichTextBoxPrintCtrl
 Imports Microsoft.Win32
 
 ''' <summary>
-''' Popotte 6.0.0.6
-''' 05 sept 2026 au 14 sept 2026
+''' Popotte 6.0.0.8
+''' 05 sept 2026 au 22 sept 2026
 ''' Work on Windows 7 sp1, windows 8, Windows 8.1, Windows 10, Windows 11  .Net10
 ''' Copyright Martin Laflamme 2003/2026
 ''' Read licence.txt
@@ -1563,32 +1562,6 @@ Public Class frmMain
             rtbDoc.BulletIndent = 10
             rtbDoc.ListFormat = ListFormats.Bullets
             rtbDoc.SelectionList = True
-        End If
-        rtbDoc.Focus()
-        GetCharFormat()
-    End Sub
-
-    Private Sub BalleToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles BalleToolStripMenuItem.Click
-        If rtbDoc.SelectionList = True Then
-            rtbDoc.SelectionList = False
-        Else
-            rtbDoc.BulletIndent = 10
-            rtbDoc.ListFormat = ListFormats.Bullets
-            rtbDoc.SelectionList = True
-            BalleToolStripMenuItem.Checked = True
-        End If
-        rtbDoc.Focus()
-        GetCharFormat()
-    End Sub
-
-    Private Sub NumériqueToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles NumériqueToolStripMenuItem.Click
-        If rtbDoc.SelectionList = True Then
-            rtbDoc.SelectionList = False
-        Else
-            rtbDoc.BulletIndent = 10
-            rtbDoc.ListFormat = ListFormats.Numbered
-            rtbDoc.SelectionList = True
-            NumériqueToolStripMenuItem.Checked = True
         End If
         rtbDoc.Focus()
         GetCharFormat()
