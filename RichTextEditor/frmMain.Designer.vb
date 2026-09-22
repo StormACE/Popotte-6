@@ -1191,7 +1191,6 @@ Partial Class frmMain
         ToolStripButtonLivres.DisplayStyle = ToolStripItemDisplayStyle.Image
         ToolStripButtonLivres.Image = CType(resources.GetObject("ToolStripButtonLivres.Image"), Image)
         ToolStripButtonLivres.ImageTransparentColor = Color.Magenta
-        ToolStripButtonLivres.ImageScaling = ToolStripItemImageScaling.SizeToFit
         ToolStripButtonLivres.Name = "ToolStripButtonLivres"
         ToolStripButtonLivres.Size = New Size(68, 68)
         ToolStripButtonLivres.Text = "Mes livres de recettes"
@@ -1201,7 +1200,6 @@ Partial Class frmMain
         ToolStripButtonNRecette.DisplayStyle = ToolStripItemDisplayStyle.Image
         ToolStripButtonNRecette.Image = CType(resources.GetObject("ToolStripButtonNRecette.Image"), Image)
         ToolStripButtonNRecette.ImageTransparentColor = Color.Magenta
-        ToolStripButtonNRecette.ImageScaling = ToolStripItemImageScaling.SizeToFit
         ToolStripButtonNRecette.Name = "ToolStripButtonNRecette"
         ToolStripButtonNRecette.Size = New Size(68, 68)
         ToolStripButtonNRecette.Text = "Nouvelle Recette"
@@ -1211,7 +1209,6 @@ Partial Class frmMain
         ToolStripButtonOuvrir.DisplayStyle = ToolStripItemDisplayStyle.Image
         ToolStripButtonOuvrir.Image = CType(resources.GetObject("ToolStripButtonOuvrir.Image"), Image)
         ToolStripButtonOuvrir.ImageTransparentColor = Color.Magenta
-        ToolStripButtonOuvrir.ImageScaling = ToolStripItemImageScaling.SizeToFit
         ToolStripButtonOuvrir.Name = "ToolStripButtonOuvrir"
         ToolStripButtonOuvrir.Size = New Size(68, 68)
         ToolStripButtonOuvrir.Text = "Ouvrir un fichier"
@@ -1221,7 +1218,6 @@ Partial Class frmMain
         ToolStripButtonSave.DisplayStyle = ToolStripItemDisplayStyle.Image
         ToolStripButtonSave.Image = CType(resources.GetObject("ToolStripButtonSave.Image"), Image)
         ToolStripButtonSave.ImageTransparentColor = Color.Magenta
-        ToolStripButtonSave.ImageScaling = ToolStripItemImageScaling.SizeToFit
         ToolStripButtonSave.Name = "ToolStripButtonSave"
         ToolStripButtonSave.Size = New Size(68, 68)
         ToolStripButtonSave.Text = "Sauvegarder"
@@ -1236,7 +1232,6 @@ Partial Class frmMain
         ToolStripButtonImage.DisplayStyle = ToolStripItemDisplayStyle.Image
         ToolStripButtonImage.Image = CType(resources.GetObject("ToolStripButtonImage.Image"), Image)
         ToolStripButtonImage.ImageTransparentColor = Color.Magenta
-        ToolStripButtonImage.ImageScaling = ToolStripItemImageScaling.SizeToFit
         ToolStripButtonImage.Name = "ToolStripButtonImage"
         ToolStripButtonImage.Size = New Size(68, 68)
         ToolStripButtonImage.Text = "Ins�rer une image"
@@ -1246,7 +1241,6 @@ Partial Class frmMain
         FileLinkToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image
         FileLinkToolStripButton.Image = CType(resources.GetObject("FileLinkToolStripButton.Image"), Image)
         FileLinkToolStripButton.ImageTransparentColor = Color.Magenta
-        FileLinkToolStripButton.ImageScaling = ToolStripItemImageScaling.SizeToFit
         FileLinkToolStripButton.Name = "FileLinkToolStripButton"
         FileLinkToolStripButton.Size = New Size(68, 68)
         FileLinkToolStripButton.Text = "Ins�rer un lien vers un fichier local"
@@ -1261,7 +1255,6 @@ Partial Class frmMain
         ToolStripButtonCut.DisplayStyle = ToolStripItemDisplayStyle.Image
         ToolStripButtonCut.Image = CType(resources.GetObject("ToolStripButtonCut.Image"), Image)
         ToolStripButtonCut.ImageTransparentColor = Color.Magenta
-        ToolStripButtonCut.ImageScaling = ToolStripItemImageScaling.SizeToFit
         ToolStripButtonCut.Name = "ToolStripButtonCut"
         ToolStripButtonCut.Size = New Size(68, 68)
         ToolStripButtonCut.Text = "Couper"
@@ -1271,7 +1264,6 @@ Partial Class frmMain
         ToolStripButtonCopy.DisplayStyle = ToolStripItemDisplayStyle.Image
         ToolStripButtonCopy.Image = CType(resources.GetObject("ToolStripButtonCopy.Image"), Image)
         ToolStripButtonCopy.ImageTransparentColor = Color.Magenta
-        ToolStripButtonCopy.ImageScaling = ToolStripItemImageScaling.SizeToFit
         ToolStripButtonCopy.Name = "ToolStripButtonCopy"
         ToolStripButtonCopy.Size = New Size(68, 68)
         ToolStripButtonCopy.Text = "Copier"
@@ -1281,7 +1273,6 @@ Partial Class frmMain
         ToolStripButtonPaste.DisplayStyle = ToolStripItemDisplayStyle.Image
         ToolStripButtonPaste.Image = CType(resources.GetObject("ToolStripButtonPaste.Image"), Image)
         ToolStripButtonPaste.ImageTransparentColor = Color.Magenta
-        ToolStripButtonPaste.ImageScaling = ToolStripItemImageScaling.SizeToFit
         ToolStripButtonPaste.Name = "ToolStripButtonPaste"
         ToolStripButtonPaste.Size = New Size(68, 68)
         ToolStripButtonPaste.Text = "Coller"
@@ -1296,7 +1287,6 @@ Partial Class frmMain
         ToolStripButtonPrint.DisplayStyle = ToolStripItemDisplayStyle.Image
         ToolStripButtonPrint.Image = CType(resources.GetObject("ToolStripButtonPrint.Image"), Image)
         ToolStripButtonPrint.ImageTransparentColor = Color.Magenta
-        ToolStripButtonPrint.ImageScaling = ToolStripItemImageScaling.SizeToFit
         ToolStripButtonPrint.Name = "ToolStripButtonPrint"
         ToolStripButtonPrint.Size = New Size(68, 68)
         ToolStripButtonPrint.Text = "Imprimer"
@@ -1307,7 +1297,6 @@ Partial Class frmMain
         PageUpToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image
         PageUpToolStripButton.Image = CType(resources.GetObject("PageUpToolStripButton.Image"), Image)
         PageUpToolStripButton.ImageTransparentColor = Color.Magenta
-        PageUpToolStripButton.ImageScaling = ToolStripItemImageScaling.SizeToFit
         PageUpToolStripButton.Name = "PageUpToolStripButton"
         PageUpToolStripButton.RightToLeft = RightToLeft.No
         PageUpToolStripButton.Size = New Size(68, 68)
@@ -1327,10 +1316,10 @@ Partial Class frmMain
         ' 
         ToolStripComboBoxPolices.AccessibleRole = AccessibleRole.ComboBox
         ToolStripComboBoxPolices.AutoSize = False
-        ToolStripComboBoxPolices.Margin = New Padding(3, 7, 3, 7)
         ToolStripComboBoxPolices.AutoToolTip = True
         ToolStripComboBoxPolices.BackColor = SystemColors.GradientInactiveCaption
         ToolStripComboBoxPolices.DropDownStyle = ComboBoxStyle.DropDownList
+        ToolStripComboBoxPolices.Margin = New Padding(3, 7, 3, 7)
         ToolStripComboBoxPolices.Name = "ToolStripComboBoxPolices"
         ToolStripComboBoxPolices.Size = New Size(375, 33)
         ToolStripComboBoxPolices.ToolTipText = "Polices"
@@ -1338,11 +1327,10 @@ Partial Class frmMain
         ' ToolStripComboBoxSize
         ' 
         ToolStripComboBoxSize.AutoSize = False
-        ToolStripComboBoxSize.Margin = New Padding(3, 7, 3, 7)
         ToolStripComboBoxSize.AutoToolTip = True
         ToolStripComboBoxSize.BackColor = SystemColors.GradientInactiveCaption
-        ToolStripComboBoxSize.DropDownStyle = ComboBoxStyle.DropDownList
         ToolStripComboBoxSize.DropDownWidth = 50
+        ToolStripComboBoxSize.Margin = New Padding(3, 7, 3, 7)
         ToolStripComboBoxSize.Name = "ToolStripComboBoxSize"
         ToolStripComboBoxSize.Size = New Size(75, 33)
         ToolStripComboBoxSize.ToolTipText = "Taille"
@@ -1350,12 +1338,12 @@ Partial Class frmMain
         ' ToolStripSeparator30
         ' 
         ToolStripSeparator30.Name = "ToolStripSeparator30"
-        ToolStripSeparator30.Size = New Size(6, 72)
+        ToolStripSeparator30.Size = New Size(6, 48)
         ' 
         ' ToolStripSeparator1
         ' 
         ToolStripSeparator1.Name = "ToolStripSeparator1"
-        ToolStripSeparator1.Size = New Size(6, 72)
+        ToolStripSeparator1.Size = New Size(6, 48)
         ' 
         ' ToolStripButtonCouleurs
         ' 
@@ -1364,7 +1352,6 @@ Partial Class frmMain
         ToolStripButtonCouleurs.DisplayStyle = ToolStripItemDisplayStyle.None
         ToolStripButtonCouleurs.Image = CType(resources.GetObject("ToolStripButtonCouleurs.Image"), Image)
         ToolStripButtonCouleurs.ImageTransparentColor = Color.Magenta
-        ToolStripButtonCouleurs.ImageScaling = ToolStripItemImageScaling.SizeToFit
         ToolStripButtonCouleurs.Name = "ToolStripButtonCouleurs"
         ToolStripButtonCouleurs.Size = New Size(30, 30)
         ToolStripButtonCouleurs.Text = "Couleurs"
@@ -1372,12 +1359,12 @@ Partial Class frmMain
         ' ToolStripSeparator31
         ' 
         ToolStripSeparator31.Name = "ToolStripSeparator31"
-        ToolStripSeparator31.Size = New Size(6, 72)
+        ToolStripSeparator31.Size = New Size(6, 48)
         ' 
         ' ToolStripSeparator2
         ' 
         ToolStripSeparator2.Name = "ToolStripSeparator2"
-        ToolStripSeparator2.Size = New Size(6, 72)
+        ToolStripSeparator2.Size = New Size(6, 48)
         ' 
         ' ToolStripButtonBold
         ' 
@@ -1386,7 +1373,6 @@ Partial Class frmMain
         ToolStripButtonBold.DisplayStyle = ToolStripItemDisplayStyle.Image
         ToolStripButtonBold.Image = CType(resources.GetObject("ToolStripButtonBold.Image"), Image)
         ToolStripButtonBold.ImageTransparentColor = Color.Magenta
-        ToolStripButtonBold.ImageScaling = ToolStripItemImageScaling.SizeToFit
         ToolStripButtonBold.Name = "ToolStripButtonBold"
         ToolStripButtonBold.Size = New Size(52, 52)
         ToolStripButtonBold.Text = "Gras"
@@ -1397,7 +1383,6 @@ Partial Class frmMain
         ToolStripButtonItalic.DisplayStyle = ToolStripItemDisplayStyle.Image
         ToolStripButtonItalic.Image = CType(resources.GetObject("ToolStripButtonItalic.Image"), Image)
         ToolStripButtonItalic.ImageTransparentColor = Color.Magenta
-        ToolStripButtonItalic.ImageScaling = ToolStripItemImageScaling.SizeToFit
         ToolStripButtonItalic.Name = "ToolStripButtonItalic"
         ToolStripButtonItalic.Size = New Size(52, 52)
         ToolStripButtonItalic.Text = "Italique"
@@ -1408,7 +1393,6 @@ Partial Class frmMain
         ToolStripButtonUnderline.DisplayStyle = ToolStripItemDisplayStyle.Image
         ToolStripButtonUnderline.Image = CType(resources.GetObject("ToolStripButtonUnderline.Image"), Image)
         ToolStripButtonUnderline.ImageTransparentColor = Color.Magenta
-        ToolStripButtonUnderline.ImageScaling = ToolStripItemImageScaling.SizeToFit
         ToolStripButtonUnderline.Name = "ToolStripButtonUnderline"
         ToolStripButtonUnderline.Size = New Size(52, 52)
         ToolStripButtonUnderline.Text = "Soulign�"
@@ -1416,12 +1400,12 @@ Partial Class frmMain
         ' ToolStripSeparator32
         ' 
         ToolStripSeparator32.Name = "ToolStripSeparator32"
-        ToolStripSeparator32.Size = New Size(6, 72)
+        ToolStripSeparator32.Size = New Size(6, 48)
         ' 
         ' ToolStripSeparator3
         ' 
         ToolStripSeparator3.Name = "ToolStripSeparator3"
-        ToolStripSeparator3.Size = New Size(6, 72)
+        ToolStripSeparator3.Size = New Size(6, 48)
         ' 
         ' ToolStripButtonGauche
         ' 
@@ -1429,7 +1413,6 @@ Partial Class frmMain
         ToolStripButtonGauche.DisplayStyle = ToolStripItemDisplayStyle.Image
         ToolStripButtonGauche.Image = CType(resources.GetObject("ToolStripButtonGauche.Image"), Image)
         ToolStripButtonGauche.ImageTransparentColor = Color.Magenta
-        ToolStripButtonGauche.ImageScaling = ToolStripItemImageScaling.SizeToFit
         ToolStripButtonGauche.Name = "ToolStripButtonGauche"
         ToolStripButtonGauche.Size = New Size(52, 52)
         ToolStripButtonGauche.Text = "Texte � gauche"
@@ -1440,7 +1423,6 @@ Partial Class frmMain
         ToolStripButtonCentre.DisplayStyle = ToolStripItemDisplayStyle.Image
         ToolStripButtonCentre.Image = CType(resources.GetObject("ToolStripButtonCentre.Image"), Image)
         ToolStripButtonCentre.ImageTransparentColor = Color.Magenta
-        ToolStripButtonCentre.ImageScaling = ToolStripItemImageScaling.SizeToFit
         ToolStripButtonCentre.Name = "ToolStripButtonCentre"
         ToolStripButtonCentre.Size = New Size(52, 52)
         ToolStripButtonCentre.Text = "Texte centr�"
@@ -1451,7 +1433,6 @@ Partial Class frmMain
         ToolStripButtonDroite.DisplayStyle = ToolStripItemDisplayStyle.Image
         ToolStripButtonDroite.Image = CType(resources.GetObject("ToolStripButtonDroite.Image"), Image)
         ToolStripButtonDroite.ImageTransparentColor = Color.Magenta
-        ToolStripButtonDroite.ImageScaling = ToolStripItemImageScaling.SizeToFit
         ToolStripButtonDroite.Name = "ToolStripButtonDroite"
         ToolStripButtonDroite.Size = New Size(52, 52)
         ToolStripButtonDroite.Text = "Texte � droite"
@@ -1462,19 +1443,18 @@ Partial Class frmMain
         JustifyToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image
         JustifyToolStripButton.Image = CType(resources.GetObject("JustifyToolStripButton.Image"), Image)
         JustifyToolStripButton.ImageTransparentColor = Color.Magenta
-        JustifyToolStripButton.ImageScaling = ToolStripItemImageScaling.SizeToFit
         JustifyToolStripButton.Name = "JustifyToolStripButton"
         JustifyToolStripButton.Size = New Size(52, 52)
         ' 
         ' ToolStripSeparator33
         ' 
         ToolStripSeparator33.Name = "ToolStripSeparator33"
-        ToolStripSeparator33.Size = New Size(6, 72)
+        ToolStripSeparator33.Size = New Size(6, 48)
         ' 
         ' ToolStripSeparator29
         ' 
         ToolStripSeparator29.Name = "ToolStripSeparator29"
-        ToolStripSeparator29.Size = New Size(6, 72)
+        ToolStripSeparator29.Size = New Size(6, 48)
         ' 
         ' ToolStripButtonBulletList
         ' 
@@ -1482,7 +1462,6 @@ Partial Class frmMain
         ToolStripButtonBulletList.DisplayStyle = ToolStripItemDisplayStyle.Image
         ToolStripButtonBulletList.Image = CType(resources.GetObject("ToolStripButtonBulletList.Image"), Image)
         ToolStripButtonBulletList.ImageTransparentColor = Color.Magenta
-        ToolStripButtonBulletList.ImageScaling = ToolStripItemImageScaling.SizeToFit
         ToolStripButtonBulletList.Name = "ToolStripButtonBulletList"
         ToolStripButtonBulletList.Size = New Size(52, 52)
         ' 
@@ -1494,14 +1473,14 @@ Partial Class frmMain
         rtbDoc.ContextMenuStrip = ContextMenuStrip1
         rtbDoc.Cursor = Cursors.IBeam
         rtbDoc.Dock = DockStyle.Fill
-        rtbDoc.Font = New Font("Calibri", 16.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        rtbDoc.Font = New Font("Calibri", 16F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         rtbDoc.HideSelection = False
         rtbDoc.ImeMode = ImeMode.NoControl
-        rtbDoc.Location = New Point(0, 178)
+        rtbDoc.Location = New Point(0, 154)
         rtbDoc.Name = "rtbDoc"
         rtbDoc.ScrollBars = RichTextBoxScrollBars.ForcedBoth
         rtbDoc.ShowSelectionMargin = True
-        rtbDoc.Size = New Size(1176, 690)
+        rtbDoc.Size = New Size(1176, 714)
         rtbDoc.TabIndex = 2
         rtbDoc.Text = ""
         ' 

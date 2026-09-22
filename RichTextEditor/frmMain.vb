@@ -1,5 +1,4 @@
 Imports System.Drawing.Text
-'Imports System.Threading
 Imports System.Globalization
 Imports System.IO
 Imports System.IO.Compression
@@ -8,7 +7,7 @@ Imports ExtendedRichTextBox.AdvRichTextBoxPrintCtrl
 Imports Microsoft.Win32
 
 ''' <summary>
-''' Popotte 6.0.0.8
+''' Popotte 6.0.0.9
 ''' 05 sept 2026 au 22 sept 2026
 ''' Work on Windows 7 sp1, windows 8, Windows 8.1, Windows 10, Windows 11  .Net10
 ''' Copyright Martin Laflamme 2003/2026
@@ -948,7 +947,8 @@ Public Class frmMain
             'if GetCharFormat() is running (Fix a bug)
             GCF = True
             ToolStripComboBoxPolices.SelectedItem = currentFont.Name
-            ToolStripComboBoxSize.SelectedItem = CStr(Math.Round(currentFont.Size, 0))
+            ToolStripComboBoxSize.Text = ""
+            ToolStripComboBoxSize.SelectedText = CStr(Math.Round(currentFont.Size, 0))
             GCF = False
 
             If rtbDoc.SelectionColor <> Nothing Then
@@ -3069,6 +3069,13 @@ Public Class frmMain
         rtbDoc.Focus()
     End Sub
 
+    Private Sub ToolStripComboBoxSize_KeyUp(sender As Object, e As KeyEventArgs) Handles ToolStripComboBoxSize.KeyUp
+        If e.KeyCode = Keys.Enter Then
+            SetFont()
+            rtbDoc.Focus()
+        End If
+    End Sub
+
     Public Sub SetFont()
         If GCF = False Then
             If FontLoaded Then
@@ -3076,14 +3083,24 @@ Public Class frmMain
                 If rtbDoc.SelectionFont IsNot Nothing Then
                     Dim SelectedFont As String = CType(ToolStripComboBoxPolices.SelectedItem, String)
                     Dim newFontStyle As System.Drawing.FontStyle = rtbDoc.SelectionFont.Style
-                    Dim SelectedSize As String = CType(ToolStripComboBoxSize.SelectedItem, String)
+                    ' Valider et parser la taille de police depuis le texte du combo
+                    Dim fontSize As Single = 0
+                    Dim sizeText As String = ToolStripComboBoxSize.Text
 
-                    rtbDoc.SelectionFont = New Font(
-                       SelectedFont,
-                       CInt(SelectedSize),
-                       newFontStyle
-                    )
+                    If Not String.IsNullOrWhiteSpace(sizeText) Then
+                        ' Essayer d'abord avec la culture invariante, puis avec la culture courante
+                        If Not Single.TryParse(sizeText, Globalization.NumberStyles.Float, Globalization.CultureInfo.InvariantCulture, fontSize) Then
+                            Single.TryParse(sizeText, fontSize)
+                        End If
+                    End If
+
+                    If fontSize > 0 Then
+                        rtbDoc.SelectionFont = New Font(SelectedFont, fontSize, newFontStyle)
+                    Else
+                        ' Taille invalide ou nulle : ne pas appliquer la police (ou utiliser une valeur par défaut si souhaité)
+                    End If
                 End If
+
             End If
         End If
     End Sub
@@ -3261,6 +3278,8 @@ Public Class frmMain
         Dim mn As New frmMenu
         mn.Show()
     End Sub
+
+
 
 
 

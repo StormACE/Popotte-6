@@ -1,7 +1,7 @@
 ﻿
 ''' <summary>
 ''' Popotte v6
-''' 5 septembre 201 au 22 septembre 2026
+''' 5 septembre 2026 au 22 septembre 2026
 ''' Work on Vista sp2, Windows 7 sp1, windows 8, Windows 8.1, Windows 10, Windows 11. Need .Net10
 ''' Copyright Martin Laflamme 2003/2026
 ''' Read licence.txt
