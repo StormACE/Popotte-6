@@ -600,8 +600,45 @@ Public Class frmMain
             regKey.CreateSubKey("Version")
             regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Version", True)
         End If
+
+        'Compare Version if version is higher than 6.0.0.6
+        Dim v1, v2 As System.Version
+        v1 = ParseVersion(regKey.GetValue("", ""))
+        v2 = ParseVersion("6.0.0.6")
+
+        If v1.CompareTo(v2) < 0 Then
+            'do update here
+
+            'Changement de format pour Indent et MargeDroite (ancien format en pixels, nouveau format en cm)
+            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings", True)
+            If regKey IsNot Nothing Then
+                Try
+                    regKey.DeleteSubKey("Indent")
+                Catch ex As Exception
+                End Try
+                Try
+                    regKey.DeleteSubKey("MargeDroite")
+                Catch ex As Exception
+                End Try
+            End If
+
+            'update is done
+        End If
+
+        'set current version in registry
         regKey.SetValue("", My.Application.Info.Version)
     End Sub
+
+
+    'String to Version
+    Private Function ParseVersion(input As String) As Version
+        Dim ver As Version = Nothing
+        If Version.TryParse(input, ver) Then
+            Return ver
+        Else
+            Return Nothing
+        End If
+    End Function
 
     'Handler for context search
     Private Sub ToolStripMenuItem_Click(ByVal sender As Object, ByVal e As System.EventArgs)
