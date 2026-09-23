@@ -7,8 +7,8 @@ Imports ExtendedRichTextBox.AdvRichTextBoxPrintCtrl
 Imports Microsoft.Win32
 
 ''' <summary>
-''' Popotte 6.0.0.9
-''' 05 sept 2026 au 22 sept 2026
+''' Popotte 6.0.0.10
+''' 05 sept 2026 au 23 sept 2026
 ''' Work on Windows 7 sp1, windows 8, Windows 8.1, Windows 10, Windows 11  .Net10
 ''' Copyright Martin Laflamme 2003/2026
 ''' Read licence.txt
@@ -303,99 +303,19 @@ Public Class frmMain
         ToolStripButtonGauche.Checked = True
         TexteÀGaucheToolStripMenuItem.Checked = True
 
-        'Get and set indent (supporte ancien format en pixels et nouveau format en cm)
-        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Indent", True)
-        If regKey IsNot Nothing Then
-            Dim raw = regKey.GetValue("", "none")
-            Dim cmValue As Double = -1
-            Try
-                If TypeOf raw Is String Then
-                    Dim s = raw.ToString().ToLower()
-                    If s = "none" OrElse s = "" Then
-                        cmValue = -1
-                    Else
-                        cmValue = CDbl(raw)
-                    End If
-                Else
-                    ' Ancien format : valeur en pixels (double ou integer)
-                    Dim pixels As Double = CDbl(raw)
-                    If pixels = 0 Then
-                        cmValue = -1
-                    Else
-                        cmValue = PixelsToCm(pixels, rtbDoc)
-                    End If
-                End If
-            Catch
-                cmValue = -1
-            End Try
-
-            If cmValue > 0 Then
-                Dim pixelsToApply As Integer = CmToPixels(cmValue, rtbDoc)
-                rtbDoc.SelectionIndent = pixelsToApply
-                ' Définir l'item coché en fonction de cmValue (0.5,1.0,...4.0)
-                Dim idx As Integer = CInt(Math.Round(cmValue * 2)) ' 0.5->1, 1.0->2, ...
-                AucunToolStripMenuItem.Checked = False
-                APtsToolStripMenuItem.Checked = (idx = 1)
-                BPtsToolStripMenuItem.Checked = (idx = 2)
-                CPtsToolStripMenuItem.Checked = (idx = 3)
-                DPtsToolStripMenuItem.Checked = (idx = 4)
-                EPtsToolStripMenuItem.Checked = (idx = 5)
-                FPtsToolStripMenuItem.Checked = (idx = 6)
-                GPtsToolStripMenuItem.Checked = (idx = 7)
-                HPtsToolStripMenuItem.Checked = (idx = 8)
-            Else
-                rtbDoc.SelectionIndent = 0
-                AucunToolStripMenuItem.Checked = True
-                APtsToolStripMenuItem.Checked = False
-                BPtsToolStripMenuItem.Checked = False
-                CPtsToolStripMenuItem.Checked = False
-                DPtsToolStripMenuItem.Checked = False
-                EPtsToolStripMenuItem.Checked = False
-                FPtsToolStripMenuItem.Checked = False
-                GPtsToolStripMenuItem.Checked = False
-                HPtsToolStripMenuItem.Checked = False
-            End If
-        Else
-            AucunToolStripMenuItem.Checked = True
-            APtsToolStripMenuItem.Checked = False
-            BPtsToolStripMenuItem.Checked = False
-            CPtsToolStripMenuItem.Checked = False
-            DPtsToolStripMenuItem.Checked = False
-            EPtsToolStripMenuItem.Checked = False
-            FPtsToolStripMenuItem.Checked = False
-            GPtsToolStripMenuItem.Checked = False
-            HPtsToolStripMenuItem.Checked = False
-            rtbDoc.SelectionIndent = 0
-        End If
         rtbDoc.Modified = False
 
         'MargeDroite (calcul dynamique en fonction du DPI : stocke la valeur en cm dans le registre)
         regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\MargeDroite", True)
         If regKey IsNot Nothing Then
-            Dim raw = regKey.GetValue("", 8)
-            Dim cmValue As Double = -1
-            Try
-                If TypeOf raw Is Integer Then
-                    ' Ancien format : index 0..7 (0 => 0.5cm, 1 => 1.0cm, ..., 7 => 4.0cm, 8 => none)
-                    Dim idx As Integer = CInt(raw)
-                    If idx = 8 Then
-                        cmValue = -1
-                    Else
-                        cmValue = 0.5 + idx * 0.5
-                    End If
-                Else
-                    ' Nouveau format : valeur en cm (string ou double)
-                    cmValue = CDbl(raw)
-                End If
-            Catch
-                cmValue = -1
-            End Try
-
-            If cmValue > 0 Then
+            Dim d As Double
+            Dim raw = regKey.GetValue("", -1)
+            Double.TryParse(raw, NumberStyles.Any, CultureInfo.InvariantCulture, d)
+            If d > 0 Then
                 ' Appliquer la marge droite en pixels
-                rtbDoc.RightMargin = rtbDoc.Width - 30 - CmToPixels(cmValue, rtbDoc)
+                rtbDoc.RightMargin = rtbDoc.Width - 30 - CmToPixels(d, rtbDoc)
                 ' Décocher et cocher l'item correspondant
-                Select Case Math.Round(cmValue * 2) ' cm *2 -> 1 => 0.5cm, 2=>1.0cm...
+                Select Case Math.Round(d * 2) ' cm *2 -> 1 => 0.5cm, 2=>1.0cm...
                     Case 1
                         CmToolStripMenuItem.Checked = True
                     Case 2
@@ -601,23 +521,19 @@ Public Class frmMain
             regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Version", True)
         End If
 
-        'Compare Version if version is higher than 6.0.0.6
+        'Compare Version if version is lower than 6.0.0.10
         Dim v1, v2 As System.Version
         v1 = ParseVersion(regKey.GetValue("", ""))
-        v2 = ParseVersion("6.0.0.6")
+        v2 = ParseVersion("6.0.0.10")
 
         If v1.CompareTo(v2) < 0 Then
             'do update here
 
-            'Changement de format pour Indent et MargeDroite (ancien format en pixels, nouveau format en cm)
+            'Indent n'est plus utilisé, remove it from registry
             regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings", True)
             If regKey IsNot Nothing Then
                 Try
                     regKey.DeleteSubKey("Indent")
-                Catch ex As Exception
-                End Try
-                Try
-                    regKey.DeleteSubKey("MargeDroite")
                 Catch ex As Exception
                 End Try
             End If
@@ -1755,12 +1671,6 @@ Public Class frmMain
         FPtsToolStripMenuItem.Checked = False
         GPtsToolStripMenuItem.Checked = False
         HPtsToolStripMenuItem.Checked = False
-        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Indent", True)
-        If regKey Is Nothing Then
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\", True)
-            regKey = regKey.CreateSubKey("Indent")
-        End If
-        regKey.SetValue("", "none")
     End Sub
 
     ' Convertit des centimètres en pixels selon le DPI du contrôle
@@ -1785,12 +1695,6 @@ Public Class frmMain
         FPtsToolStripMenuItem.Checked = False
         GPtsToolStripMenuItem.Checked = False
         HPtsToolStripMenuItem.Checked = False
-        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Indent", True)
-        If regKey Is Nothing Then
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\", True)
-            regKey = regKey.CreateSubKey("Indent")
-        End If
-        regKey.SetValue("", "0.5")
     End Sub
 
     Private Sub BPtsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BPtsToolStripMenuItem.Click
@@ -1805,12 +1709,6 @@ Public Class frmMain
         FPtsToolStripMenuItem.Checked = False
         GPtsToolStripMenuItem.Checked = False
         HPtsToolStripMenuItem.Checked = False
-        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Indent", True)
-        If regKey Is Nothing Then
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\", True)
-            regKey = regKey.CreateSubKey("Indent")
-        End If
-        regKey.SetValue("", "1.0")
     End Sub
 
     Private Sub CPtsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CPtsToolStripMenuItem.Click
@@ -1825,12 +1723,6 @@ Public Class frmMain
         FPtsToolStripMenuItem.Checked = False
         GPtsToolStripMenuItem.Checked = False
         HPtsToolStripMenuItem.Checked = False
-        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Indent", True)
-        If regKey Is Nothing Then
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\", True)
-            regKey = regKey.CreateSubKey("Indent")
-        End If
-        regKey.SetValue("", "1.5")
     End Sub
 
     Private Sub DPtsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DPtsToolStripMenuItem.Click
@@ -1845,12 +1737,6 @@ Public Class frmMain
         FPtsToolStripMenuItem.Checked = False
         GPtsToolStripMenuItem.Checked = False
         HPtsToolStripMenuItem.Checked = False
-        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Indent", True)
-        If regKey Is Nothing Then
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\", True)
-            regKey = regKey.CreateSubKey("Indent")
-        End If
-        regKey.SetValue("", "2.0")
     End Sub
 
     Private Sub EPtsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EPtsToolStripMenuItem.Click
@@ -1865,12 +1751,6 @@ Public Class frmMain
         FPtsToolStripMenuItem.Checked = False
         GPtsToolStripMenuItem.Checked = False
         HPtsToolStripMenuItem.Checked = False
-        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Indent", True)
-        If regKey Is Nothing Then
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\", True)
-            regKey = regKey.CreateSubKey("Indent")
-        End If
-        regKey.SetValue("", "2.5")
     End Sub
 
     Private Sub FPtsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FPtsToolStripMenuItem.Click
@@ -1885,12 +1765,6 @@ Public Class frmMain
         FPtsToolStripMenuItem.Checked = True
         GPtsToolStripMenuItem.Checked = False
         HPtsToolStripMenuItem.Checked = False
-        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Indent", True)
-        If regKey Is Nothing Then
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\", True)
-            regKey = regKey.CreateSubKey("Indent")
-        End If
-        regKey.SetValue("", "3.0")
     End Sub
 
     Private Sub GPtsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GPtsToolStripMenuItem.Click
@@ -1904,12 +1778,6 @@ Public Class frmMain
         FPtsToolStripMenuItem.Checked = False
         GPtsToolStripMenuItem.Checked = True
         HPtsToolStripMenuItem.Checked = False
-        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Indent", True)
-        If regKey Is Nothing Then
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\", True)
-            regKey = regKey.CreateSubKey("Indent")
-        End If
-        regKey.SetValue("", "3.5")
     End Sub
 
     Private Sub HPtsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HPtsToolStripMenuItem.Click
@@ -1923,12 +1791,6 @@ Public Class frmMain
         FPtsToolStripMenuItem.Checked = False
         GPtsToolStripMenuItem.Checked = False
         HPtsToolStripMenuItem.Checked = True
-        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Indent", True)
-        If regKey Is Nothing Then
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\", True)
-            regKey = regKey.CreateSubKey("Indent")
-        End If
-        regKey.SetValue("", "4.0")
     End Sub
 
     ' Convertit des pixels en centimètres selon le DPI du contrôle
