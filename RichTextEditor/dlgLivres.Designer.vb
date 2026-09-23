@@ -72,34 +72,35 @@ Partial Class dlgLivres
         ' 
         ' LivreContextMenuStrip
         ' 
+        LivreContextMenuStrip.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         LivreContextMenuStrip.ImageScalingSize = New Size(24, 24)
         LivreContextMenuStrip.Items.AddRange(New ToolStripItem() {NewBookToolStripMenuItem, ChangerLeNomDuLivreToolStripMenuItem, ToolStripSeparator1, EffacerLeLivreToolStripMenuItem})
         LivreContextMenuStrip.Name = "LivreContextMenuStrip"
-        LivreContextMenuStrip.Size = New Size(289, 106)
+        LivreContextMenuStrip.Size = New Size(328, 145)
         ' 
         ' NewBookToolStripMenuItem
         ' 
         NewBookToolStripMenuItem.Image = CType(resources.GetObject("NewBookToolStripMenuItem.Image"), Image)
         NewBookToolStripMenuItem.Name = "NewBookToolStripMenuItem"
-        NewBookToolStripMenuItem.Size = New Size(288, 32)
+        NewBookToolStripMenuItem.Size = New Size(327, 34)
         NewBookToolStripMenuItem.Text = "Nouveau Livre"
         ' 
         ' ChangerLeNomDuLivreToolStripMenuItem
         ' 
         ChangerLeNomDuLivreToolStripMenuItem.Name = "ChangerLeNomDuLivreToolStripMenuItem"
-        ChangerLeNomDuLivreToolStripMenuItem.Size = New Size(288, 32)
+        ChangerLeNomDuLivreToolStripMenuItem.Size = New Size(327, 34)
         ChangerLeNomDuLivreToolStripMenuItem.Text = "Changer le Nom du Livre"
         ' 
         ' ToolStripSeparator1
         ' 
         ToolStripSeparator1.Name = "ToolStripSeparator1"
-        ToolStripSeparator1.Size = New Size(285, 6)
+        ToolStripSeparator1.Size = New Size(324, 6)
         ' 
         ' EffacerLeLivreToolStripMenuItem
         ' 
         EffacerLeLivreToolStripMenuItem.Image = CType(resources.GetObject("EffacerLeLivreToolStripMenuItem.Image"), Image)
         EffacerLeLivreToolStripMenuItem.Name = "EffacerLeLivreToolStripMenuItem"
-        EffacerLeLivreToolStripMenuItem.Size = New Size(288, 32)
+        EffacerLeLivreToolStripMenuItem.Size = New Size(327, 34)
         EffacerLeLivreToolStripMenuItem.Text = "Effacer le Livre"
         ' 
         ' RevenirButton
@@ -143,57 +144,58 @@ Partial Class dlgLivres
         ' RecetteContextMenuStrip
         ' 
         RecetteContextMenuStrip.AccessibleRole = AccessibleRole.TitleBar
+        RecetteContextMenuStrip.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         RecetteContextMenuStrip.ImageScalingSize = New Size(24, 24)
         RecetteContextMenuStrip.Items.AddRange(New ToolStripItem() {ToolStripMenuItemFAV, ToolStripMenuItemMenu, ToolStripSeparator4, ModifierLesInfosDeLaRecetteToolStripMenuItem, ToolStripSeparator3, OuvrirAvecEditeurExterneToolStripMenuItem, ToolStripSeparator2, EffacerLaRecetteToolStripMenuItem})
         RecetteContextMenuStrip.Name = "RecetteContextMenuStrip"
-        RecetteContextMenuStrip.Size = New Size(331, 182)
+        RecetteContextMenuStrip.Size = New Size(352, 182)
         ' 
         ' ToolStripMenuItemFAV
         ' 
         ToolStripMenuItemFAV.Image = CType(resources.GetObject("ToolStripMenuItemFAV.Image"), Image)
         ToolStripMenuItemFAV.Name = "ToolStripMenuItemFAV"
-        ToolStripMenuItemFAV.Size = New Size(330, 32)
+        ToolStripMenuItemFAV.Size = New Size(351, 32)
         ToolStripMenuItemFAV.Text = "Ajouter aux Favoris"
         ' 
         ' ToolStripMenuItemMenu
         ' 
         ToolStripMenuItemMenu.Name = "ToolStripMenuItemMenu"
-        ToolStripMenuItemMenu.Size = New Size(330, 32)
+        ToolStripMenuItemMenu.Size = New Size(351, 32)
         ToolStripMenuItemMenu.Text = "Ajouter au Menu"
         ' 
         ' ToolStripSeparator4
         ' 
         ToolStripSeparator4.Name = "ToolStripSeparator4"
-        ToolStripSeparator4.Size = New Size(327, 6)
+        ToolStripSeparator4.Size = New Size(348, 6)
         ' 
         ' ModifierLesInfosDeLaRecetteToolStripMenuItem
         ' 
         ModifierLesInfosDeLaRecetteToolStripMenuItem.Name = "ModifierLesInfosDeLaRecetteToolStripMenuItem"
-        ModifierLesInfosDeLaRecetteToolStripMenuItem.Size = New Size(330, 32)
+        ModifierLesInfosDeLaRecetteToolStripMenuItem.Size = New Size(351, 32)
         ModifierLesInfosDeLaRecetteToolStripMenuItem.Text = "Modifier les infos de la recette"
         ' 
         ' ToolStripSeparator3
         ' 
         ToolStripSeparator3.Name = "ToolStripSeparator3"
-        ToolStripSeparator3.Size = New Size(327, 6)
+        ToolStripSeparator3.Size = New Size(348, 6)
         ' 
         ' OuvrirAvecEditeurExterneToolStripMenuItem
         ' 
         OuvrirAvecEditeurExterneToolStripMenuItem.Enabled = False
         OuvrirAvecEditeurExterneToolStripMenuItem.Name = "OuvrirAvecEditeurExterneToolStripMenuItem"
-        OuvrirAvecEditeurExterneToolStripMenuItem.Size = New Size(330, 32)
+        OuvrirAvecEditeurExterneToolStripMenuItem.Size = New Size(351, 32)
         OuvrirAvecEditeurExterneToolStripMenuItem.Text = "Ouvrir avec l'éditeur externe"
         ' 
         ' ToolStripSeparator2
         ' 
         ToolStripSeparator2.Name = "ToolStripSeparator2"
-        ToolStripSeparator2.Size = New Size(327, 6)
+        ToolStripSeparator2.Size = New Size(348, 6)
         ' 
         ' EffacerLaRecetteToolStripMenuItem
         ' 
         EffacerLaRecetteToolStripMenuItem.Image = CType(resources.GetObject("EffacerLaRecetteToolStripMenuItem.Image"), Image)
         EffacerLaRecetteToolStripMenuItem.Name = "EffacerLaRecetteToolStripMenuItem"
-        EffacerLaRecetteToolStripMenuItem.Size = New Size(330, 32)
+        EffacerLaRecetteToolStripMenuItem.Size = New Size(351, 32)
         EffacerLaRecetteToolStripMenuItem.Text = "Effacer la recette"
         ' 
         ' ListViewRecherche
@@ -256,22 +258,23 @@ Partial Class dlgLivres
         ' FavorisContextMenuStrip
         ' 
         FavorisContextMenuStrip.AccessibleRole = AccessibleRole.TitleBar
+        FavorisContextMenuStrip.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         FavorisContextMenuStrip.ImageScalingSize = New Size(24, 24)
         FavorisContextMenuStrip.Items.AddRange(New ToolStripItem() {AddToMenuToolStripMenuItem, EnleverFavToolStripMenuItem})
         FavorisContextMenuStrip.Name = "RecetteContextMenuStrip"
-        FavorisContextMenuStrip.Size = New Size(240, 68)
+        FavorisContextMenuStrip.Size = New Size(272, 72)
         ' 
         ' AddToMenuToolStripMenuItem
         ' 
         AddToMenuToolStripMenuItem.Name = "AddToMenuToolStripMenuItem"
-        AddToMenuToolStripMenuItem.Size = New Size(239, 32)
+        AddToMenuToolStripMenuItem.Size = New Size(271, 34)
         AddToMenuToolStripMenuItem.Text = "Add to menu"
         ' 
         ' EnleverFavToolStripMenuItem
         ' 
         EnleverFavToolStripMenuItem.Image = CType(resources.GetObject("EnleverFavToolStripMenuItem.Image"), Image)
         EnleverFavToolStripMenuItem.Name = "EnleverFavToolStripMenuItem"
-        EnleverFavToolStripMenuItem.Size = New Size(239, 32)
+        EnleverFavToolStripMenuItem.Size = New Size(271, 34)
         EnleverFavToolStripMenuItem.Text = "Enlever des favoris"
         ' 
         ' ButtonRandom
