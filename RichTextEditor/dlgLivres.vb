@@ -253,6 +253,7 @@ Public Class dlgLivres
                 End With
                 RevenirButton.Enabled = True
                 LastLivre = frmMain.LivreOuvert
+                ListViewRecettes.FocusedItem = ListViewRecettes.SelectedItems(0)
                 ListViewRecettes.Focus()
             Else
                 GetLivres()
