@@ -122,8 +122,6 @@ Partial Class frmMain
         BarDoutilsToolStripMenuItem1 = New ToolStripMenuItem()
         NavigationToolStripMenuItem = New ToolStripMenuItem()
         TexteToolStripMenuItem = New ToolStripMenuItem()
-        DMLRToolStripMenuItem = New ToolStripMenuItem()
-        AfficherLesImagesDesRecettesDansLaListeToolStripMenuItem = New ToolStripMenuItem()
         ToolStripSeparator19 = New ToolStripSeparator()
         ToolStripMenuItemURL = New ToolStripMenuItem()
         ToolStripSeparator20 = New ToolStripSeparator()
@@ -844,7 +842,7 @@ Partial Class frmMain
         ' 
         ' AffichageToolStripMenuItem
         ' 
-        AffichageToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {BarDoutilsToolStripMenuItem1, DMLRToolStripMenuItem, ToolStripSeparator19, ToolStripMenuItemURL, ToolStripSeparator20, LireSeulementToolStripMenuItem})
+        AffichageToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {BarDoutilsToolStripMenuItem1, ToolStripSeparator19, ToolStripMenuItemURL, ToolStripSeparator20, LireSeulementToolStripMenuItem})
         AffichageToolStripMenuItem.Name = "AffichageToolStripMenuItem"
         AffichageToolStripMenuItem.Size = New Size(632, 36)
         AffichageToolStripMenuItem.Text = "Afficha&ge"
@@ -853,7 +851,7 @@ Partial Class frmMain
         ' 
         BarDoutilsToolStripMenuItem1.DropDownItems.AddRange(New ToolStripItem() {NavigationToolStripMenuItem, TexteToolStripMenuItem})
         BarDoutilsToolStripMenuItem1.Name = "BarDoutilsToolStripMenuItem1"
-        BarDoutilsToolStripMenuItem1.Size = New Size(552, 36)
+        BarDoutilsToolStripMenuItem1.Size = New Size(544, 36)
         BarDoutilsToolStripMenuItem1.Text = "&Barres d'outils"
         ' 
         ' NavigationToolStripMenuItem
@@ -872,43 +870,27 @@ Partial Class frmMain
         TexteToolStripMenuItem.Size = New Size(219, 36)
         TexteToolStripMenuItem.Text = "Texte"
         ' 
-        ' DMLRToolStripMenuItem
-        ' 
-        DMLRToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {AfficherLesImagesDesRecettesDansLaListeToolStripMenuItem})
-        DMLRToolStripMenuItem.Name = "DMLRToolStripMenuItem"
-        DMLRToolStripMenuItem.Size = New Size(552, 36)
-        DMLRToolStripMenuItem.Text = "Dialogue Mes Livres de Recettes"
-        ' 
-        ' AfficherLesImagesDesRecettesDansLaListeToolStripMenuItem
-        ' 
-        AfficherLesImagesDesRecettesDansLaListeToolStripMenuItem.Checked = True
-        AfficherLesImagesDesRecettesDansLaListeToolStripMenuItem.CheckOnClick = True
-        AfficherLesImagesDesRecettesDansLaListeToolStripMenuItem.CheckState = CheckState.Checked
-        AfficherLesImagesDesRecettesDansLaListeToolStripMenuItem.Name = "AfficherLesImagesDesRecettesDansLaListeToolStripMenuItem"
-        AfficherLesImagesDesRecettesDansLaListeToolStripMenuItem.Size = New Size(535, 36)
-        AfficherLesImagesDesRecettesDansLaListeToolStripMenuItem.Text = "Afficher les images des recettes dans la liste"
-        ' 
         ' ToolStripSeparator19
         ' 
         ToolStripSeparator19.Name = "ToolStripSeparator19"
-        ToolStripSeparator19.Size = New Size(549, 6)
+        ToolStripSeparator19.Size = New Size(541, 6)
         ' 
         ' ToolStripMenuItemURL
         ' 
         ToolStripMenuItemURL.Name = "ToolStripMenuItemURL"
-        ToolStripMenuItemURL.Size = New Size(552, 36)
-        ToolStripMenuItemURL.Text = "&D�tection automatique des liens Hypertextes"
+        ToolStripMenuItemURL.Size = New Size(544, 36)
+        ToolStripMenuItemURL.Text = "&Détection automatique des liens Hypertextes"
         ' 
         ' ToolStripSeparator20
         ' 
         ToolStripSeparator20.Name = "ToolStripSeparator20"
-        ToolStripSeparator20.Size = New Size(549, 6)
+        ToolStripSeparator20.Size = New Size(541, 6)
         ' 
         ' LireSeulementToolStripMenuItem
         ' 
         LireSeulementToolStripMenuItem.Name = "LireSeulementToolStripMenuItem"
         LireSeulementToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.Shift Or Keys.S
-        LireSeulementToolStripMenuItem.Size = New Size(552, 36)
+        LireSeulementToolStripMenuItem.Size = New Size(544, 36)
         LireSeulementToolStripMenuItem.Text = "&Lire seulement"
         ' 
         ' ToolStripSeparator27
@@ -1084,7 +1066,7 @@ Partial Class frmMain
         ContextMenuStrip1.ImageScalingSize = New Size(24, 24)
         ContextMenuStrip1.Items.AddRange(New ToolStripItem() {SurlignerToolStripMenuItem, AnnulerSurbrillanceToolStripMenuItem, ToolStripSeparator35, AutoCcontextToolStripMenuItem, ToolStripSeparator37, ToolStripMenuItemToutSel, ToolStripSeparator18, ToolStripMenuItemImage, InsertlocalfileContextToolStripMenuItem, ToolStripSeparator14, ResearchCenter_ContextMenuItem, ToolStripSeparator5, CopierToolStripMenuItem, CouperToolStripMenuItem, CollerToolStripMenuItem})
         ContextMenuStrip1.Name = "ContextMenuStrip1"
-        ContextMenuStrip1.Size = New Size(437, 407)
+        ContextMenuStrip1.Size = New Size(437, 374)
         ' 
         ' SurlignerToolStripMenuItem
         ' 
@@ -1648,8 +1630,6 @@ Partial Class frmMain
     Friend WithEvents FileLinkToolStripButton As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripMenuItemArchiverLesRecettes As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator26 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents DMLRToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents AfficherLesImagesDesRecettesDansLaListeToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ParagrapheToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AucunToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents APtsToolStripMenuItem As ToolStripMenuItem

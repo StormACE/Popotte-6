@@ -186,12 +186,10 @@ Public Class frmMain
         OuvrirLaDerniereRecetteAuDemarrageToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "55")
         VerifierSiUneMiseAJourEstDisponibleAuDemarrageToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "56")
         BarDoutilsToolStripMenuItem1.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "57")
-        DMLRToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "58")
         ToolStripMenuItemURL.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "59")
         LireSeulementToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "60")
         NavigationToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "61")
         TexteToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "62")
-        AfficherLesImagesDesRecettesDansLaListeToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "63")
         LanguageToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "77")
         ToolStripMenuItemOnedrive.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "93")
         ToolStripMenuItemDropbox.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "94")
@@ -421,16 +419,6 @@ Public Class frmMain
         Else
             LireSeulementToolStripMenuItem.Checked = False
             rtbDoc.ReadOnly = False
-        End If
-
-        'Afficher les images dans la liste du dialogue mes livres de recettes
-        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\ImageRecette", True)
-        If regKey IsNot Nothing Then
-            ImageRecette = CBool(regKey.GetValue("", True))
-            AfficherLesImagesDesRecettesDansLaListeToolStripMenuItem.Checked = ImageRecette
-        Else
-            ImageRecette = True
-            AfficherLesImagesDesRecettesDansLaListeToolStripMenuItem.Checked = ImageRecette
         End If
 
         'Options de dossier de sauvegarde
@@ -2442,23 +2430,6 @@ Public Class frmMain
         End If
         regKey.SetValue("", OpenFileDialog1.FileName)
         OpenFileDialog1.Dispose()
-    End Sub
-
-    Private Sub AfficherLesImagesDesRecettesDansLaListeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AfficherLesImagesDesRecettesDansLaListeToolStripMenuItem.Click
-        If AfficherLesImagesDesRecettesDansLaListeToolStripMenuItem.Checked Then
-            ImageRecette = True
-        Else
-            ImageRecette = False
-        End If
-
-        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\ImageRecette", True)
-        If regKey IsNot Nothing Then
-            regKey.SetValue("", ImageRecette)
-        Else
-            Dim newregKey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings", True)
-            regKey = newregKey.CreateSubKey("ImageRecette")
-            regKey.SetValue("", ImageRecette)
-        End If
     End Sub
 
     Private Sub CmToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CmToolStripMenuItem.Click
