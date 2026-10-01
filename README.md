@@ -3,7 +3,7 @@ Logiciel de gestion de recettes Lisez License.txt avant d'utiliser ou modifier!!
 
 Recipes management software Read licence.txt before use or modification!!!
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-------------------------
 
 Popotte est un logiciel conçu pour Écrire, Lire et Classer des recettes facilement.
 
@@ -32,8 +32,7 @@ Voici quelques caractéristiques des fonctionnalités :
 -Conçu pour les débutants ainsi que les utilisateurs plus avancés Popotte permet de gérer des recettes facilement et sont interface WYSIWYG est simple et efficace!
 
 
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-------------------------
 
 Popotte is a software build to write, read and sort your recipes easily.
 
@@ -61,8 +60,7 @@ Here are some functionality characteristics :
 
 -Build to be easy for newbie and for more advanced user, Popotte can manage your recipe collections easily and is WYSIWYG interface is simple and effective!
 
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+---------------------------
 
 Structure tree to get the build to work...
 Folders and files needed can be found in Folder "Files Needed"
@@ -90,7 +88,7 @@ Popotte.exe
 
 licence.txt
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+------------------------------
 
 To build the software you need Visual Studio 2026 Community Edition
 
