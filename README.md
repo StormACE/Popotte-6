@@ -100,6 +100,6 @@ Don't forget to read the "Licence.txt" file before using, modifying and/or distr
 
 Open "Popotte.sln"
 
-Build the software.
+Build the software as x64.
 
 
