@@ -86,6 +86,10 @@ Popotte.dll
 
 Popotte.exe
 
+Popotte.deps.json
+
+Popotte.runtimeconfig.json
+
 licence.txt
 
 ------------------------------
