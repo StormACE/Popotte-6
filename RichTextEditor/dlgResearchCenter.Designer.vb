@@ -68,10 +68,12 @@ Partial Class ResearchCenter
         ' TextBoxSite
         ' 
         TextBoxSite.BackColor = SystemColors.GradientInactiveCaption
+        TextBoxSite.BorderStyle = BorderStyle.FixedSingle
+        TextBoxSite.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         TextBoxSite.Location = New Point(144, 405)
         TextBoxSite.Margin = New Padding(4, 5, 4, 5)
         TextBoxSite.Name = "TextBoxSite"
-        TextBoxSite.Size = New Size(428, 25)
+        TextBoxSite.Size = New Size(428, 34)
         TextBoxSite.TabIndex = 0
         ' 
         ' LabelNom
@@ -80,17 +82,19 @@ Partial Class ResearchCenter
         LabelNom.Location = New Point(17, 410)
         LabelNom.Margin = New Padding(4, 0, 4, 0)
         LabelNom.Name = "LabelNom"
-        LabelNom.Size = New Size(100, 19)
+        LabelNom.Size = New Size(113, 21)
         LabelNom.TabIndex = 4
         LabelNom.Text = "Nom du Site :"
         ' 
         ' TextBoxCom
         ' 
         TextBoxCom.BackColor = SystemColors.GradientInactiveCaption
+        TextBoxCom.BorderStyle = BorderStyle.FixedSingle
+        TextBoxCom.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         TextBoxCom.Location = New Point(144, 447)
         TextBoxCom.Margin = New Padding(4, 5, 4, 5)
         TextBoxCom.Name = "TextBoxCom"
-        TextBoxCom.Size = New Size(428, 25)
+        TextBoxCom.Size = New Size(428, 34)
         TextBoxCom.TabIndex = 1
         ' 
         ' LabelCom
@@ -99,7 +103,7 @@ Partial Class ResearchCenter
         LabelCom.Location = New Point(24, 452)
         LabelCom.Margin = New Padding(4, 0, 4, 0)
         LabelCom.Name = "LabelCom"
-        LabelCom.Size = New Size(94, 19)
+        LabelCom.Size = New Size(106, 21)
         LabelCom.TabIndex = 6
         LabelCom.Text = "Commande :"
         ' 

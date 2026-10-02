@@ -23,79 +23,81 @@ Partial Class RenommerLivreDialog
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(RenommerLivreDialog))
-        Me.OK_Button = New System.Windows.Forms.Button()
-        Me.Cancel_Button = New System.Windows.Forms.Button()
-        Me.NomTextBox = New System.Windows.Forms.TextBox()
-        Me.LabelNom = New System.Windows.Forms.Label()
-        Me.SuspendLayout()
-        '
-        'OK_Button
-        '
-        Me.OK_Button.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.OK_Button.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.OK_Button.Location = New System.Drawing.Point(211, 144)
-        Me.OK_Button.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.OK_Button.Name = "OK_Button"
-        Me.OK_Button.Size = New System.Drawing.Size(111, 37)
-        Me.OK_Button.TabIndex = 1
-        Me.OK_Button.Text = "OK"
-        '
-        'Cancel_Button
-        '
-        Me.Cancel_Button.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.Cancel_Button.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.Cancel_Button.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.Cancel_Button.Location = New System.Drawing.Point(333, 144)
-        Me.Cancel_Button.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.Cancel_Button.Name = "Cancel_Button"
-        Me.Cancel_Button.Size = New System.Drawing.Size(111, 37)
-        Me.Cancel_Button.TabIndex = 2
-        Me.Cancel_Button.Text = "Annuler"
-        '
-        'NomTextBox
-        '
-        Me.NomTextBox.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
-        Me.NomTextBox.Location = New System.Drawing.Point(20, 72)
-        Me.NomTextBox.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.NomTextBox.Name = "NomTextBox"
-        Me.NomTextBox.Size = New System.Drawing.Size(422, 29)
-        Me.NomTextBox.TabIndex = 0
-        '
-        'LabelNom
-        '
-        Me.LabelNom.AutoSize = True
-        Me.LabelNom.Location = New System.Drawing.Point(16, 46)
-        Me.LabelNom.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LabelNom.Name = "LabelNom"
-        Me.LabelNom.Size = New System.Drawing.Size(134, 21)
-        Me.LabelNom.TabIndex = 3
-        Me.LabelNom.Text = "Nouveau Nom : "
-        '
-        'RenommerLivreDialog
-        '
-        Me.AcceptButton = Me.OK_Button
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.AutoSize = True
-        Me.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange
-        Me.CancelButton = Me.Cancel_Button
-        Me.ClientSize = New System.Drawing.Size(464, 201)
-        Me.Controls.Add(Me.LabelNom)
-        Me.Controls.Add(Me.NomTextBox)
-        Me.Controls.Add(Me.Cancel_Button)
-        Me.Controls.Add(Me.OK_Button)
-        Me.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.MaximizeBox = False
-        Me.MinimizeBox = False
-        Me.Name = "RenommerLivreDialog"
-        Me.ShowInTaskbar = False
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Popotte - Changer le Nom du Livre"
-        Me.ResumeLayout(False)
-        Me.PerformLayout()
+        OK_Button = New Button()
+        Cancel_Button = New Button()
+        NomTextBox = New TextBox()
+        LabelNom = New Label()
+        SuspendLayout()
+        ' 
+        ' OK_Button
+        ' 
+        OK_Button.Anchor = AnchorStyles.None
+        OK_Button.FlatStyle = FlatStyle.System
+        OK_Button.Location = New Point(211, 144)
+        OK_Button.Margin = New Padding(4, 5, 4, 5)
+        OK_Button.Name = "OK_Button"
+        OK_Button.Size = New Size(111, 37)
+        OK_Button.TabIndex = 1
+        OK_Button.Text = "OK"
+        ' 
+        ' Cancel_Button
+        ' 
+        Cancel_Button.Anchor = AnchorStyles.None
+        Cancel_Button.DialogResult = DialogResult.Cancel
+        Cancel_Button.FlatStyle = FlatStyle.System
+        Cancel_Button.Location = New Point(333, 144)
+        Cancel_Button.Margin = New Padding(4, 5, 4, 5)
+        Cancel_Button.Name = "Cancel_Button"
+        Cancel_Button.Size = New Size(111, 37)
+        Cancel_Button.TabIndex = 2
+        Cancel_Button.Text = "Annuler"
+        ' 
+        ' NomTextBox
+        ' 
+        NomTextBox.BackColor = SystemColors.GradientInactiveCaption
+        NomTextBox.BorderStyle = BorderStyle.FixedSingle
+        NomTextBox.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        NomTextBox.Location = New Point(20, 72)
+        NomTextBox.Margin = New Padding(4, 5, 4, 5)
+        NomTextBox.Name = "NomTextBox"
+        NomTextBox.Size = New Size(422, 34)
+        NomTextBox.TabIndex = 0
+        ' 
+        ' LabelNom
+        ' 
+        LabelNom.AutoSize = True
+        LabelNom.Location = New Point(16, 46)
+        LabelNom.Margin = New Padding(4, 0, 4, 0)
+        LabelNom.Name = "LabelNom"
+        LabelNom.Size = New Size(134, 21)
+        LabelNom.TabIndex = 3
+        LabelNom.Text = "Nouveau Nom : "
+        ' 
+        ' RenommerLivreDialog
+        ' 
+        AcceptButton = OK_Button
+        AutoScaleDimensions = New SizeF(144F, 144F)
+        AutoScaleMode = AutoScaleMode.Dpi
+        AutoSize = True
+        AutoValidate = AutoValidate.EnablePreventFocusChange
+        CancelButton = Cancel_Button
+        ClientSize = New Size(464, 201)
+        Controls.Add(LabelNom)
+        Controls.Add(NomTextBox)
+        Controls.Add(Cancel_Button)
+        Controls.Add(OK_Button)
+        Font = New Font("Segoe UI", 8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        FormBorderStyle = FormBorderStyle.FixedDialog
+        Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        Margin = New Padding(4, 5, 4, 5)
+        MaximizeBox = False
+        MinimizeBox = False
+        Name = "RenommerLivreDialog"
+        ShowInTaskbar = False
+        StartPosition = FormStartPosition.CenterParent
+        Text = "Popotte - Changer le Nom du Livre"
+        ResumeLayout(False)
+        PerformLayout()
 
     End Sub
     Friend WithEvents OK_Button As System.Windows.Forms.Button

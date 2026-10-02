@@ -1292,6 +1292,7 @@ Partial Class frmMain
         ToolStrip1.Items.AddRange(New ToolStripItem() {ToolStripComboBoxPolices, ToolStripComboBoxSize, ToolStripSeparator30, ToolStripSeparator1, ToolStripButtonCouleurs, ToolStripSeparator31, ToolStripSeparator2, ToolStripButtonBold, ToolStripButtonItalic, ToolStripButtonUnderline, ToolStripSeparator32, ToolStripSeparator3, ToolStripButtonGauche, ToolStripButtonCentre, ToolStripButtonDroite, JustifyToolStripButton, ToolStripSeparator33, ToolStripSeparator29, ToolStripButtonBulletList})
         ToolStrip1.Location = New Point(0, 109)
         ToolStrip1.Name = "ToolStrip1"
+        ToolStrip1.RenderMode = ToolStripRenderMode.System
         ToolStrip1.Size = New Size(1176, 48)
         ToolStrip1.TabIndex = 4
         ToolStrip1.Text = "ToolStrip1"
@@ -1399,7 +1400,7 @@ Partial Class frmMain
         ToolStripButtonGauche.ImageTransparentColor = Color.Magenta
         ToolStripButtonGauche.Name = "ToolStripButtonGauche"
         ToolStripButtonGauche.Size = New Size(52, 52)
-        ToolStripButtonGauche.Text = "Texte � gauche"
+        ToolStripButtonGauche.Text = "Texte À gauche"
         ' 
         ' ToolStripButtonCentre
         ' 

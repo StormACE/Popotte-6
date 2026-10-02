@@ -20,99 +20,101 @@ Partial Class dlgFind
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgFind))
-        Me.LabelMot = New System.Windows.Forms.Label()
-        Me.txtSearchTerm = New System.Windows.Forms.TextBox()
-        Me.chkMatchCase = New System.Windows.Forms.CheckBox()
-        Me.btnFind = New System.Windows.Forms.Button()
-        Me.btnFindNext = New System.Windows.Forms.Button()
-        Me.OpacityHScrollBar = New System.Windows.Forms.HScrollBar()
-        Me.SuspendLayout()
-        '
-        'LabelMot
-        '
-        Me.LabelMot.AutoSize = True
-        Me.LabelMot.Location = New System.Drawing.Point(22, 21)
-        Me.LabelMot.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.LabelMot.Name = "LabelMot"
-        Me.LabelMot.Size = New System.Drawing.Size(73, 21)
-        Me.LabelMot.TabIndex = 0
-        Me.LabelMot.Text = "Mot Clé:"
-        '
-        'txtSearchTerm
-        '
-        Me.txtSearchTerm.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
-        Me.txtSearchTerm.Location = New System.Drawing.Point(27, 47)
-        Me.txtSearchTerm.Margin = New System.Windows.Forms.Padding(5)
-        Me.txtSearchTerm.Name = "txtSearchTerm"
-        Me.txtSearchTerm.Size = New System.Drawing.Size(417, 29)
-        Me.txtSearchTerm.TabIndex = 1
-        '
-        'chkMatchCase
-        '
-        Me.chkMatchCase.AutoSize = True
-        Me.chkMatchCase.BackColor = System.Drawing.SystemColors.Control
-        Me.chkMatchCase.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.chkMatchCase.Location = New System.Drawing.Point(27, 100)
-        Me.chkMatchCase.Margin = New System.Windows.Forms.Padding(5)
-        Me.chkMatchCase.Name = "chkMatchCase"
-        Me.chkMatchCase.Size = New System.Drawing.Size(220, 26)
-        Me.chkMatchCase.TabIndex = 4
-        Me.chkMatchCase.Text = "Sensible aux Majuscules"
-        Me.chkMatchCase.UseVisualStyleBackColor = False
-        '
-        'btnFind
-        '
-        Me.btnFind.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.btnFind.Location = New System.Drawing.Point(457, 47)
-        Me.btnFind.Margin = New System.Windows.Forms.Padding(5)
-        Me.btnFind.Name = "btnFind"
-        Me.btnFind.Size = New System.Drawing.Size(125, 34)
-        Me.btnFind.TabIndex = 2
-        Me.btnFind.Text = "&Rechercher"
-        Me.btnFind.UseVisualStyleBackColor = True
-        '
-        'btnFindNext
-        '
-        Me.btnFindNext.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.btnFindNext.Location = New System.Drawing.Point(457, 100)
-        Me.btnFindNext.Margin = New System.Windows.Forms.Padding(5)
-        Me.btnFindNext.Name = "btnFindNext"
-        Me.btnFindNext.Size = New System.Drawing.Size(125, 34)
-        Me.btnFindNext.TabIndex = 3
-        Me.btnFindNext.Text = "&Suivant"
-        Me.btnFindNext.UseVisualStyleBackColor = True
-        '
-        'OpacityHScrollBar
-        '
-        Me.OpacityHScrollBar.Location = New System.Drawing.Point(27, 150)
-        Me.OpacityHScrollBar.Name = "OpacityHScrollBar"
-        Me.OpacityHScrollBar.Size = New System.Drawing.Size(555, 26)
-        Me.OpacityHScrollBar.TabIndex = 5
-        '
-        'dlgFind
-        '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(602, 199)
-        Me.Controls.Add(Me.OpacityHScrollBar)
-        Me.Controls.Add(Me.btnFindNext)
-        Me.Controls.Add(Me.btnFind)
-        Me.Controls.Add(Me.chkMatchCase)
-        Me.Controls.Add(Me.txtSearchTerm)
-        Me.Controls.Add(Me.LabelMot)
-        Me.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Margin = New System.Windows.Forms.Padding(5)
-        Me.MaximizeBox = False
-        Me.MinimizeBox = False
-        Me.Name = "dlgFind"
-        Me.ShowInTaskbar = False
-        Me.Text = "Popotte - Rechercher"
-        Me.TopMost = True
-        Me.ResumeLayout(False)
-        Me.PerformLayout()
+        LabelMot = New Label()
+        txtSearchTerm = New TextBox()
+        chkMatchCase = New CheckBox()
+        btnFind = New Button()
+        btnFindNext = New Button()
+        OpacityHScrollBar = New HScrollBar()
+        SuspendLayout()
+        ' 
+        ' LabelMot
+        ' 
+        LabelMot.AutoSize = True
+        LabelMot.Location = New Point(22, 21)
+        LabelMot.Margin = New Padding(5, 0, 5, 0)
+        LabelMot.Name = "LabelMot"
+        LabelMot.Size = New Size(79, 21)
+        LabelMot.TabIndex = 0
+        LabelMot.Text = "Mot Clï¿½:"
+        ' 
+        ' txtSearchTerm
+        ' 
+        txtSearchTerm.BackColor = SystemColors.GradientInactiveCaption
+        txtSearchTerm.BorderStyle = BorderStyle.FixedSingle
+        txtSearchTerm.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        txtSearchTerm.Location = New Point(27, 47)
+        txtSearchTerm.Margin = New Padding(5)
+        txtSearchTerm.Name = "txtSearchTerm"
+        txtSearchTerm.Size = New Size(417, 34)
+        txtSearchTerm.TabIndex = 1
+        ' 
+        ' chkMatchCase
+        ' 
+        chkMatchCase.AutoSize = True
+        chkMatchCase.BackColor = SystemColors.Control
+        chkMatchCase.FlatStyle = FlatStyle.System
+        chkMatchCase.Location = New Point(27, 100)
+        chkMatchCase.Margin = New Padding(5)
+        chkMatchCase.Name = "chkMatchCase"
+        chkMatchCase.Size = New Size(233, 26)
+        chkMatchCase.TabIndex = 4
+        chkMatchCase.Text = "Sensible aux Majuscules"
+        chkMatchCase.UseVisualStyleBackColor = False
+        ' 
+        ' btnFind
+        ' 
+        btnFind.FlatStyle = FlatStyle.System
+        btnFind.Location = New Point(457, 47)
+        btnFind.Margin = New Padding(5)
+        btnFind.Name = "btnFind"
+        btnFind.Size = New Size(125, 34)
+        btnFind.TabIndex = 2
+        btnFind.Text = "&Rechercher"
+        btnFind.UseVisualStyleBackColor = True
+        ' 
+        ' btnFindNext
+        ' 
+        btnFindNext.FlatStyle = FlatStyle.System
+        btnFindNext.Location = New Point(457, 100)
+        btnFindNext.Margin = New Padding(5)
+        btnFindNext.Name = "btnFindNext"
+        btnFindNext.Size = New Size(125, 34)
+        btnFindNext.TabIndex = 3
+        btnFindNext.Text = "&Suivant"
+        btnFindNext.UseVisualStyleBackColor = True
+        ' 
+        ' OpacityHScrollBar
+        ' 
+        OpacityHScrollBar.Location = New Point(27, 150)
+        OpacityHScrollBar.Name = "OpacityHScrollBar"
+        OpacityHScrollBar.Size = New Size(555, 26)
+        OpacityHScrollBar.TabIndex = 5
+        ' 
+        ' dlgFind
+        ' 
+        AutoScaleDimensions = New SizeF(144F, 144F)
+        AutoScaleMode = AutoScaleMode.Dpi
+        AutoSize = True
+        ClientSize = New Size(602, 199)
+        Controls.Add(OpacityHScrollBar)
+        Controls.Add(btnFindNext)
+        Controls.Add(btnFind)
+        Controls.Add(chkMatchCase)
+        Controls.Add(txtSearchTerm)
+        Controls.Add(LabelMot)
+        Font = New Font("Segoe UI", 8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        FormBorderStyle = FormBorderStyle.FixedDialog
+        Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        Margin = New Padding(5)
+        MaximizeBox = False
+        MinimizeBox = False
+        Name = "dlgFind"
+        ShowInTaskbar = False
+        Text = "Popotte - Rechercher"
+        TopMost = True
+        ResumeLayout(False)
+        PerformLayout()
 
     End Sub
     Friend WithEvents LabelMot As System.Windows.Forms.Label

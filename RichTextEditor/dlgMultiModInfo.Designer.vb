@@ -23,80 +23,81 @@ Partial Class dlgMultiModInfo
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgMultiModInfo))
-        Me.OK_Button = New System.Windows.Forms.Button()
-        Me.Cancel_Button = New System.Windows.Forms.Button()
-        Me.LivresComboBox = New System.Windows.Forms.ComboBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.SuspendLayout()
-        '
-        'OK_Button
-        '
-        Me.OK_Button.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.OK_Button.Location = New System.Drawing.Point(96, 118)
-        Me.OK_Button.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.OK_Button.Name = "OK_Button"
-        Me.OK_Button.Size = New System.Drawing.Size(100, 35)
-        Me.OK_Button.TabIndex = 0
-        Me.OK_Button.Text = "OK"
-        '
-        'Cancel_Button
-        '
-        Me.Cancel_Button.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.Cancel_Button.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.Cancel_Button.Location = New System.Drawing.Point(204, 118)
-        Me.Cancel_Button.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.Cancel_Button.Name = "Cancel_Button"
-        Me.Cancel_Button.Size = New System.Drawing.Size(100, 35)
-        Me.Cancel_Button.TabIndex = 1
-        Me.Cancel_Button.Text = "Annuler"
-        '
-        'LivresComboBox
-        '
-        Me.LivresComboBox.AllowDrop = True
-        Me.LivresComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.LivresComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.LivresComboBox.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.LivresComboBox.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LivresComboBox.FormattingEnabled = True
-        Me.LivresComboBox.IntegralHeight = False
-        Me.LivresComboBox.Location = New System.Drawing.Point(18, 59)
-        Me.LivresComboBox.Name = "LivresComboBox"
-        Me.LivresComboBox.Size = New System.Drawing.Size(286, 33)
-        Me.LivresComboBox.Sorted = True
-        Me.LivresComboBox.TabIndex = 1
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(13, 32)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(63, 25)
-        Me.Label1.TabIndex = 2
-        Me.Label1.Text = "Livre :"
-        '
-        'dlgMultiModInfo
-        '
-        Me.AcceptButton = Me.OK_Button
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.CancelButton = Me.Cancel_Button
-        Me.ClientSize = New System.Drawing.Size(321, 167)
-        Me.Controls.Add(Me.Cancel_Button)
-        Me.Controls.Add(Me.OK_Button)
-        Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.LivresComboBox)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.MaximizeBox = False
-        Me.MinimizeBox = False
-        Me.Name = "dlgMultiModInfo"
-        Me.ShowInTaskbar = False
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Déplacer vers le Livre :"
-        Me.ResumeLayout(False)
-        Me.PerformLayout()
+        OK_Button = New Button()
+        Cancel_Button = New Button()
+        LivresComboBox = New ComboBox()
+        Label1 = New Label()
+        SuspendLayout()
+        ' 
+        ' OK_Button
+        ' 
+        OK_Button.Anchor = AnchorStyles.None
+        OK_Button.Location = New Point(107, 148)
+        OK_Button.Margin = New Padding(4, 6, 4, 6)
+        OK_Button.Name = "OK_Button"
+        OK_Button.Size = New Size(111, 44)
+        OK_Button.TabIndex = 0
+        OK_Button.Text = "OK"
+        ' 
+        ' Cancel_Button
+        ' 
+        Cancel_Button.Anchor = AnchorStyles.None
+        Cancel_Button.DialogResult = DialogResult.Cancel
+        Cancel_Button.Location = New Point(227, 148)
+        Cancel_Button.Margin = New Padding(4, 6, 4, 6)
+        Cancel_Button.Name = "Cancel_Button"
+        Cancel_Button.Size = New Size(111, 44)
+        Cancel_Button.TabIndex = 1
+        Cancel_Button.Text = "Annuler"
+        ' 
+        ' LivresComboBox
+        ' 
+        LivresComboBox.AllowDrop = True
+        LivresComboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend
+        LivresComboBox.AutoCompleteSource = AutoCompleteSource.ListItems
+        LivresComboBox.FlatStyle = FlatStyle.System
+        LivresComboBox.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        LivresComboBox.FormattingEnabled = True
+        LivresComboBox.IntegralHeight = False
+        LivresComboBox.Location = New Point(20, 74)
+        LivresComboBox.Margin = New Padding(3, 4, 3, 4)
+        LivresComboBox.Name = "LivresComboBox"
+        LivresComboBox.Size = New Size(317, 36)
+        LivresComboBox.Sorted = True
+        LivresComboBox.TabIndex = 1
+        ' 
+        ' Label1
+        ' 
+        Label1.AutoSize = True
+        Label1.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label1.Location = New Point(14, 40)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(63, 25)
+        Label1.TabIndex = 2
+        Label1.Text = "Livre :"
+        ' 
+        ' dlgMultiModInfo
+        ' 
+        AcceptButton = OK_Button
+        AutoScaleDimensions = New SizeF(10F, 25F)
+        AutoScaleMode = AutoScaleMode.Font
+        CancelButton = Cancel_Button
+        ClientSize = New Size(357, 209)
+        Controls.Add(Cancel_Button)
+        Controls.Add(OK_Button)
+        Controls.Add(Label1)
+        Controls.Add(LivresComboBox)
+        FormBorderStyle = FormBorderStyle.FixedDialog
+        Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        Margin = New Padding(4, 6, 4, 6)
+        MaximizeBox = False
+        MinimizeBox = False
+        Name = "dlgMultiModInfo"
+        ShowInTaskbar = False
+        StartPosition = FormStartPosition.CenterParent
+        Text = "Déplacer vers le Livre :"
+        ResumeLayout(False)
+        PerformLayout()
 
     End Sub
     Friend WithEvents OK_Button As System.Windows.Forms.Button

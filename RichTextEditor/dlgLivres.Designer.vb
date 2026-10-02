@@ -76,7 +76,7 @@ Partial Class dlgLivres
         LivreContextMenuStrip.ImageScalingSize = New Size(24, 24)
         LivreContextMenuStrip.Items.AddRange(New ToolStripItem() {NewBookToolStripMenuItem, ChangerLeNomDuLivreToolStripMenuItem, ToolStripSeparator1, EffacerLeLivreToolStripMenuItem})
         LivreContextMenuStrip.Name = "LivreContextMenuStrip"
-        LivreContextMenuStrip.Size = New Size(328, 145)
+        LivreContextMenuStrip.Size = New Size(328, 112)
         ' 
         ' NewBookToolStripMenuItem
         ' 
@@ -249,10 +249,12 @@ Partial Class dlgLivres
         TextBoxRecherche.AccessibleDescription = ""
         TextBoxRecherche.AutoCompleteMode = AutoCompleteMode.SuggestAppend
         TextBoxRecherche.BackColor = SystemColors.GradientInactiveCaption
+        TextBoxRecherche.BorderStyle = BorderStyle.FixedSingle
+        TextBoxRecherche.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         TextBoxRecherche.Location = New Point(364, 716)
         TextBoxRecherche.Margin = New Padding(4)
         TextBoxRecherche.Name = "TextBoxRecherche"
-        TextBoxRecherche.Size = New Size(314, 29)
+        TextBoxRecherche.Size = New Size(314, 34)
         TextBoxRecherche.TabIndex = 4
         ' 
         ' FavorisContextMenuStrip

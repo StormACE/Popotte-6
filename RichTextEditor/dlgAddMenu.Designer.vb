@@ -23,102 +23,100 @@ Partial Class dlgAddMenu
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgAddMenu))
-        Me.ButtonAdd = New System.Windows.Forms.Button()
-        Me.Cancel_Button = New System.Windows.Forms.Button()
-        Me.ListBoxDays = New System.Windows.Forms.ListBox()
-        Me.ListBoxMeal = New System.Windows.Forms.ListBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.SuspendLayout()
-        '
-        'ButtonAdd
-        '
-        Me.ButtonAdd.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.ButtonAdd.Location = New System.Drawing.Point(244, 192)
-        Me.ButtonAdd.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ButtonAdd.Name = "ButtonAdd"
-        Me.ButtonAdd.Size = New System.Drawing.Size(111, 37)
-        Me.ButtonAdd.TabIndex = 0
-        Me.ButtonAdd.Text = "Ajouter"
-        '
-        'Cancel_Button
-        '
-        Me.Cancel_Button.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.Cancel_Button.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.Cancel_Button.Location = New System.Drawing.Point(363, 192)
-        Me.Cancel_Button.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.Cancel_Button.Name = "Cancel_Button"
-        Me.Cancel_Button.Size = New System.Drawing.Size(111, 37)
-        Me.Cancel_Button.TabIndex = 1
-        Me.Cancel_Button.Text = "Annuler"
-        '
-        'ListBoxDays
-        '
-        Me.ListBoxDays.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
-        Me.ListBoxDays.Font = New System.Drawing.Font("Segoe UI", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ListBoxDays.FormattingEnabled = True
-        Me.ListBoxDays.ItemHeight = 38
-        Me.ListBoxDays.Location = New System.Drawing.Point(13, 51)
-        Me.ListBoxDays.Name = "ListBoxDays"
-        Me.ListBoxDays.Size = New System.Drawing.Size(221, 194)
-        Me.ListBoxDays.TabIndex = 1
-        '
-        'ListBoxMeal
-        '
-        Me.ListBoxMeal.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
-        Me.ListBoxMeal.Font = New System.Drawing.Font("Segoe UI", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ListBoxMeal.FormattingEnabled = True
-        Me.ListBoxMeal.ItemHeight = 38
-        Me.ListBoxMeal.Location = New System.Drawing.Point(252, 51)
-        Me.ListBoxMeal.Name = "ListBoxMeal"
-        Me.ListBoxMeal.Size = New System.Drawing.Size(221, 80)
-        Me.ListBoxMeal.TabIndex = 2
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(13, 24)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(243, 32)
-        Me.Label1.TabIndex = 3
-        Me.Label1.Text = "Jour de la semaine :"
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(252, 24)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(96, 32)
-        Me.Label2.TabIndex = 4
-        Me.Label2.Text = "Repas :"
-        '
-        'dlgAddMenu
-        '
-        Me.AcceptButton = Me.ButtonAdd
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(10.0!, 21.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.CancelButton = Me.Cancel_Button
-        Me.ClientSize = New System.Drawing.Size(487, 263)
-        Me.Controls.Add(Me.ButtonAdd)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.Cancel_Button)
-        Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.ListBoxMeal)
-        Me.Controls.Add(Me.ListBoxDays)
-        Me.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.MaximizeBox = False
-        Me.MinimizeBox = False
-        Me.Name = "dlgAddMenu"
-        Me.ShowInTaskbar = False
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Ajouter la recette au Menu"
-        Me.ResumeLayout(False)
-        Me.PerformLayout()
+        ButtonAdd = New Button()
+        Cancel_Button = New Button()
+        ListBoxDays = New ListBox()
+        ListBoxMeal = New ListBox()
+        Label1 = New Label()
+        Label2 = New Label()
+        SuspendLayout()
+        ' 
+        ' ButtonAdd
+        ' 
+        ButtonAdd.Anchor = AnchorStyles.None
+        ButtonAdd.Location = New Point(326, 347)
+        ButtonAdd.Margin = New Padding(4, 5, 4, 5)
+        ButtonAdd.Name = "ButtonAdd"
+        ButtonAdd.Size = New Size(111, 37)
+        ButtonAdd.TabIndex = 0
+        ButtonAdd.Text = "Ajouter"
+        ' 
+        ' Cancel_Button
+        ' 
+        Cancel_Button.Anchor = AnchorStyles.None
+        Cancel_Button.DialogResult = DialogResult.Cancel
+        Cancel_Button.Location = New Point(445, 347)
+        Cancel_Button.Margin = New Padding(4, 5, 4, 5)
+        Cancel_Button.Name = "Cancel_Button"
+        Cancel_Button.Size = New Size(111, 37)
+        Cancel_Button.TabIndex = 1
+        Cancel_Button.Text = "Annuler"
+        ' 
+        ' ListBoxDays
+        ' 
+        ListBoxDays.BackColor = SystemColors.GradientInactiveCaption
+        ListBoxDays.Font = New Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ListBoxDays.FormattingEnabled = True
+        ListBoxDays.Location = New Point(24, 73)
+        ListBoxDays.Name = "ListBoxDays"
+        ListBoxDays.Size = New Size(242, 308)
+        ListBoxDays.TabIndex = 1
+        ' 
+        ' ListBoxMeal
+        ' 
+        ListBoxMeal.BackColor = SystemColors.GradientInactiveCaption
+        ListBoxMeal.Font = New Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ListBoxMeal.FormattingEnabled = True
+        ListBoxMeal.Location = New Point(326, 73)
+        ListBoxMeal.Name = "ListBoxMeal"
+        ListBoxMeal.Size = New Size(221, 118)
+        ListBoxMeal.TabIndex = 2
+        ' 
+        ' Label1
+        ' 
+        Label1.AutoSize = True
+        Label1.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label1.Location = New Point(12, 24)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(242, 32)
+        Label1.TabIndex = 3
+        Label1.Text = "Jour de la semaine :"
+        ' 
+        ' Label2
+        ' 
+        Label2.AutoSize = True
+        Label2.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label2.Location = New Point(326, 24)
+        Label2.Name = "Label2"
+        Label2.Size = New Size(95, 32)
+        Label2.TabIndex = 4
+        Label2.Text = "Repas :"
+        ' 
+        ' dlgAddMenu
+        ' 
+        AcceptButton = ButtonAdd
+        AutoScaleDimensions = New SizeF(10F, 21F)
+        AutoScaleMode = AutoScaleMode.Font
+        CancelButton = Cancel_Button
+        ClientSize = New Size(584, 411)
+        Controls.Add(ButtonAdd)
+        Controls.Add(Label2)
+        Controls.Add(Cancel_Button)
+        Controls.Add(Label1)
+        Controls.Add(ListBoxMeal)
+        Controls.Add(ListBoxDays)
+        Font = New Font("Segoe UI", 8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        FormBorderStyle = FormBorderStyle.FixedDialog
+        Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        Margin = New Padding(4, 5, 4, 5)
+        MaximizeBox = False
+        MinimizeBox = False
+        Name = "dlgAddMenu"
+        ShowInTaskbar = False
+        StartPosition = FormStartPosition.CenterParent
+        Text = "Ajouter la recette au Menu"
+        ResumeLayout(False)
+        PerformLayout()
 
     End Sub
     Friend WithEvents ButtonAdd As System.Windows.Forms.Button

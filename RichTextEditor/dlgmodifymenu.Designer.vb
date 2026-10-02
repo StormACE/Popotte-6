@@ -23,73 +23,75 @@ Partial Class dlgmodifymenu
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgmodifymenu))
-        Me.OK_Button = New System.Windows.Forms.Button()
-        Me.Cancel_Button = New System.Windows.Forms.Button()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.SuspendLayout()
-        '
-        'OK_Button
-        '
-        Me.OK_Button.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.OK_Button.Location = New System.Drawing.Point(159, 148)
-        Me.OK_Button.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.OK_Button.Name = "OK_Button"
-        Me.OK_Button.Size = New System.Drawing.Size(111, 37)
-        Me.OK_Button.TabIndex = 2
-        Me.OK_Button.Text = "OK"
-        '
-        'Cancel_Button
-        '
-        Me.Cancel_Button.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.Cancel_Button.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.Cancel_Button.Location = New System.Drawing.Point(279, 148)
-        Me.Cancel_Button.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.Cancel_Button.Name = "Cancel_Button"
-        Me.Cancel_Button.Size = New System.Drawing.Size(111, 37)
-        Me.Cancel_Button.TabIndex = 3
-        Me.Cancel_Button.Text = "Annuler"
-        '
-        'TextBox1
-        '
-        Me.TextBox1.AcceptsTab = True
-        Me.TextBox1.Location = New System.Drawing.Point(13, 75)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(377, 29)
-        Me.TextBox1.TabIndex = 1
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(13, 50)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(154, 21)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Nom de la recette :"
-        '
-        'dlgmodifymenu
-        '
-        Me.AcceptButton = Me.OK_Button
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(10.0!, 21.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.CancelButton = Me.Cancel_Button
-        Me.ClientSize = New System.Drawing.Size(404, 199)
-        Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.TextBox1)
-        Me.Controls.Add(Me.Cancel_Button)
-        Me.Controls.Add(Me.OK_Button)
-        Me.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.MaximizeBox = False
-        Me.MinimizeBox = False
-        Me.Name = "dlgmodifymenu"
-        Me.ShowInTaskbar = False
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Modifier le nom de la recette"
-        Me.ResumeLayout(False)
-        Me.PerformLayout()
+        OK_Button = New Button()
+        Cancel_Button = New Button()
+        TextBox1 = New TextBox()
+        Label1 = New Label()
+        SuspendLayout()
+        ' 
+        ' OK_Button
+        ' 
+        OK_Button.Anchor = AnchorStyles.None
+        OK_Button.Location = New Point(159, 148)
+        OK_Button.Margin = New Padding(4, 5, 4, 5)
+        OK_Button.Name = "OK_Button"
+        OK_Button.Size = New Size(111, 37)
+        OK_Button.TabIndex = 2
+        OK_Button.Text = "OK"
+        ' 
+        ' Cancel_Button
+        ' 
+        Cancel_Button.Anchor = AnchorStyles.None
+        Cancel_Button.DialogResult = DialogResult.Cancel
+        Cancel_Button.Location = New Point(279, 148)
+        Cancel_Button.Margin = New Padding(4, 5, 4, 5)
+        Cancel_Button.Name = "Cancel_Button"
+        Cancel_Button.Size = New Size(111, 37)
+        Cancel_Button.TabIndex = 3
+        Cancel_Button.Text = "Annuler"
+        ' 
+        ' TextBox1
+        ' 
+        TextBox1.AcceptsTab = True
+        TextBox1.BorderStyle = BorderStyle.FixedSingle
+        TextBox1.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        TextBox1.Location = New Point(13, 75)
+        TextBox1.Name = "TextBox1"
+        TextBox1.Size = New Size(377, 34)
+        TextBox1.TabIndex = 1
+        ' 
+        ' Label1
+        ' 
+        Label1.AutoSize = True
+        Label1.Location = New Point(13, 50)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(154, 21)
+        Label1.TabIndex = 0
+        Label1.Text = "Nom de la recette :"
+        ' 
+        ' dlgmodifymenu
+        ' 
+        AcceptButton = OK_Button
+        AutoScaleDimensions = New SizeF(10F, 21F)
+        AutoScaleMode = AutoScaleMode.Font
+        CancelButton = Cancel_Button
+        ClientSize = New Size(404, 199)
+        Controls.Add(Label1)
+        Controls.Add(TextBox1)
+        Controls.Add(Cancel_Button)
+        Controls.Add(OK_Button)
+        Font = New Font("Segoe UI", 8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        FormBorderStyle = FormBorderStyle.FixedDialog
+        Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        Margin = New Padding(4, 5, 4, 5)
+        MaximizeBox = False
+        MinimizeBox = False
+        Name = "dlgmodifymenu"
+        ShowInTaskbar = False
+        StartPosition = FormStartPosition.CenterParent
+        Text = "Modifier le nom de la recette"
+        ResumeLayout(False)
+        PerformLayout()
 
     End Sub
     Friend WithEvents OK_Button As System.Windows.Forms.Button

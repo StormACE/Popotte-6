@@ -37,6 +37,7 @@ Partial Class dlgConverter
         Close_Button.Anchor = AnchorStyles.None
         Close_Button.DialogResult = DialogResult.Cancel
         Close_Button.FlatStyle = FlatStyle.System
+        Close_Button.Font = New Font("Segoe UI", 8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Close_Button.Location = New Point(347, 129)
         Close_Button.Margin = New Padding(4, 3, 4, 3)
         Close_Button.Name = "Close_Button"
@@ -47,20 +48,24 @@ Partial Class dlgConverter
         ' TextBox2
         ' 
         TextBox2.BackColor = SystemColors.GradientInactiveCaption
+        TextBox2.BorderStyle = BorderStyle.FixedSingle
+        TextBox2.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         TextBox2.Location = New Point(373, 60)
         TextBox2.Margin = New Padding(4, 3, 4, 3)
         TextBox2.Name = "TextBox2"
-        TextBox2.Size = New Size(75, 29)
+        TextBox2.Size = New Size(75, 34)
         TextBox2.TabIndex = 3
         TextBox2.WordWrap = False
         ' 
         ' TextBox1
         ' 
         TextBox1.BackColor = SystemColors.GradientInactiveCaption
+        TextBox1.BorderStyle = BorderStyle.FixedSingle
+        TextBox1.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         TextBox1.Location = New Point(13, 60)
         TextBox1.Margin = New Padding(4, 3, 4, 3)
         TextBox1.Name = "TextBox1"
-        TextBox1.Size = New Size(75, 29)
+        TextBox1.Size = New Size(75, 34)
         TextBox1.TabIndex = 1
         TextBox1.WordWrap = False
         ' 
@@ -69,12 +74,13 @@ Partial Class dlgConverter
         ConverterComboBox.BackColor = SystemColors.GradientInactiveCaption
         ConverterComboBox.DropDownStyle = ComboBoxStyle.DropDownList
         ConverterComboBox.FlatStyle = FlatStyle.System
+        ConverterComboBox.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ConverterComboBox.FormattingEnabled = True
         ConverterComboBox.Location = New Point(96, 60)
         ConverterComboBox.Margin = New Padding(4, 3, 4, 3)
         ConverterComboBox.MaxDropDownItems = 25
         ConverterComboBox.Name = "ConverterComboBox"
-        ConverterComboBox.Size = New Size(269, 29)
+        ConverterComboBox.Size = New Size(269, 36)
         ConverterComboBox.TabIndex = 2
         ' 
         ' LabelIn
