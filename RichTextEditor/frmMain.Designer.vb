@@ -1304,9 +1304,10 @@ Partial Class frmMain
         ToolStripComboBoxPolices.AutoToolTip = True
         ToolStripComboBoxPolices.BackColor = SystemColors.GradientInactiveCaption
         ToolStripComboBoxPolices.DropDownStyle = ComboBoxStyle.DropDownList
+        ToolStripComboBoxPolices.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         ToolStripComboBoxPolices.Margin = New Padding(3, 7, 3, 7)
         ToolStripComboBoxPolices.Name = "ToolStripComboBoxPolices"
-        ToolStripComboBoxPolices.Size = New Size(375, 33)
+        ToolStripComboBoxPolices.Size = New Size(375, 36)
         ToolStripComboBoxPolices.ToolTipText = "Polices"
         ' 
         ' ToolStripComboBoxSize
@@ -1315,9 +1316,10 @@ Partial Class frmMain
         ToolStripComboBoxSize.AutoToolTip = True
         ToolStripComboBoxSize.BackColor = SystemColors.GradientInactiveCaption
         ToolStripComboBoxSize.DropDownWidth = 50
+        ToolStripComboBoxSize.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         ToolStripComboBoxSize.Margin = New Padding(3, 7, 3, 7)
         ToolStripComboBoxSize.Name = "ToolStripComboBoxSize"
-        ToolStripComboBoxSize.Size = New Size(75, 33)
+        ToolStripComboBoxSize.Size = New Size(75, 36)
         ToolStripComboBoxSize.ToolTipText = "Taille"
         ' 
         ' ToolStripSeparator30
@@ -1471,7 +1473,8 @@ Partial Class frmMain
         ' 
         ' frmMain
         ' 
-        AutoScaleMode = AutoScaleMode.None
+        AutoScaleDimensions = New SizeF(144F, 144F)
+        AutoScaleMode = AutoScaleMode.Dpi
         ClientSize = New Size(1176, 868)
         Controls.Add(rtbDoc)
         Controls.Add(ToolStrip1)
