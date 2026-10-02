@@ -857,54 +857,64 @@ Public Class frmMenu
     End Sub
 
     Private Sub Button1Touteff_Click(sender As Object, e As EventArgs) Handles Button1Touteff.Click
-        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
-        If regKey IsNot Nothing Then
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Sunday", True)
+
+        Dim DlgResult = MessageBox.Show(LangINI.GetKeyValue("Popotte - MenuDialogue - MessageBox", "1"), "Popotte", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+        If DlgResult = DialogResult.Yes Then
+
+            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
             If regKey IsNot Nothing Then
-                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
-                regKey.DeleteSubKeyTree("Sunday")
-            End If
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Monday", True)
-            If regKey IsNot Nothing Then
-                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
-                regKey.DeleteSubKeyTree("Monday")
-            End If
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Tuesday", True)
-            If regKey IsNot Nothing Then
-                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
-                regKey.DeleteSubKeyTree("Tuesday")
-            End If
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Wednesday", True)
-            If regKey IsNot Nothing Then
-                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
-                regKey.DeleteSubKeyTree("Wednesday")
-            End If
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Thursday", True)
-            If regKey IsNot Nothing Then
-                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
-                regKey.DeleteSubKeyTree("Thursday")
-            End If
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Friday", True)
-            If regKey IsNot Nothing Then
-                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
-                regKey.DeleteSubKeyTree("Friday")
-            End If
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Saturday", True)
-            If regKey IsNot Nothing Then
-                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
-                regKey.DeleteSubKeyTree("Saturday")
-            End If
+                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Sunday", True)
+                If regKey IsNot Nothing Then
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
+                    regKey.DeleteSubKeyTree("Sunday")
+                End If
+                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Monday", True)
+                If regKey IsNot Nothing Then
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
+                    regKey.DeleteSubKeyTree("Monday")
+                End If
+                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Tuesday", True)
+                If regKey IsNot Nothing Then
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
+                    regKey.DeleteSubKeyTree("Tuesday")
+                End If
+                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Wednesday", True)
+                If regKey IsNot Nothing Then
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
+                    regKey.DeleteSubKeyTree("Wednesday")
+                End If
+                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Thursday", True)
+                If regKey IsNot Nothing Then
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
+                    regKey.DeleteSubKeyTree("Thursday")
+                End If
+                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Friday", True)
+                If regKey IsNot Nothing Then
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
+                    regKey.DeleteSubKeyTree("Friday")
+                End If
+                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Saturday", True)
+                If regKey IsNot Nothing Then
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
+                    regKey.DeleteSubKeyTree("Saturday")
+                End If
 
 
-            For i As Integer = 0 To 2
-                ListBoxSunday.Items(i) = LangINI.GetKeyValue("Popotte - Menu", "1")
-                ListBoxMonday.Items(i) = LangINI.GetKeyValue("Popotte - Menu", "1")
-                ListBoxTuesday.Items(i) = LangINI.GetKeyValue("Popotte - Menu", "1")
-                ListBoxWednesday.Items(i) = LangINI.GetKeyValue("Popotte - Menu", "1")
-                ListBoxThursday.Items(i) = LangINI.GetKeyValue("Popotte - Menu", "1")
-                ListBoxFriday.Items(i) = LangINI.GetKeyValue("Popotte - Menu", "1")
-                ListBoxSaturday.Items(i) = LangINI.GetKeyValue("Popotte - Menu", "1")
-            Next
+                For i As Integer = 0 To 2
+                    ListBoxSunday.Items(i) = LangINI.GetKeyValue("Popotte - Menu", "1")
+                    ListBoxMonday.Items(i) = LangINI.GetKeyValue("Popotte - Menu", "1")
+                    ListBoxTuesday.Items(i) = LangINI.GetKeyValue("Popotte - Menu", "1")
+                    ListBoxWednesday.Items(i) = LangINI.GetKeyValue("Popotte - Menu", "1")
+                    ListBoxThursday.Items(i) = LangINI.GetKeyValue("Popotte - Menu", "1")
+                    ListBoxFriday.Items(i) = LangINI.GetKeyValue("Popotte - Menu", "1")
+                    ListBoxSaturday.Items(i) = LangINI.GetKeyValue("Popotte - Menu", "1")
+                Next
+            End If
+
+            Exit Sub
         End If
+
+
     End Sub
 End Class
