@@ -11,6 +11,13 @@ Imports Microsoft.Win32
 
 Public Class LanguageDialog
 
+    Public Sub New()
+        ' This call is required by the Windows Form Designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+    End Sub
+
     Private regKey As RegistryKey
     Private Language As String
 
