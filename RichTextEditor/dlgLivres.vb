@@ -1117,7 +1117,7 @@ FileFound:
                 Livre &= ".xxx"
                 Livre = Path.GetFileNameWithoutExtension(Livre)
 
-                Dim result As Integer = MessageBox.Show(LangINI.GetKeyValue("Popotte - BooksDialog - MessageBox", "11") & fn & Chr(13) & LangINI.GetKeyValue("Popotte - BooksDialog - MessageBox", "12"), LangINI.GetKeyValue("Popotte - BooksDialog - MessageBox", "13"), MessageBoxButtons.OKCancel)
+                Dim result As Integer = MessageBox.Show(LangINI.GetKeyValue("Popotte - BooksDialog - MessageBox", "11") & Environment.NewLine & fn & Chr(13) & LangINI.GetKeyValue("Popotte - BooksDialog - MessageBox", "12"), LangINI.GetKeyValue("Popotte - BooksDialog - MessageBox", "13"), MessageBoxButtons.OKCancel, MessageBoxIcon.Information)
 
                 If result = DialogResult.OK Then
                     frmMain.rtbDoc.LoadFile(Filepath, RichTextBoxStreamType.RichText)
