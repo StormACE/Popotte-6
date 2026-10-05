@@ -15,11 +15,11 @@
     <ApplicationIcon>Popotte256-GoldMember.ico</ApplicationIcon>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
-    <Version>6.0.0.15</Version>
+    <Version>6.0.0.16</Version>
     <Authors>Martin Laflamme</Authors>
     <Copyright>Martin Laflamme 2003/2026</Copyright>
-    <FileVersion>6.0.0.15</FileVersion>
-    <AssemblyVersion>6.0.0.15</AssemblyVersion>
+    <FileVersion>6.0.0.16</FileVersion>
+    <AssemblyVersion>6.0.0.16</AssemblyVersion>
     <PackageId>Popotte</PackageId>
     <Title>Popotte</Title>
     <Product>Popotte</Product>
