@@ -360,6 +360,41 @@ Public Class AdvRichTextBoxPrintCtrl
         SendMessage(New HandleRef(Me, Handle), EM_SETTYPOGRAPHYOPTIONS, TO_ADVANCEDTYPOGRAPHY, TO_ADVANCEDTYPOGRAPHY)
     End Sub
 
+    ' Intercepte WM_SETCURSOR pour forcer l'affichage du curseur IBeam
+    Protected Overrides Sub WndProc(ByRef m As Message)
+        If m.Msg = WM_SETCURSOR Then
+            Try
+                SetCursor(Cursors.IBeam.Handle)
+                m.Result = IntPtr.Zero
+                Return
+            Catch
+                ' ignore
+            End Try
+        End If
+
+        MyBase.WndProc(m)
+    End Sub
+
+    ' Force le curseur IBeam pour éviter les alternances/"flicker"
+    ' lorsque la souris survole la marge de sélection ou une échancrure.
+    Protected Overrides Sub OnMouseEnter(e As EventArgs)
+        MyBase.OnMouseEnter(e)
+        Me.Cursor = Cursors.IBeam
+    End Sub
+
+    Protected Overrides Sub OnMouseLeave(e As EventArgs)
+        MyBase.OnMouseLeave(e)
+        Me.Cursor = Cursors.IBeam
+    End Sub
+
+    Protected Overrides Sub OnMouseMove(e As MouseEventArgs)
+        MyBase.OnMouseMove(e)
+        ' Ne change le curseur que si nécessaire (minimise les appels)
+        If Not Object.ReferenceEquals(Me.Cursor, Cursors.IBeam) Then
+            Me.Cursor = Cursors.IBeam
+        End If
+    End Sub
+
     Private updating As Integer = 0
     Private oldEventMask As Integer = 0
 
@@ -372,6 +407,7 @@ Public Class AdvRichTextBoxPrintCtrl
     Private Const TO_ADVANCEDTYPOGRAPHY As Integer = 1
     Private Const PFM_ALIGNMENT As Integer = 8
     Private Const SCF_SELECTION As Integer = 1
+    Private Const WM_SETCURSOR As Integer = &H20
 
     ' It makes no difference if we use PARAFORMAT or
     ' PARAFORMAT2 here, so I have opted for PARAFORMAT2.
@@ -412,6 +448,10 @@ Public Class AdvRichTextBoxPrintCtrl
 
     <DllImport("user32", CharSet:=CharSet.Auto)>
     Private Shared Function SendMessage(ByVal hWnd As HandleRef, ByVal msg As Integer, ByVal wParam As Integer, ByRef lp As PARAFORMAT) As Integer
+    End Function
+
+    <DllImport("user32.dll", CharSet:=CharSet.Auto)>
+    Private Shared Function SetCursor(ByVal hCursor As IntPtr) As IntPtr
     End Function
 
 
@@ -627,6 +667,8 @@ Public Class AdvRichTextBoxPrintCtrl
         Public Sub New()
             Me._size = Marshal.SizeOf(GetType(ListFormatInfo))
         End Sub
+
+
     End Class
 
 End Class
