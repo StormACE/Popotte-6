@@ -1,4 +1,5 @@
 Imports System.Drawing.Text
+Imports System.Runtime.InteropServices
 Imports System.Globalization
 Imports System.IO
 Imports System.IO.Compression
@@ -51,6 +52,64 @@ Public Class frmMain
     Public currentFile As String  ' le fichier ouvert
     Public Language As String
 
+#End Region
+
+#Region "RichEdit PInvoke"
+    ' Constantes pour EM_SETCHARFORMAT
+    Private Const EM_SETCHARFORMAT As Integer = &H444
+    Private Const SCF_SELECTION As Integer = 1
+
+    ' Masques CHARFORMAT (utilisés en dwMask)
+    Private Const CFM_BOLD As UInteger = &H1UI
+    Private Const CFM_ITALIC As UInteger = &H2UI
+    Private Const CFM_UNDERLINE As UInteger = &H4UI
+    Private Const CFM_STRIKEOUT As UInteger = &H8UI
+    Private Const CFM_PROTECTED As UInteger = &H10UI
+    Private Const CFM_LINK As UInteger = &H20UI
+    Private Const CFM_SIZE As UInteger = &H80000000UI
+    Private Const CFM_COLOR As UInteger = &H40000000UI
+    Private Const CFM_FACE As UInteger = &H20000000UI
+    Private Const CFM_CHARSET As UInteger = &H8000000UI
+
+    <StructLayout(LayoutKind.Sequential, CharSet:=CharSet.Auto)>
+    Private Structure CHARFORMAT2
+        Public cbSize As Integer
+        Public dwMask As UInteger
+        Public dwEffects As UInteger
+        Public yHeight As Integer
+        Public yOffset As Integer
+        Public crTextColor As Integer
+        Public bCharSet As Byte
+        Public bPitchAndFamily As Byte
+        <MarshalAs(UnmanagedType.ByValTStr, SizeConst:=32)>
+        Public szFaceName As String
+        ' Les autres champs de CHARFORMAT2 ne sont pas nécessaires pour notre usage
+    End Structure
+
+    <DllImport("user32.dll", CharSet:=CharSet.Auto)>
+    Private Shared Function SendMessage(hWnd As IntPtr, msg As Integer, wParam As IntPtr, ByRef cf As CHARFORMAT2) As IntPtr
+    End Function
+
+    Private Sub ApplyCharFormatToSelection(face As String, Optional size As Single = -1)
+        Dim cf As New CHARFORMAT2()
+        cf.cbSize = Marshal.SizeOf(GetType(CHARFORMAT2))
+        cf.dwMask = 0UI
+        If Not String.IsNullOrEmpty(face) Then
+            cf.dwMask = cf.dwMask Or CFM_FACE
+            cf.szFaceName = face
+        End If
+        If size > 0 Then
+            cf.dwMask = cf.dwMask Or CFM_SIZE
+            ' yHeight expects twips (1/20 point)
+            cf.yHeight = CInt(size * 20)
+        End If
+
+        Try
+            SendMessage(rtbDoc.Handle, EM_SETCHARFORMAT, New IntPtr(SCF_SELECTION), cf)
+        Catch
+            ' En cas d'erreur, ne rien faire (fallback possible)
+        End Try
+    End Sub
 #End Region
 
 
@@ -2971,29 +3030,12 @@ Public Class frmMain
                         rtbDoc.SelectionFont = New Font(SelectedFont, rtbDoc.SelectionFont.Size, newFontStyle)
                     End If
                 Else
-                    ' Sélection hétérogène (plusieurs polices) : appliquer caractère par caractère
-                    Dim selStart As Integer = rtbDoc.SelectionStart
-                    Dim selLen As Integer = rtbDoc.SelectionLength
-
-                    For i As Integer = 0 To selLen - 1
-                        rtbDoc.Select(selStart + i, 1)
-                        Dim curFont As Font = rtbDoc.SelectionFont
-                        If curFont IsNot Nothing Then
-                            Dim styleToKeep As FontStyle = curFont.Style
-                            Dim sizeToUse As Single = If(fontSize > 0, fontSize, curFont.Size)
-                            rtbDoc.SelectionFont = New Font(SelectedFont, sizeToUse, styleToKeep)
-                        Else
-                            ' si aucun font (caractère spécial), appliquer une police par défaut avec taille choisie ou default
-                            If fontSize > 0 Then
-                                rtbDoc.SelectionFont = New Font(SelectedFont, fontSize, FontStyle.Regular)
-                            Else
-                                rtbDoc.SelectionFont = New Font(SelectedFont, DefaultFontSize, FontStyle.Regular)
-                            End If
-                        End If
-                    Next
-
-                    ' Restaurer la sélection originale
-                    rtbDoc.Select(selStart, selLen)
+                    ' Sélection hétérogène : utiliser EM_SETCHARFORMAT via P/Invoke pour appliquer la police rapidement
+                    If fontSize > 0 Then
+                        ApplyCharFormatToSelection(SelectedFont, fontSize)
+                    Else
+                        ApplyCharFormatToSelection(SelectedFont)
+                    End If
                 End If
 
             End If
