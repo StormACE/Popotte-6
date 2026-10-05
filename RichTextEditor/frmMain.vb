@@ -7,8 +7,8 @@ Imports ExtendedRichTextBox.AdvRichTextBoxPrintCtrl
 Imports Microsoft.Win32
 
 ''' <summary>
-''' Popotte 6.0.0.11
-''' 05 sept 2026 au 30 sept 2026
+''' Popotte 6.0.0.16
+''' 05 sept 2026 au 5 octobre 2026
 ''' Work on Windows 7 sp1, windows 8, Windows 8.1, Windows 10, Windows 11  .Net10
 ''' Copyright Martin Laflamme 2003/2026
 ''' Read licence.txt
@@ -2950,25 +2950,50 @@ Public Class frmMain
         If GCF = False Then
             If FontLoaded Then
 
-                If rtbDoc.SelectionFont IsNot Nothing Then
-                    Dim SelectedFont As String = CType(ToolStripComboBoxPolices.SelectedItem, String)
-                    Dim newFontStyle As System.Drawing.FontStyle = rtbDoc.SelectionFont.Style
-                    ' Valider et parser la taille de police depuis le texte du combo
-                    Dim fontSize As Single = 0
-                    Dim sizeText As String = ToolStripComboBoxSize.Text
+                Dim SelectedFont As String = CType(ToolStripComboBoxPolices.SelectedItem, String)
+                ' Valider et parser la taille de police depuis le texte du combo
+                Dim fontSize As Single = 0
+                Dim sizeText As String = ToolStripComboBoxSize.Text
 
-                    If Not String.IsNullOrWhiteSpace(sizeText) Then
-                        ' Essayer d'abord avec la culture invariante, puis avec la culture courante
-                        If Not Single.TryParse(sizeText, Globalization.NumberStyles.Float, Globalization.CultureInfo.InvariantCulture, fontSize) Then
-                            Single.TryParse(sizeText, fontSize)
-                        End If
+                If Not String.IsNullOrWhiteSpace(sizeText) Then
+                    ' Essayer d'abord avec la culture invariante, puis avec la culture courante
+                    If Not Single.TryParse(sizeText, Globalization.NumberStyles.Float, Globalization.CultureInfo.InvariantCulture, fontSize) Then
+                        Single.TryParse(sizeText, fontSize)
                     End If
+                End If
 
+                If rtbDoc.SelectionFont IsNot Nothing Then
+                    ' Selection homogène : on peut appliquer en une seule fois
+                    Dim newFontStyle As System.Drawing.FontStyle = rtbDoc.SelectionFont.Style
                     If fontSize > 0 Then
                         rtbDoc.SelectionFont = New Font(SelectedFont, fontSize, newFontStyle)
                     Else
-                        ' Taille invalide ou nulle : ne pas appliquer la police (ou utiliser une valeur par défaut si souhaité)
+                        rtbDoc.SelectionFont = New Font(SelectedFont, rtbDoc.SelectionFont.Size, newFontStyle)
                     End If
+                Else
+                    ' Sélection hétérogène (plusieurs polices) : appliquer caractère par caractère
+                    Dim selStart As Integer = rtbDoc.SelectionStart
+                    Dim selLen As Integer = rtbDoc.SelectionLength
+
+                    For i As Integer = 0 To selLen - 1
+                        rtbDoc.Select(selStart + i, 1)
+                        Dim curFont As Font = rtbDoc.SelectionFont
+                        If curFont IsNot Nothing Then
+                            Dim styleToKeep As FontStyle = curFont.Style
+                            Dim sizeToUse As Single = If(fontSize > 0, fontSize, curFont.Size)
+                            rtbDoc.SelectionFont = New Font(SelectedFont, sizeToUse, styleToKeep)
+                        Else
+                            ' si aucun font (caractère spécial), appliquer une police par défaut avec taille choisie ou default
+                            If fontSize > 0 Then
+                                rtbDoc.SelectionFont = New Font(SelectedFont, fontSize, FontStyle.Regular)
+                            Else
+                                rtbDoc.SelectionFont = New Font(SelectedFont, DefaultFontSize, FontStyle.Regular)
+                            End If
+                        End If
+                    Next
+
+                    ' Restaurer la sélection originale
+                    rtbDoc.Select(selStart, selLen)
                 End If
 
             End If

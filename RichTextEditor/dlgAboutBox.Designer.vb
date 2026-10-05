@@ -61,7 +61,7 @@ Partial Class dlgAboutBox
         ' 
         LabelProductName.AutoSize = True
         LabelProductName.Dock = DockStyle.Fill
-        LabelProductName.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        LabelProductName.Font = New Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         LabelProductName.Location = New Point(351, 0)
         LabelProductName.Margin = New Padding(7, 0, 3, 0)
         LabelProductName.Name = "LabelProductName"
