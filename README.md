@@ -11,7 +11,7 @@ Voici quelques caractéristiques des fonctionnalités :
 
 -Interface graphique simple pour Écrire, Lire et Classer des recettes 
 
--Sauvegarde en format RTF par défaut ou en ce que vous voulez avec encodage ANSI ou UNICODE 
+-Sauvegarde en format RTF par défaut ou en ce que vous voulez
 
 -Insérez des images dans vos recettes 
 
@@ -40,7 +40,7 @@ Here are some functionality characteristics :
 
 -Simple user interface to write, read and sort your recipes 
 
--Save your recipes in RTF format or in text file with the extension you like with ANSI and UNICODE encoding  
+-Save your recipes in RTF format or in text file with the extension you want
 
 -Insert images in your recipes 
 
