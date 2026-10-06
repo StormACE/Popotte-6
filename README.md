@@ -1,7 +1,7 @@
 # Popotte 6 BETA
-Logiciel de gestion de recettes Lisez License.txt avant d'utiliser ou modifier!!!
+Logiciel de gestion de recettes pour Windows x64 Lisez License.txt avant d'utiliser ou modifier!!!
 
-Recipes management software Read licence.txt before use or modification!!!
+Recipes management software for Windows x64 Read licence.txt before use or modification!!!
 
 -------------------------
 
