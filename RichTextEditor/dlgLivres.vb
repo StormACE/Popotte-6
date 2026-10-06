@@ -242,18 +242,18 @@ Public Class dlgLivres
                 Dim itm As ListViewItem
                 With ListViewRecettes
                     regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\DerRecette", True)
-                    Dim filename As String = Path.GetFileNameWithoutExtension(CType(regKey.GetValue("Recette", ""), String))
                     If File.Exists(regKey.GetValue("DerRecette", "").ToString) Then
+                        Dim filename As String = Path.GetFileNameWithoutExtension(CType(regKey.GetValue("Recette", ""), String))
                         itm = .FindItemWithText(filename, False, 0, True)
                         If Not itm Is Nothing Then
                             .Items.Item(itm.Index).Selected = True
                             .Items.Item(itm.Index).EnsureVisible()
                         End If
+                        ListViewRecettes.FocusedItem = ListViewRecettes.SelectedItems(0)
                     End If
                 End With
                 RevenirButton.Enabled = True
                 LastLivre = frmMain.LivreOuvert
-                ListViewRecettes.FocusedItem = ListViewRecettes.SelectedItems(0)
                 ListViewRecettes.Focus()
             Else
                 GetLivres()
