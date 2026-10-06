@@ -1,4 +1,8 @@
 # Popotte 6 BETA
+
+<img src="https://github.com/StormACE/Popotte-6/blob/main/RichTextEditor/Images/Popotte256-GoldMember.png" width="300">
+
+
 Logiciel de gestion de recettes pour Windows x64 Lisez License.txt avant d'utiliser ou modifier!!!
 
 Recipes management software for Windows x64 Read licence.txt before use or modification!!!
