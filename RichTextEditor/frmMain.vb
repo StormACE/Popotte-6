@@ -117,7 +117,6 @@ Public Class frmMain
 #Region "Form Methods"
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        InitializeListFormatMenu()
         CreateRegKey()
 
         FaireMiseaJour()
@@ -158,6 +157,8 @@ Public Class frmMain
                 End If
             End If
         End If
+
+        InitializeListFormatMenu()
 
         'Setting language
         'Menu
@@ -3275,21 +3276,21 @@ Public Class frmMain
     Private Function GetListFormatText(listFormat As ListFormats) As String
         Select Case listFormat
             Case ListFormats.None
-                Return "Aucune liste"
+                Return LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "200")
             Case ListFormats.Bullets
-                Return "Puces"
+                Return LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "201")
             Case ListFormats.Numbered
-                Return "Numérotation"
+                Return LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "202")
             Case ListFormats.LowercaseLetters
-                Return "Lettres minuscules"
+                Return LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "203")
             Case ListFormats.UppercaseLetters
-                Return "Lettres majuscules"
+                Return LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "204")
             Case ListFormats.LowercaseRomanNumeral
-                Return "Chiffres romains minuscules"
+                Return LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "205")
             Case ListFormats.UppercaseRomanNumeral
-                Return "Chiffres romains majuscules"
+                Return LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "206")
             Case ListFormats.SmallBullets
-                Return "Petites puces"
+                Return LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "207")
             Case Else
                 Return listFormat.ToString()
         End Select
