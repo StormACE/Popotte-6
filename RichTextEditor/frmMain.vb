@@ -8,7 +8,7 @@ Imports ExtendedRichTextBox.AdvRichTextBoxPrintCtrl
 Imports Microsoft.Win32
 
 ''' <summary>
-''' Popotte 6.0.0.17
+''' Popotte 6.0.0.18
 ''' 05 sept 2026 au 8 octobre 2026
 ''' Work on Windows 7 sp1, windows 8, Windows 8.1, Windows 10, Windows 11  .Net10
 ''' Copyright Martin Laflamme 2003/2026
@@ -1398,25 +1398,70 @@ Public Class frmMain
 
 
     Private Sub PasteToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles PasteToolStripMenuItem.Click
-        'fix un bogue avec rtbDoc.Paste()
         ' Declares an IDataObject to hold the data returned from the clipboard.
         ' Retrieves the data from the clipboard.
         Dim iData As IDataObject = Clipboard.GetDataObject()
 
-        If iData.GetDataPresent(DataFormats.Bitmap) Then
+        Try
+            ' If clipboard already contains a bitmap, paste it directly
+            If iData.GetDataPresent(DataFormats.Bitmap) Then
+                Dim df As DataFormats.Format = DataFormats.GetFormat(DataFormats.Bitmap)
+                If Me.rtbDoc.CanPaste(df) Then
+                    Me.rtbDoc.Paste(df)
+                End If
 
-            Dim df As DataFormats.Format
-            df = DataFormats.GetFormat(DataFormats.Bitmap)
-            If Me.rtbDoc.CanPaste(df) Then
-                Me.rtbDoc.Paste(df)
+                ' If clipboard contains a file drop, and the first file is an image,
+                ' convert it to a Bitmap and paste it as bitmap so all image types
+                ' become bitmaps when inserted into the RTF control.
+            ElseIf iData.GetDataPresent(DataFormats.FileDrop) Then
+                Dim files() As String = CType(iData.GetData(DataFormats.FileDrop), String())
+                If files IsNot Nothing AndAlso files.Length > 0 Then
+                    Try
+                        Dim img As Image = Image.FromFile(files(0))
+                        Dim bmp As New Bitmap(img)
+                        Dim orgData As Object = Clipboard.GetDataObject()
+                        Clipboard.SetDataObject(bmp, True)
+                        Dim df As DataFormats.Format = DataFormats.GetFormat(DataFormats.Bitmap)
+                        If Me.rtbDoc.CanPaste(df) Then
+                            Me.rtbDoc.Paste(df)
+                        End If
+                        Clipboard.SetDataObject(orgData)
+                    Catch
+                        ' If not an image or cannot load, fall back to default paste
+                        rtbDoc.Paste()
+                    End Try
+                Else
+                    rtbDoc.Paste()
+                End If
+
+                ' If clipboard contains an Image object in another format, convert to Bitmap and paste
+            ElseIf iData.GetDataPresent(GetType(System.Drawing.Image)) Then
+                Try
+                    Dim img As Image = CType(iData.GetData(GetType(System.Drawing.Image)), Image)
+                    Dim bmp As New Bitmap(img)
+                    Dim orgData As Object = Clipboard.GetDataObject()
+                    Clipboard.SetDataObject(bmp, True)
+                    Dim df As DataFormats.Format = DataFormats.GetFormat(DataFormats.Bitmap)
+                    If Me.rtbDoc.CanPaste(df) Then
+                        Me.rtbDoc.Paste(df)
+                    End If
+                    Clipboard.SetDataObject(orgData)
+                Catch
+                    rtbDoc.Paste()
+                End Try
+
+            ElseIf iData.GetDataPresent(DataFormats.Text) Then
+                rtbDoc.SelectedText = CType(iData.GetData(DataFormats.Text), String)
+            Else
+                rtbDoc.Paste()
             End If
-
-        ElseIf iData.GetDataPresent(DataFormats.Text) Then
-            ' Yes it is, so display it in a text box.
-            rtbDoc.SelectedText = CType(iData.GetData(DataFormats.Text), String)
-        Else
-            rtbDoc.Paste()
-        End If
+        Catch
+            ' Fallback to default paste on any unexpected error
+            Try
+                rtbDoc.Paste()
+            Catch
+            End Try
+        End Try
     End Sub
 
 
@@ -1687,19 +1732,38 @@ Public Class frmMain
             'backup clipboard
             Dim orgData As Object = Clipboard.GetDataObject
 
-            Dim img As Image
-            img = Image.FromFile(strImagePath)
-            Clipboard.SetDataObject(img)
-            Dim df As DataFormats.Format
-            df = DataFormats.GetFormat(DataFormats.Bitmap)
-            If Me.rtbDoc.CanPaste(df) Then
-                Me.rtbDoc.Paste(df)
-            End If
-
-            'Restore clipboard
-            Clipboard.SetDataObject(orgData)
+            Dim img As Image = Nothing
+            Dim bmp As Bitmap = Nothing
+            Try
+                img = Image.FromFile(strImagePath)
+                ' Convert any image type to a Bitmap before placing on clipboard
+                bmp = New Bitmap(img)
+                Clipboard.SetDataObject(bmp, True)
+                Dim df As DataFormats.Format = DataFormats.GetFormat(DataFormats.Bitmap)
+                If Me.rtbDoc.CanPaste(df) Then
+                    Me.rtbDoc.Paste(df)
+                End If
+            Finally
+                ' Restore original clipboard and dispose temporary images
+                Try
+                    Clipboard.SetDataObject(orgData)
+                Catch
+                End Try
+                If bmp IsNot Nothing Then
+                    Try
+                        bmp.Dispose()
+                    Catch
+                    End Try
+                End If
+                If img IsNot Nothing Then
+                    Try
+                        img.Dispose()
+                    Catch
+                    End Try
+                End If
+            End Try
         Catch ex As Exception
-            ''MessageBox.Show(LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "12") & " " & ex.ToString, LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "7"), MessageBoxButtons.OK, MessageBoxIcon.Warning) 'else display any possible error
+            MessageBox.Show(LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "12") & " " & ex.ToString, LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "7"), MessageBoxButtons.OK, MessageBoxIcon.Warning) 'else display any possible error
         End Try
         OpenFileDialog1.Dispose()
     End Sub
