@@ -69,10 +69,6 @@ Partial Class frmMain
         LongueToolStripMenuItem = New ToolStripMenuItem()
         CourteHeureToolStripMenuItem = New ToolStripMenuItem()
         LongueHeureToolStripMenuItem = New ToolStripMenuItem()
-        ToolStripSeparator22 = New ToolStripSeparator()
-        ListeToolStripMenuItem = New ToolStripMenuItem()
-        AddBulletsToolStripMenuItem = New ToolStripMenuItem()
-        RemoveBulletsToolStripMenuItem = New ToolStripMenuItem()
         ToolStripSeparator16 = New ToolStripSeparator()
         DegreToolStripMenuItem = New ToolStripMenuItem()
         QuartToolStripMenuItem = New ToolStripMenuItem()
@@ -208,7 +204,7 @@ Partial Class frmMain
         JustifyToolStripButton = New ToolStripButton()
         ToolStripSeparator33 = New ToolStripSeparator()
         ToolStripSeparator29 = New ToolStripSeparator()
-        ToolStripButtonBulletList = New ToolStripButton()
+        ToolStripButtonBulletList = New ToolStripDropDownButton()
         FolderBrowserDialog1 = New FolderBrowserDialog()
         rtbDoc = New ExtendedRichTextBox.AdvRichTextBoxPrintCtrl()
         MenuStrip1.SuspendLayout()
@@ -506,7 +502,7 @@ Partial Class frmMain
         ' 
         ' SpecialToolStripMenuItem
         ' 
-        SpecialToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {DateToolStripMenuItem, ToolStripSeparator22, ListeToolStripMenuItem, ToolStripSeparator16, DegreToolStripMenuItem, QuartToolStripMenuItem, DemiToolStripMenuItem, Quart3ToolStripMenuItem, ToolStripSeparator17, TableDesCaracteresToolStripMenuItem})
+        SpecialToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {DateToolStripMenuItem, ToolStripSeparator16, DegreToolStripMenuItem, QuartToolStripMenuItem, DemiToolStripMenuItem, Quart3ToolStripMenuItem, ToolStripSeparator17, TableDesCaracteresToolStripMenuItem})
         SpecialToolStripMenuItem.Name = "SpecialToolStripMenuItem"
         SpecialToolStripMenuItem.Size = New Size(215, 32)
         SpecialToolStripMenuItem.Text = "&Caractères spéciaux"
@@ -541,30 +537,6 @@ Partial Class frmMain
         LongueHeureToolStripMenuItem.Name = "LongueHeureToolStripMenuItem"
         LongueHeureToolStripMenuItem.Size = New Size(266, 36)
         LongueHeureToolStripMenuItem.Text = "Longue + Heure"
-        ' 
-        ' ToolStripSeparator22
-        ' 
-        ToolStripSeparator22.Name = "ToolStripSeparator22"
-        ToolStripSeparator22.Size = New Size(317, 6)
-        ' 
-        ' ListeToolStripMenuItem
-        ' 
-        ListeToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {AddBulletsToolStripMenuItem, RemoveBulletsToolStripMenuItem})
-        ListeToolStripMenuItem.Name = "ListeToolStripMenuItem"
-        ListeToolStripMenuItem.Size = New Size(320, 36)
-        ListeToolStripMenuItem.Text = "Faire une &liste"
-        ' 
-        ' AddBulletsToolStripMenuItem
-        ' 
-        AddBulletsToolStripMenuItem.Name = "AddBulletsToolStripMenuItem"
-        AddBulletsToolStripMenuItem.Size = New Size(278, 36)
-        AddBulletsToolStripMenuItem.Text = "&Ajouter une balle"
-        ' 
-        ' RemoveBulletsToolStripMenuItem
-        ' 
-        RemoveBulletsToolStripMenuItem.Name = "RemoveBulletsToolStripMenuItem"
-        RemoveBulletsToolStripMenuItem.Size = New Size(278, 36)
-        RemoveBulletsToolStripMenuItem.Text = "&Enlever une balle"
         ' 
         ' ToolStripSeparator16
         ' 
@@ -1447,6 +1419,7 @@ Partial Class frmMain
         ' 
         ToolStripButtonBulletList.AutoSize = False
         ToolStripButtonBulletList.DisplayStyle = ToolStripItemDisplayStyle.Image
+        ToolStripButtonBulletList.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ToolStripButtonBulletList.Image = CType(resources.GetObject("ToolStripButtonBulletList.Image"), Image)
         ToolStripButtonBulletList.ImageTransparentColor = Color.Magenta
         ToolStripButtonBulletList.Name = "ToolStripButtonBulletList"
@@ -1581,9 +1554,6 @@ Partial Class frmMain
     Friend WithEvents CopierToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CouperToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CollerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ListeToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents AddBulletsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents RemoveBulletsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator16 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents DegreToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents QuartToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -1622,7 +1592,6 @@ Partial Class frmMain
     Friend WithEvents DateToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CourteToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents LongueToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator22 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents CourteHeureToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents LongueHeureToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator24 As System.Windows.Forms.ToolStripSeparator
@@ -1679,7 +1648,7 @@ Partial Class frmMain
     Friend WithEvents SurlignerLaSelectionToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AnnulerLaSurbrillanceToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AnnulerSurbrillanceToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ToolStripButtonBulletList As ToolStripButton
+    Friend WithEvents ToolStripButtonBulletList As ToolStripDropDownButton
     Friend WithEvents AutoCToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AutoCcontextToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator37 As ToolStripSeparator

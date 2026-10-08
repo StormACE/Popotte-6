@@ -499,8 +499,10 @@ Public Class AdvRichTextBoxPrintCtrl
                     format.Numbering = Convert.ToInt16(ListFormats.None)
                     format.Offset = 0
                 Else
+                    format.Mask = format.Mask Or &H8000
                     format.Numbering = Convert.ToInt16(Me._listFormat)
                     format.Offset = MyBase.BulletIndent
+                    format.NumberingStart = 1
                 End If
                 AdvRichTextBoxPrintCtrl.SendMessage(New HandleRef(Me, MyBase.Handle),
                                             1095, 0, format)
@@ -658,6 +660,21 @@ Public Class AdvRichTextBoxPrintCtrl
                 Me._tabs = value
             End Set
         End Property
+
+        Private dySpaceBefore As Integer
+        Private dySpaceAfter As Integer
+        Private dyLineSpacing As Integer
+        Private sStyle As Short
+        Private bLineSpacingRule As Byte
+        Private bOutlineLevel As Byte
+        Private wShadingWeight As Short
+        Private wShadingStyle As Short
+        Public NumberingStart As Short
+        Private wNumberingStyle As Short
+        Private wNumberingTab As Short
+        Private wBorderSpace As Short
+        Private wBorderWidth As Short
+        Private wBorders As Short
 
 
 

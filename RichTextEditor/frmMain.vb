@@ -117,6 +117,7 @@ Public Class frmMain
 #Region "Form Methods"
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        InitializeListFormatMenu()
         CreateRegKey()
 
         FaireMiseaJour()
@@ -204,7 +205,6 @@ Public Class frmMain
 
         'Menu Carateres speciaux
         DateToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "32")
-        ListeToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "33")
         DegreToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "34")
         QuartToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "35")
         DemiToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "36")
@@ -214,8 +214,6 @@ Public Class frmMain
         LongueToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "40")
         CourteHeureToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "41")
         LongueHeureToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "42")
-        AddBulletsToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "43")
-        RemoveBulletsToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "44")
 
         'Menu Paragraphe
         ParagrapheToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "69")
@@ -1030,15 +1028,6 @@ Public Class frmMain
                 HPtsToolStripMenuItem.Checked = (idxSel = 8)
             End If
 
-            'if list selected
-            If rtbDoc.SelectionList = True Then
-                ToolStripButtonBulletList.Checked = True
-                AddBulletsToolStripMenuItem.Checked = True
-            Else
-                ToolStripButtonBulletList.Checked = False
-                AddBulletsToolStripMenuItem.Checked = False
-            End If
-
         End If
     End Sub
 
@@ -1637,7 +1626,7 @@ Public Class frmMain
     End Sub
 
 
-    Private Sub AddBulletsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles AddBulletsToolStripMenuItem.Click
+    Private Sub AddBulletsToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs)
         If rtbDoc.SelectionList = True Then
             rtbDoc.SelectionList = False
         Else
@@ -1650,7 +1639,7 @@ Public Class frmMain
     End Sub
 
 
-    Private Sub RemoveBulletsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles RemoveBulletsToolStripMenuItem.Click
+    Private Sub RemoveBulletsToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs)
 
         rtbDoc.SelectionBullet = False
 
@@ -3274,8 +3263,51 @@ Public Class frmMain
         rtbDoc.SelectionStart = 0
     End Sub
 
-    Private Sub ToolStripButtonBulletList_Click(sender As Object, e As EventArgs) Handles ToolStripButtonBulletList.Click
-        AddBulletsToolStripMenuItem_Click(Me, e)
+    Private Sub InitializeListFormatMenu()
+        For Each listFormat As ListFormats In [Enum].GetValues(GetType(ListFormats))
+            Dim item As New ToolStripMenuItem(GetListFormatText(listFormat))
+            item.Tag = listFormat
+            AddHandler item.Click, AddressOf ListFormatMenuItem_Click
+            ToolStripButtonBulletList.DropDownItems.Add(item)
+        Next
+    End Sub
+
+    Private Function GetListFormatText(listFormat As ListFormats) As String
+        Select Case listFormat
+            Case ListFormats.None
+                Return "Aucune liste"
+            Case ListFormats.Bullets
+                Return "Puces"
+            Case ListFormats.Numbered
+                Return "Numérotation"
+            Case ListFormats.LowercaseLetters
+                Return "Lettres minuscules"
+            Case ListFormats.UppercaseLetters
+                Return "Lettres majuscules"
+            Case ListFormats.LowercaseRomanNumeral
+                Return "Chiffres romains minuscules"
+            Case ListFormats.UppercaseRomanNumeral
+                Return "Chiffres romains majuscules"
+            Case ListFormats.SmallBullets
+                Return "Petites puces"
+            Case Else
+                Return listFormat.ToString()
+        End Select
+    End Function
+
+    Private Sub ListFormatMenuItem_Click(sender As Object, e As EventArgs)
+        Dim listFormat As ListFormats = CType(DirectCast(sender, ToolStripMenuItem).Tag, ListFormats)
+
+        If listFormat = ListFormats.None Then
+            rtbDoc.SelectionList = False
+        Else
+            rtbDoc.BulletIndent = 10
+            rtbDoc.ListFormat = listFormat
+            rtbDoc.SelectionList = True
+        End If
+
+        rtbDoc.Focus()
+        GetCharFormat()
     End Sub
 
 
@@ -3316,6 +3348,7 @@ Public Class frmMain
         Dim mn As New frmMenu
         mn.Show()
     End Sub
+
 
 
 
