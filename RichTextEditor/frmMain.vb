@@ -8,8 +8,8 @@ Imports ExtendedRichTextBox.AdvRichTextBoxPrintCtrl
 Imports Microsoft.Win32
 
 ''' <summary>
-''' Popotte 6.0.0.16
-''' 05 sept 2026 au 5 octobre 2026
+''' Popotte 6.0.0.17
+''' 05 sept 2026 au 8 octobre 2026
 ''' Work on Windows 7 sp1, windows 8, Windows 8.1, Windows 10, Windows 11  .Net10
 ''' Copyright Martin Laflamme 2003/2026
 ''' Read licence.txt
@@ -1351,12 +1351,49 @@ Public Class frmMain
 
 
     Private Sub CopyToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles CopyToolStripMenuItem.Click
-        rtbDoc.Copy()
+        Try
+            If rtbDoc.SelectionLength > 0 Then
+                ' Create a data object with both RTF and plain text to avoid losing clipboard on exit
+                Dim data As New DataObject()
+                Try
+                    data.SetData(DataFormats.Rtf, True, rtbDoc.SelectedRtf)
+                Catch
+                    ' If RTF not available, ignore
+                End Try
+                data.SetData(DataFormats.Text, True, rtbDoc.SelectedText)
+                ' Make clipboard persistent after app exits
+                Clipboard.SetDataObject(data, True)
+            End If
+        Catch ex As Exception
+            ' Fallback to default copy if something goes wrong
+            Try
+                rtbDoc.Copy()
+            Catch
+            End Try
+        End Try
     End Sub
 
 
     Private Sub CutToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles CutToolStripMenuItem.Click
-        rtbDoc.Cut()
+        Try
+            If rtbDoc.SelectionLength > 0 Then
+                ' Prepare data to put on clipboard and persist it
+                Dim data As New DataObject()
+                Try
+                    data.SetData(DataFormats.Rtf, True, rtbDoc.SelectedRtf)
+                Catch
+                End Try
+                data.SetData(DataFormats.Text, True, rtbDoc.SelectedText)
+                Clipboard.SetDataObject(data, True)
+                ' Remove selection after placing data on clipboard
+                rtbDoc.SelectedText = String.Empty
+            End If
+        Catch ex As Exception
+            Try
+                rtbDoc.Cut()
+            Catch
+            End Try
+        End Try
     End Sub
 
 
