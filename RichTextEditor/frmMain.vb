@@ -530,6 +530,40 @@ Public Class frmMain
 
     End Sub
 
+    'Initialize the list format menu items based on the ListFormats enum
+    Private Sub InitializeListFormatMenu()
+        For Each listFormat As ListFormats In [Enum].GetValues(GetType(ListFormats))
+            Dim item As New ToolStripMenuItem(GetListFormatText(listFormat))
+            item.Tag = listFormat
+            AddHandler item.Click, AddressOf ListFormatMenuItem_Click
+            ToolStripButtonBulletList.DropDownItems.Add(item)
+        Next
+    End Sub
+
+    'Get text for the list format menu item based on the ListFormats enum
+    Private Function GetListFormatText(listFormat As ListFormats) As String
+        Select Case listFormat
+            Case ListFormats.None
+                Return LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "200")
+            Case ListFormats.Bullets
+                Return LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "201")
+            Case ListFormats.Numbered
+                Return LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "202")
+            Case ListFormats.LowercaseLetters
+                Return LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "203")
+            Case ListFormats.UppercaseLetters
+                Return LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "204")
+            Case ListFormats.LowercaseRomanNumeral
+                Return LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "205")
+            Case ListFormats.UppercaseRomanNumeral
+                Return LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "206")
+            Case ListFormats.SmallBullets
+                Return LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "207")
+            Case Else
+                Return listFormat.ToString()
+        End Select
+    End Function
+
 
     'Create startup registry key
     Private Sub CreateRegKey()
@@ -3263,38 +3297,6 @@ Public Class frmMain
     Private Sub PageUpToolStripButton_Click(sender As Object, e As EventArgs) Handles PageUpToolStripButton.Click
         rtbDoc.SelectionStart = 0
     End Sub
-
-    Private Sub InitializeListFormatMenu()
-        For Each listFormat As ListFormats In [Enum].GetValues(GetType(ListFormats))
-            Dim item As New ToolStripMenuItem(GetListFormatText(listFormat))
-            item.Tag = listFormat
-            AddHandler item.Click, AddressOf ListFormatMenuItem_Click
-            ToolStripButtonBulletList.DropDownItems.Add(item)
-        Next
-    End Sub
-
-    Private Function GetListFormatText(listFormat As ListFormats) As String
-        Select Case listFormat
-            Case ListFormats.None
-                Return LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "200")
-            Case ListFormats.Bullets
-                Return LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "201")
-            Case ListFormats.Numbered
-                Return LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "202")
-            Case ListFormats.LowercaseLetters
-                Return LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "203")
-            Case ListFormats.UppercaseLetters
-                Return LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "204")
-            Case ListFormats.LowercaseRomanNumeral
-                Return LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "205")
-            Case ListFormats.UppercaseRomanNumeral
-                Return LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "206")
-            Case ListFormats.SmallBullets
-                Return LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "207")
-            Case Else
-                Return listFormat.ToString()
-        End Select
-    End Function
 
     Private Sub ListFormatMenuItem_Click(sender As Object, e As EventArgs)
         Dim listFormat As ListFormats = CType(DirectCast(sender, ToolStripMenuItem).Tag, ListFormats)
