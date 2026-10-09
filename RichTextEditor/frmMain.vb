@@ -203,6 +203,7 @@ Public Class frmMain
         ItalicToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "29")
         UnderlineToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "30")
         NormalToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "31")
+        CouleurToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - ToolBar Tooltips", "13")
 
         'Menu Carateres speciaux
         DateToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "32")
@@ -3313,7 +3314,14 @@ Public Class frmMain
         GetCharFormat()
     End Sub
 
+    Private Sub ToolStripMenuItemMenu_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemMenu.Click
+        Dim mn As New frmMenu
+        mn.Show()
+    End Sub
 
+    Private Sub CouleurToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CouleurToolStripMenuItem.Click
+        ToolStripButtonCouleurs_Click(Me, e)
+    End Sub
 
 #End Region
 
@@ -3346,17 +3354,6 @@ Public Class frmMain
         End If
 
     End Sub
-
-    Private Sub ToolStripMenuItemMenu_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemMenu.Click
-        Dim mn As New frmMenu
-        mn.Show()
-    End Sub
-
-
-
-
-
-
 
 #End Region
 

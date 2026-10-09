@@ -207,6 +207,8 @@ Partial Class frmMain
         ToolStripButtonBulletList = New ToolStripDropDownButton()
         FolderBrowserDialog1 = New FolderBrowserDialog()
         rtbDoc = New ExtendedRichTextBox.AdvRichTextBoxPrintCtrl()
+        CouleurToolStripMenuItem = New ToolStripMenuItem()
+        ToolStripSeparator22 = New ToolStripSeparator()
         MenuStrip1.SuspendLayout()
         ContextMenuStrip1.SuspendLayout()
         ToolStrip2.SuspendLayout()
@@ -451,7 +453,7 @@ Partial Class frmMain
         ' 
         ' FontToolStripMenuItem
         ' 
-        FontToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {SelectFontToolStripMenuItem, ToolStripMenuItem6, BoldToolStripMenuItem, ItalicToolStripMenuItem, UnderlineToolStripMenuItem, NormalToolStripMenuItem})
+        FontToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {SelectFontToolStripMenuItem, ToolStripSeparator22, CouleurToolStripMenuItem, ToolStripMenuItem6, BoldToolStripMenuItem, ItalicToolStripMenuItem, UnderlineToolStripMenuItem, NormalToolStripMenuItem})
         FontToolStripMenuItem.Name = "FontToolStripMenuItem"
         FontToolStripMenuItem.Size = New Size(84, 32)
         FontToolStripMenuItem.Text = "&Police"
@@ -1444,6 +1446,17 @@ Partial Class frmMain
         rtbDoc.TabIndex = 2
         rtbDoc.Text = ""
         ' 
+        ' CouleurToolStripMenuItem
+        ' 
+        CouleurToolStripMenuItem.Name = "CouleurToolStripMenuItem"
+        CouleurToolStripMenuItem.Size = New Size(360, 36)
+        CouleurToolStripMenuItem.Text = "Couleur"
+        ' 
+        ' ToolStripSeparator22
+        ' 
+        ToolStripSeparator22.Name = "ToolStripSeparator22"
+        ToolStripSeparator22.Size = New Size(357, 6)
+        ' 
         ' frmMain
         ' 
         AutoScaleDimensions = New SizeF(144F, 144F)
@@ -1656,4 +1669,6 @@ Partial Class frmMain
     Friend WithEvents AutoCeditToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItemMenu As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator39 As ToolStripSeparator
+    Friend WithEvents ToolStripSeparator22 As ToolStripSeparator
+    Friend WithEvents CouleurToolStripMenuItem As ToolStripMenuItem
 End Class
