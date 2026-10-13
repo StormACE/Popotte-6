@@ -26,6 +26,9 @@ Public Class dlgLivres
     Private LangINI As IniFile = frmMain.LangIni
 
     Private Fav As Boolean = False
+    Private _rechercheEnCours As Integer = 0
+    Private _fermetureDemandee As Boolean = False
+    Private _rechercheReactivationTimer As System.Windows.Forms.Timer
 #End Region
 
 
@@ -264,6 +267,12 @@ Public Class dlgLivres
     End Sub
 
     Private Sub Livres_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
+        _fermetureDemandee = True
+        If _rechercheReactivationTimer IsNot Nothing Then
+            _rechercheReactivationTimer.Stop()
+            _rechercheReactivationTimer.Dispose()
+            _rechercheReactivationTimer = Nothing
+        End If
         GC.Collect()
     End Sub
 
@@ -516,12 +525,15 @@ Public Class dlgLivres
 
     Private Sub ListViewRecherche_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles ListViewRecherche.KeyDown
         If e.KeyCode = Keys.Return Then
-            RechercheItemClick()
             e.Handled = True
+            e.SuppressKeyPress = True
+            If _rechercheEnCours = 0 Then RechercheItemClick()
         End If
     End Sub
 
     Private Sub RechercheItemClick()
+        If ListViewRecherche.SelectedItems.Count = 0 Then Return
+
         Dim NomRecette As String = ListViewRecherche.SelectedItems(0).Text
         Dim position As Integer = -1
         Dim Recherchetexte As String = ""
@@ -715,10 +727,12 @@ Public Class dlgLivres
         Return CNote
     End Function
 
-    Private Sub TextBoxRecherche_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBoxRecherche.KeyDown
+    Private Async Sub TextBoxRecherche_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBoxRecherche.KeyDown
         If e.KeyCode = Keys.Enter Then
-            Recherche()
             e.Handled = True
+            e.SuppressKeyPress = True
+            If _rechercheEnCours <> 0 Then Return
+            Await RechercheAsync()
         End If
     End Sub
 
@@ -893,73 +907,54 @@ Public Class dlgLivres
         End If
     End Sub
 
-    Private Sub ButtonRecherche_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ButtonRecherche.Click
-        Recherche()
+    Private Async Sub ButtonRecherche_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ButtonRecherche.Click
+        If _rechercheEnCours <> 0 Then Return
+        Await RechercheAsync()
     End Sub
 
-    Private Sub Recherche()
-        Dim objItem As ListViewItem
-        imageListSmallRecette.Images.Clear()
-        Dim RechercheTexte As String = Strings.LCase(TextBoxRecherche.Text.Trim)
-        If RechercheTexte <> "" Then
-            ListViewRecettes.Visible = False
-            ListViewRecherche.Visible = True
-            Fav = False
-            Me.Text = "Popotte - " & LangINI.GetKeyValue("Popotte - BooksDialog", "18") & 0 & LangINI.GetKeyValue("Popotte - BooksDialog", "19")
-            Me.Cursor = Cursors.WaitCursor
-            Dim RecetteTotalCount As Integer = 0
-            Me.ListViewRecherche.Items.Clear()
-            Dim imgidx As Integer = 0
-            If (Directory.Exists(PopotteDir)) Then
-                For Each Folder As String In My.Computer.FileSystem.GetDirectories(PopotteDir)
-                    'Retourne le nom du dossier
-                    Dim FolderName As String = Path.GetFileName(Folder)
-                    'set search parameters
-                    Dim di As New DirectoryInfo(PopotteDir & FolderName)
-                    Dim aryFi As FileInfo() = di.GetFiles("*.rtf")
-                    Dim fi As FileInfo
-                    For Each fi In aryFi
-                        Dim Filename As String = Strings.LCase(fi.Name)
-                        Dim FirstCharacter As Integer = Strings.Left(Filename, Filename.Length - 4).IndexOf(RechercheTexte.Trim)
-                        If FirstCharacter <> -1 Then
-                            Dim key As String = "Software\Popotte\Livres\" & FolderName & "\" & Strings.Left(Filename, Filename.Length - 4)
-                            Dim note As Integer = -1
-                            Dim Description As String = ""
-                            regKey = Registry.CurrentUser.OpenSubKey(key, True)
-                            If regKey IsNot Nothing Then
-                                note = CType(regKey.GetValue("Note", -1), Integer)
-                                Description = regKey.GetValue("Description", "").ToString
-                            End If
+    Private Async Function RechercheAsync() As System.Threading.Tasks.Task
+        If _fermetureDemandee OrElse System.Threading.Interlocked.CompareExchange(_rechercheEnCours, 1, 0) <> 0 Then Return
 
-                            AddImageToImagelist(Strings.Left(Filename, Filename.Length - 4), FolderName)
+        ButtonRecherche.Enabled = False
+        ButtonRecherche.Refresh()
+        TextBoxRecherche.Enabled = False
+        Try
+            Dim objItem As ListViewItem
+            imageListSmallRecette.Images.Clear()
+            Dim RechercheTexte As String = Strings.LCase(TextBoxRecherche.Text.Trim)
+            If RechercheTexte <> "" Then
+                ListViewRecettes.Visible = False
+                ListViewRecherche.Visible = True
+                Fav = False
+                Me.Text = "Popotte - " & LangINI.GetKeyValue("Popotte - BooksDialog", "18") & 0 & LangINI.GetKeyValue("Popotte - BooksDialog", "19")
+                Me.Cursor = Cursors.WaitCursor
+                Dim RecetteTotalCount As Integer = 0
+                Me.ListViewRecherche.Items.Clear()
+                Dim imgidx As Integer = 0
+                If (Directory.Exists(PopotteDir)) Then
+                    For Each Folder As String In My.Computer.FileSystem.GetDirectories(PopotteDir)
+                        'Retourne le nom du dossier
+                        Dim FolderName As String = Path.GetFileName(Folder)
+                        'set search parameters
+                        Dim di As New DirectoryInfo(PopotteDir & FolderName)
+                        Dim aryFi As FileInfo() = di.GetFiles("*.rtf")
+                        Dim fi As FileInfo
+                        For Each fi In aryFi
+                            Await System.Threading.Tasks.Task.Yield()
+                            If _fermetureDemandee Then Return
 
-                            'Add to listview
-                            objItem = ListViewRecherche.Items.Add(Strings.Left(fi.Name, fi.Name.Length - 4))
-                            With objItem
-                                .SubItems.Add(ConvertNote(note))
-                                .SubItems.Add(Description)
-                                .SubItems.Add(FolderName)
-                                .SubItems.Add(CType(-1, String))
-                                .SubItems.Add(RechercheTexte)
-                                .ImageIndex = imgidx
-                            End With
-                            RecetteTotalCount += 1
-                            imgidx += 1
-                            Me.Text = "Popotte - " & LangINI.GetKeyValue("Popotte - BooksDialog", "18") & RecetteTotalCount & LangINI.GetKeyValue("Popotte - BooksDialog", "19")
-                        Else
-                            Dim Path As String = PopotteDir & FolderName & "\" & Filename
-                            Dim key As String = "Software\Popotte\Livres\" & FolderName & "\" & Strings.Left(Filename, Filename.Length - 4)
-                            Dim note As Integer = -1
-                            Dim Description As String = ""
+                            Dim Filename As String = Strings.LCase(fi.Name)
+                            Dim FirstCharacter As Integer = Strings.Left(Filename, Filename.Length - 4).IndexOf(RechercheTexte.Trim)
+                            If FirstCharacter <> -1 Then
+                                Dim key As String = "Software\Popotte\Livres\" & FolderName & "\" & Strings.Left(Filename, Filename.Length - 4)
+                                Dim note As Integer = -1
+                                Dim Description As String = ""
+                                regKey = Registry.CurrentUser.OpenSubKey(key, True)
+                                If regKey IsNot Nothing Then
+                                    note = CType(regKey.GetValue("Note", -1), Integer)
+                                    Description = regKey.GetValue("Description", "").ToString
+                                End If
 
-                            'Search description
-                            regKey = Registry.CurrentUser.OpenSubKey(key, True)
-                            If regKey IsNot Nothing Then
-                                note = CType(regKey.GetValue("Note", -1), Integer)
-                                Description = regKey.GetValue("Description", "").ToString
-                            End If
-                            Dim DescFound As Integer = LCase(Description).IndexOf(LCase(RechercheTexte.Trim))
-                            If DescFound <> -1 Then
                                 AddImageToImagelist(Strings.Left(Filename, Filename.Length - 4), FolderName)
 
                                 'Add to listview
@@ -975,53 +970,110 @@ Public Class dlgLivres
                                 RecetteTotalCount += 1
                                 imgidx += 1
                                 Me.Text = "Popotte - " & LangINI.GetKeyValue("Popotte - BooksDialog", "18") & RecetteTotalCount & LangINI.GetKeyValue("Popotte - BooksDialog", "19")
-                                GoTo FileFound
-                            End If
+                                objItem.EnsureVisible()
+                                ListViewRecherche.Update()
+                            Else
+                                Dim Path As String = PopotteDir & FolderName & "\" & Filename
+                                Dim key As String = "Software\Popotte\Livres\" & FolderName & "\" & Strings.Left(Filename, Filename.Length - 4)
+                                Dim note As Integer = -1
+                                Dim Description As String = ""
 
-                            'search Files
-                            ScanRichTextBox.LoadFile(Path, RichTextBoxStreamType.RichText)
-                            Dim Position As Integer = ScanRichTextBox.Find(RechercheTexte.Trim, 0, ScanRichTextBox.Text.Length, RichTextBoxFinds.None)
-                            GC.Collect()
-                            If Position <> -1 Then
+                                'Search description
                                 regKey = Registry.CurrentUser.OpenSubKey(key, True)
                                 If regKey IsNot Nothing Then
                                     note = CType(regKey.GetValue("Note", -1), Integer)
                                     Description = regKey.GetValue("Description", "").ToString
                                 End If
+                                Dim DescFound As Integer = LCase(Description).IndexOf(LCase(RechercheTexte.Trim))
+                                If DescFound <> -1 Then
+                                    AddImageToImagelist(Strings.Left(Filename, Filename.Length - 4), FolderName)
 
-                                AddImageToImagelist(Strings.Left(Filename, Filename.Length - 4), FolderName)
+                                    'Add to listview
+                                    objItem = ListViewRecherche.Items.Add(Strings.Left(fi.Name, fi.Name.Length - 4))
+                                    With objItem
+                                        .SubItems.Add(ConvertNote(note))
+                                        .SubItems.Add(Description)
+                                        .SubItems.Add(FolderName)
+                                        .SubItems.Add(CType(-1, String))
+                                        .SubItems.Add(RechercheTexte)
+                                        .ImageIndex = imgidx
+                                    End With
+                                    RecetteTotalCount += 1
+                                    imgidx += 1
+                                    Me.Text = "Popotte - " & LangINI.GetKeyValue("Popotte - BooksDialog", "18") & RecetteTotalCount & LangINI.GetKeyValue("Popotte - BooksDialog", "19")
+                                    objItem.EnsureVisible()
+                                    ListViewRecherche.Update()
+                                    GoTo FileFound
+                                End If
 
-                                'Add to listview
-                                objItem = ListViewRecherche.Items.Add(Strings.Left(fi.Name, fi.Name.Length - 4))
-                                With objItem
-                                    .SubItems.Add(ConvertNote(note))
-                                    .SubItems.Add(Description)
-                                    .SubItems.Add(FolderName)
-                                    .SubItems.Add(Position.ToString)
-                                    .SubItems.Add(RechercheTexte)
-                                    .ImageIndex = imgidx
-                                End With
-                                RecetteTotalCount += 1
-                                imgidx += 1
-                                Me.Text = "Popotte - " & LangINI.GetKeyValue("Popotte - BooksDialog", "18") & RecetteTotalCount & LangINI.GetKeyValue("Popotte - BooksDialog", "19")
-                            End If
-                            'Goto jump
+                                'search Files
+                                ScanRichTextBox.LoadFile(Path, RichTextBoxStreamType.RichText)
+                                Dim Position As Integer = ScanRichTextBox.Find(RechercheTexte.Trim, 0, ScanRichTextBox.Text.Length, RichTextBoxFinds.None)
+                                GC.Collect()
+                                If Position <> -1 Then
+                                    regKey = Registry.CurrentUser.OpenSubKey(key, True)
+                                    If regKey IsNot Nothing Then
+                                        note = CType(regKey.GetValue("Note", -1), Integer)
+                                        Description = regKey.GetValue("Description", "").ToString
+                                    End If
+
+                                    AddImageToImagelist(Strings.Left(Filename, Filename.Length - 4), FolderName)
+
+                                    'Add to listview
+                                    objItem = ListViewRecherche.Items.Add(Strings.Left(fi.Name, fi.Name.Length - 4))
+                                    With objItem
+                                        .SubItems.Add(ConvertNote(note))
+                                        .SubItems.Add(Description)
+                                        .SubItems.Add(FolderName)
+                                        .SubItems.Add(Position.ToString)
+                                        .SubItems.Add(RechercheTexte)
+                                        .ImageIndex = imgidx
+                                    End With
+                                    RecetteTotalCount += 1
+                                    imgidx += 1
+                                    Me.Text = "Popotte - " & LangINI.GetKeyValue("Popotte - BooksDialog", "18") & RecetteTotalCount & LangINI.GetKeyValue("Popotte - BooksDialog", "19")
+                                    objItem.EnsureVisible()
+                                    ListViewRecherche.Update()
+                                End If
+                                'Goto jump
 FileFound:
-                        End If
+                            End If
+                        Next
                     Next
-                Next
+                End If
+                Me.Cursor = Cursors.Arrow
+                Me.ListViewRecettes.Visible = False
+                Me.ListViewRecherche.Visible = True
+                Me.RevenirButton.Enabled = True
+                ListViewRecherche.Focus()
+                If RecetteTotalCount = 0 Then
+                    MsgBox(LangINI.GetKeyValue("Popotte - BooksDialog - MessageBox", "2"), MsgBoxStyle.Exclamation, "Popotte")
+                End If
             End If
-            Me.Cursor = Cursors.Arrow
-            Me.ListViewRecettes.Visible = False
-            Me.ListViewRecherche.Visible = True
-            Me.RevenirButton.Enabled = True
             ListViewRecherche.Focus()
-            If RecetteTotalCount = 0 Then
-                MsgBox(LangINI.GetKeyValue("Popotte - BooksDialog - MessageBox", "2"), MsgBoxStyle.Exclamation, "Popotte")
+            GC.Collect()
+        Finally
+            If Not IsDisposed AndAlso Not _fermetureDemandee Then
+                _rechercheReactivationTimer = New System.Windows.Forms.Timer With {.Interval = 500}
+                AddHandler _rechercheReactivationTimer.Tick, AddressOf RechercheTerminee
+                _rechercheReactivationTimer.Start()
+            Else
+                System.Threading.Interlocked.Exchange(_rechercheEnCours, 0)
             End If
+        End Try
+    End Function
+
+    Private Sub RechercheTerminee(sender As Object, e As EventArgs)
+        _rechercheReactivationTimer.Stop()
+        RemoveHandler _rechercheReactivationTimer.Tick, AddressOf RechercheTerminee
+        _rechercheReactivationTimer.Dispose()
+        _rechercheReactivationTimer = Nothing
+        System.Threading.Interlocked.Exchange(_rechercheEnCours, 0)
+        If Not IsDisposed Then
+            Me.Cursor = Cursors.Arrow
+            ButtonRecherche.Enabled = True
+            TextBoxRecherche.Enabled = True
         End If
-        ListViewRecherche.Focus()
-        GC.Collect()
     End Sub
 
     'Bouton Favorites
