@@ -38,8 +38,6 @@ Public Class dlgLivres
         Public Property Livre As String
         Public Property Position As Integer
         Public Property TexteRecherche As String
-        Public Property NombreResultats As Integer
-        Public Property Image As Image
     End Class
 #End Region
 
@@ -909,8 +907,13 @@ Public Class dlgLivres
         ButtonRecherche.Enabled = False
         ButtonRecherche.Refresh()
         TextBoxRecherche.Enabled = False
+        Dim rechercheListUpdate As Boolean = False
         Try
-            imageListSmallRecette.Images.Clear()
+            If _recetteLoader IsNot Nothing Then
+                _recetteLoader.ResetImageList()
+            Else
+                imageListSmallRecette.Images.Clear()
+            End If
             Dim RechercheTexte As String = Strings.LCase(TextBoxRecherche.Text.Trim)
             If RechercheTexte <> "" Then
                 ListViewRecettes.Visible = False
@@ -920,12 +923,18 @@ Public Class dlgLivres
                 Me.Cursor = Cursors.WaitCursor
                 ListViewRecherche.Enabled = False
                 Me.ListViewRecherche.Items.Clear()
+                ListViewRecherche.BeginUpdate()
+                rechercheListUpdate = True
                 _rechercheCancellation = New System.Threading.CancellationTokenSource()
                 Dim RecetteTotalCount As Integer = Await RechercherRecettesSurThreadSTA(RechercheTexte, _rechercheCancellation.Token)
                 If _fermetureDemandee Then Return
+                ListViewRecherche.EndUpdate()
+                rechercheListUpdate = False
                 Me.ListViewRecettes.Visible = False
                 Me.ListViewRecherche.Visible = True
                 Me.RevenirButton.Enabled = True
+                If ListViewRecherche.Items.Count > 0 Then ListViewRecherche.Items(ListViewRecherche.Items.Count - 1).EnsureVisible()
+                Me.Text = "Popotte - " & LangINI.GetKeyValue("Popotte - BooksDialog", "18") & RecetteTotalCount & LangINI.GetKeyValue("Popotte - BooksDialog", "19")
                 ListViewRecherche.Focus()
                 If RecetteTotalCount = 0 Then
                     MsgBox(LangINI.GetKeyValue("Popotte - BooksDialog - MessageBox", "2"), MsgBoxStyle.Exclamation, "Popotte")
@@ -935,6 +944,9 @@ Public Class dlgLivres
         Catch ex As OperationCanceledException
             If Not _fermetureDemandee Then Throw
         Finally
+            If rechercheListUpdate AndAlso Not IsDisposed Then
+                ListViewRecherche.EndUpdate()
+            End If
             If _rechercheCancellation IsNot Nothing Then
                 _rechercheCancellation.Dispose()
                 _rechercheCancellation = Nothing
@@ -989,16 +1001,16 @@ Public Class dlgLivres
 
                                     LireMetadonneesRecette(key, note, description)
 
-                                    If firstCharacter = -1 AndAlso Strings.LCase(description).IndexOf(Strings.LCase(RechercheTexte.Trim)) = -1 Then
+                                    Dim descriptionLower As String = Strings.LCase(description)
+                                    If firstCharacter = -1 AndAlso descriptionLower.IndexOf(RechercheTexte.Trim) = -1 Then
                                         Dim recipePath As String = Path.Combine(PopotteDir, folderName, filename)
                                         scanRichTextBox.LoadFile(recipePath, RichTextBoxStreamType.RichText)
                                         If scanRichTextBox.Text.Length > 0 Then
                                             position = scanRichTextBox.Find(RechercheTexte.Trim, 0, scanRichTextBox.Text.Length, RichTextBoxFinds.None)
                                         End If
-                                        If position <> -1 Then LireMetadonneesRecette(key, note, description)
                                     End If
 
-                                    If firstCharacter <> -1 OrElse Strings.LCase(description).IndexOf(Strings.LCase(RechercheTexte.Trim)) <> -1 OrElse position <> -1 Then
+                                    If firstCharacter <> -1 OrElse descriptionLower.IndexOf(RechercheTexte.Trim) <> -1 OrElse position <> -1 Then
                                         recetteTotalCount += 1
                                         Dim result As New RechercheResultat With {
                                             .Nom = Strings.Left(file.Name, file.Name.Length - 4),
@@ -1006,9 +1018,7 @@ Public Class dlgLivres
                                             .Description = description,
                                             .Livre = folderName,
                                             .Position = position,
-                                            .TexteRecherche = RechercheTexte,
-                                            .NombreResultats = recetteTotalCount,
-                                            .Image = ChargerImageRecherche(recipeName, folderName)
+                                            .TexteRecherche = RechercheTexte
                                         }
                                         cancellationToken.ThrowIfCancellationRequested()
                                         Invoke(New Action(Of RechercheResultat)(AddressOf AjouterResultatRecherche), New Object() {result})
@@ -1036,7 +1046,7 @@ Public Class dlgLivres
     End Function
 
     Private Sub LireMetadonneesRecette(key As String, ByRef note As Integer, ByRef description As String)
-        Using recipeKey As RegistryKey = Registry.CurrentUser.OpenSubKey(key, True)
+        Using recipeKey As RegistryKey = Registry.CurrentUser.OpenSubKey(key, False)
             If recipeKey IsNot Nothing Then
                 note = CType(recipeKey.GetValue("Note", -1), Integer)
                 description = recipeKey.GetValue("Description", "").ToString
@@ -1045,12 +1055,6 @@ Public Class dlgLivres
     End Sub
 
     Private Sub AjouterResultatRecherche(result As RechercheResultat)
-        Try
-            imageListSmallRecette.Images.Add(result.Image)
-        Finally
-            result.Image.Dispose()
-        End Try
-
         Dim item As ListViewItem = ListViewRecherche.Items.Add(result.Nom)
         With item
             .SubItems.Add(ConvertNote(result.Note))
@@ -1058,12 +1062,9 @@ Public Class dlgLivres
             .SubItems.Add(result.Livre)
             .SubItems.Add(result.Position.ToString)
             .SubItems.Add(result.TexteRecherche)
-            .ImageIndex = imageListSmallRecette.Images.Count - 1
+            .ImageIndex = If(frmMain.ImageRecette AndAlso _recetteLoader IsNot Nothing, _recetteLoader.GetIndexAndLoad(result.Nom, result.Livre), 0)
         End With
 
-        Me.Text = "Popotte - " & LangINI.GetKeyValue("Popotte - BooksDialog", "18") & result.NombreResultats & LangINI.GetKeyValue("Popotte - BooksDialog", "19")
-        item.EnsureVisible()
-        ListViewRecherche.Update()
     End Sub
 
     'Bouton Favorites
