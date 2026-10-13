@@ -473,7 +473,7 @@ Public Class dlgLivres
     End Sub
 
     Private Sub ListViewRecherche_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) Handles ListViewRecherche.ColumnClick
-        If e.Column < 2 Then
+        If _rechercheEnCours = 0 AndAlso e.Column < 2 Then
             SortMyListView(ListViewRecherche, e.Column, False, True)
         End If
     End Sub
@@ -497,7 +497,7 @@ Public Class dlgLivres
     End Sub
 
     Private Sub ListViewRecherche_MouseClick(sender As Object, e As MouseEventArgs) Handles ListViewRecherche.MouseClick
-        If Fav = True Then
+        If _rechercheEnCours = 0 AndAlso Fav = True Then
             If e.Button = MouseButtons.Right Then
                 If ListViewRecherche.SelectedItems.Count > 0 Then
                     FavorisContextMenuStrip.Show(ListViewRecherche, New Point(e.X, e.Y))
@@ -545,7 +545,7 @@ Public Class dlgLivres
     End Sub
 
     Private Sub RechercheItemClick()
-        If ListViewRecherche.SelectedItems.Count = 0 Then Return
+        If _rechercheEnCours <> 0 OrElse ListViewRecherche.SelectedItems.Count = 0 Then Return
 
         Dim NomRecette As String = ListViewRecherche.SelectedItems(0).Text
         Dim position As Integer = -1
@@ -918,6 +918,7 @@ Public Class dlgLivres
                 Fav = False
                 Me.Text = "Popotte - " & LangINI.GetKeyValue("Popotte - BooksDialog", "18") & 0 & LangINI.GetKeyValue("Popotte - BooksDialog", "19")
                 Me.Cursor = Cursors.WaitCursor
+                ListViewRecherche.Enabled = False
                 Me.ListViewRecherche.Items.Clear()
                 _rechercheCancellation = New System.Threading.CancellationTokenSource()
                 Dim RecetteTotalCount As Integer = Await RechercherRecettesSurThreadSTA(RechercheTexte, _rechercheCancellation.Token)
@@ -958,6 +959,7 @@ Public Class dlgLivres
             Me.Cursor = Cursors.Arrow
             ButtonRecherche.Enabled = True
             TextBoxRecherche.Enabled = True
+            ListViewRecherche.Enabled = True
         End If
     End Sub
 
