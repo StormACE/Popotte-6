@@ -364,8 +364,13 @@ Public Class AdvRichTextBoxPrintCtrl
     Protected Overrides Sub WndProc(ByRef m As Message)
         If m.Msg = WM_SETCURSOR Then
             Try
-                SetCursor(Cursors.IBeam.Handle)
-                m.Result = IntPtr.Zero
+                Dim hitTest As Integer = CInt(m.LParam.ToInt64() And &HFFFFL)
+                If hitTest = HTVSCROLL OrElse hitTest = HTHSCROLL Then
+                    SetCursor(Cursors.Arrow.Handle)
+                Else
+                    SetCursor(Cursors.IBeam.Handle)
+                End If
+                m.Result = New IntPtr(1)
                 Return
             Catch
                 ' ignore
@@ -408,6 +413,8 @@ Public Class AdvRichTextBoxPrintCtrl
     Private Const PFM_ALIGNMENT As Integer = 8
     Private Const SCF_SELECTION As Integer = 1
     Private Const WM_SETCURSOR As Integer = &H20
+    Private Const HTHSCROLL As Integer = 6
+    Private Const HTVSCROLL As Integer = 7
 
     ' It makes no difference if we use PARAFORMAT or
     ' PARAFORMAT2 here, so I have opted for PARAFORMAT2.
