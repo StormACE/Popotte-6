@@ -3,6 +3,7 @@
 
 
 Imports System.Text
+Imports System.Windows.Forms
 Imports Microsoft.Win32
 
 Public Class frmMenu
@@ -72,6 +73,14 @@ Public Class frmMenu
         Effacer6ToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "11")
         Modifier7ToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "10")
         Effacer7ToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "11")
+
+        CollerLeTexteToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "20")
+        CollerLeTexteToolStripMenuItem1.Text = LangINI.GetKeyValue("Popotte - Menu", "20")
+        CollerLeTexteToolStripMenuItem2.Text = LangINI.GetKeyValue("Popotte - Menu", "20")
+        CollerLeTexteToolStripMenuItem3.Text = LangINI.GetKeyValue("Popotte - Menu", "20")
+        CollerLeTexteToolStripMenuItem4.Text = LangINI.GetKeyValue("Popotte - Menu", "20")
+        CollerLeTexteToolStripMenuItem5.Text = LangINI.GetKeyValue("Popotte - Menu", "20")
+        CollerLeTexteToolStripMenuItem6.Text = LangINI.GetKeyValue("Popotte - Menu", "20")
 
         regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Sunday", True)
         If regKey IsNot Nothing Then
@@ -495,6 +504,12 @@ Public Class frmMenu
 
     Private Sub ContextMenuStrip1_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles ContextMenuStrip1.Opening
         If ListBoxSunday.SelectedItems.Count > 0 Then
+            Dim clipttext As String = Clipboard.GetText()
+            If clipttext <> "" Then
+                CollerLeTexteToolStripMenuItem.Enabled = True
+            Else
+                CollerLeTexteToolStripMenuItem.Enabled = False
+            End If
             EffacerToolStripMenuItem.Enabled = True
             ModifierToolStripMenuItem.Enabled = True
         Else
@@ -505,6 +520,12 @@ Public Class frmMenu
 
     Private Sub ContextMenuStrip2_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles ContextMenuStrip2.Opening
         If ListBoxMonday.SelectedItems.Count > 0 Then
+            Dim clipttext As String = Clipboard.GetText()
+            If clipttext <> "" Then
+                CollerLeTexteToolStripMenuItem1.Enabled = True
+            Else
+                CollerLeTexteToolStripMenuItem1.Enabled = False
+            End If
             Effacer2ToolStripMenuItem.Enabled = True
             Modifier2ToolStripMenuItem.Enabled = True
         Else
@@ -515,6 +536,12 @@ Public Class frmMenu
 
     Private Sub ContextMenuStrip3_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles ContextMenuStrip3.Opening
         If ListBoxTuesday.SelectedItems.Count > 0 Then
+            Dim clipttext As String = Clipboard.GetText()
+            If clipttext <> "" Then
+                CollerLeTexteToolStripMenuItem2.Enabled = True
+            Else
+                CollerLeTexteToolStripMenuItem2.Enabled = False
+            End If
             Effacer3ToolStripMenuItem.Enabled = True
             Modifier3ToolStripMenuItem.Enabled = True
         Else
@@ -525,6 +552,12 @@ Public Class frmMenu
 
     Private Sub ContextMenuStrip4_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles ContextMenuStrip4.Opening
         If ListBoxWednesday.SelectedItems.Count > 0 Then
+            Dim clipttext As String = Clipboard.GetText()
+            If clipttext <> "" Then
+                CollerLeTexteToolStripMenuItem3.Enabled = True
+            Else
+                CollerLeTexteToolStripMenuItem3.Enabled = False
+            End If
             Effacer4ToolStripMenuItem.Enabled = True
             Modifier4ToolStripMenuItem.Enabled = True
         Else
@@ -535,6 +568,12 @@ Public Class frmMenu
 
     Private Sub ContextMenuStrip5_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles ContextMenuStrip5.Opening
         If ListBoxThursday.SelectedItems.Count > 0 Then
+            Dim clipttext As String = Clipboard.GetText()
+            If clipttext <> "" Then
+                CollerLeTexteToolStripMenuItem4.Enabled = True
+            Else
+                CollerLeTexteToolStripMenuItem4.Enabled = False
+            End If
             Effacer5ToolStripMenuItem.Enabled = True
             Modifier5ToolStripMenuItem.Enabled = True
         Else
@@ -545,6 +584,12 @@ Public Class frmMenu
 
     Private Sub ContextMenuStrip6_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles ContextMenuStrip6.Opening
         If ListBoxFriday.SelectedItems.Count > 0 Then
+            Dim clipttext As String = Clipboard.GetText()
+            If clipttext <> "" Then
+                CollerLeTexteToolStripMenuItem5.Enabled = True
+            Else
+                CollerLeTexteToolStripMenuItem5.Enabled = False
+            End If
             Effacer6ToolStripMenuItem.Enabled = True
             Modifier6ToolStripMenuItem.Enabled = True
         Else
@@ -555,6 +600,12 @@ Public Class frmMenu
 
     Private Sub ContextMenuStrip7_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles ContextMenuStrip7.Opening
         If ListBoxSaturday.SelectedItems.Count > 0 Then
+            Dim clipttext As String = Clipboard.GetText()
+            If clipttext <> "" Then
+                CollerLeTexteToolStripMenuItem6.Enabled = True
+            Else
+                CollerLeTexteToolStripMenuItem6.Enabled = False
+            End If
             Effacer7ToolStripMenuItem.Enabled = True
             Modifier7ToolStripMenuItem.Enabled = True
         Else
@@ -752,6 +803,295 @@ Public Class frmMenu
         mr.Dispose()
     End Sub
 
+
+    Private Sub CollerLeTexteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CollerLeTexteToolStripMenuItem.Click
+        Dim index As Integer = ListBoxSunday.SelectedIndex
+        Dim mealgroup As String = ""
+        Dim day As String = "Sunday"
+        Dim clipttext As String = Clipboard.GetText()
+        If clipttext <> "" Then
+            ListBoxSunday.Items(index) = clipttext
+
+            Select Case index
+                Case 0
+                    mealgroup = "meal1"
+                Case 1
+                    mealgroup = "meal2"
+                Case 2
+                    mealgroup = "meal3"
+            End Select
+
+            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
+            If regKey IsNot Nothing Then
+                regKey.SetValue("Recette", clipttext)
+                regKey.SetValue("Livre", "")
+            Else
+                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day, True)
+                If regKey IsNot Nothing Then
+                    regKey.CreateSubKey(mealgroup)
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
+                    regKey.SetValue("Recette", clipttext)
+                    regKey.SetValue("Livre", "")
+                Else
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
+                    regKey.CreateSubKey(day)
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day, True)
+                    regKey.CreateSubKey(mealgroup)
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
+                    regKey.SetValue("Recette", clipttext)
+                    regKey.SetValue("Livre", "")
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub CollerLeTexteToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles CollerLeTexteToolStripMenuItem1.Click
+        Dim index As Integer = ListBoxMonday.SelectedIndex
+        Dim mealgroup As String = ""
+        Dim day As String = "Monday"
+        Dim clipttext As String = Clipboard.GetText()
+        If clipttext <> "" Then
+            ListBoxMonday.Items(index) = clipttext
+
+            Select Case index
+                Case 0
+                    mealgroup = "meal1"
+                Case 1
+                    mealgroup = "meal2"
+                Case 2
+                    mealgroup = "meal3"
+            End Select
+
+            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
+            If regKey IsNot Nothing Then
+                regKey.SetValue("Recette", clipttext)
+                regKey.SetValue("Livre", "")
+            Else
+                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day, True)
+                If regKey IsNot Nothing Then
+                    regKey.CreateSubKey(mealgroup)
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
+                    regKey.SetValue("Recette", clipttext)
+                    regKey.SetValue("Livre", "")
+                Else
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
+                    regKey.CreateSubKey(day)
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day, True)
+                    regKey.CreateSubKey(mealgroup)
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
+                    regKey.SetValue("Recette", clipttext)
+                    regKey.SetValue("Livre", "")
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub CollerLeTexteToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles CollerLeTexteToolStripMenuItem2.Click
+        Dim index As Integer = ListBoxTuesday.SelectedIndex
+        Dim mealgroup As String = ""
+        Dim day As String = "Tuesday"
+        Dim clipttext As String = Clipboard.GetText()
+        If clipttext <> "" Then
+            ListBoxTuesday.Items(index) = clipttext
+
+            Select Case index
+                Case 0
+                    mealgroup = "meal1"
+                Case 1
+                    mealgroup = "meal2"
+                Case 2
+                    mealgroup = "meal3"
+            End Select
+
+            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
+            If regKey IsNot Nothing Then
+                regKey.SetValue("Recette", clipttext)
+                regKey.SetValue("Livre", "")
+            Else
+                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day, True)
+                If regKey IsNot Nothing Then
+                    regKey.CreateSubKey(mealgroup)
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
+                    regKey.SetValue("Recette", clipttext)
+                    regKey.SetValue("Livre", "")
+                Else
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
+                    regKey.CreateSubKey(day)
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day, True)
+                    regKey.CreateSubKey(mealgroup)
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
+                    regKey.SetValue("Recette", clipttext)
+                    regKey.SetValue("Livre", "")
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub CollerLeTexteToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles CollerLeTexteToolStripMenuItem3.Click
+        Dim index As Integer = ListBoxWednesday.SelectedIndex
+        Dim mealgroup As String = ""
+        Dim day As String = "Wednesday"
+        Dim clipttext As String = Clipboard.GetText()
+        If clipttext <> "" Then
+            ListBoxWednesday.Items(index) = clipttext
+
+            Select Case index
+                Case 0
+                    mealgroup = "meal1"
+                Case 1
+                    mealgroup = "meal2"
+                Case 2
+                    mealgroup = "meal3"
+            End Select
+
+            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
+            If regKey IsNot Nothing Then
+                regKey.SetValue("Recette", clipttext)
+                regKey.SetValue("Livre", "")
+            Else
+                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day, True)
+                If regKey IsNot Nothing Then
+                    regKey.CreateSubKey(mealgroup)
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
+                    regKey.SetValue("Recette", clipttext)
+                    regKey.SetValue("Livre", "")
+                Else
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
+                    regKey.CreateSubKey(day)
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day, True)
+                    regKey.CreateSubKey(mealgroup)
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
+                    regKey.SetValue("Recette", clipttext)
+                    regKey.SetValue("Livre", "")
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub CollerLeTexteToolStripMenuItem4_Click(sender As Object, e As EventArgs) Handles CollerLeTexteToolStripMenuItem4.Click
+        Dim index As Integer = ListBoxThursday.SelectedIndex
+        Dim mealgroup As String = ""
+        Dim day As String = "Thursday"
+        Dim clipttext As String = Clipboard.GetText()
+        If clipttext <> "" Then
+            ListBoxThursday.Items(index) = clipttext
+
+            Select Case index
+                Case 0
+                    mealgroup = "meal1"
+                Case 1
+                    mealgroup = "meal2"
+                Case 2
+                    mealgroup = "meal3"
+            End Select
+
+            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
+            If regKey IsNot Nothing Then
+                regKey.SetValue("Recette", clipttext)
+                regKey.SetValue("Livre", "")
+            Else
+                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day, True)
+                If regKey IsNot Nothing Then
+                    regKey.CreateSubKey(mealgroup)
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
+                    regKey.SetValue("Recette", clipttext)
+                    regKey.SetValue("Livre", "")
+                Else
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
+                    regKey.CreateSubKey(day)
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day, True)
+                    regKey.CreateSubKey(mealgroup)
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
+                    regKey.SetValue("Recette", clipttext)
+                    regKey.SetValue("Livre", "")
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub CollerLeTexteToolStripMenuItem5_Click(sender As Object, e As EventArgs) Handles CollerLeTexteToolStripMenuItem5.Click
+        Dim index As Integer = ListBoxFriday.SelectedIndex
+        Dim mealgroup As String = ""
+        Dim day As String = "Friday"
+        Dim clipttext As String = Clipboard.GetText()
+        If clipttext <> "" Then
+            ListBoxFriday.Items(index) = clipttext
+
+            Select Case index
+                Case 0
+                    mealgroup = "meal1"
+                Case 1
+                    mealgroup = "meal2"
+                Case 2
+                    mealgroup = "meal3"
+            End Select
+
+            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
+            If regKey IsNot Nothing Then
+                regKey.SetValue("Recette", clipttext)
+                regKey.SetValue("Livre", "")
+            Else
+                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day, True)
+                If regKey IsNot Nothing Then
+                    regKey.CreateSubKey(mealgroup)
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
+                    regKey.SetValue("Recette", clipttext)
+                    regKey.SetValue("Livre", "")
+                Else
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
+                    regKey.CreateSubKey(day)
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day, True)
+                    regKey.CreateSubKey(mealgroup)
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
+                    regKey.SetValue("Recette", clipttext)
+                    regKey.SetValue("Livre", "")
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub CollerLeTexteToolStripMenuItem6_Click(sender As Object, e As EventArgs) Handles CollerLeTexteToolStripMenuItem6.Click
+        Dim index As Integer = ListBoxSaturday.SelectedIndex
+        Dim mealgroup As String = ""
+        Dim day As String = "Saturday"
+        Dim clipttext As String = Clipboard.GetText()
+        If clipttext <> "" Then
+            ListBoxSaturday.Items(index) = clipttext
+
+            Select Case index
+                Case 0
+                    mealgroup = "meal1"
+                Case 1
+                    mealgroup = "meal2"
+                Case 2
+                    mealgroup = "meal3"
+            End Select
+
+            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
+            If regKey IsNot Nothing Then
+                regKey.SetValue("Recette", clipttext)
+                regKey.SetValue("Livre", "")
+            Else
+                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day, True)
+                If regKey IsNot Nothing Then
+                    regKey.CreateSubKey(mealgroup)
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
+                    regKey.SetValue("Recette", clipttext)
+                    regKey.SetValue("Livre", "")
+                Else
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
+                    regKey.CreateSubKey(day)
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day, True)
+                    regKey.CreateSubKey(mealgroup)
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
+                    regKey.SetValue("Recette", clipttext)
+                    regKey.SetValue("Livre", "")
+                End If
+            End If
+        End If
+    End Sub
+
+
     Private Sub ButtonPreview_Click(sender As Object, e As EventArgs) Handles ButtonPreview.Click
         If frmMain.rtbDoc.Modified = False Then
             frmMain.rtbDoc.Clear()
@@ -917,4 +1257,6 @@ Public Class frmMenu
 
 
     End Sub
+
+
 End Class

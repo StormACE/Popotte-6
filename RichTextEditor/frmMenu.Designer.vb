@@ -62,6 +62,13 @@ Partial Class frmMenu
         Effacer7ToolStripMenuItem = New ToolStripMenuItem()
         ButtonPreview = New Button()
         Button1Touteff = New Button()
+        CollerLeTexteToolStripMenuItem = New ToolStripMenuItem()
+        CollerLeTexteToolStripMenuItem1 = New ToolStripMenuItem()
+        CollerLeTexteToolStripMenuItem2 = New ToolStripMenuItem()
+        CollerLeTexteToolStripMenuItem3 = New ToolStripMenuItem()
+        CollerLeTexteToolStripMenuItem4 = New ToolStripMenuItem()
+        CollerLeTexteToolStripMenuItem5 = New ToolStripMenuItem()
+        CollerLeTexteToolStripMenuItem6 = New ToolStripMenuItem()
         ContextMenuStrip1.SuspendLayout()
         ContextMenuStrip2.SuspendLayout()
         ContextMenuStrip3.SuspendLayout()
@@ -166,21 +173,21 @@ Partial Class frmMenu
         ' 
         ContextMenuStrip1.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ContextMenuStrip1.ImageScalingSize = New Size(24, 24)
-        ContextMenuStrip1.Items.AddRange(New ToolStripItem() {ModifierToolStripMenuItem, EffacerToolStripMenuItem})
+        ContextMenuStrip1.Items.AddRange(New ToolStripItem() {ModifierToolStripMenuItem, CollerLeTexteToolStripMenuItem, EffacerToolStripMenuItem})
         ContextMenuStrip1.Name = "ContextMenuStrip1"
-        ContextMenuStrip1.Size = New Size(175, 72)
+        ContextMenuStrip1.Size = New Size(226, 106)
         ' 
         ' ModifierToolStripMenuItem
         ' 
         ModifierToolStripMenuItem.Name = "ModifierToolStripMenuItem"
-        ModifierToolStripMenuItem.Size = New Size(174, 34)
+        ModifierToolStripMenuItem.Size = New Size(225, 34)
         ModifierToolStripMenuItem.Text = "Modifier"
         ' 
         ' EffacerToolStripMenuItem
         ' 
         EffacerToolStripMenuItem.Image = CType(resources.GetObject("EffacerToolStripMenuItem.Image"), Image)
         EffacerToolStripMenuItem.Name = "EffacerToolStripMenuItem"
-        EffacerToolStripMenuItem.Size = New Size(174, 34)
+        EffacerToolStripMenuItem.Size = New Size(225, 34)
         EffacerToolStripMenuItem.Text = "Effacer"
         ' 
         ' ListBoxMonday
@@ -198,21 +205,21 @@ Partial Class frmMenu
         ' 
         ContextMenuStrip2.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ContextMenuStrip2.ImageScalingSize = New Size(24, 24)
-        ContextMenuStrip2.Items.AddRange(New ToolStripItem() {Modifier2ToolStripMenuItem, Effacer2ToolStripMenuItem})
+        ContextMenuStrip2.Items.AddRange(New ToolStripItem() {Modifier2ToolStripMenuItem, CollerLeTexteToolStripMenuItem1, Effacer2ToolStripMenuItem})
         ContextMenuStrip2.Name = "ContextMenuStrip2"
-        ContextMenuStrip2.Size = New Size(175, 72)
+        ContextMenuStrip2.Size = New Size(226, 106)
         ' 
         ' Modifier2ToolStripMenuItem
         ' 
         Modifier2ToolStripMenuItem.Name = "Modifier2ToolStripMenuItem"
-        Modifier2ToolStripMenuItem.Size = New Size(174, 34)
+        Modifier2ToolStripMenuItem.Size = New Size(225, 34)
         Modifier2ToolStripMenuItem.Text = "Modifier"
         ' 
         ' Effacer2ToolStripMenuItem
         ' 
         Effacer2ToolStripMenuItem.Image = CType(resources.GetObject("Effacer2ToolStripMenuItem.Image"), Image)
         Effacer2ToolStripMenuItem.Name = "Effacer2ToolStripMenuItem"
-        Effacer2ToolStripMenuItem.Size = New Size(174, 34)
+        Effacer2ToolStripMenuItem.Size = New Size(225, 34)
         Effacer2ToolStripMenuItem.Text = "Effacer"
         ' 
         ' ListBoxTuesday
@@ -230,21 +237,21 @@ Partial Class frmMenu
         ' 
         ContextMenuStrip3.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ContextMenuStrip3.ImageScalingSize = New Size(24, 24)
-        ContextMenuStrip3.Items.AddRange(New ToolStripItem() {Modifier3ToolStripMenuItem, Effacer3ToolStripMenuItem})
+        ContextMenuStrip3.Items.AddRange(New ToolStripItem() {Modifier3ToolStripMenuItem, CollerLeTexteToolStripMenuItem2, Effacer3ToolStripMenuItem})
         ContextMenuStrip3.Name = "ContextMenuStrip3"
-        ContextMenuStrip3.Size = New Size(175, 72)
+        ContextMenuStrip3.Size = New Size(226, 106)
         ' 
         ' Modifier3ToolStripMenuItem
         ' 
         Modifier3ToolStripMenuItem.Name = "Modifier3ToolStripMenuItem"
-        Modifier3ToolStripMenuItem.Size = New Size(174, 34)
+        Modifier3ToolStripMenuItem.Size = New Size(225, 34)
         Modifier3ToolStripMenuItem.Text = "Modifier"
         ' 
         ' Effacer3ToolStripMenuItem
         ' 
         Effacer3ToolStripMenuItem.Image = CType(resources.GetObject("Effacer3ToolStripMenuItem.Image"), Image)
         Effacer3ToolStripMenuItem.Name = "Effacer3ToolStripMenuItem"
-        Effacer3ToolStripMenuItem.Size = New Size(174, 34)
+        Effacer3ToolStripMenuItem.Size = New Size(225, 34)
         Effacer3ToolStripMenuItem.Text = "Effacer"
         ' 
         ' ListBoxWednesday
@@ -262,21 +269,21 @@ Partial Class frmMenu
         ' 
         ContextMenuStrip4.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ContextMenuStrip4.ImageScalingSize = New Size(24, 24)
-        ContextMenuStrip4.Items.AddRange(New ToolStripItem() {Modifier4ToolStripMenuItem, Effacer4ToolStripMenuItem})
+        ContextMenuStrip4.Items.AddRange(New ToolStripItem() {Modifier4ToolStripMenuItem, CollerLeTexteToolStripMenuItem3, Effacer4ToolStripMenuItem})
         ContextMenuStrip4.Name = "ContextMenuStrip4"
-        ContextMenuStrip4.Size = New Size(175, 72)
+        ContextMenuStrip4.Size = New Size(226, 106)
         ' 
         ' Modifier4ToolStripMenuItem
         ' 
         Modifier4ToolStripMenuItem.Name = "Modifier4ToolStripMenuItem"
-        Modifier4ToolStripMenuItem.Size = New Size(174, 34)
+        Modifier4ToolStripMenuItem.Size = New Size(225, 34)
         Modifier4ToolStripMenuItem.Text = "Modifier"
         ' 
         ' Effacer4ToolStripMenuItem
         ' 
         Effacer4ToolStripMenuItem.Image = CType(resources.GetObject("Effacer4ToolStripMenuItem.Image"), Image)
         Effacer4ToolStripMenuItem.Name = "Effacer4ToolStripMenuItem"
-        Effacer4ToolStripMenuItem.Size = New Size(174, 34)
+        Effacer4ToolStripMenuItem.Size = New Size(225, 34)
         Effacer4ToolStripMenuItem.Text = "Effacer"
         ' 
         ' ListBoxThursday
@@ -294,21 +301,21 @@ Partial Class frmMenu
         ' 
         ContextMenuStrip5.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ContextMenuStrip5.ImageScalingSize = New Size(24, 24)
-        ContextMenuStrip5.Items.AddRange(New ToolStripItem() {Modifier5ToolStripMenuItem, Effacer5ToolStripMenuItem})
+        ContextMenuStrip5.Items.AddRange(New ToolStripItem() {Modifier5ToolStripMenuItem, CollerLeTexteToolStripMenuItem4, Effacer5ToolStripMenuItem})
         ContextMenuStrip5.Name = "ContextMenuStrip5"
-        ContextMenuStrip5.Size = New Size(175, 72)
+        ContextMenuStrip5.Size = New Size(226, 106)
         ' 
         ' Modifier5ToolStripMenuItem
         ' 
         Modifier5ToolStripMenuItem.Name = "Modifier5ToolStripMenuItem"
-        Modifier5ToolStripMenuItem.Size = New Size(174, 34)
+        Modifier5ToolStripMenuItem.Size = New Size(225, 34)
         Modifier5ToolStripMenuItem.Text = "Modifier"
         ' 
         ' Effacer5ToolStripMenuItem
         ' 
         Effacer5ToolStripMenuItem.Image = CType(resources.GetObject("Effacer5ToolStripMenuItem.Image"), Image)
         Effacer5ToolStripMenuItem.Name = "Effacer5ToolStripMenuItem"
-        Effacer5ToolStripMenuItem.Size = New Size(174, 34)
+        Effacer5ToolStripMenuItem.Size = New Size(225, 34)
         Effacer5ToolStripMenuItem.Text = "Effacer"
         ' 
         ' ListBoxFriday
@@ -326,21 +333,21 @@ Partial Class frmMenu
         ' 
         ContextMenuStrip6.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ContextMenuStrip6.ImageScalingSize = New Size(24, 24)
-        ContextMenuStrip6.Items.AddRange(New ToolStripItem() {Modifier6ToolStripMenuItem, Effacer6ToolStripMenuItem})
+        ContextMenuStrip6.Items.AddRange(New ToolStripItem() {Modifier6ToolStripMenuItem, CollerLeTexteToolStripMenuItem5, Effacer6ToolStripMenuItem})
         ContextMenuStrip6.Name = "ContextMenuStrip6"
-        ContextMenuStrip6.Size = New Size(175, 72)
+        ContextMenuStrip6.Size = New Size(226, 106)
         ' 
         ' Modifier6ToolStripMenuItem
         ' 
         Modifier6ToolStripMenuItem.Name = "Modifier6ToolStripMenuItem"
-        Modifier6ToolStripMenuItem.Size = New Size(174, 34)
+        Modifier6ToolStripMenuItem.Size = New Size(225, 34)
         Modifier6ToolStripMenuItem.Text = "Modifier"
         ' 
         ' Effacer6ToolStripMenuItem
         ' 
         Effacer6ToolStripMenuItem.Image = CType(resources.GetObject("Effacer6ToolStripMenuItem.Image"), Image)
         Effacer6ToolStripMenuItem.Name = "Effacer6ToolStripMenuItem"
-        Effacer6ToolStripMenuItem.Size = New Size(174, 34)
+        Effacer6ToolStripMenuItem.Size = New Size(225, 34)
         Effacer6ToolStripMenuItem.Text = "Effacer"
         ' 
         ' ListBoxSaturday
@@ -358,21 +365,21 @@ Partial Class frmMenu
         ' 
         ContextMenuStrip7.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ContextMenuStrip7.ImageScalingSize = New Size(24, 24)
-        ContextMenuStrip7.Items.AddRange(New ToolStripItem() {Modifier7ToolStripMenuItem, Effacer7ToolStripMenuItem})
+        ContextMenuStrip7.Items.AddRange(New ToolStripItem() {Modifier7ToolStripMenuItem, CollerLeTexteToolStripMenuItem6, Effacer7ToolStripMenuItem})
         ContextMenuStrip7.Name = "ContextMenuStrip7"
-        ContextMenuStrip7.Size = New Size(175, 72)
+        ContextMenuStrip7.Size = New Size(249, 139)
         ' 
         ' Modifier7ToolStripMenuItem
         ' 
         Modifier7ToolStripMenuItem.Name = "Modifier7ToolStripMenuItem"
-        Modifier7ToolStripMenuItem.Size = New Size(174, 34)
+        Modifier7ToolStripMenuItem.Size = New Size(248, 34)
         Modifier7ToolStripMenuItem.Text = "Modifier"
         ' 
         ' Effacer7ToolStripMenuItem
         ' 
         Effacer7ToolStripMenuItem.Image = CType(resources.GetObject("Effacer7ToolStripMenuItem.Image"), Image)
         Effacer7ToolStripMenuItem.Name = "Effacer7ToolStripMenuItem"
-        Effacer7ToolStripMenuItem.Size = New Size(174, 34)
+        Effacer7ToolStripMenuItem.Size = New Size(248, 34)
         Effacer7ToolStripMenuItem.Text = "Effacer"
         ' 
         ' ButtonPreview
@@ -394,6 +401,48 @@ Partial Class frmMenu
         Button1Touteff.TabIndex = 23
         Button1Touteff.Text = "Tout Effacer"
         Button1Touteff.UseVisualStyleBackColor = True
+        ' 
+        ' CollerLeTexteToolStripMenuItem
+        ' 
+        CollerLeTexteToolStripMenuItem.Name = "CollerLeTexteToolStripMenuItem"
+        CollerLeTexteToolStripMenuItem.Size = New Size(248, 34)
+        CollerLeTexteToolStripMenuItem.Text = "Coller le texte"
+        ' 
+        ' CollerLeTexteToolStripMenuItem1
+        ' 
+        CollerLeTexteToolStripMenuItem1.Name = "CollerLeTexteToolStripMenuItem1"
+        CollerLeTexteToolStripMenuItem1.Size = New Size(248, 34)
+        CollerLeTexteToolStripMenuItem1.Text = "Coller le texte"
+        ' 
+        ' CollerLeTexteToolStripMenuItem2
+        ' 
+        CollerLeTexteToolStripMenuItem2.Name = "CollerLeTexteToolStripMenuItem2"
+        CollerLeTexteToolStripMenuItem2.Size = New Size(248, 34)
+        CollerLeTexteToolStripMenuItem2.Text = "Coller le texte"
+        ' 
+        ' CollerLeTexteToolStripMenuItem3
+        ' 
+        CollerLeTexteToolStripMenuItem3.Name = "CollerLeTexteToolStripMenuItem3"
+        CollerLeTexteToolStripMenuItem3.Size = New Size(248, 34)
+        CollerLeTexteToolStripMenuItem3.Text = "Coller le texte"
+        ' 
+        ' CollerLeTexteToolStripMenuItem4
+        ' 
+        CollerLeTexteToolStripMenuItem4.Name = "CollerLeTexteToolStripMenuItem4"
+        CollerLeTexteToolStripMenuItem4.Size = New Size(248, 34)
+        CollerLeTexteToolStripMenuItem4.Text = "Coller le texte"
+        ' 
+        ' CollerLeTexteToolStripMenuItem5
+        ' 
+        CollerLeTexteToolStripMenuItem5.Name = "CollerLeTexteToolStripMenuItem5"
+        CollerLeTexteToolStripMenuItem5.Size = New Size(248, 34)
+        CollerLeTexteToolStripMenuItem5.Text = "Coller le texte"
+        ' 
+        ' CollerLeTexteToolStripMenuItem6
+        ' 
+        CollerLeTexteToolStripMenuItem6.Name = "CollerLeTexteToolStripMenuItem6"
+        CollerLeTexteToolStripMenuItem6.Size = New Size(248, 34)
+        CollerLeTexteToolStripMenuItem6.Text = "Coller le texte"
         ' 
         ' frmMenu
         ' 
@@ -471,4 +520,11 @@ Partial Class frmMenu
     Friend WithEvents Effacer7ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ButtonPreview As Button
     Friend WithEvents Button1Touteff As Button
+    Friend WithEvents CollerLeTexteToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CollerLeTexteToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents CollerLeTexteToolStripMenuItem2 As ToolStripMenuItem
+    Friend WithEvents CollerLeTexteToolStripMenuItem3 As ToolStripMenuItem
+    Friend WithEvents CollerLeTexteToolStripMenuItem4 As ToolStripMenuItem
+    Friend WithEvents CollerLeTexteToolStripMenuItem5 As ToolStripMenuItem
+    Friend WithEvents CollerLeTexteToolStripMenuItem6 As ToolStripMenuItem
 End Class
