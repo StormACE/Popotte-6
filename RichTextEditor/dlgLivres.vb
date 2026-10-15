@@ -952,7 +952,7 @@ Public Class dlgLivres
                 _rechercheCancellation = Nothing
             End If
             If Not IsDisposed AndAlso Not _fermetureDemandee Then
-                _rechercheReactivationTimer = New System.Windows.Forms.Timer With {.Interval = 500}
+                _rechercheReactivationTimer = New System.Windows.Forms.Timer With {.Interval = 100}
                 AddHandler _rechercheReactivationTimer.Tick, AddressOf RechercheTerminee
                 _rechercheReactivationTimer.Start()
             Else
