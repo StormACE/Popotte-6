@@ -967,11 +967,14 @@ Public Class dlgLivres
         _rechercheReactivationTimer.Dispose()
         _rechercheReactivationTimer = Nothing
         System.Threading.Interlocked.Exchange(_rechercheEnCours, 0)
+
+
         If Not IsDisposed Then
             Me.Cursor = Cursors.Arrow
             ButtonRecherche.Enabled = True
             TextBoxRecherche.Enabled = True
             ListViewRecherche.Enabled = True
+            TextBoxRecherche.Focus()
         End If
     End Sub
 
