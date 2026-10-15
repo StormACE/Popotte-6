@@ -28,7 +28,7 @@ Partial Class frmMain
         OpenToolStripMenuItem = New ToolStripMenuItem()
         ToolStripMenuItem1 = New ToolStripSeparator()
         SaveToolStripMenuItem = New ToolStripMenuItem()
-        SaveAsANSIToolStripMenuItem = New ToolStripMenuItem()
+        SaveAsToolStripMenuItem = New ToolStripMenuItem()
         ToolStripMenuItem2 = New ToolStripSeparator()
         mnuPageSetup = New ToolStripMenuItem()
         PreviewToolStripMenuItem = New ToolStripMenuItem()
@@ -58,6 +58,8 @@ Partial Class frmMain
         SurlignerLaSelectionToolStripMenuItem = New ToolStripMenuItem()
         FontToolStripMenuItem = New ToolStripMenuItem()
         SelectFontToolStripMenuItem = New ToolStripMenuItem()
+        ToolStripSeparator22 = New ToolStripSeparator()
+        CouleurToolStripMenuItem = New ToolStripMenuItem()
         ToolStripMenuItem6 = New ToolStripSeparator()
         BoldToolStripMenuItem = New ToolStripMenuItem()
         ItalicToolStripMenuItem = New ToolStripMenuItem()
@@ -207,8 +209,6 @@ Partial Class frmMain
         ToolStripButtonBulletList = New ToolStripDropDownButton()
         FolderBrowserDialog1 = New FolderBrowserDialog()
         rtbDoc = New ExtendedRichTextBox.AdvRichTextBoxPrintCtrl()
-        CouleurToolStripMenuItem = New ToolStripMenuItem()
-        ToolStripSeparator22 = New ToolStripSeparator()
         MenuStrip1.SuspendLayout()
         ContextMenuStrip1.SuspendLayout()
         ToolStrip2.SuspendLayout()
@@ -229,7 +229,7 @@ Partial Class frmMain
         ' 
         ' FileToolStripMenuItem
         ' 
-        FileToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {ToolStripMenuItemLivres, NewToolStripMenuItem, OpenToolStripMenuItem, ToolStripMenuItem1, SaveToolStripMenuItem, SaveAsANSIToolStripMenuItem, ToolStripMenuItem2, mnuPageSetup, PreviewToolStripMenuItem, PrintToolStripMenuItem, ToolStripMenuItem3, ExitToolStripMenuItem})
+        FileToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {ToolStripMenuItemLivres, NewToolStripMenuItem, OpenToolStripMenuItem, ToolStripMenuItem1, SaveToolStripMenuItem, SaveAsToolStripMenuItem, ToolStripMenuItem2, mnuPageSetup, PreviewToolStripMenuItem, PrintToolStripMenuItem, ToolStripMenuItem3, ExitToolStripMenuItem})
         FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         FileToolStripMenuItem.Size = New Size(91, 32)
         FileToolStripMenuItem.Text = "&Fichier"
@@ -271,12 +271,12 @@ Partial Class frmMain
         SaveToolStripMenuItem.Size = New Size(406, 36)
         SaveToolStripMenuItem.Text = "&Sauvegarder..."
         ' 
-        ' SaveAsANSIToolStripMenuItem
+        ' SaveAsToolStripMenuItem
         ' 
-        SaveAsANSIToolStripMenuItem.Image = CType(resources.GetObject("SaveAsANSIToolStripMenuItem.Image"), Image)
-        SaveAsANSIToolStripMenuItem.Name = "SaveAsANSIToolStripMenuItem"
-        SaveAsANSIToolStripMenuItem.Size = New Size(406, 36)
-        SaveAsANSIToolStripMenuItem.Text = "&Sauvegarder sous..."
+        SaveAsToolStripMenuItem.Image = CType(resources.GetObject("SaveAsToolStripMenuItem.Image"), Image)
+        SaveAsToolStripMenuItem.Name = "SaveAsToolStripMenuItem"
+        SaveAsToolStripMenuItem.Size = New Size(406, 36)
+        SaveAsToolStripMenuItem.Text = "&Sauvegarder sous..."
         ' 
         ' ToolStripMenuItem2
         ' 
@@ -465,6 +465,17 @@ Partial Class frmMain
         SelectFontToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.F
         SelectFontToolStripMenuItem.Size = New Size(360, 36)
         SelectFontToolStripMenuItem.Text = "Police par &défaut..."
+        ' 
+        ' ToolStripSeparator22
+        ' 
+        ToolStripSeparator22.Name = "ToolStripSeparator22"
+        ToolStripSeparator22.Size = New Size(357, 6)
+        ' 
+        ' CouleurToolStripMenuItem
+        ' 
+        CouleurToolStripMenuItem.Name = "CouleurToolStripMenuItem"
+        CouleurToolStripMenuItem.Size = New Size(360, 36)
+        CouleurToolStripMenuItem.Text = "Couleur"
         ' 
         ' ToolStripMenuItem6
         ' 
@@ -1446,17 +1457,6 @@ Partial Class frmMain
         rtbDoc.TabIndex = 2
         rtbDoc.Text = ""
         ' 
-        ' CouleurToolStripMenuItem
-        ' 
-        CouleurToolStripMenuItem.Name = "CouleurToolStripMenuItem"
-        CouleurToolStripMenuItem.Size = New Size(360, 36)
-        CouleurToolStripMenuItem.Text = "Couleur"
-        ' 
-        ' ToolStripSeparator22
-        ' 
-        ToolStripSeparator22.Name = "ToolStripSeparator22"
-        ToolStripSeparator22.Size = New Size(357, 6)
-        ' 
         ' frmMain
         ' 
         AutoScaleDimensions = New SizeF(144F, 144F)
@@ -1489,7 +1489,7 @@ Partial Class frmMain
     Friend WithEvents ToolStripMenuItem1 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents OpenToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SaveToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents SaveAsANSIToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SaveAsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem2 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents PreviewToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents PrintToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem

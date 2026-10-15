@@ -2,7 +2,7 @@
 ''' Popotte v5
 ''' 1 mars 2016 au 13 Janvier 2017
 ''' Work on Vista sp2, Windows 7 sp1, windows 8, Windows 8.1 and Windows 10. Need .Net Framework 4.0
-''' Copyright Martin Laflamme 2003/2017
+''' Copyright Martin Laflamme 2003/2026
 ''' Read licence.txt
 ''' </summary>
 Public Class dlgConverter
@@ -107,83 +107,83 @@ Public Class dlgConverter
     End Sub
 
     Private Sub ConverterComboBox_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles ConverterComboBox.SelectedIndexChanged
-        Dim Choice As Int32 = ConverterComboBox.SelectedIndex
+        Dim Choice As Int64 = ConverterComboBox.SelectedIndex
         Dim NumbIn As Double = Val(TextBox1.Text)
         Dim NumbOut As Double
 
         Select Case Choice
             Case 1
                 NumbOut = ((9 * NumbIn) / 5) + 32
-                TextBox2.Text = NumbOut.ToString("F1")
+                TextBox2.Text = NumbOut.ToString("F3")
             Case 2
                 NumbOut = ((NumbIn - 32) * 5) / 9
-                TextBox2.Text = NumbOut.ToString("F1")
+                TextBox2.Text = NumbOut.ToString("F3")
             Case 3
-                NumbOut = (NumbIn * 2.2)
-                TextBox2.Text = NumbOut.ToString("F1")
+                NumbOut = (NumbIn * 2.2046226218)
+                TextBox2.Text = NumbOut.ToString("F3")
             Case 4
-                NumbOut = (NumbIn / 2.2)
-                TextBox2.Text = NumbOut.ToString("F1")
+                NumbOut = (NumbIn / 2.2046226218)
+                TextBox2.Text = NumbOut.ToString("F3")
             Case 5
                 NumbOut = (NumbIn * 28.3495)
-                TextBox2.Text = NumbOut.ToString("F1")
+                TextBox2.Text = NumbOut.ToString("F3")
             Case 6
                 NumbOut = (NumbIn / 28.3495)
-                TextBox2.Text = NumbOut.ToString("F1")
+                TextBox2.Text = NumbOut.ToString("F3")
             Case 7
-                NumbOut = (NumbIn * 15.5)
-                TextBox2.Text = NumbOut.ToString("F1")
+                NumbOut = (NumbIn * 15)
+                TextBox2.Text = NumbOut.ToString("F3")
             Case 8
-                NumbOut = (NumbIn / 15.5)
-                TextBox2.Text = NumbOut.ToString("F1")
+                NumbOut = (NumbIn / 15)
+                TextBox2.Text = NumbOut.ToString("F3")
             Case 9
-                NumbOut = (NumbIn * 5.5)
-                TextBox2.Text = NumbOut.ToString("F1")
+                NumbOut = (NumbIn * 5)
+                TextBox2.Text = NumbOut.ToString("F3")
             Case 10
-                NumbOut = (NumbIn / 5.5)
-                TextBox2.Text = NumbOut.ToString("F1")
+                NumbOut = (NumbIn / 5)
+                TextBox2.Text = NumbOut.ToString("F3")
             Case 11
                 NumbOut = (NumbIn * 250)
-                TextBox2.Text = NumbOut.ToString("F1")
+                TextBox2.Text = NumbOut.ToString("F3")
             Case 12
                 NumbOut = (NumbIn / 250)
-                TextBox2.Text = NumbOut.ToString("F1")
+                TextBox2.Text = NumbOut.ToString("F3")
             Case 13
                 NumbOut = (NumbIn * 15)
-                TextBox2.Text = NumbOut.ToString("F1")
+                TextBox2.Text = NumbOut.ToString("F3")
             Case 14
                 NumbOut = (NumbIn / 15)
-                TextBox2.Text = NumbOut.ToString("F1")
+                TextBox2.Text = NumbOut.ToString("F3")
             Case 15
                 NumbOut = (NumbIn * 5)
-                TextBox2.Text = NumbOut.ToString("F1")
+                TextBox2.Text = NumbOut.ToString("F3")
             Case 16
                 NumbOut = (NumbIn / 5)
-                TextBox2.Text = NumbOut.ToString("F1")
+                TextBox2.Text = NumbOut.ToString("F3")
             Case 17
                 NumbOut = (NumbIn * 2.54)
-                TextBox2.Text = NumbOut.ToString("F1")
+                TextBox2.Text = NumbOut.ToString("F3")
             Case 18
                 NumbOut = (NumbIn / 2.54)
-                TextBox2.Text = NumbOut.ToString("F1")
+                TextBox2.Text = NumbOut.ToString("F3")
             Case 19
                 NumbOut = (NumbIn * 30.48)
-                TextBox2.Text = NumbOut.ToString("F1")
+                TextBox2.Text = NumbOut.ToString("F3")
             Case 20
                 NumbOut = (NumbIn / 30.48)
-                TextBox2.Text = NumbOut.ToString("F1")
+                TextBox2.Text = NumbOut.ToString("F3")
             Case 21
                 NumbOut = (NumbIn * 0.9144)
-                TextBox2.Text = NumbOut.ToString("F1")
+                TextBox2.Text = NumbOut.ToString("F3")
             Case 22
                 NumbOut = (NumbIn / 0.9144)
-                TextBox2.Text = NumbOut.ToString("F1")
+                TextBox2.Text = NumbOut.ToString("F3")
             Case 23
                 NumbOut = (NumbIn / 0.6214)
-                TextBox2.Text = NumbOut.ToString("F1")
+                TextBox2.Text = NumbOut.ToString("F3")
             Case 24
                 NumbOut = (NumbIn * 0.6214)
-                TextBox2.Text = NumbOut.ToString("F1")
+                TextBox2.Text = NumbOut.ToString("F3")
         End Select
     End Sub
 

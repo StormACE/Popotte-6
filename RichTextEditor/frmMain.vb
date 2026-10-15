@@ -8,8 +8,8 @@ Imports ExtendedRichTextBox.AdvRichTextBoxPrintCtrl
 Imports Microsoft.Win32
 
 ''' <summary>
-''' Popotte 6.0.0.21
-''' 05 sept 2026 au 14 octobre 2026
+''' Popotte 6
+''' 05 sept 2026 au 15 octobre 2026
 ''' Work on Windows 7 sp1, windows 8, Windows 8.1, Windows 10, Windows 11  .Net10
 ''' Copyright Martin Laflamme 2003/2026
 ''' Read licence.txt
@@ -175,7 +175,7 @@ Public Class frmMain
         NewToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "9")
         OpenToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "10")
         SaveToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "11")
-        SaveAsANSIToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "12")
+        SaveAsToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "12")
         mnuPageSetup.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "13")
         PreviewToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "14")
         PrintToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "15")
@@ -315,7 +315,6 @@ Public Class frmMain
         'les boutons de sauvegarde sont déactivé tant que le texte n'est pas modifié
         ToolStripButtonSave.Enabled = False
         SaveToolStripMenuItem.Enabled = False
-        SaveAsANSIToolStripMenuItem.Enabled = False
 
         'Charge les engins de recherche
         regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\CentreRecherche", True)
@@ -609,15 +608,6 @@ Public Class frmMain
 
         If v1.CompareTo(v2) < 0 Then
             'do update here
-
-            'Indent n'est plus utilisé, remove it from registry
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings", True)
-            If regKey IsNot Nothing Then
-                Try
-                    regKey.DeleteSubKey("Indent")
-                Catch ex As Exception
-                End Try
-            End If
 
             'update is done
         End If
@@ -1110,11 +1100,9 @@ Public Class frmMain
         If rtbDoc.Modified Then
             ToolStripButtonSave.Enabled = True
             SaveToolStripMenuItem.Enabled = True
-            SaveAsANSIToolStripMenuItem.Enabled = True
         Else
             ToolStripButtonSave.Enabled = False
             SaveToolStripMenuItem.Enabled = False
-            SaveAsANSIToolStripMenuItem.Enabled = False
         End If
     End Sub
 
@@ -1319,50 +1307,53 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub SaveAsToolANSIStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SaveAsANSIToolStripMenuItem.Click
+    Private Sub SaveAsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SaveAsToolStripMenuItem.Click
 
         SaveFileDialog1.Title = "Popotte - Sauvegarder sous..."
         SaveFileDialog1.DefaultExt = "txt"
         SaveFileDialog1.Filter = "Tout les fichiers|*.*|Rich Text|*.rtf|Texte|*.txt"
         SaveFileDialog1.FilterIndex = 1
-        SaveFileDialog1.ShowDialog()
+        If rtbDoc.Text <> "" Then
 
+            If SaveFileDialog1.ShowDialog() <> DialogResult.OK Then Return
 
-        If SaveFileDialog1.FileName = "" Then Exit Sub
+            If SaveFileDialog1.FileName = "" Then Exit Sub
 
-        Dim strExt As String
-        strExt = Path.GetExtension(SaveFileDialog1.FileName)
-        strExt = strExt.ToLower()
+            Dim strExt As String = Path.GetExtension(SaveFileDialog1.FileName).ToLowerInvariant()
+            Dim saved As Boolean = False
 
-        Select Case strExt
-            Case ".rtf"
-                Try
-                    rtbDoc.SaveFile(SaveFileDialog1.FileName, RichTextBoxStreamType.RichText)
-                    MessageBox.Show(LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "50"), "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Catch ex As Exception
-                    MessageBox.Show(LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "49"), "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Select Case strExt
+                Case ".rtf"
+                    Try
+                        rtbDoc.SaveFile(SaveFileDialog1.FileName, RichTextBoxStreamType.RichText)
+                        saved = True
+                    Catch ex As Exception
+                        MessageBox.Show(LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "49"), "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End Try
 
-            Case Else
-                Dim txtWriter As StreamWriter
-                'encode as ansi
-                txtWriter = New StreamWriter(SaveFileDialog1.FileName, True, System.Text.Encoding.Default)
-                Try
-                    txtWriter.Write(rtbDoc.Text)
-                    MessageBox.Show(LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "50"), "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Catch ex As Exception
-                    MessageBox.Show(LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "49"), "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End Try
-                txtWriter.Close()
-                txtWriter = Nothing
-                rtbDoc.SelectionStart = 0
-                rtbDoc.SelectionLength = 0
-        End Select
+                Case Else
+                    Try
+                        Using txtWriter As New StreamWriter(SaveFileDialog1.FileName, False, System.Text.Encoding.Default)
+                            txtWriter.Write(rtbDoc.Text)
+                        End Using
+                        saved = True
+                    Catch ex As Exception
+                        MessageBox.Show(LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "49"), "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End Try
+            End Select
 
-        currentFile = SaveFileDialog1.FileName
-        rtbDoc.Modified = False
-        Me.Text = "Popotte - [" & currentFile.ToString() & "]"
-        SaveFileDialog1.Dispose()
+            If Not saved Then
+                MessageBox.Show(LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "49"), "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
+
+            MessageBox.Show(LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "50"), "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            currentFile = SaveFileDialog1.FileName
+            rtbDoc.Modified = False
+            Me.Text = "Popotte - [" & currentFile & "]"
+
+        End If
+
     End Sub
 
     Private Sub ExitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles ExitToolStripMenuItem.Click

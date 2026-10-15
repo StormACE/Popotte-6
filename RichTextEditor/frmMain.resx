@@ -247,7 +247,7 @@
         nQW+GPQx6OGXweeDfkZHgVdJi8D/gSbAcdy7HMedUz54lZz7D5g0fgQrLOdNAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="SaveAsANSIToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="SaveAsToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
         JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAHG0lEQVRYR82XC0xUVxrHT7ObupRCdt3t
