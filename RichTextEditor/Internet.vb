@@ -1,8 +1,7 @@
 ''' <summary>
-''' Popotte v5
-''' 1 mars 2016 au 31 Juillet 2022
-''' Work on Vista sp2, Windows 7 sp1, windows 8, Windows 8.1 and Windows 10. Need .Net Framework 4.0
-''' Copyright Martin Laflamme 2003/2017
+''' Popotte v6
+''' Work on Vista sp2, Windows 7 sp1, windows 8, Windows 8.1 and Windows 10 and 11. Need .Net10
+''' Copyright Martin Laflamme 2003/2026
 ''' Read licence.txt
 ''' </summary>
 Module Internet

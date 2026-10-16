@@ -2,7 +2,6 @@ Imports Microsoft.Win32
 
 ''' <summary>
 ''' Popotte v6
-''' 1 mars 2016 au 08 sept 2026
 ''' Work on Vista sp2, Windows 7 sp1, windows 8, Windows 8.1 and Windows 10. .Net10
 ''' Copyright Martin Laflamme 2003/2026
 ''' Read licence.txt

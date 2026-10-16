@@ -1,4 +1,4 @@
-﻿''' Copyright Martin Laflamme 2003/2019
+﻿''' Copyright Martin Laflamme 2003/2026
 ''' Read licence.txt
 
 Imports Microsoft.Win32

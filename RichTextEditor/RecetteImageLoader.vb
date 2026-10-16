@@ -1,3 +1,7 @@
+''' Copyright Martin Laflamme 2003/2026
+''' Read licence.txt
+
+
 Imports System.IO
 Imports System.Text
 Imports System.Text.RegularExpressions

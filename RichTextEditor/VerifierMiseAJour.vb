@@ -1,8 +1,10 @@
+''' Copyright Martin Laflamme 2003/2026
+''' Read licence.txt
+
+
+
 Imports System.IO
 Imports System.Text
-
-'Apache v2
-'Read "Apache v2.txt"
 
 Public Class CVérifierMiseAJour
 
