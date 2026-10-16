@@ -360,7 +360,31 @@ Public Class AdvRichTextBoxPrintCtrl
         SendMessage(New HandleRef(Me, Handle), EM_SETTYPOGRAPHYOPTIONS, TO_ADVANCEDTYPOGRAPHY, TO_ADVANCEDTYPOGRAPHY)
     End Sub
 
-    ' Intercepte WM_SETCURSOR pour forcer l'affichage du curseur IBeam
+    Private Function IsInSelectionMargin(clientPoint As Point) As Boolean
+        If Not ShowSelectionMargin OrElse clientPoint.X < 0 OrElse
+           clientPoint.Y < 0 OrElse clientPoint.Y >= ClientSize.Height Then
+            Return False
+        End If
+
+        ' La position du premier caractère de la ligne visuelle tient compte
+        ' des retraits et de l'échancrure du paragraphe.
+        Dim charIndex As Integer = GetCharIndexFromPosition(clientPoint)
+        If charIndex < 0 Then Return False
+
+        Dim lineIndex As Integer = GetLineFromCharIndex(charIndex)
+        Dim lineStart As Integer = GetFirstCharIndexFromLine(lineIndex)
+        If lineStart < 0 Then Return False
+
+        Dim textStartX As Integer = GetPositionFromCharIndex(lineStart).X
+        Return clientPoint.X < textStartX
+    End Function
+
+    Private Sub UpdateEditorCursor(clientPoint As Point)
+        Cursor = If(IsInSelectionMargin(clientPoint), Cursors.Arrow, Cursors.IBeam)
+    End Sub
+
+    ' WM_SETCURSOR doit appliquer le même test que MouseMove : le curseur
+    ' IBeam forcé partout masquait la marge de sélection native.
     Protected Overrides Sub WndProc(ByRef m As Message)
         If m.Msg = WM_SETCURSOR Then
             Try
@@ -368,7 +392,9 @@ Public Class AdvRichTextBoxPrintCtrl
                 If hitTest = HTVSCROLL OrElse hitTest = HTHSCROLL Then
                     SetCursor(Cursors.Arrow.Handle)
                 Else
-                    SetCursor(Cursors.IBeam.Handle)
+                    Dim clientPoint As Point = PointToClient(Control.MousePosition)
+                    Dim editorCursor As Cursor = If(IsInSelectionMargin(clientPoint), Cursors.Arrow, Cursors.IBeam)
+                    SetCursor(editorCursor.Handle)
                 End If
                 m.Result = New IntPtr(1)
                 Return
@@ -384,20 +410,17 @@ Public Class AdvRichTextBoxPrintCtrl
     ' lorsque la souris survole la marge de sélection ou une échancrure.
     Protected Overrides Sub OnMouseEnter(e As EventArgs)
         MyBase.OnMouseEnter(e)
-        Me.Cursor = Cursors.IBeam
+        UpdateEditorCursor(PointToClient(Control.MousePosition))
     End Sub
 
     Protected Overrides Sub OnMouseLeave(e As EventArgs)
         MyBase.OnMouseLeave(e)
-        Me.Cursor = Cursors.IBeam
+        Cursor = Cursors.IBeam
     End Sub
 
     Protected Overrides Sub OnMouseMove(e As MouseEventArgs)
         MyBase.OnMouseMove(e)
-        ' Ne change le curseur que si nécessaire (minimise les appels)
-        If Not Object.ReferenceEquals(Me.Cursor, Cursors.IBeam) Then
-            Me.Cursor = Cursors.IBeam
-        End If
+        UpdateEditorCursor(New Point(e.X, e.Y))
     End Sub
 
     Private updating As Integer = 0
