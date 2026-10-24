@@ -35,7 +35,6 @@ Partial Class dlgLivres
         ListViewRecettes = New ListView()
         RecetteContextMenuStrip = New ContextMenuStrip(components)
         ToolStripMenuItemFAV = New ToolStripMenuItem()
-        ToolStripMenuItemMenu = New ToolStripMenuItem()
         ToolStripSeparator4 = New ToolStripSeparator()
         ModifierLesInfosDeLaRecetteToolStripMenuItem = New ToolStripMenuItem()
         ToolStripSeparator3 = New ToolStripSeparator()
@@ -49,7 +48,6 @@ Partial Class dlgLivres
         ButtonFav = New Button()
         TextBoxRecherche = New TextBox()
         FavorisContextMenuStrip = New ContextMenuStrip(components)
-        AddToMenuToolStripMenuItem = New ToolStripMenuItem()
         EnleverFavToolStripMenuItem = New ToolStripMenuItem()
         ButtonRandom = New Button()
         LivreContextMenuStrip.SuspendLayout()
@@ -146,9 +144,9 @@ Partial Class dlgLivres
         RecetteContextMenuStrip.AccessibleRole = AccessibleRole.TitleBar
         RecetteContextMenuStrip.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         RecetteContextMenuStrip.ImageScalingSize = New Size(24, 24)
-        RecetteContextMenuStrip.Items.AddRange(New ToolStripItem() {ToolStripMenuItemFAV, ToolStripMenuItemMenu, ToolStripSeparator4, ModifierLesInfosDeLaRecetteToolStripMenuItem, ToolStripSeparator3, OuvrirAvecEditeurExterneToolStripMenuItem, ToolStripSeparator2, EffacerLaRecetteToolStripMenuItem})
+        RecetteContextMenuStrip.Items.AddRange(New ToolStripItem() {ToolStripMenuItemFAV, ToolStripSeparator4, ModifierLesInfosDeLaRecetteToolStripMenuItem, ToolStripSeparator3, OuvrirAvecEditeurExterneToolStripMenuItem, ToolStripSeparator2, EffacerLaRecetteToolStripMenuItem})
         RecetteContextMenuStrip.Name = "RecetteContextMenuStrip"
-        RecetteContextMenuStrip.Size = New Size(352, 182)
+        RecetteContextMenuStrip.Size = New Size(352, 150)
         ' 
         ' ToolStripMenuItemFAV
         ' 
@@ -156,12 +154,6 @@ Partial Class dlgLivres
         ToolStripMenuItemFAV.Name = "ToolStripMenuItemFAV"
         ToolStripMenuItemFAV.Size = New Size(351, 32)
         ToolStripMenuItemFAV.Text = "Ajouter aux Favoris"
-        ' 
-        ' ToolStripMenuItemMenu
-        ' 
-        ToolStripMenuItemMenu.Name = "ToolStripMenuItemMenu"
-        ToolStripMenuItemMenu.Size = New Size(351, 32)
-        ToolStripMenuItemMenu.Text = "Ajouter au Menu"
         ' 
         ' ToolStripSeparator4
         ' 
@@ -262,15 +254,9 @@ Partial Class dlgLivres
         FavorisContextMenuStrip.AccessibleRole = AccessibleRole.TitleBar
         FavorisContextMenuStrip.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         FavorisContextMenuStrip.ImageScalingSize = New Size(24, 24)
-        FavorisContextMenuStrip.Items.AddRange(New ToolStripItem() {AddToMenuToolStripMenuItem, EnleverFavToolStripMenuItem})
+        FavorisContextMenuStrip.Items.AddRange(New ToolStripItem() {EnleverFavToolStripMenuItem})
         FavorisContextMenuStrip.Name = "RecetteContextMenuStrip"
-        FavorisContextMenuStrip.Size = New Size(272, 72)
-        ' 
-        ' AddToMenuToolStripMenuItem
-        ' 
-        AddToMenuToolStripMenuItem.Name = "AddToMenuToolStripMenuItem"
-        AddToMenuToolStripMenuItem.Size = New Size(271, 34)
-        AddToMenuToolStripMenuItem.Text = "Add to menu"
+        FavorisContextMenuStrip.Size = New Size(272, 38)
         ' 
         ' EnleverFavToolStripMenuItem
         ' 
@@ -347,6 +333,4 @@ Partial Class dlgLivres
     Friend WithEvents FavorisContextMenuStrip As ContextMenuStrip
     Friend WithEvents EnleverFavToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ButtonRandom As Button
-    Friend WithEvents ToolStripMenuItemMenu As ToolStripMenuItem
-    Friend WithEvents AddToMenuToolStripMenuItem As ToolStripMenuItem
 End Class

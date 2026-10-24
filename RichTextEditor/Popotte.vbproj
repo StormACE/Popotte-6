@@ -74,7 +74,6 @@
 
   <ItemGroup>
     <EmbeddedResource Update="dlgAboutBox.resx"><DependentUpon>dlgAboutBox.vb</DependentUpon></EmbeddedResource>
-    <EmbeddedResource Update="dlgAddMenu.resx"><DependentUpon>dlgAddMenu.vb</DependentUpon></EmbeddedResource>
     <EmbeddedResource Update="dlgLanguage.resx"><DependentUpon>dlgLanguage.vb</DependentUpon></EmbeddedResource>
     <EmbeddedResource Update="dlgmodifymenu.resx"><DependentUpon>dlgmodifymenu.vb</DependentUpon></EmbeddedResource>
     <EmbeddedResource Update="dlgMultiModInfo.resx"><DependentUpon>dlgMultiModInfo.vb</DependentUpon></EmbeddedResource>
