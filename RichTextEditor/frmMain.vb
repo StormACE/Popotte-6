@@ -2416,17 +2416,6 @@ Public Class frmMain
                 End If
             End If
 
-            'Indent
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Indent\", True)
-            If regKey IsNot Nothing Then
-                Dim ValueCount As Integer = regKey.ValueCount()
-                If ValueCount > 0 Then
-                    sb.AppendLine("[HKEY_CURRENT_USER\Software\Popotte\Settings\Indent\" & "]")
-                    sb.AppendLine(CType(Chr(34) & "" & Chr(34) & "=" & Chr(34) & CType(regKey.GetValue(""), String) & Chr(34), String))
-                    sb.AppendLine()
-                End If
-            End If
-
             'Language
             regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Language\", True)
             If regKey IsNot Nothing Then
