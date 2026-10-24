@@ -24,7 +24,6 @@ Partial Class frmMenu
     Private Sub InitializeComponent()
         components = New ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMenu))
-        ButtonClose = New Button()
         ButtonPreviousWeek = New Button()
         ButtonNextWeek = New Button()
         ButtonSave = New Button()
@@ -82,19 +81,9 @@ Partial Class frmMenu
         ContextMenuStrip7.SuspendLayout()
         SuspendLayout()
         ' 
-        ' ButtonClose
-        ' 
-        ButtonClose.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        ButtonClose.Location = New Point(898, 839)
-        ButtonClose.Name = "ButtonClose"
-        ButtonClose.Size = New Size(94, 47)
-        ButtonClose.TabIndex = 7
-        ButtonClose.Text = "Fermer"
-        ButtonClose.UseVisualStyleBackColor = True
-        ' 
         ' ButtonPreviousWeek
         ' 
-        ButtonPreviousWeek.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ButtonPreviousWeek.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ButtonPreviousWeek.Location = New Point(297, 16)
         ButtonPreviousWeek.Name = "ButtonPreviousWeek"
         ButtonPreviousWeek.Size = New Size(150, 30)
@@ -104,7 +93,7 @@ Partial Class frmMenu
         ' 
         ' ButtonNextWeek
         ' 
-        ButtonNextWeek.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ButtonNextWeek.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ButtonNextWeek.Location = New Point(842, 16)
         ButtonNextWeek.Name = "ButtonNextWeek"
         ButtonNextWeek.Size = New Size(150, 30)
@@ -114,8 +103,8 @@ Partial Class frmMenu
         ' 
         ' ButtonSave
         ' 
-        ButtonSave.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        ButtonSave.Location = New Point(297, 839)
+        ButtonSave.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ButtonSave.Location = New Point(844, 839)
         ButtonSave.Name = "ButtonSave"
         ButtonSave.Size = New Size(148, 47)
         ButtonSave.TabIndex = 26
@@ -124,7 +113,7 @@ Partial Class frmMenu
         ' 
         ' LabelCurrentWeek
         ' 
-        LabelCurrentWeek.Font = New Font("Segoe UI", 11.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        LabelCurrentWeek.Font = New Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         LabelCurrentWeek.Location = New Point(462, 16)
         LabelCurrentWeek.Name = "LabelCurrentWeek"
         LabelCurrentWeek.Size = New Size(370, 30)
@@ -135,7 +124,7 @@ Partial Class frmMenu
         ' LabelMonday
         ' 
         LabelMonday.AutoSize = True
-        LabelMonday.Font = New Font("Segoe UI", 20.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        LabelMonday.Font = New Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         LabelMonday.Location = New Point(33, 156)
         LabelMonday.Name = "LabelMonday"
         LabelMonday.Size = New Size(178, 54)
@@ -145,7 +134,7 @@ Partial Class frmMenu
         ' LabelTuesday
         ' 
         LabelTuesday.AutoSize = True
-        LabelTuesday.Font = New Font("Segoe UI", 20.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        LabelTuesday.Font = New Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         LabelTuesday.Location = New Point(33, 265)
         LabelTuesday.Name = "LabelTuesday"
         LabelTuesday.Size = New Size(176, 54)
@@ -155,7 +144,7 @@ Partial Class frmMenu
         ' LabelWednesday
         ' 
         LabelWednesday.AutoSize = True
-        LabelWednesday.Font = New Font("Segoe UI", 20.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        LabelWednesday.Font = New Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         LabelWednesday.Location = New Point(33, 374)
         LabelWednesday.Name = "LabelWednesday"
         LabelWednesday.Size = New Size(242, 54)
@@ -165,7 +154,7 @@ Partial Class frmMenu
         ' LabelSunday
         ' 
         LabelSunday.AutoSize = True
-        LabelSunday.Font = New Font("Segoe UI", 20.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        LabelSunday.Font = New Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         LabelSunday.Location = New Point(33, 48)
         LabelSunday.Name = "LabelSunday"
         LabelSunday.Size = New Size(162, 54)
@@ -175,7 +164,7 @@ Partial Class frmMenu
         ' LabelThursday
         ' 
         LabelThursday.AutoSize = True
-        LabelThursday.Font = New Font("Segoe UI", 20.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        LabelThursday.Font = New Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         LabelThursday.Location = New Point(33, 483)
         LabelThursday.Name = "LabelThursday"
         LabelThursday.Size = New Size(197, 54)
@@ -185,7 +174,7 @@ Partial Class frmMenu
         ' LabelFriday
         ' 
         LabelFriday.AutoSize = True
-        LabelFriday.Font = New Font("Segoe UI", 20.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        LabelFriday.Font = New Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         LabelFriday.Location = New Point(33, 594)
         LabelFriday.Name = "LabelFriday"
         LabelFriday.Size = New Size(140, 54)
@@ -195,7 +184,7 @@ Partial Class frmMenu
         ' LabelSaturday
         ' 
         LabelSaturday.AutoSize = True
-        LabelSaturday.Font = New Font("Segoe UI", 20.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        LabelSaturday.Font = New Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         LabelSaturday.Location = New Point(38, 706)
         LabelSaturday.Name = "LabelSaturday"
         LabelSaturday.Size = New Size(192, 54)
@@ -206,7 +195,7 @@ Partial Class frmMenu
         ' 
         ListBoxSunday.BackColor = SystemColors.GradientInactiveCaption
         ListBoxSunday.ContextMenuStrip = ContextMenuStrip1
-        ListBoxSunday.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ListBoxSunday.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ListBoxSunday.FormattingEnabled = True
         ListBoxSunday.Location = New Point(297, 48)
         ListBoxSunday.Name = "ListBoxSunday"
@@ -215,7 +204,7 @@ Partial Class frmMenu
         ' 
         ' ContextMenuStrip1
         ' 
-        ContextMenuStrip1.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ContextMenuStrip1.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ContextMenuStrip1.ImageScalingSize = New Size(24, 24)
         ContextMenuStrip1.Items.AddRange(New ToolStripItem() {ModifierToolStripMenuItem, CollerLeTexteToolStripMenuItem, EffacerToolStripMenuItem})
         ContextMenuStrip1.Name = "ContextMenuStrip1"
@@ -244,7 +233,7 @@ Partial Class frmMenu
         ' 
         ListBoxMonday.BackColor = SystemColors.GradientInactiveCaption
         ListBoxMonday.ContextMenuStrip = ContextMenuStrip2
-        ListBoxMonday.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ListBoxMonday.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ListBoxMonday.FormattingEnabled = True
         ListBoxMonday.Location = New Point(297, 156)
         ListBoxMonday.Name = "ListBoxMonday"
@@ -253,7 +242,7 @@ Partial Class frmMenu
         ' 
         ' ContextMenuStrip2
         ' 
-        ContextMenuStrip2.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ContextMenuStrip2.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ContextMenuStrip2.ImageScalingSize = New Size(24, 24)
         ContextMenuStrip2.Items.AddRange(New ToolStripItem() {Modifier2ToolStripMenuItem, CollerLeTexteToolStripMenuItem1, Effacer2ToolStripMenuItem})
         ContextMenuStrip2.Name = "ContextMenuStrip2"
@@ -282,7 +271,7 @@ Partial Class frmMenu
         ' 
         ListBoxTuesday.BackColor = SystemColors.GradientInactiveCaption
         ListBoxTuesday.ContextMenuStrip = ContextMenuStrip3
-        ListBoxTuesday.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ListBoxTuesday.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ListBoxTuesday.FormattingEnabled = True
         ListBoxTuesday.Location = New Point(297, 265)
         ListBoxTuesday.Name = "ListBoxTuesday"
@@ -291,7 +280,7 @@ Partial Class frmMenu
         ' 
         ' ContextMenuStrip3
         ' 
-        ContextMenuStrip3.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ContextMenuStrip3.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ContextMenuStrip3.ImageScalingSize = New Size(24, 24)
         ContextMenuStrip3.Items.AddRange(New ToolStripItem() {Modifier3ToolStripMenuItem, CollerLeTexteToolStripMenuItem2, Effacer3ToolStripMenuItem})
         ContextMenuStrip3.Name = "ContextMenuStrip3"
@@ -320,7 +309,7 @@ Partial Class frmMenu
         ' 
         ListBoxWednesday.BackColor = SystemColors.GradientInactiveCaption
         ListBoxWednesday.ContextMenuStrip = ContextMenuStrip4
-        ListBoxWednesday.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ListBoxWednesday.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ListBoxWednesday.FormattingEnabled = True
         ListBoxWednesday.Location = New Point(297, 374)
         ListBoxWednesday.Name = "ListBoxWednesday"
@@ -329,7 +318,7 @@ Partial Class frmMenu
         ' 
         ' ContextMenuStrip4
         ' 
-        ContextMenuStrip4.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ContextMenuStrip4.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ContextMenuStrip4.ImageScalingSize = New Size(24, 24)
         ContextMenuStrip4.Items.AddRange(New ToolStripItem() {Modifier4ToolStripMenuItem, CollerLeTexteToolStripMenuItem3, Effacer4ToolStripMenuItem})
         ContextMenuStrip4.Name = "ContextMenuStrip4"
@@ -358,7 +347,7 @@ Partial Class frmMenu
         ' 
         ListBoxThursday.BackColor = SystemColors.GradientInactiveCaption
         ListBoxThursday.ContextMenuStrip = ContextMenuStrip5
-        ListBoxThursday.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ListBoxThursday.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ListBoxThursday.FormattingEnabled = True
         ListBoxThursday.Location = New Point(297, 483)
         ListBoxThursday.Name = "ListBoxThursday"
@@ -367,7 +356,7 @@ Partial Class frmMenu
         ' 
         ' ContextMenuStrip5
         ' 
-        ContextMenuStrip5.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ContextMenuStrip5.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ContextMenuStrip5.ImageScalingSize = New Size(24, 24)
         ContextMenuStrip5.Items.AddRange(New ToolStripItem() {Modifier5ToolStripMenuItem, CollerLeTexteToolStripMenuItem4, Effacer5ToolStripMenuItem})
         ContextMenuStrip5.Name = "ContextMenuStrip5"
@@ -396,7 +385,7 @@ Partial Class frmMenu
         ' 
         ListBoxFriday.BackColor = SystemColors.GradientInactiveCaption
         ListBoxFriday.ContextMenuStrip = ContextMenuStrip6
-        ListBoxFriday.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ListBoxFriday.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ListBoxFriday.FormattingEnabled = True
         ListBoxFriday.Location = New Point(297, 594)
         ListBoxFriday.Name = "ListBoxFriday"
@@ -405,7 +394,7 @@ Partial Class frmMenu
         ' 
         ' ContextMenuStrip6
         ' 
-        ContextMenuStrip6.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ContextMenuStrip6.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ContextMenuStrip6.ImageScalingSize = New Size(24, 24)
         ContextMenuStrip6.Items.AddRange(New ToolStripItem() {Modifier6ToolStripMenuItem, CollerLeTexteToolStripMenuItem5, Effacer6ToolStripMenuItem})
         ContextMenuStrip6.Name = "ContextMenuStrip6"
@@ -434,7 +423,7 @@ Partial Class frmMenu
         ' 
         ListBoxSaturday.BackColor = SystemColors.GradientInactiveCaption
         ListBoxSaturday.ContextMenuStrip = ContextMenuStrip7
-        ListBoxSaturday.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ListBoxSaturday.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ListBoxSaturday.FormattingEnabled = True
         ListBoxSaturday.Location = New Point(297, 706)
         ListBoxSaturday.Name = "ListBoxSaturday"
@@ -443,7 +432,7 @@ Partial Class frmMenu
         ' 
         ' ContextMenuStrip7
         ' 
-        ContextMenuStrip7.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ContextMenuStrip7.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ContextMenuStrip7.ImageScalingSize = New Size(24, 24)
         ContextMenuStrip7.Items.AddRange(New ToolStripItem() {Modifier7ToolStripMenuItem, CollerLeTexteToolStripMenuItem6, Effacer7ToolStripMenuItem})
         ContextMenuStrip7.Name = "ContextMenuStrip7"
@@ -470,8 +459,8 @@ Partial Class frmMenu
         ' 
         ' ButtonPreview
         ' 
-        ButtonPreview.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        ButtonPreview.Location = New Point(451, 839)
+        ButtonPreview.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ButtonPreview.Location = New Point(445, 839)
         ButtonPreview.Name = "ButtonPreview"
         ButtonPreview.Size = New Size(170, 47)
         ButtonPreview.TabIndex = 22
@@ -480,8 +469,8 @@ Partial Class frmMenu
         ' 
         ' Button1Touteff
         ' 
-        Button1Touteff.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Button1Touteff.Location = New Point(627, 839)
+        Button1Touteff.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Button1Touteff.Location = New Point(297, 839)
         Button1Touteff.Name = "Button1Touteff"
         Button1Touteff.Size = New Size(142, 47)
         Button1Touteff.TabIndex = 23
@@ -512,8 +501,7 @@ Partial Class frmMenu
         Controls.Add(LabelWednesday)
         Controls.Add(LabelTuesday)
         Controls.Add(LabelMonday)
-        Controls.Add(ButtonClose)
-        Font = New Font("Segoe UI", 8.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Font = New Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         FormBorderStyle = FormBorderStyle.FixedDialog
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         MaximizeBox = False
@@ -530,7 +518,6 @@ Partial Class frmMenu
         PerformLayout()
 
     End Sub
-    Friend WithEvents ButtonClose As Button
     Friend WithEvents ButtonPreviousWeek As Button
     Friend WithEvents ButtonNextWeek As Button
     Friend WithEvents ButtonSave As Button

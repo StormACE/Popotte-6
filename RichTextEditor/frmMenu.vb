@@ -102,7 +102,6 @@ Public Class frmMenu
         LabelFriday.Text = LangINI.GetKeyValue("Popotte - Menu", "7")
         LabelSaturday.Text = LangINI.GetKeyValue("Popotte - Menu", "8")
 
-        ButtonClose.Text = LangINI.GetKeyValue("Popotte - Menu", "9")
         ButtonPreview.Text = LangINI.GetKeyValue("Popotte - Menu", "16")
         Button1Touteff.Text = LangINI.GetKeyValue("Popotte - Menu", "17")
         ButtonNextWeek.Text = LangINI.GetKeyValue("Popotte - Menu", "19")
@@ -261,24 +260,6 @@ Public Class frmMenu
                     SaveCurrentWeek()
             End Select
         End If
-    End Sub
-
-    Private Sub ButtonClose_Click(sender As Object, e As EventArgs) Handles ButtonClose.Click
-        If ModifyMenu Then
-            Dim answer As Integer = MessageBox.Show(LangINI.GetKeyValue("Popotte - EditorWindow - Messagebox", "52"), LangINI.GetKeyValue("Popotte - EditorWindow - Messagebox", "7"), MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation)
-            Select Case answer
-                Case DialogResult.Cancel
-                    Return
-                Case DialogResult.No
-                    Close()
-                Case DialogResult.Yes
-                    SaveCurrentWeek()
-                    Close()
-            End Select
-        Else
-            Close()
-        End If
-
     End Sub
 
     Private Sub ContextMenuStrip1_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles ContextMenuStrip1.Opening
