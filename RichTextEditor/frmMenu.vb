@@ -3,7 +3,6 @@
 
 
 Imports System.Text
-Imports System.Windows.Forms
 Imports Microsoft.Win32
 
 Public Class frmMenu
@@ -11,14 +10,87 @@ Public Class frmMenu
     Private regKey As RegistryKey
     'Get Language
     Private LangINI As IniFile = frmMain.LangIni
+    Private CurrentWeekStart As DateTime = GetStartOfWeek(DateTime.Today)
+    Private ReadOnly WeekDayNames As String() = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"}
 
-    Private Sub FrmMenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Function GetStartOfWeek(ByVal value As DateTime) As DateTime
+        Dim targetDate As DateTime = value.Date
+        Return targetDate.AddDays(-CInt(targetDate.DayOfWeek))
+    End Function
+
+    Private Function GetMealName(ByVal mealIndex As Integer) As String
+        Select Case mealIndex
+            Case 0
+                Return "meal1"
+            Case 1
+                Return "meal2"
+            Case 2
+                Return "meal3"
+            Case Else
+                Return "meal1"
+        End Select
+    End Function
+
+    Private Function GetDefaultRecipeText() As String
+        Return LangINI.GetKeyValue("Popotte - Menu", "1")
+    End Function
+
+    Private Function GetListBoxForDay(ByVal dayName As String) As ListBox
+        Select Case dayName
+            Case "Sunday"
+                Return ListBoxSunday
+            Case "Monday"
+                Return ListBoxMonday
+            Case "Tuesday"
+                Return ListBoxTuesday
+            Case "Wednesday"
+                Return ListBoxWednesday
+            Case "Thursday"
+                Return ListBoxThursday
+            Case "Friday"
+                Return ListBoxFriday
+            Case "Saturday"
+                Return ListBoxSaturday
+            Case Else
+                Return ListBoxSunday
+        End Select
+    End Function
+
+    Private Sub RefreshWeekDisplay()
+        Dim weekEnd As DateTime = CurrentWeekStart.AddDays(6)
+        LabelCurrentWeek.Text = String.Format(LangINI.GetKeyValue("Popotte - Menu", "22") & ": " & "{0:dd/MM/yyyy}", CurrentWeekStart, weekEnd)
+    End Sub
+
+    Private Sub FillListBoxFromRecipes(ByVal dayName As String, ByVal listBox As ListBox, ByVal keyToRead As RegistryKey)
+        listBox.Items.Clear()
+        For mealIndex As Integer = 0 To 2
+            listBox.Items.Add(GetDefaultRecipeText())
+        Next
+
+        If keyToRead Is Nothing Then
+            Return
+        End If
+
+        Dim dayKey As RegistryKey = keyToRead.OpenSubKey(dayName, False)
+        If dayKey Is Nothing Then
+            Return
+        End If
+
+        For mealIndex As Integer = 0 To 2
+            Dim mealKey As RegistryKey = dayKey.OpenSubKey(GetMealName(mealIndex), False)
+            If mealKey IsNot Nothing Then
+                Dim recipeValue As String = CType(mealKey.GetValue("Recette", String.Empty), String)
+                If Not String.IsNullOrWhiteSpace(recipeValue) AndAlso recipeValue <> GetDefaultRecipeText() Then
+                    listBox.Items(mealIndex) = recipeValue
+                End If
+            End If
+        Next
+    End Sub
+
+    Private Sub LoadCurrentWeekMenu()
         CenterToScreen()
-        Dim nRecette As String = ""
-        Dim nLivre As String = ""
 
         Text = LangINI.GetKeyValue("Popotte - Menu", "12")
-
         LabelSunday.Text = LangINI.GetKeyValue("Popotte - Menu", "2")
         LabelMonday.Text = LangINI.GetKeyValue("Popotte - Menu", "3")
         LabelTuesday.Text = LangINI.GetKeyValue("Popotte - Menu", "4")
@@ -27,37 +99,16 @@ Public Class frmMenu
         LabelFriday.Text = LangINI.GetKeyValue("Popotte - Menu", "7")
         LabelSaturday.Text = LangINI.GetKeyValue("Popotte - Menu", "8")
 
-        ListBoxSunday.Items.Add(LangINI.GetKeyValue("Popotte - Menu", "1"))
-        ListBoxSunday.Items.Add(LangINI.GetKeyValue("Popotte - Menu", "1"))
-        ListBoxSunday.Items.Add(LangINI.GetKeyValue("Popotte - Menu", "1"))
-
-        ListBoxMonday.Items.Add(LangINI.GetKeyValue("Popotte - Menu", "1"))
-        ListBoxMonday.Items.Add(LangINI.GetKeyValue("Popotte - Menu", "1"))
-        ListBoxMonday.Items.Add(LangINI.GetKeyValue("Popotte - Menu", "1"))
-
-        ListBoxTuesday.Items.Add(LangINI.GetKeyValue("Popotte - Menu", "1"))
-        ListBoxTuesday.Items.Add(LangINI.GetKeyValue("Popotte - Menu", "1"))
-        ListBoxTuesday.Items.Add(LangINI.GetKeyValue("Popotte - Menu", "1"))
-
-        ListBoxWednesday.Items.Add(LangINI.GetKeyValue("Popotte - Menu", "1"))
-        ListBoxWednesday.Items.Add(LangINI.GetKeyValue("Popotte - Menu", "1"))
-        ListBoxWednesday.Items.Add(LangINI.GetKeyValue("Popotte - Menu", "1"))
-
-        ListBoxThursday.Items.Add(LangINI.GetKeyValue("Popotte - Menu", "1"))
-        ListBoxThursday.Items.Add(LangINI.GetKeyValue("Popotte - Menu", "1"))
-        ListBoxThursday.Items.Add(LangINI.GetKeyValue("Popotte - Menu", "1"))
-
-        ListBoxFriday.Items.Add(LangINI.GetKeyValue("Popotte - Menu", "1"))
-        ListBoxFriday.Items.Add(LangINI.GetKeyValue("Popotte - Menu", "1"))
-        ListBoxFriday.Items.Add(LangINI.GetKeyValue("Popotte - Menu", "1"))
-
-        ListBoxSaturday.Items.Add(LangINI.GetKeyValue("Popotte - Menu", "1"))
-        ListBoxSaturday.Items.Add(LangINI.GetKeyValue("Popotte - Menu", "1"))
-        ListBoxSaturday.Items.Add(LangINI.GetKeyValue("Popotte - Menu", "1"))
-
         ButtonClose.Text = LangINI.GetKeyValue("Popotte - Menu", "9")
         ButtonPreview.Text = LangINI.GetKeyValue("Popotte - Menu", "16")
         Button1Touteff.Text = LangINI.GetKeyValue("Popotte - Menu", "17")
+        ButtonNextWeek.Text = LangINI.GetKeyValue("Popotte - Menu", "19")
+        ButtonPreviousWeek.Text = LangINI.GetKeyValue("Popotte - Menu", "18")
+        ButtonSave.Text = LangINI.GetKeyValue("Popotte - Menu", "21")
+        ButtonPreviousWeek.Visible = True
+        ButtonNextWeek.Visible = True
+        ButtonSave.Visible = True
+        LabelCurrentWeek.Visible = True
 
         ModifierToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "10")
         EffacerToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "11")
@@ -82,165 +133,118 @@ Public Class frmMenu
         CollerLeTexteToolStripMenuItem5.Text = LangINI.GetKeyValue("Popotte - Menu", "20")
         CollerLeTexteToolStripMenuItem6.Text = LangINI.GetKeyValue("Popotte - Menu", "20")
 
-        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Sunday", True)
-        If regKey IsNot Nothing Then
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Sunday\meal1", True)
-            If regKey IsNot Nothing Then
-                nRecette = CType(regKey.GetValue("Recette"), String)
-                ListBoxSunday.Items.Insert(0, nRecette)
-                ListBoxSunday.Items.RemoveAt(3)
-            End If
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Sunday\meal2", True)
-            If regKey IsNot Nothing Then
-                nRecette = CType(regKey.GetValue("Recette"), String)
-                ListBoxSunday.Items.Insert(1, nRecette)
-                ListBoxSunday.Items.RemoveAt(3)
-            End If
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Sunday\meal3", True)
-            If regKey IsNot Nothing Then
-                nRecette = CType(regKey.GetValue("Recette"), String)
-                ListBoxSunday.Items.Insert(2, nRecette)
-                ListBoxSunday.Items.RemoveAt(3)
-            End If
+        Dim weekKey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Weeks\" & CurrentWeekStart.ToString("yyyy-MM-dd"), False)
+        For Each dayName As String In WeekDayNames
+            FillListBoxFromRecipes(dayName, GetListBoxForDay(dayName), weekKey)
+        Next
+
+        If weekKey Is Nothing Then
+            For Each dayName As String In WeekDayNames
+                Dim legacyKey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & dayName, False)
+                FillListBoxFromRecipes(dayName, GetListBoxForDay(dayName), legacyKey)
+            Next
         End If
 
-        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Monday", True)
-        If regKey IsNot Nothing Then
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Monday\meal1", True)
-            If regKey IsNot Nothing Then
-                nRecette = CType(regKey.GetValue("Recette"), String)
-                ListBoxMonday.Items.Insert(0, nRecette)
-                ListBoxMonday.Items.RemoveAt(3)
-            End If
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Monday\meal2", True)
-            If regKey IsNot Nothing Then
-                nRecette = CType(regKey.GetValue("Recette"), String)
-                ListBoxMonday.Items.Insert(1, nRecette)
-                ListBoxMonday.Items.RemoveAt(3)
-            End If
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Monday\meal3", True)
-            If regKey IsNot Nothing Then
-                nRecette = CType(regKey.GetValue("Recette"), String)
-                ListBoxMonday.Items.Insert(2, nRecette)
-                ListBoxMonday.Items.RemoveAt(3)
-            End If
+        RefreshWeekDisplay()
+    End Sub
+
+    Private Sub SaveCurrentWeek()
+        Dim rootKey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
+        If rootKey Is Nothing Then
+            rootKey = Registry.CurrentUser.CreateSubKey("Software\Popotte\Settings\Menu")
         End If
 
-        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Tuesday", True)
-        If regKey IsNot Nothing Then
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Tuesday\meal1", True)
-            If regKey IsNot Nothing Then
-                nRecette = CType(regKey.GetValue("Recette"), String)
-                ListBoxTuesday.Items.Insert(0, nRecette)
-                ListBoxTuesday.Items.RemoveAt(3)
-            End If
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Tuesday\meal2", True)
-            If regKey IsNot Nothing Then
-                nRecette = CType(regKey.GetValue("Recette"), String)
-                ListBoxTuesday.Items.Insert(1, nRecette)
-                ListBoxTuesday.Items.RemoveAt(3)
-            End If
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Tuesday\meal3", True)
-            If regKey IsNot Nothing Then
-                nRecette = CType(regKey.GetValue("Recette"), String)
-                ListBoxTuesday.Items.Insert(2, nRecette)
-                ListBoxTuesday.Items.RemoveAt(3)
-            End If
-        End If
+        Dim weeksKey As RegistryKey = rootKey.CreateSubKey("Weeks")
+        Dim weekKey As RegistryKey = weeksKey.CreateSubKey(CurrentWeekStart.ToString("yyyy-MM-dd"))
 
-        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Wednesday", True)
-        If regKey IsNot Nothing Then
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Wednesday\meal1", True)
-            If regKey IsNot Nothing Then
-                nRecette = CType(regKey.GetValue("Recette"), String)
-                ListBoxWednesday.Items.Insert(0, nRecette)
-                ListBoxWednesday.Items.RemoveAt(3)
-            End If
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Wednesday\meal2", True)
-            If regKey IsNot Nothing Then
-                nRecette = CType(regKey.GetValue("Recette"), String)
-                ListBoxWednesday.Items.Insert(1, nRecette)
-                ListBoxWednesday.Items.RemoveAt(3)
-            End If
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Wednesday\meal3", True)
-            If regKey IsNot Nothing Then
-                nRecette = CType(regKey.GetValue("Recette"), String)
-                ListBoxWednesday.Items.Insert(2, nRecette)
-                ListBoxWednesday.Items.RemoveAt(3)
-            End If
-        End If
+        For Each dayName As String In WeekDayNames
+            Dim listBox As ListBox = GetListBoxForDay(dayName)
+            Dim dayKey As RegistryKey = weekKey.CreateSubKey(dayName)
 
-        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Thursday", True)
-        If regKey IsNot Nothing Then
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Thursday\meal1", True)
-            If regKey IsNot Nothing Then
-                nRecette = CType(regKey.GetValue("Recette"), String)
-                ListBoxThursday.Items.Insert(0, nRecette)
-                ListBoxThursday.Items.RemoveAt(3)
-            End If
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Thursday\meal2", True)
-            If regKey IsNot Nothing Then
-                nRecette = CType(regKey.GetValue("Recette"), String)
-                ListBoxThursday.Items.Insert(1, nRecette)
-                ListBoxThursday.Items.RemoveAt(3)
-            End If
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Thursday\meal3", True)
-            If regKey IsNot Nothing Then
-                nRecette = CType(regKey.GetValue("Recette"), String)
-                ListBoxThursday.Items.Insert(2, nRecette)
-                ListBoxThursday.Items.RemoveAt(3)
-            End If
-        End If
+            For mealIndex As Integer = 0 To 2
+                Dim mealKey As RegistryKey = dayKey.CreateSubKey(GetMealName(mealIndex))
+                Dim recipeValue As String = String.Empty
 
-        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Friday", True)
-        If regKey IsNot Nothing Then
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Friday\meal1", True)
-            If regKey IsNot Nothing Then
-                nRecette = CType(regKey.GetValue("Recette"), String)
-                ListBoxFriday.Items.Insert(0, nRecette)
-                ListBoxFriday.Items.RemoveAt(3)
-            End If
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Friday\meal2", True)
-            If regKey IsNot Nothing Then
-                nRecette = CType(regKey.GetValue("Recette"), String)
-                ListBoxFriday.Items.Insert(1, nRecette)
-                ListBoxFriday.Items.RemoveAt(3)
-            End If
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Friday\meal3", True)
-            If regKey IsNot Nothing Then
-                nRecette = CType(regKey.GetValue("Recette"), String)
-                ListBoxFriday.Items.Insert(2, nRecette)
-                ListBoxFriday.Items.RemoveAt(3)
-            End If
-        End If
+                If listBox.Items.Count > mealIndex Then
+                    recipeValue = CType(listBox.Items(mealIndex), String)
+                End If
 
-        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Saturday", True)
-        If regKey IsNot Nothing Then
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Saturday\meal1", True)
-            If regKey IsNot Nothing Then
-                nRecette = CType(regKey.GetValue("Recette"), String)
-                ListBoxSaturday.Items.Insert(0, nRecette)
-                ListBoxSaturday.Items.RemoveAt(3)
-            End If
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Saturday\meal2", True)
-            If regKey IsNot Nothing Then
-                nRecette = CType(regKey.GetValue("Recette"), String)
-                ListBoxSaturday.Items.Insert(1, nRecette)
-                ListBoxSaturday.Items.RemoveAt(3)
-            End If
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Saturday\meal3", True)
-            If regKey IsNot Nothing Then
-                nRecette = CType(regKey.GetValue("Recette"), String)
-                ListBoxSaturday.Items.Insert(2, nRecette)
-                ListBoxSaturday.Items.RemoveAt(3)
-            End If
-        End If
+                If String.IsNullOrWhiteSpace(recipeValue) OrElse recipeValue = GetDefaultRecipeText() Then
+                    recipeValue = String.Empty
+                End If
 
+                mealKey.SetValue("Recette", recipeValue)
+                mealKey.SetValue("Livre", String.Empty)
+            Next
+
+            Dim legacyDayKey As RegistryKey = rootKey.CreateSubKey(dayName)
+            For mealIndex As Integer = 0 To 2
+                Dim legacyMealKey As RegistryKey = legacyDayKey.CreateSubKey(GetMealName(mealIndex))
+                Dim legacyRecipe As String = String.Empty
+                If listBox.Items.Count > mealIndex Then
+                    legacyRecipe = CType(listBox.Items(mealIndex), String)
+                End If
+
+                If String.IsNullOrWhiteSpace(legacyRecipe) OrElse legacyRecipe = GetDefaultRecipeText() Then
+                    legacyRecipe = String.Empty
+                End If
+
+                legacyMealKey.SetValue("Recette", legacyRecipe)
+                legacyMealKey.SetValue("Livre", String.Empty)
+            Next
+        Next
+
+        MessageBox.Show(LangINI.GetKeyValue("Popotte - Menu", "23"), "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Information)
+    End Sub
+
+    Private Sub ButtonPreviousWeek_Click(sender As Object, e As EventArgs) Handles ButtonPreviousWeek.Click
+        Dim answer As Integer = MessageBox.Show(LangINI.GetKeyValue("Popotte - EditorWindow - Messagebox", "53"), LangINI.GetKeyValue("Popotte - EditorWindow - Messagebox", "7"), MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation)
+        Select Case answer
+            Case DialogResult.Cancel
+            Case DialogResult.No
+                CurrentWeekStart = CurrentWeekStart.AddDays(-7)
+                LoadCurrentWeekMenu()
+            Case DialogResult.Yes
+                SaveCurrentWeek()
+                CurrentWeekStart = CurrentWeekStart.AddDays(-7)
+                LoadCurrentWeekMenu()
+        End Select
+    End Sub
+
+    Private Sub ButtonNextWeek_Click(sender As Object, e As EventArgs) Handles ButtonNextWeek.Click
+        Dim answer As Integer = MessageBox.Show(LangINI.GetKeyValue("Popotte - EditorWindow - Messagebox", "53"), LangINI.GetKeyValue("Popotte - EditorWindow - Messagebox", "7"), MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation)
+        Select Case answer
+            Case DialogResult.Cancel
+            Case DialogResult.No
+                CurrentWeekStart = CurrentWeekStart.AddDays(7)
+                LoadCurrentWeekMenu()
+            Case DialogResult.Yes
+                SaveCurrentWeek()
+                CurrentWeekStart = CurrentWeekStart.AddDays(7)
+                LoadCurrentWeekMenu()
+        End Select
 
     End Sub
 
+    Private Sub ButtonSave_Click(sender As Object, e As EventArgs) Handles ButtonSave.Click
+        SaveCurrentWeek()
+    End Sub
+
+    Private Sub FrmMenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LoadCurrentWeekMenu()
+    End Sub
+
     Private Sub ButtonClose_Click(sender As Object, e As EventArgs) Handles ButtonClose.Click
-        Close()
+        Dim answer As Integer = MessageBox.Show(LangINI.GetKeyValue("Popotte - EditorWindow - Messagebox", "52"), LangINI.GetKeyValue("Popotte - EditorWindow - Messagebox", "7"), MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation)
+        Select Case answer
+            Case DialogResult.Cancel
+            Case DialogResult.No
+                Close()
+            Case DialogResult.Yes
+                SaveCurrentWeek()
+                Close()
+        End Select
+
     End Sub
 
     Private Sub ListBoxSunday_MouseDoubleClick(sender As Object, ByVal e As MouseEventArgs) Handles ListBoxSunday.MouseDoubleClick
@@ -616,142 +620,44 @@ Public Class frmMenu
 
     Private Sub EffacerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EffacerToolStripMenuItem.Click
         Dim index As Integer = ListBoxSunday.SelectedIndex
-        Dim mealgroup As String = ""
-        Select Case index
-            Case 0
-                mealgroup = "meal1"
-            Case 1
-                mealgroup = "meal2"
-            Case 2
-                mealgroup = "meal3"
-        End Select
 
-        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Sunday\" & mealgroup, True)
-        If regKey IsNot Nothing Then
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Sunday", True)
-            regKey.DeleteSubKey(mealgroup)
-            ListBoxSunday.Items(index) = LangINI.GetKeyValue("Popotte - Menu", "1")
-        End If
+        ListBoxSunday.Items(index) = LangINI.GetKeyValue("Popotte - Menu", "1")
     End Sub
 
     Private Sub Effacer2ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Effacer2ToolStripMenuItem.Click
         Dim index As Integer = ListBoxMonday.SelectedIndex
-        Dim mealgroup As String = ""
-        Select Case index
-            Case 0
-                mealgroup = "meal1"
-            Case 1
-                mealgroup = "meal2"
-            Case 2
-                mealgroup = "meal3"
-        End Select
 
-        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Monday\" & mealgroup, True)
-        If regKey IsNot Nothing Then
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Monday", True)
-            regKey.DeleteSubKey(mealgroup)
-            ListBoxMonday.Items(index) = LangINI.GetKeyValue("Popotte - Menu", "1")
-        End If
+        ListBoxMonday.Items(index) = LangINI.GetKeyValue("Popotte - Menu", "1")
     End Sub
 
     Private Sub Effacer3ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Effacer3ToolStripMenuItem.Click
         Dim index As Integer = ListBoxTuesday.SelectedIndex
-        Dim mealgroup As String = ""
-        Select Case index
-            Case 0
-                mealgroup = "meal1"
-            Case 1
-                mealgroup = "meal2"
-            Case 2
-                mealgroup = "meal3"
-        End Select
 
-        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Tuesday\" & mealgroup, True)
-        If regKey IsNot Nothing Then
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Tuesday", True)
-            regKey.DeleteSubKey(mealgroup)
-            ListBoxTuesday.Items(index) = LangINI.GetKeyValue("Popotte - Menu", "1")
-        End If
+        ListBoxTuesday.Items(index) = LangINI.GetKeyValue("Popotte - Menu", "1")
     End Sub
 
     Private Sub Effacer4ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Effacer4ToolStripMenuItem.Click
         Dim index As Integer = ListBoxWednesday.SelectedIndex
-        Dim mealgroup As String = ""
-        Select Case index
-            Case 0
-                mealgroup = "meal1"
-            Case 1
-                mealgroup = "meal2"
-            Case 2
-                mealgroup = "meal3"
-        End Select
 
-        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Wednesday\" & mealgroup, True)
-        If regKey IsNot Nothing Then
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Wednesday", True)
-            regKey.DeleteSubKey(mealgroup)
-            ListBoxWednesday.Items(index) = LangINI.GetKeyValue("Popotte - Menu", "1")
-        End If
+        ListBoxWednesday.Items(index) = LangINI.GetKeyValue("Popotte - Menu", "1")
     End Sub
 
     Private Sub Effacer5ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Effacer5ToolStripMenuItem.Click
         Dim index As Integer = ListBoxThursday.SelectedIndex
-        Dim mealgroup As String = ""
-        Select Case index
-            Case 0
-                mealgroup = "meal1"
-            Case 1
-                mealgroup = "meal2"
-            Case 2
-                mealgroup = "meal3"
-        End Select
 
-        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Thursday\" & mealgroup, True)
-        If regKey IsNot Nothing Then
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Thursday", True)
-            regKey.DeleteSubKey(mealgroup)
-            ListBoxThursday.Items(index) = LangINI.GetKeyValue("Popotte - Menu", "1")
-        End If
+        ListBoxThursday.Items(index) = LangINI.GetKeyValue("Popotte - Menu", "1")
     End Sub
 
     Private Sub Effacer6ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Effacer6ToolStripMenuItem.Click
         Dim index As Integer = ListBoxFriday.SelectedIndex
-        Dim mealgroup As String = ""
-        Select Case index
-            Case 0
-                mealgroup = "meal1"
-            Case 1
-                mealgroup = "meal2"
-            Case 2
-                mealgroup = "meal3"
-        End Select
 
-        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Friday\" & mealgroup, True)
-        If regKey IsNot Nothing Then
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Friday", True)
-            regKey.DeleteSubKey(mealgroup)
-            ListBoxFriday.Items(index) = LangINI.GetKeyValue("Popotte - Menu", "1")
-        End If
+        ListBoxFriday.Items(index) = LangINI.GetKeyValue("Popotte - Menu", "1")
     End Sub
 
     Private Sub Effacer7ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Effacer7ToolStripMenuItem.Click
         Dim index As Integer = ListBoxSaturday.SelectedIndex
-        Dim mealgroup As String = ""
-        Select Case index
-            Case 0
-                mealgroup = "meal1"
-            Case 1
-                mealgroup = "meal2"
-            Case 2
-                mealgroup = "meal3"
-        End Select
 
-        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Saturday\" & mealgroup, True)
-        If regKey IsNot Nothing Then
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Saturday", True)
-            regKey.DeleteSubKey(mealgroup)
-            ListBoxSaturday.Items(index) = LangINI.GetKeyValue("Popotte - Menu", "1")
-        End If
+        ListBoxSaturday.Items(index) = LangINI.GetKeyValue("Popotte - Menu", "1")
     End Sub
 
     Private Sub ModifierToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ModifierToolStripMenuItem.Click
@@ -811,37 +717,6 @@ Public Class frmMenu
         Dim clipttext As String = Clipboard.GetText()
         If clipttext <> "" Then
             ListBoxSunday.Items(index) = clipttext
-
-            Select Case index
-                Case 0
-                    mealgroup = "meal1"
-                Case 1
-                    mealgroup = "meal2"
-                Case 2
-                    mealgroup = "meal3"
-            End Select
-
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
-            If regKey IsNot Nothing Then
-                regKey.SetValue("Recette", clipttext)
-                regKey.SetValue("Livre", "")
-            Else
-                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day, True)
-                If regKey IsNot Nothing Then
-                    regKey.CreateSubKey(mealgroup)
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
-                    regKey.SetValue("Recette", clipttext)
-                    regKey.SetValue("Livre", "")
-                Else
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
-                    regKey.CreateSubKey(day)
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day, True)
-                    regKey.CreateSubKey(mealgroup)
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
-                    regKey.SetValue("Recette", clipttext)
-                    regKey.SetValue("Livre", "")
-                End If
-            End If
         End If
     End Sub
 
@@ -852,37 +727,6 @@ Public Class frmMenu
         Dim clipttext As String = Clipboard.GetText()
         If clipttext <> "" Then
             ListBoxMonday.Items(index) = clipttext
-
-            Select Case index
-                Case 0
-                    mealgroup = "meal1"
-                Case 1
-                    mealgroup = "meal2"
-                Case 2
-                    mealgroup = "meal3"
-            End Select
-
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
-            If regKey IsNot Nothing Then
-                regKey.SetValue("Recette", clipttext)
-                regKey.SetValue("Livre", "")
-            Else
-                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day, True)
-                If regKey IsNot Nothing Then
-                    regKey.CreateSubKey(mealgroup)
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
-                    regKey.SetValue("Recette", clipttext)
-                    regKey.SetValue("Livre", "")
-                Else
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
-                    regKey.CreateSubKey(day)
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day, True)
-                    regKey.CreateSubKey(mealgroup)
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
-                    regKey.SetValue("Recette", clipttext)
-                    regKey.SetValue("Livre", "")
-                End If
-            End If
         End If
     End Sub
 
@@ -893,37 +737,6 @@ Public Class frmMenu
         Dim clipttext As String = Clipboard.GetText()
         If clipttext <> "" Then
             ListBoxTuesday.Items(index) = clipttext
-
-            Select Case index
-                Case 0
-                    mealgroup = "meal1"
-                Case 1
-                    mealgroup = "meal2"
-                Case 2
-                    mealgroup = "meal3"
-            End Select
-
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
-            If regKey IsNot Nothing Then
-                regKey.SetValue("Recette", clipttext)
-                regKey.SetValue("Livre", "")
-            Else
-                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day, True)
-                If regKey IsNot Nothing Then
-                    regKey.CreateSubKey(mealgroup)
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
-                    regKey.SetValue("Recette", clipttext)
-                    regKey.SetValue("Livre", "")
-                Else
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
-                    regKey.CreateSubKey(day)
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day, True)
-                    regKey.CreateSubKey(mealgroup)
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
-                    regKey.SetValue("Recette", clipttext)
-                    regKey.SetValue("Livre", "")
-                End If
-            End If
         End If
     End Sub
 
@@ -934,37 +747,6 @@ Public Class frmMenu
         Dim clipttext As String = Clipboard.GetText()
         If clipttext <> "" Then
             ListBoxWednesday.Items(index) = clipttext
-
-            Select Case index
-                Case 0
-                    mealgroup = "meal1"
-                Case 1
-                    mealgroup = "meal2"
-                Case 2
-                    mealgroup = "meal3"
-            End Select
-
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
-            If regKey IsNot Nothing Then
-                regKey.SetValue("Recette", clipttext)
-                regKey.SetValue("Livre", "")
-            Else
-                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day, True)
-                If regKey IsNot Nothing Then
-                    regKey.CreateSubKey(mealgroup)
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
-                    regKey.SetValue("Recette", clipttext)
-                    regKey.SetValue("Livre", "")
-                Else
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
-                    regKey.CreateSubKey(day)
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day, True)
-                    regKey.CreateSubKey(mealgroup)
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
-                    regKey.SetValue("Recette", clipttext)
-                    regKey.SetValue("Livre", "")
-                End If
-            End If
         End If
     End Sub
 
@@ -975,37 +757,6 @@ Public Class frmMenu
         Dim clipttext As String = Clipboard.GetText()
         If clipttext <> "" Then
             ListBoxThursday.Items(index) = clipttext
-
-            Select Case index
-                Case 0
-                    mealgroup = "meal1"
-                Case 1
-                    mealgroup = "meal2"
-                Case 2
-                    mealgroup = "meal3"
-            End Select
-
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
-            If regKey IsNot Nothing Then
-                regKey.SetValue("Recette", clipttext)
-                regKey.SetValue("Livre", "")
-            Else
-                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day, True)
-                If regKey IsNot Nothing Then
-                    regKey.CreateSubKey(mealgroup)
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
-                    regKey.SetValue("Recette", clipttext)
-                    regKey.SetValue("Livre", "")
-                Else
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
-                    regKey.CreateSubKey(day)
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day, True)
-                    regKey.CreateSubKey(mealgroup)
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
-                    regKey.SetValue("Recette", clipttext)
-                    regKey.SetValue("Livre", "")
-                End If
-            End If
         End If
     End Sub
 
@@ -1016,37 +767,6 @@ Public Class frmMenu
         Dim clipttext As String = Clipboard.GetText()
         If clipttext <> "" Then
             ListBoxFriday.Items(index) = clipttext
-
-            Select Case index
-                Case 0
-                    mealgroup = "meal1"
-                Case 1
-                    mealgroup = "meal2"
-                Case 2
-                    mealgroup = "meal3"
-            End Select
-
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
-            If regKey IsNot Nothing Then
-                regKey.SetValue("Recette", clipttext)
-                regKey.SetValue("Livre", "")
-            Else
-                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day, True)
-                If regKey IsNot Nothing Then
-                    regKey.CreateSubKey(mealgroup)
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
-                    regKey.SetValue("Recette", clipttext)
-                    regKey.SetValue("Livre", "")
-                Else
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
-                    regKey.CreateSubKey(day)
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day, True)
-                    regKey.CreateSubKey(mealgroup)
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
-                    regKey.SetValue("Recette", clipttext)
-                    regKey.SetValue("Livre", "")
-                End If
-            End If
         End If
     End Sub
 
@@ -1057,64 +777,16 @@ Public Class frmMenu
         Dim clipttext As String = Clipboard.GetText()
         If clipttext <> "" Then
             ListBoxSaturday.Items(index) = clipttext
-
-            Select Case index
-                Case 0
-                    mealgroup = "meal1"
-                Case 1
-                    mealgroup = "meal2"
-                Case 2
-                    mealgroup = "meal3"
-            End Select
-
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
-            If regKey IsNot Nothing Then
-                regKey.SetValue("Recette", clipttext)
-                regKey.SetValue("Livre", "")
-            Else
-                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day, True)
-                If regKey IsNot Nothing Then
-                    regKey.CreateSubKey(mealgroup)
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
-                    regKey.SetValue("Recette", clipttext)
-                    regKey.SetValue("Livre", "")
-                Else
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
-                    regKey.CreateSubKey(day)
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day, True)
-                    regKey.CreateSubKey(mealgroup)
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & day & "\" & mealgroup, True)
-                    regKey.SetValue("Recette", clipttext)
-                    regKey.SetValue("Livre", "")
-                End If
-            End If
         End If
     End Sub
 
 
     Private Sub ButtonPreview_Click(sender As Object, e As EventArgs) Handles ButtonPreview.Click
-        If frmMain.rtbDoc.Modified = False Then
-            frmMain.rtbDoc.Clear()
-            Printmenu()
-            frmMain.rtbDoc.SelectAll()
-            frmMain.SetDefaultFont()
-            frmMain.rtbDoc.Focus()
-            frmMain.currentFile = ""
-            frmMain.Text = "Popotte"
-            frmMain.LivreOuvert = ""
-            frmMain.rtbDoc.SelectionAlignment = ExtendedRichTextBox.TextAlign.Left
-            frmMain.ToolStripButtonGauche.Checked = True
-            frmMain.ToolStripButtonCentre.Checked = False
-            frmMain.ToolStripButtonDroite.Checked = False
-            frmMain.TexteÀGaucheToolStripMenuItem.Checked = True
-            frmMain.TexteCentréToolStripMenuItem.Checked = False
-            frmMain.TexteÀDroiteToolStripMenuItem.Checked = False
-            Close()
-        Else
-            Dim answer As Integer = MessageBox.Show(LangINI.GetKeyValue("Popotte - EditorWindow - Messagebox", "10"), LangINI.GetKeyValue("Popotte - EditorWindow - Messagebox", "7"), MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation)
-            Select Case answer
-                Case Global.System.Windows.Forms.DialogResult.Cancel
-                Case Global.System.Windows.Forms.DialogResult.No
+        Dim answer As Integer = MessageBox.Show(LangINI.GetKeyValue("Popotte - EditorWindow - Messagebox", "52"), LangINI.GetKeyValue("Popotte - EditorWindow - Messagebox", "7"), MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation)
+        Select Case answer
+            Case DialogResult.Cancel
+            Case DialogResult.No
+                If frmMain.rtbDoc.Modified = False Then
                     frmMain.rtbDoc.Clear()
                     Printmenu()
                     frmMain.rtbDoc.SelectAll()
@@ -1131,8 +803,50 @@ Public Class frmMenu
                     frmMain.TexteCentréToolStripMenuItem.Checked = False
                     frmMain.TexteÀDroiteToolStripMenuItem.Checked = False
                     Close()
-                Case Global.System.Windows.Forms.DialogResult.Yes
-                    frmMain.SaveToolStripMenuItem_Click(Me, e)
+                Else
+                    Dim answerM As Integer = MessageBox.Show(LangINI.GetKeyValue("Popotte - EditorWindow - Messagebox", "10"), LangINI.GetKeyValue("Popotte - EditorWindow - Messagebox", "7"), MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation)
+                    Select Case answerM
+                        Case DialogResult.Cancel
+                        Case DialogResult.No
+                            frmMain.rtbDoc.Clear()
+                            Printmenu()
+                            frmMain.rtbDoc.SelectAll()
+                            frmMain.SetDefaultFont()
+                            frmMain.rtbDoc.Focus()
+                            frmMain.currentFile = ""
+                            frmMain.Text = "Popotte"
+                            frmMain.LivreOuvert = ""
+                            frmMain.rtbDoc.SelectionAlignment = ExtendedRichTextBox.TextAlign.Left
+                            frmMain.ToolStripButtonGauche.Checked = True
+                            frmMain.ToolStripButtonCentre.Checked = False
+                            frmMain.ToolStripButtonDroite.Checked = False
+                            frmMain.TexteÀGaucheToolStripMenuItem.Checked = True
+                            frmMain.TexteCentréToolStripMenuItem.Checked = False
+                            frmMain.TexteÀDroiteToolStripMenuItem.Checked = False
+                            Close()
+                        Case DialogResult.Yes
+                            frmMain.SaveToolStripMenuItem_Click(Me, e)
+                            frmMain.rtbDoc.Clear()
+                            Printmenu()
+                            frmMain.rtbDoc.SelectAll()
+                            frmMain.SetDefaultFont()
+                            frmMain.rtbDoc.Focus()
+                            frmMain.currentFile = ""
+                            frmMain.Text = "Popotte"
+                            frmMain.LivreOuvert = ""
+                            frmMain.rtbDoc.SelectionAlignment = ExtendedRichTextBox.TextAlign.Left
+                            frmMain.ToolStripButtonGauche.Checked = True
+                            frmMain.ToolStripButtonCentre.Checked = False
+                            frmMain.ToolStripButtonDroite.Checked = False
+                            frmMain.TexteÀGaucheToolStripMenuItem.Checked = True
+                            frmMain.TexteCentréToolStripMenuItem.Checked = False
+                            frmMain.TexteÀDroiteToolStripMenuItem.Checked = False
+                            Close()
+                    End Select
+                End If
+            Case DialogResult.Yes
+                SaveCurrentWeek()
+                If frmMain.rtbDoc.Modified = False Then
                     frmMain.rtbDoc.Clear()
                     Printmenu()
                     frmMain.rtbDoc.SelectAll()
@@ -1149,8 +863,51 @@ Public Class frmMenu
                     frmMain.TexteCentréToolStripMenuItem.Checked = False
                     frmMain.TexteÀDroiteToolStripMenuItem.Checked = False
                     Close()
-            End Select
-        End If
+                Else
+                    Dim answern As Integer = MessageBox.Show(LangINI.GetKeyValue("Popotte - EditorWindow - Messagebox", "10"), LangINI.GetKeyValue("Popotte - EditorWindow - Messagebox", "7"), MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation)
+                    Select Case answern
+                        Case DialogResult.Cancel
+                        Case DialogResult.No
+                            frmMain.rtbDoc.Clear()
+                            Printmenu()
+                            frmMain.rtbDoc.SelectAll()
+                            frmMain.SetDefaultFont()
+                            frmMain.rtbDoc.Focus()
+                            frmMain.currentFile = ""
+                            frmMain.Text = "Popotte"
+                            frmMain.LivreOuvert = ""
+                            frmMain.rtbDoc.SelectionAlignment = ExtendedRichTextBox.TextAlign.Left
+                            frmMain.ToolStripButtonGauche.Checked = True
+                            frmMain.ToolStripButtonCentre.Checked = False
+                            frmMain.ToolStripButtonDroite.Checked = False
+                            frmMain.TexteÀGaucheToolStripMenuItem.Checked = True
+                            frmMain.TexteCentréToolStripMenuItem.Checked = False
+                            frmMain.TexteÀDroiteToolStripMenuItem.Checked = False
+                            Close()
+                        Case DialogResult.Yes
+                            frmMain.SaveToolStripMenuItem_Click(Me, e)
+                            frmMain.rtbDoc.Clear()
+                            Printmenu()
+                            frmMain.rtbDoc.SelectAll()
+                            frmMain.SetDefaultFont()
+                            frmMain.rtbDoc.Focus()
+                            frmMain.currentFile = ""
+                            frmMain.Text = "Popotte"
+                            frmMain.LivreOuvert = ""
+                            frmMain.rtbDoc.SelectionAlignment = ExtendedRichTextBox.TextAlign.Left
+                            frmMain.ToolStripButtonGauche.Checked = True
+                            frmMain.ToolStripButtonCentre.Checked = False
+                            frmMain.ToolStripButtonDroite.Checked = False
+                            frmMain.TexteÀGaucheToolStripMenuItem.Checked = True
+                            frmMain.TexteCentréToolStripMenuItem.Checked = False
+                            frmMain.TexteÀDroiteToolStripMenuItem.Checked = False
+                            Close()
+                    End Select
+                End If
+
+
+        End Select
+
     End Sub
 
     Private Sub Printmenu()
@@ -1201,58 +958,15 @@ Public Class frmMenu
         Dim DlgResult = MessageBox.Show(LangINI.GetKeyValue("Popotte - MenuDialogue - MessageBox", "1"), "Popotte", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
         If DlgResult = DialogResult.Yes Then
-
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
-            If regKey IsNot Nothing Then
-                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Sunday", True)
-                If regKey IsNot Nothing Then
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
-                    regKey.DeleteSubKeyTree("Sunday")
-                End If
-                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Monday", True)
-                If regKey IsNot Nothing Then
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
-                    regKey.DeleteSubKeyTree("Monday")
-                End If
-                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Tuesday", True)
-                If regKey IsNot Nothing Then
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
-                    regKey.DeleteSubKeyTree("Tuesday")
-                End If
-                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Wednesday", True)
-                If regKey IsNot Nothing Then
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
-                    regKey.DeleteSubKeyTree("Wednesday")
-                End If
-                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Thursday", True)
-                If regKey IsNot Nothing Then
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
-                    regKey.DeleteSubKeyTree("Thursday")
-                End If
-                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Friday", True)
-                If regKey IsNot Nothing Then
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
-                    regKey.DeleteSubKeyTree("Friday")
-                End If
-                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Saturday", True)
-                If regKey IsNot Nothing Then
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
-                    regKey.DeleteSubKeyTree("Saturday")
-                End If
-
-
-                For i As Integer = 0 To 2
-                    ListBoxSunday.Items(i) = LangINI.GetKeyValue("Popotte - Menu", "1")
-                    ListBoxMonday.Items(i) = LangINI.GetKeyValue("Popotte - Menu", "1")
-                    ListBoxTuesday.Items(i) = LangINI.GetKeyValue("Popotte - Menu", "1")
-                    ListBoxWednesday.Items(i) = LangINI.GetKeyValue("Popotte - Menu", "1")
-                    ListBoxThursday.Items(i) = LangINI.GetKeyValue("Popotte - Menu", "1")
-                    ListBoxFriday.Items(i) = LangINI.GetKeyValue("Popotte - Menu", "1")
-                    ListBoxSaturday.Items(i) = LangINI.GetKeyValue("Popotte - Menu", "1")
-                Next
-            End If
-
-            Exit Sub
+            For i As Integer = 0 To 2
+                ListBoxSunday.Items(i) = LangINI.GetKeyValue("Popotte - Menu", "1")
+                ListBoxMonday.Items(i) = LangINI.GetKeyValue("Popotte - Menu", "1")
+                ListBoxTuesday.Items(i) = LangINI.GetKeyValue("Popotte - Menu", "1")
+                ListBoxWednesday.Items(i) = LangINI.GetKeyValue("Popotte - Menu", "1")
+                ListBoxThursday.Items(i) = LangINI.GetKeyValue("Popotte - Menu", "1")
+                ListBoxFriday.Items(i) = LangINI.GetKeyValue("Popotte - Menu", "1")
+                ListBoxSaturday.Items(i) = LangINI.GetKeyValue("Popotte - Menu", "1")
+            Next
         End If
 
 

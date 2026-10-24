@@ -1,4 +1,4 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class frmMenu
     Inherits System.Windows.Forms.Form
 
@@ -25,6 +25,10 @@ Partial Class frmMenu
         components = New ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMenu))
         ButtonClose = New Button()
+        ButtonPreviousWeek = New Button()
+        ButtonNextWeek = New Button()
+        ButtonSave = New Button()
+        LabelCurrentWeek = New Label()
         LabelMonday = New Label()
         LabelTuesday = New Label()
         LabelWednesday = New Label()
@@ -35,40 +39,40 @@ Partial Class frmMenu
         ListBoxSunday = New ListBox()
         ContextMenuStrip1 = New ContextMenuStrip(components)
         ModifierToolStripMenuItem = New ToolStripMenuItem()
+        CollerLeTexteToolStripMenuItem = New ToolStripMenuItem()
         EffacerToolStripMenuItem = New ToolStripMenuItem()
         ListBoxMonday = New ListBox()
         ContextMenuStrip2 = New ContextMenuStrip(components)
         Modifier2ToolStripMenuItem = New ToolStripMenuItem()
+        CollerLeTexteToolStripMenuItem1 = New ToolStripMenuItem()
         Effacer2ToolStripMenuItem = New ToolStripMenuItem()
         ListBoxTuesday = New ListBox()
         ContextMenuStrip3 = New ContextMenuStrip(components)
         Modifier3ToolStripMenuItem = New ToolStripMenuItem()
+        CollerLeTexteToolStripMenuItem2 = New ToolStripMenuItem()
         Effacer3ToolStripMenuItem = New ToolStripMenuItem()
         ListBoxWednesday = New ListBox()
         ContextMenuStrip4 = New ContextMenuStrip(components)
         Modifier4ToolStripMenuItem = New ToolStripMenuItem()
+        CollerLeTexteToolStripMenuItem3 = New ToolStripMenuItem()
         Effacer4ToolStripMenuItem = New ToolStripMenuItem()
         ListBoxThursday = New ListBox()
         ContextMenuStrip5 = New ContextMenuStrip(components)
         Modifier5ToolStripMenuItem = New ToolStripMenuItem()
+        CollerLeTexteToolStripMenuItem4 = New ToolStripMenuItem()
         Effacer5ToolStripMenuItem = New ToolStripMenuItem()
         ListBoxFriday = New ListBox()
         ContextMenuStrip6 = New ContextMenuStrip(components)
         Modifier6ToolStripMenuItem = New ToolStripMenuItem()
+        CollerLeTexteToolStripMenuItem5 = New ToolStripMenuItem()
         Effacer6ToolStripMenuItem = New ToolStripMenuItem()
         ListBoxSaturday = New ListBox()
         ContextMenuStrip7 = New ContextMenuStrip(components)
         Modifier7ToolStripMenuItem = New ToolStripMenuItem()
+        CollerLeTexteToolStripMenuItem6 = New ToolStripMenuItem()
         Effacer7ToolStripMenuItem = New ToolStripMenuItem()
         ButtonPreview = New Button()
         Button1Touteff = New Button()
-        CollerLeTexteToolStripMenuItem = New ToolStripMenuItem()
-        CollerLeTexteToolStripMenuItem1 = New ToolStripMenuItem()
-        CollerLeTexteToolStripMenuItem2 = New ToolStripMenuItem()
-        CollerLeTexteToolStripMenuItem3 = New ToolStripMenuItem()
-        CollerLeTexteToolStripMenuItem4 = New ToolStripMenuItem()
-        CollerLeTexteToolStripMenuItem5 = New ToolStripMenuItem()
-        CollerLeTexteToolStripMenuItem6 = New ToolStripMenuItem()
         ContextMenuStrip1.SuspendLayout()
         ContextMenuStrip2.SuspendLayout()
         ContextMenuStrip3.SuspendLayout()
@@ -80,7 +84,7 @@ Partial Class frmMenu
         ' 
         ' ButtonClose
         ' 
-        ButtonClose.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ButtonClose.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ButtonClose.Location = New Point(898, 839)
         ButtonClose.Name = "ButtonClose"
         ButtonClose.Size = New Size(94, 47)
@@ -88,10 +92,50 @@ Partial Class frmMenu
         ButtonClose.Text = "Fermer"
         ButtonClose.UseVisualStyleBackColor = True
         ' 
+        ' ButtonPreviousWeek
+        ' 
+        ButtonPreviousWeek.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ButtonPreviousWeek.Location = New Point(297, 16)
+        ButtonPreviousWeek.Name = "ButtonPreviousWeek"
+        ButtonPreviousWeek.Size = New Size(150, 30)
+        ButtonPreviousWeek.TabIndex = 24
+        ButtonPreviousWeek.Text = "Précédente"
+        ButtonPreviousWeek.UseVisualStyleBackColor = True
+        ' 
+        ' ButtonNextWeek
+        ' 
+        ButtonNextWeek.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ButtonNextWeek.Location = New Point(842, 16)
+        ButtonNextWeek.Name = "ButtonNextWeek"
+        ButtonNextWeek.Size = New Size(150, 30)
+        ButtonNextWeek.TabIndex = 25
+        ButtonNextWeek.Text = "Suivante"
+        ButtonNextWeek.UseVisualStyleBackColor = True
+        ' 
+        ' ButtonSave
+        ' 
+        ButtonSave.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ButtonSave.Location = New Point(297, 839)
+        ButtonSave.Name = "ButtonSave"
+        ButtonSave.Size = New Size(148, 47)
+        ButtonSave.TabIndex = 26
+        ButtonSave.Text = "Sauvegarder"
+        ButtonSave.UseVisualStyleBackColor = True
+        ' 
+        ' LabelCurrentWeek
+        ' 
+        LabelCurrentWeek.Font = New Font("Segoe UI", 11.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        LabelCurrentWeek.Location = New Point(462, 16)
+        LabelCurrentWeek.Name = "LabelCurrentWeek"
+        LabelCurrentWeek.Size = New Size(370, 30)
+        LabelCurrentWeek.TabIndex = 27
+        LabelCurrentWeek.Text = "Semaine"
+        LabelCurrentWeek.TextAlign = ContentAlignment.MiddleCenter
+        ' 
         ' LabelMonday
         ' 
         LabelMonday.AutoSize = True
-        LabelMonday.Font = New Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        LabelMonday.Font = New Font("Segoe UI", 20.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         LabelMonday.Location = New Point(33, 156)
         LabelMonday.Name = "LabelMonday"
         LabelMonday.Size = New Size(178, 54)
@@ -101,7 +145,7 @@ Partial Class frmMenu
         ' LabelTuesday
         ' 
         LabelTuesday.AutoSize = True
-        LabelTuesday.Font = New Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        LabelTuesday.Font = New Font("Segoe UI", 20.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         LabelTuesday.Location = New Point(33, 265)
         LabelTuesday.Name = "LabelTuesday"
         LabelTuesday.Size = New Size(176, 54)
@@ -111,7 +155,7 @@ Partial Class frmMenu
         ' LabelWednesday
         ' 
         LabelWednesday.AutoSize = True
-        LabelWednesday.Font = New Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        LabelWednesday.Font = New Font("Segoe UI", 20.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         LabelWednesday.Location = New Point(33, 374)
         LabelWednesday.Name = "LabelWednesday"
         LabelWednesday.Size = New Size(242, 54)
@@ -121,7 +165,7 @@ Partial Class frmMenu
         ' LabelSunday
         ' 
         LabelSunday.AutoSize = True
-        LabelSunday.Font = New Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        LabelSunday.Font = New Font("Segoe UI", 20.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         LabelSunday.Location = New Point(33, 48)
         LabelSunday.Name = "LabelSunday"
         LabelSunday.Size = New Size(162, 54)
@@ -131,7 +175,7 @@ Partial Class frmMenu
         ' LabelThursday
         ' 
         LabelThursday.AutoSize = True
-        LabelThursday.Font = New Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        LabelThursday.Font = New Font("Segoe UI", 20.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         LabelThursday.Location = New Point(33, 483)
         LabelThursday.Name = "LabelThursday"
         LabelThursday.Size = New Size(197, 54)
@@ -141,7 +185,7 @@ Partial Class frmMenu
         ' LabelFriday
         ' 
         LabelFriday.AutoSize = True
-        LabelFriday.Font = New Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        LabelFriday.Font = New Font("Segoe UI", 20.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         LabelFriday.Location = New Point(33, 594)
         LabelFriday.Name = "LabelFriday"
         LabelFriday.Size = New Size(140, 54)
@@ -151,7 +195,7 @@ Partial Class frmMenu
         ' LabelSaturday
         ' 
         LabelSaturday.AutoSize = True
-        LabelSaturday.Font = New Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        LabelSaturday.Font = New Font("Segoe UI", 20.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         LabelSaturday.Location = New Point(38, 706)
         LabelSaturday.Name = "LabelSaturday"
         LabelSaturday.Size = New Size(192, 54)
@@ -162,7 +206,7 @@ Partial Class frmMenu
         ' 
         ListBoxSunday.BackColor = SystemColors.GradientInactiveCaption
         ListBoxSunday.ContextMenuStrip = ContextMenuStrip1
-        ListBoxSunday.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ListBoxSunday.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ListBoxSunday.FormattingEnabled = True
         ListBoxSunday.Location = New Point(297, 48)
         ListBoxSunday.Name = "ListBoxSunday"
@@ -171,7 +215,7 @@ Partial Class frmMenu
         ' 
         ' ContextMenuStrip1
         ' 
-        ContextMenuStrip1.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ContextMenuStrip1.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ContextMenuStrip1.ImageScalingSize = New Size(24, 24)
         ContextMenuStrip1.Items.AddRange(New ToolStripItem() {ModifierToolStripMenuItem, CollerLeTexteToolStripMenuItem, EffacerToolStripMenuItem})
         ContextMenuStrip1.Name = "ContextMenuStrip1"
@@ -182,6 +226,12 @@ Partial Class frmMenu
         ModifierToolStripMenuItem.Name = "ModifierToolStripMenuItem"
         ModifierToolStripMenuItem.Size = New Size(225, 34)
         ModifierToolStripMenuItem.Text = "Modifier"
+        ' 
+        ' CollerLeTexteToolStripMenuItem
+        ' 
+        CollerLeTexteToolStripMenuItem.Name = "CollerLeTexteToolStripMenuItem"
+        CollerLeTexteToolStripMenuItem.Size = New Size(225, 34)
+        CollerLeTexteToolStripMenuItem.Text = "Coller le texte"
         ' 
         ' EffacerToolStripMenuItem
         ' 
@@ -194,7 +244,7 @@ Partial Class frmMenu
         ' 
         ListBoxMonday.BackColor = SystemColors.GradientInactiveCaption
         ListBoxMonday.ContextMenuStrip = ContextMenuStrip2
-        ListBoxMonday.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ListBoxMonday.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ListBoxMonday.FormattingEnabled = True
         ListBoxMonday.Location = New Point(297, 156)
         ListBoxMonday.Name = "ListBoxMonday"
@@ -203,7 +253,7 @@ Partial Class frmMenu
         ' 
         ' ContextMenuStrip2
         ' 
-        ContextMenuStrip2.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ContextMenuStrip2.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ContextMenuStrip2.ImageScalingSize = New Size(24, 24)
         ContextMenuStrip2.Items.AddRange(New ToolStripItem() {Modifier2ToolStripMenuItem, CollerLeTexteToolStripMenuItem1, Effacer2ToolStripMenuItem})
         ContextMenuStrip2.Name = "ContextMenuStrip2"
@@ -214,6 +264,12 @@ Partial Class frmMenu
         Modifier2ToolStripMenuItem.Name = "Modifier2ToolStripMenuItem"
         Modifier2ToolStripMenuItem.Size = New Size(225, 34)
         Modifier2ToolStripMenuItem.Text = "Modifier"
+        ' 
+        ' CollerLeTexteToolStripMenuItem1
+        ' 
+        CollerLeTexteToolStripMenuItem1.Name = "CollerLeTexteToolStripMenuItem1"
+        CollerLeTexteToolStripMenuItem1.Size = New Size(225, 34)
+        CollerLeTexteToolStripMenuItem1.Text = "Coller le texte"
         ' 
         ' Effacer2ToolStripMenuItem
         ' 
@@ -226,7 +282,7 @@ Partial Class frmMenu
         ' 
         ListBoxTuesday.BackColor = SystemColors.GradientInactiveCaption
         ListBoxTuesday.ContextMenuStrip = ContextMenuStrip3
-        ListBoxTuesday.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ListBoxTuesday.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ListBoxTuesday.FormattingEnabled = True
         ListBoxTuesday.Location = New Point(297, 265)
         ListBoxTuesday.Name = "ListBoxTuesday"
@@ -235,7 +291,7 @@ Partial Class frmMenu
         ' 
         ' ContextMenuStrip3
         ' 
-        ContextMenuStrip3.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ContextMenuStrip3.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ContextMenuStrip3.ImageScalingSize = New Size(24, 24)
         ContextMenuStrip3.Items.AddRange(New ToolStripItem() {Modifier3ToolStripMenuItem, CollerLeTexteToolStripMenuItem2, Effacer3ToolStripMenuItem})
         ContextMenuStrip3.Name = "ContextMenuStrip3"
@@ -246,6 +302,12 @@ Partial Class frmMenu
         Modifier3ToolStripMenuItem.Name = "Modifier3ToolStripMenuItem"
         Modifier3ToolStripMenuItem.Size = New Size(225, 34)
         Modifier3ToolStripMenuItem.Text = "Modifier"
+        ' 
+        ' CollerLeTexteToolStripMenuItem2
+        ' 
+        CollerLeTexteToolStripMenuItem2.Name = "CollerLeTexteToolStripMenuItem2"
+        CollerLeTexteToolStripMenuItem2.Size = New Size(225, 34)
+        CollerLeTexteToolStripMenuItem2.Text = "Coller le texte"
         ' 
         ' Effacer3ToolStripMenuItem
         ' 
@@ -258,7 +320,7 @@ Partial Class frmMenu
         ' 
         ListBoxWednesday.BackColor = SystemColors.GradientInactiveCaption
         ListBoxWednesday.ContextMenuStrip = ContextMenuStrip4
-        ListBoxWednesday.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ListBoxWednesday.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ListBoxWednesday.FormattingEnabled = True
         ListBoxWednesday.Location = New Point(297, 374)
         ListBoxWednesday.Name = "ListBoxWednesday"
@@ -267,7 +329,7 @@ Partial Class frmMenu
         ' 
         ' ContextMenuStrip4
         ' 
-        ContextMenuStrip4.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ContextMenuStrip4.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ContextMenuStrip4.ImageScalingSize = New Size(24, 24)
         ContextMenuStrip4.Items.AddRange(New ToolStripItem() {Modifier4ToolStripMenuItem, CollerLeTexteToolStripMenuItem3, Effacer4ToolStripMenuItem})
         ContextMenuStrip4.Name = "ContextMenuStrip4"
@@ -278,6 +340,12 @@ Partial Class frmMenu
         Modifier4ToolStripMenuItem.Name = "Modifier4ToolStripMenuItem"
         Modifier4ToolStripMenuItem.Size = New Size(225, 34)
         Modifier4ToolStripMenuItem.Text = "Modifier"
+        ' 
+        ' CollerLeTexteToolStripMenuItem3
+        ' 
+        CollerLeTexteToolStripMenuItem3.Name = "CollerLeTexteToolStripMenuItem3"
+        CollerLeTexteToolStripMenuItem3.Size = New Size(225, 34)
+        CollerLeTexteToolStripMenuItem3.Text = "Coller le texte"
         ' 
         ' Effacer4ToolStripMenuItem
         ' 
@@ -290,7 +358,7 @@ Partial Class frmMenu
         ' 
         ListBoxThursday.BackColor = SystemColors.GradientInactiveCaption
         ListBoxThursday.ContextMenuStrip = ContextMenuStrip5
-        ListBoxThursday.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ListBoxThursday.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ListBoxThursday.FormattingEnabled = True
         ListBoxThursday.Location = New Point(297, 483)
         ListBoxThursday.Name = "ListBoxThursday"
@@ -299,7 +367,7 @@ Partial Class frmMenu
         ' 
         ' ContextMenuStrip5
         ' 
-        ContextMenuStrip5.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ContextMenuStrip5.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ContextMenuStrip5.ImageScalingSize = New Size(24, 24)
         ContextMenuStrip5.Items.AddRange(New ToolStripItem() {Modifier5ToolStripMenuItem, CollerLeTexteToolStripMenuItem4, Effacer5ToolStripMenuItem})
         ContextMenuStrip5.Name = "ContextMenuStrip5"
@@ -310,6 +378,12 @@ Partial Class frmMenu
         Modifier5ToolStripMenuItem.Name = "Modifier5ToolStripMenuItem"
         Modifier5ToolStripMenuItem.Size = New Size(225, 34)
         Modifier5ToolStripMenuItem.Text = "Modifier"
+        ' 
+        ' CollerLeTexteToolStripMenuItem4
+        ' 
+        CollerLeTexteToolStripMenuItem4.Name = "CollerLeTexteToolStripMenuItem4"
+        CollerLeTexteToolStripMenuItem4.Size = New Size(225, 34)
+        CollerLeTexteToolStripMenuItem4.Text = "Coller le texte"
         ' 
         ' Effacer5ToolStripMenuItem
         ' 
@@ -322,7 +396,7 @@ Partial Class frmMenu
         ' 
         ListBoxFriday.BackColor = SystemColors.GradientInactiveCaption
         ListBoxFriday.ContextMenuStrip = ContextMenuStrip6
-        ListBoxFriday.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ListBoxFriday.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ListBoxFriday.FormattingEnabled = True
         ListBoxFriday.Location = New Point(297, 594)
         ListBoxFriday.Name = "ListBoxFriday"
@@ -331,7 +405,7 @@ Partial Class frmMenu
         ' 
         ' ContextMenuStrip6
         ' 
-        ContextMenuStrip6.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ContextMenuStrip6.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ContextMenuStrip6.ImageScalingSize = New Size(24, 24)
         ContextMenuStrip6.Items.AddRange(New ToolStripItem() {Modifier6ToolStripMenuItem, CollerLeTexteToolStripMenuItem5, Effacer6ToolStripMenuItem})
         ContextMenuStrip6.Name = "ContextMenuStrip6"
@@ -342,6 +416,12 @@ Partial Class frmMenu
         Modifier6ToolStripMenuItem.Name = "Modifier6ToolStripMenuItem"
         Modifier6ToolStripMenuItem.Size = New Size(225, 34)
         Modifier6ToolStripMenuItem.Text = "Modifier"
+        ' 
+        ' CollerLeTexteToolStripMenuItem5
+        ' 
+        CollerLeTexteToolStripMenuItem5.Name = "CollerLeTexteToolStripMenuItem5"
+        CollerLeTexteToolStripMenuItem5.Size = New Size(225, 34)
+        CollerLeTexteToolStripMenuItem5.Text = "Coller le texte"
         ' 
         ' Effacer6ToolStripMenuItem
         ' 
@@ -354,7 +434,7 @@ Partial Class frmMenu
         ' 
         ListBoxSaturday.BackColor = SystemColors.GradientInactiveCaption
         ListBoxSaturday.ContextMenuStrip = ContextMenuStrip7
-        ListBoxSaturday.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ListBoxSaturday.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ListBoxSaturday.FormattingEnabled = True
         ListBoxSaturday.Location = New Point(297, 706)
         ListBoxSaturday.Name = "ListBoxSaturday"
@@ -363,29 +443,35 @@ Partial Class frmMenu
         ' 
         ' ContextMenuStrip7
         ' 
-        ContextMenuStrip7.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ContextMenuStrip7.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ContextMenuStrip7.ImageScalingSize = New Size(24, 24)
         ContextMenuStrip7.Items.AddRange(New ToolStripItem() {Modifier7ToolStripMenuItem, CollerLeTexteToolStripMenuItem6, Effacer7ToolStripMenuItem})
         ContextMenuStrip7.Name = "ContextMenuStrip7"
-        ContextMenuStrip7.Size = New Size(249, 139)
+        ContextMenuStrip7.Size = New Size(226, 106)
         ' 
         ' Modifier7ToolStripMenuItem
         ' 
         Modifier7ToolStripMenuItem.Name = "Modifier7ToolStripMenuItem"
-        Modifier7ToolStripMenuItem.Size = New Size(248, 34)
+        Modifier7ToolStripMenuItem.Size = New Size(225, 34)
         Modifier7ToolStripMenuItem.Text = "Modifier"
+        ' 
+        ' CollerLeTexteToolStripMenuItem6
+        ' 
+        CollerLeTexteToolStripMenuItem6.Name = "CollerLeTexteToolStripMenuItem6"
+        CollerLeTexteToolStripMenuItem6.Size = New Size(225, 34)
+        CollerLeTexteToolStripMenuItem6.Text = "Coller le texte"
         ' 
         ' Effacer7ToolStripMenuItem
         ' 
         Effacer7ToolStripMenuItem.Image = CType(resources.GetObject("Effacer7ToolStripMenuItem.Image"), Image)
         Effacer7ToolStripMenuItem.Name = "Effacer7ToolStripMenuItem"
-        Effacer7ToolStripMenuItem.Size = New Size(248, 34)
+        Effacer7ToolStripMenuItem.Size = New Size(225, 34)
         Effacer7ToolStripMenuItem.Text = "Effacer"
         ' 
         ' ButtonPreview
         ' 
-        ButtonPreview.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        ButtonPreview.Location = New Point(722, 839)
+        ButtonPreview.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ButtonPreview.Location = New Point(451, 839)
         ButtonPreview.Name = "ButtonPreview"
         ButtonPreview.Size = New Size(170, 47)
         ButtonPreview.TabIndex = 22
@@ -394,55 +480,13 @@ Partial Class frmMenu
         ' 
         ' Button1Touteff
         ' 
-        Button1Touteff.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Button1Touteff.Location = New Point(574, 839)
+        Button1Touteff.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Button1Touteff.Location = New Point(627, 839)
         Button1Touteff.Name = "Button1Touteff"
         Button1Touteff.Size = New Size(142, 47)
         Button1Touteff.TabIndex = 23
         Button1Touteff.Text = "Tout Effacer"
         Button1Touteff.UseVisualStyleBackColor = True
-        ' 
-        ' CollerLeTexteToolStripMenuItem
-        ' 
-        CollerLeTexteToolStripMenuItem.Name = "CollerLeTexteToolStripMenuItem"
-        CollerLeTexteToolStripMenuItem.Size = New Size(248, 34)
-        CollerLeTexteToolStripMenuItem.Text = "Coller le texte"
-        ' 
-        ' CollerLeTexteToolStripMenuItem1
-        ' 
-        CollerLeTexteToolStripMenuItem1.Name = "CollerLeTexteToolStripMenuItem1"
-        CollerLeTexteToolStripMenuItem1.Size = New Size(248, 34)
-        CollerLeTexteToolStripMenuItem1.Text = "Coller le texte"
-        ' 
-        ' CollerLeTexteToolStripMenuItem2
-        ' 
-        CollerLeTexteToolStripMenuItem2.Name = "CollerLeTexteToolStripMenuItem2"
-        CollerLeTexteToolStripMenuItem2.Size = New Size(248, 34)
-        CollerLeTexteToolStripMenuItem2.Text = "Coller le texte"
-        ' 
-        ' CollerLeTexteToolStripMenuItem3
-        ' 
-        CollerLeTexteToolStripMenuItem3.Name = "CollerLeTexteToolStripMenuItem3"
-        CollerLeTexteToolStripMenuItem3.Size = New Size(248, 34)
-        CollerLeTexteToolStripMenuItem3.Text = "Coller le texte"
-        ' 
-        ' CollerLeTexteToolStripMenuItem4
-        ' 
-        CollerLeTexteToolStripMenuItem4.Name = "CollerLeTexteToolStripMenuItem4"
-        CollerLeTexteToolStripMenuItem4.Size = New Size(248, 34)
-        CollerLeTexteToolStripMenuItem4.Text = "Coller le texte"
-        ' 
-        ' CollerLeTexteToolStripMenuItem5
-        ' 
-        CollerLeTexteToolStripMenuItem5.Name = "CollerLeTexteToolStripMenuItem5"
-        CollerLeTexteToolStripMenuItem5.Size = New Size(248, 34)
-        CollerLeTexteToolStripMenuItem5.Text = "Coller le texte"
-        ' 
-        ' CollerLeTexteToolStripMenuItem6
-        ' 
-        CollerLeTexteToolStripMenuItem6.Name = "CollerLeTexteToolStripMenuItem6"
-        CollerLeTexteToolStripMenuItem6.Size = New Size(248, 34)
-        CollerLeTexteToolStripMenuItem6.Text = "Coller le texte"
         ' 
         ' frmMenu
         ' 
@@ -450,6 +494,10 @@ Partial Class frmMenu
         ClientSize = New Size(1041, 919)
         Controls.Add(Button1Touteff)
         Controls.Add(ButtonPreview)
+        Controls.Add(ButtonSave)
+        Controls.Add(ButtonNextWeek)
+        Controls.Add(ButtonPreviousWeek)
+        Controls.Add(LabelCurrentWeek)
         Controls.Add(ListBoxSaturday)
         Controls.Add(ListBoxFriday)
         Controls.Add(ListBoxThursday)
@@ -465,7 +513,7 @@ Partial Class frmMenu
         Controls.Add(LabelTuesday)
         Controls.Add(LabelMonday)
         Controls.Add(ButtonClose)
-        Font = New Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Font = New Font("Segoe UI", 8.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         FormBorderStyle = FormBorderStyle.FixedDialog
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         MaximizeBox = False
@@ -483,6 +531,10 @@ Partial Class frmMenu
 
     End Sub
     Friend WithEvents ButtonClose As Button
+    Friend WithEvents ButtonPreviousWeek As Button
+    Friend WithEvents ButtonNextWeek As Button
+    Friend WithEvents ButtonSave As Button
+    Friend WithEvents LabelCurrentWeek As Label
     Friend WithEvents LabelMonday As Label
     Friend WithEvents LabelTuesday As Label
     Friend WithEvents LabelWednesday As Label

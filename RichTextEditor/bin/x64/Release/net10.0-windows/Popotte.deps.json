@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v10.0": {
-      "Popotte/6.0.0.23": {
+      "Popotte/6.0.0.24": {
         "dependencies": {
           "AdvRTB": "2.0.0",
           "AdvRTB.Reference": "2.0.0.0"
@@ -33,7 +33,7 @@
     }
   },
   "libraries": {
-    "Popotte/6.0.0.23": {
+    "Popotte/6.0.0.24": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
