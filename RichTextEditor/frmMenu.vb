@@ -208,10 +208,12 @@ Public Class frmMenu
                 Case DialogResult.No
                     CurrentWeekStart = CurrentWeekStart.AddDays(-7)
                     LoadCurrentWeekMenu()
+                    ModifyMenu = False
                 Case DialogResult.Yes
                     SaveCurrentWeek()
                     CurrentWeekStart = CurrentWeekStart.AddDays(-7)
                     LoadCurrentWeekMenu()
+                    ModifyMenu = False
             End Select
         Else
             CurrentWeekStart = CurrentWeekStart.AddDays(-7)
@@ -228,10 +230,12 @@ Public Class frmMenu
                 Case DialogResult.No
                     CurrentWeekStart = CurrentWeekStart.AddDays(7)
                     LoadCurrentWeekMenu()
+                    ModifyMenu = False
                 Case DialogResult.Yes
                     SaveCurrentWeek()
                     CurrentWeekStart = CurrentWeekStart.AddDays(7)
                     LoadCurrentWeekMenu()
+                    ModifyMenu = False
             End Select
         Else
             CurrentWeekStart = CurrentWeekStart.AddDays(7)
