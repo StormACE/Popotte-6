@@ -53,6 +53,7 @@ Partial Class dlgmodifymenu
         ' TextBox1
         ' 
         TextBox1.AcceptsTab = True
+        TextBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend
         TextBox1.BorderStyle = BorderStyle.FixedSingle
         TextBox1.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         TextBox1.Location = New Point(13, 75)

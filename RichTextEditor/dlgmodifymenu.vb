@@ -1,5 +1,9 @@
 ﻿''' Copyright Martin Laflamme 2003/2026
 ''' Read licence.txt
+''' 
+Imports Microsoft.Win32
+
+
 Public Class dlgmodifymenu
 
     Dim recette As String = ""
@@ -41,6 +45,17 @@ Public Class dlgmodifymenu
         Cancel_Button.Text = LangINI.GetKeyValue("Popotte - ModifyMenu", "3")
         TextBox1.Text = recette
         TextBox1.SelectAll()
+
+        'the textbox suggest favorites
+        Dim Favcollection As AutoCompleteStringCollection = New AutoCompleteStringCollection()
+        TextBox1.AutoCompleteSource = AutoCompleteSource.CustomSource
+        Dim regKey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Favorites", True)
+        If regKey IsNot Nothing Then
+            For Each subkeyname As String In regKey.GetSubKeyNames
+                Favcollection.Add(subkeyname)
+            Next
+            TextBox1.AutoCompleteCustomSource = Favcollection
+        End If
 
     End Sub
 End Class

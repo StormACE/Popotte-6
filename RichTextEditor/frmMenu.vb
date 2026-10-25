@@ -430,56 +430,84 @@ Public Class frmMenu
     Private Sub ModifierToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ModifierToolStripMenuItem.Click
         Dim index As Integer = ListBoxSunday.SelectedIndex
         Dim mr As New dlgmodifymenu(ListBoxSunday.Items(index).ToString, ListBoxSunday, index, 1)
-        mr.ShowDialog()
-        ModifyMenu = True
+        Dim dialogR As DialogResult = mr.ShowDialog()
+        If dialogR = DialogResult.OK Then
+            ModifyMenu = True
+        Else
+            ModifyMenu = False
+        End If
         mr.Dispose()
     End Sub
 
     Private Sub Modifier2ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Modifier2ToolStripMenuItem.Click
         Dim index As Integer = ListBoxMonday.SelectedIndex
         Dim mr As New dlgmodifymenu(ListBoxMonday.Items(index).ToString, ListBoxMonday, index, 2)
-        mr.ShowDialog()
-        ModifyMenu = True
+        Dim dialogR As DialogResult = mr.ShowDialog()
+        If dialogR = DialogResult.OK Then
+            ModifyMenu = True
+        Else
+            ModifyMenu = False
+        End If
         mr.Dispose()
     End Sub
 
     Private Sub Modifier3ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Modifier3ToolStripMenuItem.Click
         Dim index As Integer = ListBoxTuesday.SelectedIndex
         Dim mr As New dlgmodifymenu(ListBoxTuesday.Items(index).ToString, ListBoxTuesday, index, 3)
-        mr.ShowDialog()
-        ModifyMenu = True
+        Dim dialogR As DialogResult = mr.ShowDialog()
+        If dialogR = DialogResult.OK Then
+            ModifyMenu = True
+        Else
+            ModifyMenu = False
+        End If
         mr.Dispose()
     End Sub
 
     Private Sub Modifier4ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Modifier4ToolStripMenuItem.Click
         Dim index As Integer = ListBoxWednesday.SelectedIndex
         Dim mr As New dlgmodifymenu(ListBoxWednesday.Items(index).ToString, ListBoxWednesday, index, 4)
-        mr.ShowDialog()
-        ModifyMenu = True
+        Dim dialogR As DialogResult = mr.ShowDialog()
+        If dialogR = DialogResult.OK Then
+            ModifyMenu = True
+        Else
+            ModifyMenu = False
+        End If
         mr.Dispose()
     End Sub
 
     Private Sub Modifier5ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Modifier5ToolStripMenuItem.Click
         Dim index As Integer = ListBoxThursday.SelectedIndex
         Dim mr As New dlgmodifymenu(ListBoxThursday.Items(index).ToString, ListBoxThursday, index, 5)
-        mr.ShowDialog()
-        ModifyMenu = True
+        Dim dialogR As DialogResult = mr.ShowDialog()
+        If dialogR = DialogResult.OK Then
+            ModifyMenu = True
+        Else
+            ModifyMenu = False
+        End If
         mr.Dispose()
     End Sub
 
     Private Sub Modifier6ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Modifier6ToolStripMenuItem.Click
         Dim index As Integer = ListBoxFriday.SelectedIndex
         Dim mr As New dlgmodifymenu(ListBoxFriday.Items(index).ToString, ListBoxFriday, index, 6)
-        mr.ShowDialog()
-        ModifyMenu = True
+        Dim dialogR As DialogResult = mr.ShowDialog()
+        If dialogR = DialogResult.OK Then
+            ModifyMenu = True
+        Else
+            ModifyMenu = False
+        End If
         mr.Dispose()
     End Sub
 
     Private Sub Modifier7ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Modifier7ToolStripMenuItem.Click
         Dim index As Integer = ListBoxSaturday.SelectedIndex
         Dim mr As New dlgmodifymenu(ListBoxSaturday.Items(index).ToString, ListBoxSaturday, index, 7)
-        mr.ShowDialog()
-        ModifyMenu = True
+        Dim dialogR As DialogResult = mr.ShowDialog()
+        If dialogR = DialogResult.OK Then
+            ModifyMenu = True
+        Else
+            ModifyMenu = False
+        End If
         mr.Dispose()
     End Sub
 
