@@ -795,8 +795,9 @@ Public Class frmMenu
 
     Private Sub Printmenu()
         Dim sb As New StringBuilder()
+        Dim weekEnd As DateTime = CurrentWeekStart.AddDays(6)
         sb.AppendLine()
-        sb.AppendLine(LangINI.GetKeyValue("Popotte - Menu", "12") & " :")
+        sb.AppendLine(String.Format(LangINI.GetKeyValue("Popotte - Menu", "12") & ": " & "{0:dd/MM/yyyy}", CurrentWeekStart, weekEnd))
         sb.AppendLine()
         sb.AppendLine(LabelSunday.Text & " :")
         sb.AppendLine(LangINI.GetKeyValue("Popotte - Menu", "13") & " :  " & ListBoxSunday.Items(0).ToString)
