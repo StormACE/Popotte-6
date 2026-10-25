@@ -10,6 +10,24 @@ Public Class frmMenu
     Private regKey As RegistryKey
     'Get Language
     Private LangINI As IniFile = frmMain.LangIni
+    Private ReadOnly PreviousWeekToolTip As New ToolTip()
+    Private ReadOnly NextWeekToolTip As New ToolTip()
+    Private ReadOnly SaveToolTip As New ToolTip()
+    Private ReadOnly PreviewToolTip As New ToolTip()
+    Private ReadOnly AllWeekToolTip As New ToolTip()
+
+    Private Sub ConfigureButtonToolTip(ByVal toolTip As ToolTip, ByVal control As Control, ByVal titleKey As String, ByVal textKey As String)
+        toolTip.UseFading = True
+        toolTip.UseAnimation = True
+        toolTip.IsBalloon = True
+        toolTip.ShowAlways = True
+        toolTip.AutoPopDelay = 2500
+        toolTip.InitialDelay = 500
+        toolTip.ReshowDelay = 500
+        toolTip.ToolTipIcon = ToolTipIcon.Info
+        toolTip.ToolTipTitle = LangINI.GetKeyValue("Popotte - Menu - Tooltips", titleKey)
+        toolTip.SetToolTip(control, LangINI.GetKeyValue("Popotte - Menu - Tooltips", textKey))
+    End Sub
 
     Private CurrentWeekStart As DateTime = GetStartOfWeek(DateTime.Today)
     Private ReadOnly WeekDayNames As String() = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"}
@@ -91,49 +109,6 @@ Public Class frmMenu
     End Sub
 
     Private Sub LoadCurrentWeekMenu()
-        CenterToScreen()
-
-        Text = LangINI.GetKeyValue("Popotte - Menu", "12")
-        LabelSunday.Text = LangINI.GetKeyValue("Popotte - Menu", "2")
-        LabelMonday.Text = LangINI.GetKeyValue("Popotte - Menu", "3")
-        LabelTuesday.Text = LangINI.GetKeyValue("Popotte - Menu", "4")
-        LabelWednesday.Text = LangINI.GetKeyValue("Popotte - Menu", "5")
-        LabelThursday.Text = LangINI.GetKeyValue("Popotte - Menu", "6")
-        LabelFriday.Text = LangINI.GetKeyValue("Popotte - Menu", "7")
-        LabelSaturday.Text = LangINI.GetKeyValue("Popotte - Menu", "8")
-
-        ButtonPreview.Text = LangINI.GetKeyValue("Popotte - Menu", "16")
-        Button1Touteff.Text = LangINI.GetKeyValue("Popotte - Menu", "17")
-        ButtonNextWeek.Text = LangINI.GetKeyValue("Popotte - Menu", "19")
-        ButtonPreviousWeek.Text = LangINI.GetKeyValue("Popotte - Menu", "18")
-        ButtonSave.Text = LangINI.GetKeyValue("Popotte - Menu", "21")
-        ButtonPreviousWeek.Visible = True
-        ButtonNextWeek.Visible = True
-        ButtonSave.Visible = True
-        LabelCurrentWeek.Visible = True
-
-        ModifierToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "10")
-        EffacerToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "11")
-        Modifier2ToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "10")
-        Effacer2ToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "11")
-        Modifier3ToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "10")
-        Effacer3ToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "11")
-        Modifier4ToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "10")
-        Effacer4ToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "11")
-        Modifier5ToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "10")
-        Effacer5ToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "11")
-        Modifier6ToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "10")
-        Effacer6ToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "11")
-        Modifier7ToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "10")
-        Effacer7ToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "11")
-
-        CollerLeTexteToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "20")
-        CollerLeTexteToolStripMenuItem1.Text = LangINI.GetKeyValue("Popotte - Menu", "20")
-        CollerLeTexteToolStripMenuItem2.Text = LangINI.GetKeyValue("Popotte - Menu", "20")
-        CollerLeTexteToolStripMenuItem3.Text = LangINI.GetKeyValue("Popotte - Menu", "20")
-        CollerLeTexteToolStripMenuItem4.Text = LangINI.GetKeyValue("Popotte - Menu", "20")
-        CollerLeTexteToolStripMenuItem5.Text = LangINI.GetKeyValue("Popotte - Menu", "20")
-        CollerLeTexteToolStripMenuItem6.Text = LangINI.GetKeyValue("Popotte - Menu", "20")
 
         Dim weekKey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Weeks\" & CurrentWeekStart.ToString("yyyy-MM-dd"), False)
         For Each dayName As String In WeekDayNames
@@ -249,6 +224,58 @@ Public Class frmMenu
     End Sub
 
     Private Sub FrmMenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        CenterToScreen()
+
+        Text = LangINI.GetKeyValue("Popotte - Menu", "12")
+        LabelSunday.Text = LangINI.GetKeyValue("Popotte - Menu", "2")
+        LabelMonday.Text = LangINI.GetKeyValue("Popotte - Menu", "3")
+        LabelTuesday.Text = LangINI.GetKeyValue("Popotte - Menu", "4")
+        LabelWednesday.Text = LangINI.GetKeyValue("Popotte - Menu", "5")
+        LabelThursday.Text = LangINI.GetKeyValue("Popotte - Menu", "6")
+        LabelFriday.Text = LangINI.GetKeyValue("Popotte - Menu", "7")
+        LabelSaturday.Text = LangINI.GetKeyValue("Popotte - Menu", "8")
+
+        ButtonPreview.Text = LangINI.GetKeyValue("Popotte - Menu", "16")
+        Button1Touteff.Text = LangINI.GetKeyValue("Popotte - Menu", "17")
+        ButtonNextWeek.Text = LangINI.GetKeyValue("Popotte - Menu", "19")
+        ButtonPreviousWeek.Text = LangINI.GetKeyValue("Popotte - Menu", "18")
+        ButtonSave.Text = LangINI.GetKeyValue("Popotte - Menu", "21")
+        ButtonPreviousWeek.Visible = True
+        ButtonNextWeek.Visible = True
+        ButtonSave.Visible = True
+        LabelCurrentWeek.Visible = True
+
+        ModifierToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "10")
+        EffacerToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "11")
+        Modifier2ToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "10")
+        Effacer2ToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "11")
+        Modifier3ToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "10")
+        Effacer3ToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "11")
+        Modifier4ToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "10")
+        Effacer4ToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "11")
+        Modifier5ToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "10")
+        Effacer5ToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "11")
+        Modifier6ToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "10")
+        Effacer6ToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "11")
+        Modifier7ToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "10")
+        Effacer7ToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "11")
+
+        CollerLeTexteToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "20")
+        CollerLeTexteToolStripMenuItem1.Text = LangINI.GetKeyValue("Popotte - Menu", "20")
+        CollerLeTexteToolStripMenuItem2.Text = LangINI.GetKeyValue("Popotte - Menu", "20")
+        CollerLeTexteToolStripMenuItem3.Text = LangINI.GetKeyValue("Popotte - Menu", "20")
+        CollerLeTexteToolStripMenuItem4.Text = LangINI.GetKeyValue("Popotte - Menu", "20")
+        CollerLeTexteToolStripMenuItem5.Text = LangINI.GetKeyValue("Popotte - Menu", "20")
+        CollerLeTexteToolStripMenuItem6.Text = LangINI.GetKeyValue("Popotte - Menu", "20")
+
+        'Add ToolTips To Controls
+        ConfigureButtonToolTip(PreviousWeekToolTip, ButtonPreviousWeek, "1", "2")
+        ConfigureButtonToolTip(NextWeekToolTip, ButtonNextWeek, "3", "4")
+        ConfigureButtonToolTip(SaveToolTip, ButtonSave, "5", "6")
+        ConfigureButtonToolTip(PreviewToolTip, ButtonPreview, "7", "8")
+        ConfigureButtonToolTip(AllWeekToolTip, Button1Touteff, "9", "10")
+
+        'here we load the menu for the current week, if no menu is found, we load the default menu
         LoadCurrentWeekMenu()
     End Sub
 
