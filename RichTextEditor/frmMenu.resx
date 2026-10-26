@@ -671,7 +671,7 @@
 </value>
   </data>
   <metadata name="ContextMenuStrip7.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1337, 17</value>
+    <value>1332, 16</value>
   </metadata>
   <data name="Effacer7ToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

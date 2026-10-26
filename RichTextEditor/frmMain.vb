@@ -1223,6 +1223,33 @@ Public Class frmMain
     End Sub
 
 
+    Public Sub LoadRecipeFromMenu(ByVal filePath As String)
+        If rtbDoc.Modified Then
+            Dim answer As DialogResult = MessageBox.Show(LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "11"), LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "7"), MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation)
+            If answer = DialogResult.Cancel Then
+                Return
+            End If
+            If answer = DialogResult.Yes Then
+                SaveToolStripMenuItem_Click(Me, EventArgs.Empty)
+                If rtbDoc.Modified Then
+                    Return
+                End If
+            End If
+        End If
+
+        rtbDoc.LoadFile(filePath, RichTextBoxStreamType.RichText)
+        currentFile = filePath
+        Me.Text = "Popotte - [" & filePath & "]"
+        rtbDoc.Modified = False
+        LivreOuvert = ""
+
+        Using recentRecipeKey As RegistryKey = Registry.CurrentUser.CreateSubKey("Software\Popotte\Settings\DerRecette")
+            recentRecipeKey.SetValue("DerRecette", currentFile)
+            recentRecipeKey.SetValue("Livre", "")
+            recentRecipeKey.SetValue("Recette", "")
+        End Using
+    End Sub
+
     Private Sub OpenFile()
 
         OpenFileDialog1.Title = "Popotte - " & LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "78")

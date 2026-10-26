@@ -2,14 +2,27 @@
 ''' Read licence.txt
 
 
+Imports System.IO
 Imports System.Text
 Imports Microsoft.Win32
 
 Public Class frmMenu
 
+    Private Class IndexedRecipe
+        Public ReadOnly Property FileName As String
+        Public ReadOnly Property FolderPath As String
+
+        Public Sub New(ByVal fullPath As String)
+            FileName = Path.GetFileName(fullPath)
+            FolderPath = Path.GetDirectoryName(fullPath)
+        End Sub
+    End Class
+
     Private regKey As RegistryKey
     'Get Language
     Private LangINI As IniFile = frmMain.LangIni
+    Private ReadOnly RecipeIndex As New Dictionary(Of String, List(Of IndexedRecipe))(StringComparer.OrdinalIgnoreCase)
+    Private ReadOnly LoadRecipeMenuItems As New Dictionary(Of ContextMenuStrip, ToolStripMenuItem)
 
     Private CurrentWeekStart As DateTime = GetStartOfWeek(DateTime.Today)
     Private ReadOnly WeekDayNames As String() = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"}
@@ -285,6 +298,17 @@ Public Class frmMenu
         ConfigureButtonToolTip(PreviewToolTip, ButtonPreview, "7", "8")
         ConfigureButtonToolTip(AllWeekToolTip, Button1Touteff, "9", "10")
 
+        'indexation of the recipe files
+        IndexRecipeFiles()
+        'Create the "Load Recipe" menu item for each context menu and associate it with the corresponding ListBox
+        AddRecipeLoadMenuItem(ContextMenuStrip1, ListBoxSunday)
+        AddRecipeLoadMenuItem(ContextMenuStrip2, ListBoxMonday)
+        AddRecipeLoadMenuItem(ContextMenuStrip3, ListBoxTuesday)
+        AddRecipeLoadMenuItem(ContextMenuStrip4, ListBoxWednesday)
+        AddRecipeLoadMenuItem(ContextMenuStrip5, ListBoxThursday)
+        AddRecipeLoadMenuItem(ContextMenuStrip6, ListBoxFriday)
+        AddRecipeLoadMenuItem(ContextMenuStrip7, ListBoxSaturday)
+
         'here we load the menu for the current week, if no menu is found, we load the default menu
         LoadCurrentWeekMenu()
     End Sub
@@ -302,6 +326,145 @@ Public Class frmMenu
             End Select
         End If
     End Sub
+
+    Private Sub FrmMenu_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        RecipeIndex.Clear()
+        LoadRecipeMenuItems.Clear()
+    End Sub
+
+    Private Sub IndexRecipeFiles()
+        RecipeIndex.Clear()
+        Dim recipeDirectory As String = frmMain.PopotteDir
+
+        If Not Directory.Exists(recipeDirectory) Then
+            MessageBox.Show(LangINI.GetKeyValue("Popotte - MenuDialogue - MessageBox", "2") & " : " & Environment.NewLine & recipeDirectory, "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        Dim indexingErrors As New List(Of String)
+        IndexRecipeDirectory(recipeDirectory, indexingErrors)
+        If indexingErrors.Count > 0 Then
+            MessageBox.Show(LangINI.GetKeyValue("Popotte - MenuDialogue - MessageBox", "3") & " : " & Environment.NewLine & String.Join(Environment.NewLine, indexingErrors), "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        End If
+    End Sub
+
+    Private Sub IndexRecipeDirectory(ByVal directoryPath As String, ByVal indexingErrors As List(Of String))
+        Dim filePaths As String()
+        Try
+            filePaths = Directory.GetFiles(directoryPath)
+        Catch ex As UnauthorizedAccessException
+            indexingErrors.Add(directoryPath & " : " & ex.Message)
+            Return
+        Catch ex As IOException
+            indexingErrors.Add(directoryPath & " : " & ex.Message)
+            Return
+        End Try
+
+        Array.Sort(filePaths, StringComparer.OrdinalIgnoreCase)
+        For Each filePath As String In filePaths
+            Dim recipe As New IndexedRecipe(filePath)
+            AddRecipeIndexEntry(recipe.FileName, recipe)
+            AddRecipeIndexEntry(Path.GetFileNameWithoutExtension(recipe.FileName), recipe)
+        Next
+
+        Dim childDirectories As String()
+        Try
+            childDirectories = Directory.GetDirectories(directoryPath)
+        Catch ex As UnauthorizedAccessException
+            indexingErrors.Add(directoryPath & " : " & ex.Message)
+            Return
+        Catch ex As IOException
+            indexingErrors.Add(directoryPath & " : " & ex.Message)
+            Return
+        End Try
+
+        Array.Sort(childDirectories, StringComparer.OrdinalIgnoreCase)
+        For Each childDirectory As String In childDirectories
+            IndexRecipeDirectory(childDirectory, indexingErrors)
+        Next
+    End Sub
+
+    Private Sub AddRecipeIndexEntry(ByVal key As String, ByVal recipe As IndexedRecipe)
+        If String.IsNullOrWhiteSpace(key) Then
+            Return
+        End If
+
+        Dim recipes As List(Of IndexedRecipe) = Nothing
+        If Not RecipeIndex.TryGetValue(key, recipes) Then
+            recipes = New List(Of IndexedRecipe)
+            RecipeIndex.Add(key, recipes)
+        End If
+        recipes.Add(recipe)
+    End Sub
+
+    Private Sub AddRecipeLoadMenuItem(ByVal contextMenu As ContextMenuStrip, ByVal listBox As ListBox)
+        Dim menuItem As New ToolStripMenuItem(LangINI.GetKeyValue("Popotte - Menu", "25"))
+        menuItem.Tag = listBox
+        menuItem.Enabled = False
+        AddHandler menuItem.Click, AddressOf LoadSelectedRecipe_Click
+        contextMenu.Items.Insert(0, New ToolStripSeparator())
+        contextMenu.Items.Insert(0, menuItem)
+        LoadRecipeMenuItems.Add(contextMenu, menuItem)
+        AddHandler contextMenu.Opening, AddressOf RecipeContextMenuStrip_Opening
+    End Sub
+
+    Private Sub RecipeContextMenuStrip_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs)
+        Dim contextMenu As ContextMenuStrip = DirectCast(sender, ContextMenuStrip)
+        Dim menuItem As ToolStripMenuItem = LoadRecipeMenuItems(contextMenu)
+        Dim listBox As ListBox = DirectCast(menuItem.Tag, ListBox)
+        menuItem.Enabled = listBox.SelectedIndex >= 0
+    End Sub
+
+    Private Sub LoadSelectedRecipe_Click(sender As Object, e As EventArgs)
+        Dim menuItem As ToolStripMenuItem = DirectCast(sender, ToolStripMenuItem)
+        Dim listBox As ListBox = DirectCast(menuItem.Tag, ListBox)
+        If listBox.SelectedIndex < 0 Then
+            Return
+        End If
+
+        Dim selectedRecipeName As String = listBox.SelectedItem.ToString().Trim()
+        Dim indexedRecipe As IndexedRecipe = FindIndexedRtfRecipe(selectedRecipeName)
+        If indexedRecipe Is Nothing Then
+            MessageBox.Show(LangINI.GetKeyValue("Popotte - MenuDialogue - MessageBox", "4") & Environment.NewLine & " « " & selectedRecipeName & " » " & Environment.NewLine & LangINI.GetKeyValue("Popotte - MenuDialogue - MessageBox", "5"), "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Return
+        End If
+
+        Try
+            frmMain.LoadRecipeFromMenu(Path.Combine(indexedRecipe.FolderPath, indexedRecipe.FileName))
+            frmMain.LivreOuvert = Path.GetFileName(indexedRecipe.FolderPath)
+            frmMain.currentFile = Path.Combine(indexedRecipe.FolderPath, indexedRecipe.FileName)
+            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\DerRecette", True)
+            regKey.SetValue("DerRecette", frmMain.currentFile)
+            regKey.SetValue("Livre", frmMain.LivreOuvert)
+            regKey.SetValue("Recette", indexedRecipe.FileName)
+        Catch ex As IOException
+            MessageBox.Show(LangINI.GetKeyValue("Popotte - MenuDialogue - MessageBox", "6") & " : " & ex.Message, "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Catch ex As UnauthorizedAccessException
+            MessageBox.Show(LangINI.GetKeyValue("Popotte - MenuDialogue - MessageBox", "6") & " : " & ex.Message, "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Catch ex As ArgumentException
+            MessageBox.Show(LangINI.GetKeyValue("Popotte - MenuDialogue - MessageBox", "7") & " : " & ex.Message, "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Function FindIndexedRtfRecipe(ByVal recipeName As String) As IndexedRecipe
+        If String.IsNullOrWhiteSpace(recipeName) Then
+            Return Nothing
+        End If
+
+        Dim searchKeys As String() = {recipeName, Path.GetFileName(recipeName), Path.GetFileNameWithoutExtension(recipeName)}
+        For Each searchKey As String In searchKeys
+            Dim recipes As List(Of IndexedRecipe) = Nothing
+            If RecipeIndex.TryGetValue(searchKey, recipes) Then
+                For Each recipe As IndexedRecipe In recipes
+                    If String.Equals(Path.GetExtension(recipe.FileName), ".rtf", StringComparison.OrdinalIgnoreCase) Then
+                        Return recipe
+                    End If
+                Next
+            End If
+        Next
+
+        Return Nothing
+    End Function
 
     Private Sub ContextMenuStrip1_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles ContextMenuStrip1.Opening
         If ListBoxSunday.SelectedItems.Count > 0 Then

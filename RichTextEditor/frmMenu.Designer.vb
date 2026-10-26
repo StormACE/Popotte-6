@@ -229,41 +229,41 @@ Partial Class frmMenu
         ContextMenuStrip1.ImageScalingSize = New Size(24, 24)
         ContextMenuStrip1.Items.AddRange(New ToolStripItem() {ModifierToolStripMenuItem, ToolStripSeparator1, CopierLeTexteToolStripMenuItem, CollerLeTexteToolStripMenuItem, ToolStripSeparator2, EffacerToolStripMenuItem})
         ContextMenuStrip1.Name = "ContextMenuStrip1"
-        ContextMenuStrip1.Size = New Size(232, 152)
+        ContextMenuStrip1.Size = New Size(249, 185)
         ' 
         ' ModifierToolStripMenuItem
         ' 
         ModifierToolStripMenuItem.Name = "ModifierToolStripMenuItem"
-        ModifierToolStripMenuItem.Size = New Size(231, 34)
+        ModifierToolStripMenuItem.Size = New Size(248, 34)
         ModifierToolStripMenuItem.Text = "Modifier"
         ' 
         ' ToolStripSeparator1
         ' 
         ToolStripSeparator1.Name = "ToolStripSeparator1"
-        ToolStripSeparator1.Size = New Size(228, 6)
+        ToolStripSeparator1.Size = New Size(245, 6)
         ' 
         ' CopierLeTexteToolStripMenuItem
         ' 
         CopierLeTexteToolStripMenuItem.Name = "CopierLeTexteToolStripMenuItem"
-        CopierLeTexteToolStripMenuItem.Size = New Size(231, 34)
+        CopierLeTexteToolStripMenuItem.Size = New Size(248, 34)
         CopierLeTexteToolStripMenuItem.Text = "Copier le texte"
         ' 
         ' CollerLeTexteToolStripMenuItem
         ' 
         CollerLeTexteToolStripMenuItem.Name = "CollerLeTexteToolStripMenuItem"
-        CollerLeTexteToolStripMenuItem.Size = New Size(231, 34)
+        CollerLeTexteToolStripMenuItem.Size = New Size(248, 34)
         CollerLeTexteToolStripMenuItem.Text = "Coller le texte"
         ' 
         ' ToolStripSeparator2
         ' 
         ToolStripSeparator2.Name = "ToolStripSeparator2"
-        ToolStripSeparator2.Size = New Size(228, 6)
+        ToolStripSeparator2.Size = New Size(245, 6)
         ' 
         ' EffacerToolStripMenuItem
         ' 
         EffacerToolStripMenuItem.Image = CType(resources.GetObject("EffacerToolStripMenuItem.Image"), Image)
         EffacerToolStripMenuItem.Name = "EffacerToolStripMenuItem"
-        EffacerToolStripMenuItem.Size = New Size(231, 34)
+        EffacerToolStripMenuItem.Size = New Size(248, 34)
         EffacerToolStripMenuItem.Text = "Effacer"
         ' 
         ' ListBoxMonday
