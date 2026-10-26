@@ -931,7 +931,8 @@ Public Class dlgLivres
                 Me.RevenirButton.Enabled = True
                 If ListViewRecherche.Items.Count > 0 Then ListViewRecherche.Items(ListViewRecherche.Items.Count - 1).EnsureVisible()
                 Me.Text = "Popotte - " & LangINI.GetKeyValue("Popotte - BooksDialog", "18") & RecetteTotalCount & LangINI.GetKeyValue("Popotte - BooksDialog", "19")
-                ListViewRecherche.Focus()
+                ListViewRecherche.Items(0).Selected = True
+                ListViewRecherche.Items(0).EnsureVisible()
                 If RecetteTotalCount = 0 Then
                     MsgBox(LangINI.GetKeyValue("Popotte - BooksDialog - MessageBox", "2"), MsgBoxStyle.Exclamation, "Popotte")
                 End If
