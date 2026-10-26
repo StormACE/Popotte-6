@@ -10,6 +10,13 @@ Public Class frmMenu
     Private regKey As RegistryKey
     'Get Language
     Private LangINI As IniFile = frmMain.LangIni
+
+    Private CurrentWeekStart As DateTime = GetStartOfWeek(DateTime.Today)
+    Private ReadOnly WeekDayNames As String() = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"}
+
+    Private ModifyMenu As Boolean = False
+
+    'Setup ToolTips for buttons
     Private ReadOnly PreviousWeekToolTip As New ToolTip()
     Private ReadOnly NextWeekToolTip As New ToolTip()
     Private ReadOnly SaveToolTip As New ToolTip()
@@ -28,11 +35,6 @@ Public Class frmMenu
         toolTip.ToolTipTitle = LangINI.GetKeyValue("Popotte - Menu - Tooltips", titleKey)
         toolTip.SetToolTip(control, LangINI.GetKeyValue("Popotte - Menu - Tooltips", textKey))
     End Sub
-
-    Private CurrentWeekStart As DateTime = GetStartOfWeek(DateTime.Today)
-    Private ReadOnly WeekDayNames As String() = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"}
-
-    Private ModifyMenu As Boolean = False
 
     Private Function GetStartOfWeek(ByVal value As DateTime) As DateTime
         Dim targetDate As DateTime = value.Date
@@ -268,6 +270,14 @@ Public Class frmMenu
         CollerLeTexteToolStripMenuItem5.Text = LangINI.GetKeyValue("Popotte - Menu", "20")
         CollerLeTexteToolStripMenuItem6.Text = LangINI.GetKeyValue("Popotte - Menu", "20")
 
+        CopierLeTexteToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - Menu", "24")
+        CopierLeTexteToolStripMenuItem1.Text = LangINI.GetKeyValue("Popotte - Menu", "24")
+        CopierLeTexteToolStripMenuItem2.Text = LangINI.GetKeyValue("Popotte - Menu", "24")
+        CopierLeTexteToolStripMenuItem3.Text = LangINI.GetKeyValue("Popotte - Menu", "24")
+        CopierLeTexteToolStripMenuItem4.Text = LangINI.GetKeyValue("Popotte - Menu", "24")
+        CopierLeTexteToolStripMenuItem5.Text = LangINI.GetKeyValue("Popotte - Menu", "24")
+        CopierLetexteToolStripMenuItem6.Text = LangINI.GetKeyValue("Popotte - Menu", "24")
+
         'Add ToolTips To Controls
         ConfigureButtonToolTip(PreviousWeekToolTip, ButtonPreviousWeek, "1", "2")
         ConfigureButtonToolTip(NextWeekToolTip, ButtonNextWeek, "3", "4")
@@ -303,9 +313,12 @@ Public Class frmMenu
             End If
             EffacerToolStripMenuItem.Enabled = True
             ModifierToolStripMenuItem.Enabled = True
+            CopierLeTexteToolStripMenuItem.Enabled = True
         Else
             EffacerToolStripMenuItem.Enabled = False
             ModifierToolStripMenuItem.Enabled = False
+            CollerLeTexteToolStripMenuItem.Enabled = False
+            CopierLeTexteToolStripMenuItem.Enabled = False
         End If
     End Sub
 
@@ -319,9 +332,12 @@ Public Class frmMenu
             End If
             Effacer2ToolStripMenuItem.Enabled = True
             Modifier2ToolStripMenuItem.Enabled = True
+            CopierLeTexteToolStripMenuItem1.Enabled = True
         Else
             Effacer2ToolStripMenuItem.Enabled = False
             Modifier2ToolStripMenuItem.Enabled = False
+            CollerLeTexteToolStripMenuItem1.Enabled = False
+            CopierLeTexteToolStripMenuItem1.Enabled = False
         End If
     End Sub
 
@@ -335,9 +351,12 @@ Public Class frmMenu
             End If
             Effacer3ToolStripMenuItem.Enabled = True
             Modifier3ToolStripMenuItem.Enabled = True
+            CopierLeTexteToolStripMenuItem2.Enabled = True
         Else
             Effacer3ToolStripMenuItem.Enabled = False
             Modifier3ToolStripMenuItem.Enabled = False
+            CollerLeTexteToolStripMenuItem2.Enabled = False
+            CopierLeTexteToolStripMenuItem2.Enabled = False
         End If
     End Sub
 
@@ -351,9 +370,12 @@ Public Class frmMenu
             End If
             Effacer4ToolStripMenuItem.Enabled = True
             Modifier4ToolStripMenuItem.Enabled = True
+            CopierLeTexteToolStripMenuItem3.Enabled = True
         Else
             Effacer4ToolStripMenuItem.Enabled = False
             Modifier4ToolStripMenuItem.Enabled = False
+            CollerLeTexteToolStripMenuItem3.Enabled = False
+            CopierLeTexteToolStripMenuItem3.Enabled = False
         End If
     End Sub
 
@@ -367,9 +389,12 @@ Public Class frmMenu
             End If
             Effacer5ToolStripMenuItem.Enabled = True
             Modifier5ToolStripMenuItem.Enabled = True
+            CopierLeTexteToolStripMenuItem4.Enabled = True
         Else
             Effacer5ToolStripMenuItem.Enabled = False
             Modifier5ToolStripMenuItem.Enabled = False
+            CollerLeTexteToolStripMenuItem4.Enabled = False
+            CopierLeTexteToolStripMenuItem4.Enabled = False
         End If
     End Sub
 
@@ -383,9 +408,12 @@ Public Class frmMenu
             End If
             Effacer6ToolStripMenuItem.Enabled = True
             Modifier6ToolStripMenuItem.Enabled = True
+            CopierLeTexteToolStripMenuItem5.Enabled = True
         Else
             Effacer6ToolStripMenuItem.Enabled = False
             Modifier6ToolStripMenuItem.Enabled = False
+            CollerLeTexteToolStripMenuItem5.Enabled = False
+            CopierLeTexteToolStripMenuItem5.Enabled = False
         End If
     End Sub
 
@@ -399,9 +427,12 @@ Public Class frmMenu
             End If
             Effacer7ToolStripMenuItem.Enabled = True
             Modifier7ToolStripMenuItem.Enabled = True
+            CopierLetexteToolStripMenuItem6.Enabled = True
         Else
             Effacer7ToolStripMenuItem.Enabled = False
             Modifier7ToolStripMenuItem.Enabled = False
+            CollerLeTexteToolStripMenuItem6.Enabled = False
+            CopierLetexteToolStripMenuItem6.Enabled = False
         End If
     End Sub
 
@@ -614,6 +645,66 @@ Public Class frmMenu
             ListBoxSaturday.Items(index) = clipttext
             ModifyMenu = True
         End If
+    End Sub
+
+    Private Sub CopierLeTexteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CopierLeTexteToolStripMenuItem.Click
+        Copytextfromlistbox(ListBoxSunday)
+    End Sub
+
+    Private Sub CopierLeTexteToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles CopierLeTexteToolStripMenuItem1.Click
+        Copytextfromlistbox(ListBoxMonday)
+    End Sub
+
+    Private Sub CopierLeTexteToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles CopierLeTexteToolStripMenuItem2.Click
+        Copytextfromlistbox(ListBoxTuesday)
+    End Sub
+
+    Private Sub CopierLeTexteToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles CopierLeTexteToolStripMenuItem3.Click
+        Copytextfromlistbox(ListBoxWednesday)
+    End Sub
+
+    Private Sub CopierLeTexteToolStripMenuItem4_Click(sender As Object, e As EventArgs) Handles CopierLeTexteToolStripMenuItem4.Click
+        Copytextfromlistbox(ListBoxFriday)
+    End Sub
+
+    Private Sub CopierLeTexteToolStripMenuItem5_Click(sender As Object, e As EventArgs) Handles CopierLeTexteToolStripMenuItem5.Click
+        Copytextfromlistbox(ListBoxSaturday)
+    End Sub
+
+    Private Sub CopierLetexteToolStripMenuItem6_Click(sender As Object, e As EventArgs) Handles CopierLetexteToolStripMenuItem6.Click
+        Copytextfromlistbox(ListBoxThursday)
+    End Sub
+
+    Private Sub Copytextfromlistbox(listbox As ListBox)
+        Clipboard.SetText(listbox.SelectedItem.ToString())
+    End Sub
+
+    Private Sub ListBoxSunday_MouseDoubleClick(sender As Object, e As EventArgs) Handles ListBoxSunday.MouseDoubleClick
+        ModifierToolStripMenuItem_Click(sender, e)
+    End Sub
+
+    Private Sub ListBoxMonday_MouseDoubleClick(sender As Object, e As EventArgs) Handles ListBoxMonday.MouseDoubleClick
+        Modifier2ToolStripMenuItem_Click(sender, e)
+    End Sub
+
+    Private Sub ListBoxTuesday_MouseDoubleClick(sender As Object, e As EventArgs) Handles ListBoxTuesday.MouseDoubleClick
+        Modifier3ToolStripMenuItem_Click(sender, e)
+    End Sub
+
+    Private Sub ListBoxWednesday_MouseDoubleClick(sender As Object, e As EventArgs) Handles ListBoxWednesday.MouseDoubleClick
+        Modifier4ToolStripMenuItem_Click(sender, e)
+    End Sub
+
+    Private Sub ListBoxThursday_MouseDoubleClick(sender As Object, e As EventArgs) Handles ListBoxThursday.MouseDoubleClick
+        Modifier5ToolStripMenuItem_Click(sender, e)
+    End Sub
+
+    Private Sub ListBoxFriday_MouseDoubleClick(sender As Object, e As EventArgs) Handles ListBoxFriday.MouseDoubleClick
+        Modifier6ToolStripMenuItem_Click(sender, e)
+    End Sub
+
+    Private Sub ListBoxSaturday_MouseDoubleClick(sender As Object, e As EventArgs) Handles ListBoxSaturday.MouseDoubleClick
+        Modifier7ToolStripMenuItem_Click(sender, e)
     End Sub
 
 

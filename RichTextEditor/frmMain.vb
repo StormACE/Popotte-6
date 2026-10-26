@@ -3295,6 +3295,18 @@ Public Class frmMain
     End Sub
 
     Private Sub ToolStripMenuItemMenu_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemMenu.Click
+        For Each openForm As Form In Application.OpenForms
+            If TypeOf openForm Is frmMenu Then
+                Dim menuForm As frmMenu = DirectCast(openForm, frmMenu)
+                If menuForm.WindowState = FormWindowState.Minimized Then
+                    menuForm.WindowState = FormWindowState.Normal
+                End If
+                menuForm.BringToFront()
+                menuForm.Activate()
+                Return
+            End If
+        Next
+
         Dim mn As New frmMenu
         mn.Show()
     End Sub
