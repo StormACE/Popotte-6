@@ -58,7 +58,8 @@ Public Class dlgLivres
         OuvrirAvecEditeurExterneToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - BooksDialog - Contextmenu", "5")
         EffacerLaRecetteToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - BooksDialog - Contextmenu", "6")
         EnleverFavToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - BooksDialog - Contextmenu", "7")
-        ToolStripMenuItemFAV.Text = LangINI.GetKeyValue("Popotte - BooksDialog - Contextmenu", "8")
+        RecetteFavorisToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - BooksDialog - Contextmenu", "8")
+        RechercheFavorisToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - BooksDialog - Contextmenu", "8")
 
 
         ' Set ListViewLivres Properties
@@ -480,12 +481,12 @@ Public Class dlgLivres
                 RecetteContextMenuStrip.Show(ListViewRecettes, New Point(e.X, e.Y))
                 EffacerLaRecetteToolStripMenuItem.Enabled = False
                 OuvrirAvecEditeurExterneToolStripMenuItem.Enabled = False
-                ToolStripMenuItemFAV.Enabled = False
+                RecetteFavorisToolStripMenuItem.Enabled = False
             ElseIf ListViewRecettes.SelectedItems.Count = 1 Then
                 RecetteContextMenuStrip.Show(ListViewRecettes, New Point(e.X, e.Y))
                 EffacerLaRecetteToolStripMenuItem.Enabled = True
                 OuvrirAvecEditeurExterneToolStripMenuItem.Enabled = True
-                ToolStripMenuItemFAV.Enabled = True
+                RecetteFavorisToolStripMenuItem.Enabled = True
             End If
         End If
     End Sub
@@ -903,6 +904,8 @@ Public Class dlgLivres
         ButtonRecherche.Enabled = False
         ButtonRecherche.Refresh()
         TextBoxRecherche.Enabled = False
+        ListViewRecherche.ContextMenuStrip = RechercheContextMenuStrip
+
         Dim rechercheListUpdate As Boolean = False
         Try
             If _recetteLoader IsNot Nothing Then
@@ -914,6 +917,7 @@ Public Class dlgLivres
             If RechercheTexte <> "" Then
                 ListViewRecettes.Visible = False
                 ListViewRecherche.Visible = True
+
                 Fav = False
                 Me.Text = "Popotte - " & LangINI.GetKeyValue("Popotte - BooksDialog", "18") & 0 & LangINI.GetKeyValue("Popotte - BooksDialog", "19")
                 Me.Cursor = Cursors.WaitCursor
@@ -1078,6 +1082,8 @@ Public Class dlgLivres
         ListViewRecherche.Items.Clear()
         ListViewRecettes.Visible = False
         ListViewRecherche.Visible = True
+        ListViewRecherche.ContextMenuStrip = FavorisContextMenuStrip
+
         Text = "Popotte - " & LangINI.GetKeyValue("Popotte - BooksDialog", "20")
 
         Dim RecetteTotalCount As Integer = 0
@@ -1190,7 +1196,7 @@ Public Class dlgLivres
 
     Private Sub EnleverFavToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EnleverFavToolStripMenuItem.Click
         regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Favorites", True)
-        Dim NomRecette As String = ListViewRecherche.SelectedItems(0).Text
+        Dim NomRecette = ListViewRecherche.SelectedItems(0).Text
         regKey.DeleteSubKey(NomRecette)
         'remove item from list
         ListViewRecherche.FocusedItem.Remove()
@@ -1377,7 +1383,7 @@ Public Class dlgLivres
     End Sub
 
 
-    Private Sub ToolStripMenuItemFAV_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemFAV.Click
+    Private Sub RecetteFavorisToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RecetteFavorisToolStripMenuItem.Click
         If ListViewRecettes.SelectedItems.Count = 1 Then
             regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Favorites", True)
             If regKey Is Nothing Then
@@ -1391,6 +1397,30 @@ Public Class dlgLivres
             Else
                 Livre = frmMain.LivreOuvert
             End If
+
+            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Favorites\" & NomRecette, True)
+
+            If regKey Is Nothing Then
+                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Favorites", True)
+                regKey.CreateSubKey(NomRecette.Trim)
+                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Favorites\" & NomRecette, True)
+                regKey.SetValue("Livre", Livre)
+                MessageBox.Show(Me, LangINI.GetKeyValue("Popotte - BooksDialog - MessageBox", "9"), LangINI.GetKeyValue("Popotte - BooksDialog - MessageBox", "8"), MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Else
+                MessageBox.Show(LangINI.GetKeyValue("Popotte - BooksDialog - MessageBox", "10"), LangINI.GetKeyValue("Popotte - BooksDialog - MessageBox", "8"), MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+        End If
+    End Sub
+
+    Private Sub RechercheFavorisToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RechercheFavorisToolStripMenuItem.Click
+        If ListViewRecherche.SelectedItems.Count = 1 Then
+            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Favorites", True)
+            If regKey Is Nothing Then
+                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings", True)
+                regKey.CreateSubKey("Favorites")
+            End If
+            Dim NomRecette As String = ListViewRecherche.SelectedItems(0).Text
+            Dim Livre As String = ListViewRecherche.SelectedItems(0).SubItems(3).Text
 
             regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Favorites\" & NomRecette, True)
 
