@@ -42,6 +42,8 @@ Partial Class dlgLivres
         ToolStripSeparator2 = New ToolStripSeparator()
         EffacerLaRecetteToolStripMenuItem = New ToolStripMenuItem()
         ListViewRecherche = New ListView()
+        RechercheContextMenuStrip = New ContextMenuStrip(components)
+        RechercheFavorisToolStripMenuItem = New ToolStripMenuItem()
         ButtonRecherche = New Button()
         ScanRichTextBox = New RichTextBox()
         ButtonFav = New Button()
@@ -49,12 +51,12 @@ Partial Class dlgLivres
         FavorisContextMenuStrip = New ContextMenuStrip(components)
         EnleverFavToolStripMenuItem = New ToolStripMenuItem()
         ButtonRandom = New Button()
-        RechercheContextMenuStrip = New ContextMenuStrip(components)
-        RechercheFavorisToolStripMenuItem = New ToolStripMenuItem()
+        CopierLeNomDeLaRecetteToolStripMenuItem = New ToolStripMenuItem()
+        ToolStripSeparator5 = New ToolStripSeparator()
         LivreContextMenuStrip.SuspendLayout()
         RecetteContextMenuStrip.SuspendLayout()
-        FavorisContextMenuStrip.SuspendLayout()
         RechercheContextMenuStrip.SuspendLayout()
+        FavorisContextMenuStrip.SuspendLayout()
         SuspendLayout()
         ' 
         ' ListViewLivres
@@ -146,9 +148,9 @@ Partial Class dlgLivres
         RecetteContextMenuStrip.AccessibleRole = AccessibleRole.TitleBar
         RecetteContextMenuStrip.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         RecetteContextMenuStrip.ImageScalingSize = New Size(24, 24)
-        RecetteContextMenuStrip.Items.AddRange(New ToolStripItem() {RecetteFavorisToolStripMenuItem, ToolStripSeparator4, ModifierLesInfosDeLaRecetteToolStripMenuItem, ToolStripSeparator3, OuvrirAvecEditeurExterneToolStripMenuItem, ToolStripSeparator2, EffacerLaRecetteToolStripMenuItem})
+        RecetteContextMenuStrip.Items.AddRange(New ToolStripItem() {RecetteFavorisToolStripMenuItem, ToolStripSeparator4, ModifierLesInfosDeLaRecetteToolStripMenuItem, ToolStripSeparator3, CopierLeNomDeLaRecetteToolStripMenuItem, ToolStripSeparator2, OuvrirAvecEditeurExterneToolStripMenuItem, ToolStripSeparator5, EffacerLaRecetteToolStripMenuItem})
         RecetteContextMenuStrip.Name = "RecetteContextMenuStrip"
-        RecetteContextMenuStrip.Size = New Size(352, 150)
+        RecetteContextMenuStrip.Size = New Size(352, 221)
         ' 
         ' RecetteFavorisToolStripMenuItem
         ' 
@@ -203,6 +205,22 @@ Partial Class dlgLivres
         ListViewRecherche.Size = New Size(1008, 608)
         ListViewRecherche.TabIndex = 4
         ListViewRecherche.UseCompatibleStateImageBehavior = False
+        ' 
+        ' RechercheContextMenuStrip
+        ' 
+        RechercheContextMenuStrip.AccessibleRole = AccessibleRole.TitleBar
+        RechercheContextMenuStrip.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        RechercheContextMenuStrip.ImageScalingSize = New Size(24, 24)
+        RechercheContextMenuStrip.Items.AddRange(New ToolStripItem() {RechercheFavorisToolStripMenuItem})
+        RechercheContextMenuStrip.Name = "RecetteContextMenuStrip"
+        RechercheContextMenuStrip.Size = New Size(276, 38)
+        ' 
+        ' RechercheFavorisToolStripMenuItem
+        ' 
+        RechercheFavorisToolStripMenuItem.Image = CType(resources.GetObject("RechercheFavorisToolStripMenuItem.Image"), Image)
+        RechercheFavorisToolStripMenuItem.Name = "RechercheFavorisToolStripMenuItem"
+        RechercheFavorisToolStripMenuItem.Size = New Size(275, 34)
+        RechercheFavorisToolStripMenuItem.Text = "Ajouter aux Favoris"
         ' 
         ' ButtonRecherche
         ' 
@@ -278,21 +296,16 @@ Partial Class dlgLivres
         ButtonRandom.TabIndex = 8
         ButtonRandom.UseVisualStyleBackColor = True
         ' 
-        ' RechercheContextMenuStrip
+        ' CopierLeNomDeLaRecetteToolStripMenuItem
         ' 
-        RechercheContextMenuStrip.AccessibleRole = AccessibleRole.TitleBar
-        RechercheContextMenuStrip.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        RechercheContextMenuStrip.ImageScalingSize = New Size(24, 24)
-        RechercheContextMenuStrip.Items.AddRange(New ToolStripItem() {RechercheFavorisToolStripMenuItem})
-        RechercheContextMenuStrip.Name = "RecetteContextMenuStrip"
-        RechercheContextMenuStrip.Size = New Size(276, 38)
+        CopierLeNomDeLaRecetteToolStripMenuItem.Name = "CopierLeNomDeLaRecetteToolStripMenuItem"
+        CopierLeNomDeLaRecetteToolStripMenuItem.Size = New Size(351, 32)
+        CopierLeNomDeLaRecetteToolStripMenuItem.Text = "Copier le nom de la recette"
         ' 
-        ' RechercheFavorisToolStripMenuItem
+        ' ToolStripSeparator5
         ' 
-        RechercheFavorisToolStripMenuItem.Image = CType(resources.GetObject("RechercheFavorisToolStripMenuItem.Image"), Image)
-        RechercheFavorisToolStripMenuItem.Name = "RechercheFavorisToolStripMenuItem"
-        RechercheFavorisToolStripMenuItem.Size = New Size(275, 34)
-        RechercheFavorisToolStripMenuItem.Text = "Ajouter aux Favoris"
+        ToolStripSeparator5.Name = "ToolStripSeparator5"
+        ToolStripSeparator5.Size = New Size(348, 6)
         ' 
         ' dlgLivres
         ' 
@@ -321,8 +334,8 @@ Partial Class dlgLivres
         StartPosition = FormStartPosition.CenterParent
         LivreContextMenuStrip.ResumeLayout(False)
         RecetteContextMenuStrip.ResumeLayout(False)
-        FavorisContextMenuStrip.ResumeLayout(False)
         RechercheContextMenuStrip.ResumeLayout(False)
+        FavorisContextMenuStrip.ResumeLayout(False)
         ResumeLayout(False)
         PerformLayout()
 
@@ -355,4 +368,6 @@ Partial Class dlgLivres
     Friend WithEvents ButtonRandom As Button
     Friend WithEvents RechercheContextMenuStrip As ContextMenuStrip
     Friend WithEvents RechercheFavorisToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CopierLeNomDeLaRecetteToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator5 As ToolStripSeparator
 End Class

@@ -60,6 +60,7 @@ Public Class dlgLivres
         EnleverFavToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - BooksDialog - Contextmenu", "7")
         RecetteFavorisToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - BooksDialog - Contextmenu", "8")
         RechercheFavorisToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - BooksDialog - Contextmenu", "8")
+        CopierLeNomDeLaRecetteToolStripMenuItem.Text = LangINI.GetKeyValue("Popotte - BooksDialog - Contextmenu", "9")
 
 
         ' Set ListViewLivres Properties
@@ -1433,6 +1434,12 @@ Public Class dlgLivres
             Else
                 MessageBox.Show(LangINI.GetKeyValue("Popotte - BooksDialog - MessageBox", "10"), LangINI.GetKeyValue("Popotte - BooksDialog - MessageBox", "8"), MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
+        End If
+    End Sub
+
+    Private Sub CopierLeNomDeLaRecetteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CopierLeNomDeLaRecetteToolStripMenuItem.Click
+        If ListViewRecettes.SelectedItems.Count = 1 Then
+            Clipboard.SetText(ListViewRecettes.SelectedItems(0).Text)
         End If
     End Sub
 
