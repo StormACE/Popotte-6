@@ -125,14 +125,14 @@ Public Class frmMenu
 
     Private Sub LoadCurrentWeekMenu()
 
-        Dim weekKey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\Weeks\" & CurrentWeekStart.ToString("yyyy-MM-dd"), False)
+        Dim weekKey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Menu\Weeks\" & CurrentWeekStart.ToString("yyyy-MM-dd"), False)
         For Each dayName As String In WeekDayNames
             FillListBoxFromRecipes(dayName, GetListBoxForDay(dayName), weekKey)
         Next
 
         If weekKey Is Nothing Then
             For Each dayName As String In WeekDayNames
-                Dim legacyKey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu\" & dayName, False)
+                Dim legacyKey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Menu\" & dayName, False)
                 FillListBoxFromRecipes(dayName, GetListBoxForDay(dayName), legacyKey)
             Next
         End If
@@ -141,9 +141,9 @@ Public Class frmMenu
     End Sub
 
     Private Sub SaveCurrentWeek()
-        Dim rootKey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", True)
+        Dim rootKey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Menu", True)
         If rootKey Is Nothing Then
-            rootKey = Registry.CurrentUser.CreateSubKey("Software\Popotte\Settings\Menu")
+            rootKey = Registry.CurrentUser.CreateSubKey("Software\Popotte\Menu")
         End If
 
         Dim weeksKey As RegistryKey = rootKey.CreateSubKey("Weeks")

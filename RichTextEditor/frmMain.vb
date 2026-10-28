@@ -582,7 +582,6 @@ Public Class frmMain
         If Not regKey Is Nothing Then
             regKey.CreateSubKey("DerRecette")
             regKey.CreateSubKey("LivreDem")
-            regKey.CreateSubKey("Menu")
         End If
         regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Livres", True)
         If regKey Is Nothing Then
@@ -604,19 +603,47 @@ Public Class frmMain
 
         'Compare Version if version is lower than 6.0.0.10
         Dim v1, v2 As System.Version
-        v1 = ParseVersion(regKey.GetValue("", ""))
-        v2 = ParseVersion("6.0.0.10")
+        v1 = ParseVersion("6.0.0.26")
+        v2 = ParseVersion(regKey.GetValue("", ""))
 
         If v1.CompareTo(v2) < 0 Then
-            'do update here
+            Using sourceMenuKey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", False)
+                If sourceMenuKey IsNot Nothing Then
+                    Using destinationMenuKey As RegistryKey = Registry.CurrentUser.CreateSubKey("Software\Popotte\Menu")
+                        If destinationMenuKey Is Nothing Then
+                            Throw New InvalidOperationException("Unable to create the destination menu registry key.")
+                        End If
 
-            'update is done
+                        CopyRegistryKey(sourceMenuKey, destinationMenuKey)
+                    End Using
+                End If
+            End Using
         End If
 
         'set current version in registry
         regKey.SetValue("", My.Application.Info.Version)
     End Sub
 
+    Private Sub CopyRegistryKey(sourceKey As RegistryKey, destinationKey As RegistryKey)
+        For Each valueName As String In sourceKey.GetValueNames()
+            Dim value As Object = sourceKey.GetValue(valueName, Nothing, RegistryValueOptions.DoNotExpandEnvironmentNames)
+            destinationKey.SetValue(valueName, value, sourceKey.GetValueKind(valueName))
+        Next
+
+        For Each subKeyName As String In sourceKey.GetSubKeyNames()
+            Using sourceSubKey As RegistryKey = sourceKey.OpenSubKey(subKeyName, False)
+                If sourceSubKey IsNot Nothing Then
+                    Using destinationSubKey As RegistryKey = destinationKey.CreateSubKey(subKeyName)
+                        If destinationSubKey Is Nothing Then
+                            Throw New InvalidOperationException("Unable to create a destination menu registry subkey.")
+                        End If
+
+                        CopyRegistryKey(sourceSubKey, destinationSubKey)
+                    End Using
+                End If
+            End Using
+        Next
+    End Sub
 
     'String to Version
     Private Function ParseVersion(input As String) As Version
@@ -3394,7 +3421,7 @@ Public Class frmMain
                     .CreateNoWindow = True
                 }
                 exportProcess.StartInfo.ArgumentList.Add("export")
-                exportProcess.StartInfo.ArgumentList.Add("HKEY_CURRENT_USER\Software\Popotte\Settings\Menu")
+                exportProcess.StartInfo.ArgumentList.Add("HKEY_CURRENT_USER\Software\Popotte\Menu")
                 exportProcess.StartInfo.ArgumentList.Add(SaveFileDialog1.FileName)
                 exportProcess.StartInfo.ArgumentList.Add("/y")
 
