@@ -209,6 +209,7 @@ Partial Class frmMain
         ToolStripButtonBulletList = New ToolStripDropDownButton()
         FolderBrowserDialog1 = New FolderBrowserDialog()
         rtbDoc = New ExtendedRichTextBox.AdvRichTextBoxPrintCtrl()
+        SauvegarderLesMenusDeLaSemaineToolStripMenuItem = New ToolStripMenuItem()
         MenuStrip1.SuspendLayout()
         ContextMenuStrip1.SuspendLayout()
         ToolStrip2.SuspendLayout()
@@ -754,7 +755,7 @@ Partial Class frmMain
         ' 
         ' OutilsToolStripMenuItem
         ' 
-        OutilsToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {ToolStripMenuItemMenu, ToolStripSeparator39, ConvertisseurToolStripMenuItem, ToolStripSeparator12, ResearchCenter__ToolStripMenuItem, ToolStripSeparator15, ToolStripMenuItemArchiverLesRecettes, SaveBD_ToolStripMenuItem, ToolStripSeparator13, OuvrirLeRepertoireDesRecettesToolStripMenuItem})
+        OutilsToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {ToolStripMenuItemMenu, ToolStripSeparator39, ConvertisseurToolStripMenuItem, ToolStripSeparator12, ResearchCenter__ToolStripMenuItem, ToolStripSeparator15, ToolStripMenuItemArchiverLesRecettes, SaveBD_ToolStripMenuItem, SauvegarderLesMenusDeLaSemaineToolStripMenuItem, ToolStripSeparator13, OuvrirLeRepertoireDesRecettesToolStripMenuItem})
         OutilsToolStripMenuItem.Name = "OutilsToolStripMenuItem"
         OutilsToolStripMenuItem.Size = New Size(84, 32)
         OutilsToolStripMenuItem.Text = "O&utils"
@@ -1457,6 +1458,12 @@ Partial Class frmMain
         rtbDoc.TabIndex = 2
         rtbDoc.Text = ""
         ' 
+        ' SauvegarderLesMenusDeLaSemaineToolStripMenuItem
+        ' 
+        SauvegarderLesMenusDeLaSemaineToolStripMenuItem.Name = "SauvegarderLesMenusDeLaSemaineToolStripMenuItem"
+        SauvegarderLesMenusDeLaSemaineToolStripMenuItem.Size = New Size(574, 36)
+        SauvegarderLesMenusDeLaSemaineToolStripMenuItem.Text = "Sauvegarder les menus de la semaine"
+        ' 
         ' frmMain
         ' 
         AutoScaleDimensions = New SizeF(144F, 144F)
@@ -1671,4 +1678,5 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator39 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator22 As ToolStripSeparator
     Friend WithEvents CouleurToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SauvegarderLesMenusDeLaSemaineToolStripMenuItem As ToolStripMenuItem
 End Class

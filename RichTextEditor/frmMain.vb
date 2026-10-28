@@ -9,7 +9,7 @@ Imports Microsoft.Win32
 
 ''' <summary>
 ''' Popotte 6
-''' 05 sept 2026 au 15 octobre 2026
+''' 05 sept 2026 au 28 octobre 2026
 ''' Work on Windows 7 sp1, windows 8, Windows 8.1, Windows 10, Windows 11  .Net10
 ''' Copyright Martin Laflamme 2003/2026
 ''' Read licence.txt
@@ -236,6 +236,7 @@ Public Class frmMain
         SaveBD_ToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "49")
         OuvrirLeRepertoireDesRecettesToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "50")
         ToolStripMenuItemMenu.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "102")
+        SauvegarderLesMenusDeLaSemaineToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "103")
 
         'Menu Options
         AffichageToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "51")
@@ -1356,7 +1357,7 @@ Public Class frmMain
                         saved = True
                     Catch ex As Exception
                         MessageBox.Show(LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "49"), "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End Try
+                    End Try
 
                 Case Else
                     Try
@@ -2308,8 +2309,7 @@ Public Class frmMain
         SaveFileDialog1.Filter = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "92") & "|*.reg"
         SaveFileDialog1.FilterIndex = 1
 
-
-        If SaveFileDialog1.ShowDialog = Global.System.Windows.Forms.DialogResult.Cancel Then
+        If SaveFileDialog1.ShowDialog() <> DialogResult.OK Then
             SaveFileDialog1.Dispose()
             Exit Sub
         End If
@@ -3372,6 +3372,50 @@ Public Class frmMain
             e.HasMorePages = False
         End If
 
+    End Sub
+
+    Private Sub SauvegarderLesMenusDeLaSemaineToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SauvegarderLesMenusDeLaSemaineToolStripMenuItem.Click
+        SaveFileDialog1.Title = "Popotte - " & LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "104")
+        SaveFileDialog1.FileName = ""
+        SaveFileDialog1.DefaultExt = "reg"
+        SaveFileDialog1.Filter = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "92") & "|*.reg"
+        SaveFileDialog1.FilterIndex = 1
+
+        If SaveFileDialog1.ShowDialog() <> DialogResult.OK Then
+            SaveFileDialog1.Dispose()
+            Exit Sub
+        End If
+
+        Try
+            Using exportProcess As New Global.System.Diagnostics.Process()
+                exportProcess.StartInfo = New Global.System.Diagnostics.ProcessStartInfo With {
+                    .FileName = "reg.exe",
+                    .UseShellExecute = False,
+                    .CreateNoWindow = True
+                }
+                exportProcess.StartInfo.ArgumentList.Add("export")
+                exportProcess.StartInfo.ArgumentList.Add("HKEY_CURRENT_USER\Software\Popotte\Settings\Menu")
+                exportProcess.StartInfo.ArgumentList.Add(SaveFileDialog1.FileName)
+                exportProcess.StartInfo.ArgumentList.Add("/y")
+
+                If Not exportProcess.Start() Then
+                    MessageBox.Show(LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "54"), "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Else
+                    exportProcess.WaitForExit()
+                    If exportProcess.ExitCode <> 0 Then
+                        MessageBox.Show(LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "55") & " (code " & exportProcess.ExitCode.ToString() & ")." & LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "56"), "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End If
+                End If
+            End Using
+
+            'Success message
+            MessageBox.Show(LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "57"), "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        Catch ex As Global.System.ComponentModel.Win32Exception
+            MessageBox.Show(LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "54") & " : " & ex.Message, "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            SaveFileDialog1.Dispose()
+        End Try
     End Sub
 
 #End Region

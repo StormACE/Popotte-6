@@ -168,22 +168,6 @@ Public Class frmMenu
                 mealKey.SetValue("Recette", recipeValue)
                 mealKey.SetValue("Livre", String.Empty)
             Next
-
-            Dim legacyDayKey As RegistryKey = rootKey.CreateSubKey(dayName)
-            For mealIndex As Integer = 0 To 2
-                Dim legacyMealKey As RegistryKey = legacyDayKey.CreateSubKey(GetMealName(mealIndex))
-                Dim legacyRecipe As String = String.Empty
-                If listBox.Items.Count > mealIndex Then
-                    legacyRecipe = CType(listBox.Items(mealIndex), String)
-                End If
-
-                If String.IsNullOrWhiteSpace(legacyRecipe) OrElse legacyRecipe = GetDefaultRecipeText() Then
-                    legacyRecipe = String.Empty
-                End If
-
-                legacyMealKey.SetValue("Recette", legacyRecipe)
-                legacyMealKey.SetValue("Livre", String.Empty)
-            Next
         Next
         ModifyMenu = False
         MessageBox.Show(LangINI.GetKeyValue("Popotte - Menu", "23"), "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Information)
