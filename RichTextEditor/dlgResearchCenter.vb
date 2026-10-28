@@ -92,7 +92,7 @@ Public Class ResearchCenter
     End Sub
 
     Private Sub LoadDefaultRC()
-        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\CentreRecherche", True)
+        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\CentreRecherche", True)
         If regKey IsNot Nothing Then
             For Each valueName As String In regKey.GetValueNames()
                 ListViewRC.Items.Add(valueName, 0).SubItems.Add(regKey.GetValue(valueName).ToString())
@@ -115,18 +115,18 @@ Public Class ResearchCenter
         If TextBoxSite.Text <> "" And TextBoxCom.Text <> "" Then
             If CheckifSiteExist(TextBoxSite.Text) <> 1 Then
                 ListViewRC.Items.Add(TextBoxSite.Text, 0).SubItems.Add(TextBoxCom.Text)
-                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\CentreRecherche", True)
+                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\CentreRecherche", True)
                 If regKey Is Nothing Then
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\", True)
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\", True)
                     regKey = regKey.CreateSubKey("CentreRecherche")
                 End If
                 regKey.SetValue(TextBoxSite.Text, TextBoxCom.Text)
             Else
                 Dim Answer As Integer = MessageBox.Show(LangINI.GetKeyValue("Popotte - ResearchCenter - MessageBox", "2"), "Popotte - " & LangINI.GetKeyValue("Popotte - ResearchCenter - MessageBox", "1"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
                 If Answer = Global.System.Windows.Forms.DialogResult.Yes Then
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\CentreRecherche", True)
+                    regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\CentreRecherche", True)
                     If regKey Is Nothing Then
-                        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\", True)
+                        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\", True)
                         regKey = regKey.CreateSubKey("CentreRecherche")
                     End If
                     regKey.SetValue(TextBoxSite.Text, TextBoxCom.Text)
@@ -154,7 +154,7 @@ Public Class ResearchCenter
             Dim Sitename As String = ListViewRC.SelectedItems(0).Text
             Dim Answer As Integer = MessageBox.Show(LangINI.GetKeyValue("Popotte - ResearchCenter - MessageBox", "6") & " " & Sitename, "Popotte - " & LangINI.GetKeyValue("Popotte - ResearchCenter - MessageBox", "1"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
             If Answer = Global.System.Windows.Forms.DialogResult.Yes Then
-                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\CentreRecherche", True)
+                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\CentreRecherche", True)
                 regKey.DeleteValue(Sitename)
                 ListViewRC.Items.Clear()
                 LoadDefaultRC()

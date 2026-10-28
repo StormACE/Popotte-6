@@ -318,7 +318,7 @@ Public Class frmMain
         SaveToolStripMenuItem.Enabled = False
 
         'Charge les engins de recherche
-        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\CentreRecherche", True)
+        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\CentreRecherche", True)
         If regKey IsNot Nothing Then
             Dim valuename As String() = regKey.GetValueNames()
             System.Array.Sort(Of String)(valuename) 'classe les noms des engins de recherche par ordre alphabétique
@@ -592,6 +592,8 @@ Public Class frmMain
 
     'Do update if necessary
     Private Sub FaireMiseaJour()
+
+        'get last version from registry and set current version in registry
         regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Version", True)
         If regKey Is Nothing Then
             'do update here
@@ -601,39 +603,45 @@ Public Class frmMain
             regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Version", True)
         End If
 
-        'Compare Version if version is lower than 6.0.0.10
-        Dim v1, v2 As System.Version
-        v1 = ParseVersion("6.0.0.26")
-        v2 = ParseVersion(regKey.GetValue("", ""))
 
-        If v1.CompareTo(v2) < 0 Then
+        'Copy registry keys from "Software\Popotte\Settings\Menu" to "Software\Popotte\Menu"
+        Using sourceMenuKey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", False)
+            If sourceMenuKey IsNot Nothing Then
+                Using destinationMenuKey As RegistryKey = Registry.CurrentUser.CreateSubKey("Software\Popotte\Menu")
+                    If destinationMenuKey Is Nothing Then
+                        Throw New InvalidOperationException("Unable to create the destination menu registry key.")
+                    End If
 
-            'Copy registry keys from "Software\Popotte\Settings\Menu" to "Software\Popotte\Menu"
-            Using sourceMenuKey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", False)
-                If sourceMenuKey IsNot Nothing Then
-                    Using destinationMenuKey As RegistryKey = Registry.CurrentUser.CreateSubKey("Software\Popotte\Menu")
-                        If destinationMenuKey Is Nothing Then
-                            Throw New InvalidOperationException("Unable to create the destination menu registry key.")
-                        End If
+                    CopyRegistryKey(sourceMenuKey, destinationMenuKey)
+                End Using
+            End If
+        End Using
 
-                        CopyRegistryKey(sourceMenuKey, destinationMenuKey)
-                    End Using
-                End If
-            End Using
+        'Copy registry keys from "Software\Popotte\Settings\Favorites" to "Software\Popotte\Favorites"
+        Using sourceMenuKey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Favorites", False)
+            If sourceMenuKey IsNot Nothing Then
+                Using destinationMenuKey As RegistryKey = Registry.CurrentUser.CreateSubKey("Software\Popotte\Favorites")
+                    If destinationMenuKey Is Nothing Then
+                        Throw New InvalidOperationException("Unable to create the destination menu registry key.")
+                    End If
 
-            'Copy registry keys from "Software\Popotte\Settings\Favorites" to "Software\Popotte\Favorites"
-            Using sourceMenuKey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Favorites", False)
-                If sourceMenuKey IsNot Nothing Then
-                    Using destinationMenuKey As RegistryKey = Registry.CurrentUser.CreateSubKey("Software\Popotte\Favorites")
-                        If destinationMenuKey Is Nothing Then
-                            Throw New InvalidOperationException("Unable to create the destination menu registry key.")
-                        End If
+                    CopyRegistryKey(sourceMenuKey, destinationMenuKey)
+                End Using
+            End If
+        End Using
 
-                        CopyRegistryKey(sourceMenuKey, destinationMenuKey)
-                    End Using
-                End If
-            End Using
-        End If
+        'Copy registry keys from "Software\Popotte\Settings\CentreRecherche" to "Software\Popotte\CentreRecherche"
+        Using sourceMenuKey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\CentreRecherche", False)
+            If sourceMenuKey IsNot Nothing Then
+                Using destinationMenuKey As RegistryKey = Registry.CurrentUser.CreateSubKey("Software\Popotte\CentreRecherche")
+                    If destinationMenuKey Is Nothing Then
+                        Throw New InvalidOperationException("Unable to create the destination menu registry key.")
+                    End If
+
+                    CopyRegistryKey(sourceMenuKey, destinationMenuKey)
+                End Using
+            End If
+        End Using
 
         'set current version in registry
         regKey.SetValue("", My.Application.Info.Version)
@@ -673,7 +681,7 @@ Public Class frmMain
     'Handler for context search
     Private Sub ToolStripMenuItem_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         'Quand un engins de recherche est sélectionné dans le context menu
-        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\CentreRecherche", True)
+        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\CentreRecherche", True)
         If regKey IsNot Nothing Then
             Dim Link As String = CType(regKey.GetValue(sender.ToString, ""), String)
             Dim Word As String = rtbDoc.SelectedText
@@ -2405,13 +2413,13 @@ Public Class frmMain
             End If
 
             'Ajoute les engins de recherche
-            Dim regKeySearch As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\CentreRecherche\", True)
+            Dim regKeySearch As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\CentreRecherche\", True)
             If regKeySearch IsNot Nothing Then
                 Dim ValueSearchCount As Integer = regKeySearch.ValueCount()
                 If ValueSearchCount > 0 Then
                     For Each valueName As String In regKeySearch.GetValueNames()
                         Dim Command As String = regKeySearch.GetValue(valueName).ToString()
-                        sb.AppendLine("[HKEY_CURRENT_USER\Software\Popotte\Settings\CentreRecherche\" & "]")
+                        sb.AppendLine("[HKEY_CURRENT_USER\Software\Popotte\CentreRecherche\" & "]")
                         sb.AppendLine(Chr(34) & valueName & Chr(34) & "=" & Chr(34) & Command & Chr(34))
                         sb.AppendLine()
                     Next
