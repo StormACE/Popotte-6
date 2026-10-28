@@ -1093,13 +1093,13 @@ Public Class dlgLivres
         Fav = True
         RevenirButton.Enabled = True
 
-        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Favorites", True)
+        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Favorites", True)
         If regKey IsNot Nothing Then
             For Each subKeyName As String In regKey.GetSubKeyNames()
                 RecetteTotalCount += 1
                 Text = "Popotte - " & LangINI.GetKeyValue("Popotte - BooksDialog", "20") & " - (" & RecetteTotalCount.ToString & ")"
 
-                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Favorites\" & subKeyName, True)
+                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Favorites\" & subKeyName, True)
                 Dim Livre As String = regKey.GetValue("Livre").ToString
 
                 regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Livres\" & Livre & "\" & subKeyName, True)
