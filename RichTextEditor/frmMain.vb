@@ -611,9 +611,9 @@ Public Class frmMain
                     If destinationMenuKey Is Nothing Then
                         Throw New InvalidOperationException("Unable to create the destination menu registry key.")
                     End If
-
                     CopyRegistryKey(sourceMenuKey, destinationMenuKey)
                 End Using
+                Registry.CurrentUser.DeleteSubKeyTree("Software\Popotte\Settings\Menu")
             End If
         End Using
 
@@ -624,9 +624,9 @@ Public Class frmMain
                     If destinationMenuKey Is Nothing Then
                         Throw New InvalidOperationException("Unable to create the destination menu registry key.")
                     End If
-
                     CopyRegistryKey(sourceMenuKey, destinationMenuKey)
                 End Using
+                Registry.CurrentUser.DeleteSubKeyTree("Software\Popotte\Settings\Favorites")
             End If
         End Using
 
@@ -637,9 +637,9 @@ Public Class frmMain
                     If destinationMenuKey Is Nothing Then
                         Throw New InvalidOperationException("Unable to create the destination menu registry key.")
                     End If
-
                     CopyRegistryKey(sourceMenuKey, destinationMenuKey)
                 End Using
+                Registry.CurrentUser.DeleteSubKeyTree("Software\Popotte\Settings\CentreRecherche")
             End If
         End Using
 
