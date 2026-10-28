@@ -2393,12 +2393,12 @@ Public Class frmMain
             '////////////////////// Add settings /////////////////////////////////////////////////
 
             'Ajoute les favoris
-            Dim regKeyFAV As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Favorites\", True)
+            Dim regKeyFAV As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Favorites\", True)
             If regKeyFAV IsNot Nothing Then
                 For Each subkeyname As String In regKeyFAV.GetSubKeyNames()
-                    regKeyFAV = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Favorites\" & subkeyname, True)
+                    regKeyFAV = Registry.CurrentUser.OpenSubKey("Software\Popotte\Favorites\" & subkeyname, True)
                     Dim Livre As String = regKeyFAV.GetValue("Livre").ToString()
-                    sb.AppendLine("[HKEY_CURRENT_USER\Software\Popotte\Settings\Favorites\" & subkeyname & "]")
+                    sb.AppendLine("[HKEY_CURRENT_USER\Software\Popotte\Favorites\" & subkeyname & "]")
                     sb.AppendLine(Chr(34) & "Livre" & Chr(34) & "=" & Chr(34) & Livre & Chr(34))
                     sb.AppendLine()
                 Next
