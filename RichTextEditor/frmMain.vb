@@ -1010,6 +1010,15 @@ Public Class frmMain
     End Sub
 
     Private Sub rtbDoc_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles rtbDoc.KeyDown
+
+        'CTRL+V paste image from clipboard as bitmap in RichTextBox (if clipboard contains image)
+        If e.Control AndAlso e.KeyCode = Keys.V AndAlso Clipboard.ContainsImage() Then
+            e.Handled = True
+            e.SuppressKeyPress = True
+            PasteToolStripMenuItem_Click(sender, EventArgs.Empty)
+            Return
+        End If
+
         Select Case e.KeyCode
             Case Keys.Down, Keys.Left, Keys.Right, Keys.Up, Keys.Enter, Keys.Back
                 GetCharFormat()
