@@ -9,7 +9,7 @@ Imports Microsoft.Win32
 
 ''' <summary>
 ''' Popotte 6
-''' 05 sept 2026 au 28 octobre 2026
+''' 05 sept 2026 au 29 octobre 2026
 ''' Work on Windows 7 sp1, windows 8, Windows 8.1, Windows 10, Windows 11  .Net10
 ''' Copyright Martin Laflamme 2003/2026
 ''' Read licence.txt
@@ -297,6 +297,7 @@ Public Class frmMain
         SurlignerToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "97")
         AnnulerSurbrillanceToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "98")
         AutoCcontextToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "100")
+        UtiliserLaPoliceParDéfaultToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - ContextMenu", "8")
 
 
         'Vérifier si la form a été redimensionner
@@ -3164,6 +3165,10 @@ Public Class frmMain
     End Sub
     Private Sub AutoCcontextToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AutoCcontextToolStripMenuItem.Click
         AutoCeditToolStripMenuItem_Click(Me, e)
+    End Sub
+    Private Sub UtiliserLaPoliceParDéfaultToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UtiliserLaPoliceParDéfaultToolStripMenuItem.Click
+        SetDefaultFont()
+        rtbDoc.Focus()
     End Sub
 #End Region
 

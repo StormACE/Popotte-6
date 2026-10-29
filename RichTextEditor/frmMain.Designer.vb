@@ -113,6 +113,7 @@ Partial Class frmMain
         ToolStripSeparator15 = New ToolStripSeparator()
         ToolStripMenuItemArchiverLesRecettes = New ToolStripMenuItem()
         SaveBD_ToolStripMenuItem = New ToolStripMenuItem()
+        SauvegarderLesMenusDeLaSemaineToolStripMenuItem = New ToolStripMenuItem()
         ToolStripSeparator13 = New ToolStripSeparator()
         OuvrirLeRepertoireDesRecettesToolStripMenuItem = New ToolStripMenuItem()
         OptionsToolStripMenuItem = New ToolStripMenuItem()
@@ -209,7 +210,8 @@ Partial Class frmMain
         ToolStripButtonBulletList = New ToolStripDropDownButton()
         FolderBrowserDialog1 = New FolderBrowserDialog()
         rtbDoc = New ExtendedRichTextBox.AdvRichTextBoxPrintCtrl()
-        SauvegarderLesMenusDeLaSemaineToolStripMenuItem = New ToolStripMenuItem()
+        UtiliserLaPoliceParDéfaultToolStripMenuItem = New ToolStripMenuItem()
+        ToolStripSeparator23 = New ToolStripSeparator()
         MenuStrip1.SuspendLayout()
         ContextMenuStrip1.SuspendLayout()
         ToolStrip2.SuspendLayout()
@@ -808,6 +810,12 @@ Partial Class frmMain
         SaveBD_ToolStripMenuItem.Size = New Size(574, 36)
         SaveBD_ToolStripMenuItem.Text = "Sauvegarder la Base de Données et les Options..."
         ' 
+        ' SauvegarderLesMenusDeLaSemaineToolStripMenuItem
+        ' 
+        SauvegarderLesMenusDeLaSemaineToolStripMenuItem.Name = "SauvegarderLesMenusDeLaSemaineToolStripMenuItem"
+        SauvegarderLesMenusDeLaSemaineToolStripMenuItem.Size = New Size(574, 36)
+        SauvegarderLesMenusDeLaSemaineToolStripMenuItem.Text = "Sauvegarder les menus de la semaine"
+        ' 
         ' ToolStripSeparator13
         ' 
         ToolStripSeparator13.Name = "ToolStripSeparator13"
@@ -1050,9 +1058,9 @@ Partial Class frmMain
         ' 
         ContextMenuStrip1.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ContextMenuStrip1.ImageScalingSize = New Size(24, 24)
-        ContextMenuStrip1.Items.AddRange(New ToolStripItem() {SurlignerToolStripMenuItem, AnnulerSurbrillanceToolStripMenuItem, ToolStripSeparator35, AutoCcontextToolStripMenuItem, ToolStripSeparator37, ToolStripMenuItemToutSel, ToolStripSeparator18, ToolStripMenuItemImage, InsertlocalfileContextToolStripMenuItem, ToolStripSeparator14, ResearchCenter_ContextMenuItem, ToolStripSeparator5, CopierToolStripMenuItem, CouperToolStripMenuItem, CollerToolStripMenuItem})
+        ContextMenuStrip1.Items.AddRange(New ToolStripItem() {SurlignerToolStripMenuItem, AnnulerSurbrillanceToolStripMenuItem, ToolStripSeparator23, UtiliserLaPoliceParDéfaultToolStripMenuItem, ToolStripSeparator35, AutoCcontextToolStripMenuItem, ToolStripSeparator37, ToolStripMenuItemToutSel, ToolStripSeparator18, ToolStripMenuItemImage, InsertlocalfileContextToolStripMenuItem, ToolStripSeparator14, ResearchCenter_ContextMenuItem, ToolStripSeparator5, CopierToolStripMenuItem, CouperToolStripMenuItem, CollerToolStripMenuItem})
         ContextMenuStrip1.Name = "ContextMenuStrip1"
-        ContextMenuStrip1.Size = New Size(437, 374)
+        ContextMenuStrip1.Size = New Size(437, 447)
         ' 
         ' SurlignerToolStripMenuItem
         ' 
@@ -1458,11 +1466,16 @@ Partial Class frmMain
         rtbDoc.TabIndex = 2
         rtbDoc.Text = ""
         ' 
-        ' SauvegarderLesMenusDeLaSemaineToolStripMenuItem
+        ' UtiliserLaPoliceParDéfaultToolStripMenuItem
         ' 
-        SauvegarderLesMenusDeLaSemaineToolStripMenuItem.Name = "SauvegarderLesMenusDeLaSemaineToolStripMenuItem"
-        SauvegarderLesMenusDeLaSemaineToolStripMenuItem.Size = New Size(574, 36)
-        SauvegarderLesMenusDeLaSemaineToolStripMenuItem.Text = "Sauvegarder les menus de la semaine"
+        UtiliserLaPoliceParDéfaultToolStripMenuItem.Name = "UtiliserLaPoliceParDéfaultToolStripMenuItem"
+        UtiliserLaPoliceParDéfaultToolStripMenuItem.Size = New Size(436, 34)
+        UtiliserLaPoliceParDéfaultToolStripMenuItem.Text = "Utiliser la police par défault"
+        ' 
+        ' ToolStripSeparator23
+        ' 
+        ToolStripSeparator23.Name = "ToolStripSeparator23"
+        ToolStripSeparator23.Size = New Size(433, 6)
         ' 
         ' frmMain
         ' 
@@ -1679,4 +1692,6 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator22 As ToolStripSeparator
     Friend WithEvents CouleurToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SauvegarderLesMenusDeLaSemaineToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator23 As ToolStripSeparator
+    Friend WithEvents UtiliserLaPoliceParDéfaultToolStripMenuItem As ToolStripMenuItem
 End Class
