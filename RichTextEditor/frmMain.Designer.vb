@@ -58,6 +58,7 @@ Partial Class frmMain
         SurlignerLaSelectionToolStripMenuItem = New ToolStripMenuItem()
         FontToolStripMenuItem = New ToolStripMenuItem()
         SelectFontToolStripMenuItem = New ToolStripMenuItem()
+        UtiliserLaPoliceParDéfautToolStripMenuItem = New ToolStripMenuItem()
         ToolStripSeparator22 = New ToolStripSeparator()
         CouleurToolStripMenuItem = New ToolStripMenuItem()
         ToolStripMenuItem6 = New ToolStripSeparator()
@@ -160,6 +161,8 @@ Partial Class frmMain
         ContextMenuStrip1 = New ContextMenuStrip(components)
         SurlignerToolStripMenuItem = New ToolStripMenuItem()
         AnnulerSurbrillanceToolStripMenuItem = New ToolStripMenuItem()
+        ToolStripSeparator23 = New ToolStripSeparator()
+        UtiliserLaPoliceParDéfaultToolStripMenuItem = New ToolStripMenuItem()
         ToolStripSeparator35 = New ToolStripSeparator()
         AutoCcontextToolStripMenuItem = New ToolStripMenuItem()
         ToolStripSeparator37 = New ToolStripSeparator()
@@ -210,8 +213,6 @@ Partial Class frmMain
         ToolStripButtonBulletList = New ToolStripDropDownButton()
         FolderBrowserDialog1 = New FolderBrowserDialog()
         rtbDoc = New ExtendedRichTextBox.AdvRichTextBoxPrintCtrl()
-        UtiliserLaPoliceParDéfaultToolStripMenuItem = New ToolStripMenuItem()
-        ToolStripSeparator23 = New ToolStripSeparator()
         MenuStrip1.SuspendLayout()
         ContextMenuStrip1.SuspendLayout()
         ToolStrip2.SuspendLayout()
@@ -456,7 +457,7 @@ Partial Class frmMain
         ' 
         ' FontToolStripMenuItem
         ' 
-        FontToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {SelectFontToolStripMenuItem, ToolStripSeparator22, CouleurToolStripMenuItem, ToolStripMenuItem6, BoldToolStripMenuItem, ItalicToolStripMenuItem, UnderlineToolStripMenuItem, NormalToolStripMenuItem})
+        FontToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {SelectFontToolStripMenuItem, UtiliserLaPoliceParDéfautToolStripMenuItem, ToolStripSeparator22, CouleurToolStripMenuItem, ToolStripMenuItem6, BoldToolStripMenuItem, ItalicToolStripMenuItem, UnderlineToolStripMenuItem, NormalToolStripMenuItem})
         FontToolStripMenuItem.Name = "FontToolStripMenuItem"
         FontToolStripMenuItem.Size = New Size(84, 32)
         FontToolStripMenuItem.Text = "&Police"
@@ -465,32 +466,39 @@ Partial Class frmMain
         ' 
         SelectFontToolStripMenuItem.Image = CType(resources.GetObject("SelectFontToolStripMenuItem.Image"), Image)
         SelectFontToolStripMenuItem.Name = "SelectFontToolStripMenuItem"
-        SelectFontToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.F
-        SelectFontToolStripMenuItem.Size = New Size(360, 36)
+        SelectFontToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.Alt Or Keys.F
+        SelectFontToolStripMenuItem.Size = New Size(402, 36)
         SelectFontToolStripMenuItem.Text = "Police par &défaut..."
+        ' 
+        ' UtiliserLaPoliceParDéfautToolStripMenuItem
+        ' 
+        UtiliserLaPoliceParDéfautToolStripMenuItem.Name = "UtiliserLaPoliceParDéfautToolStripMenuItem"
+        UtiliserLaPoliceParDéfautToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.F
+        UtiliserLaPoliceParDéfautToolStripMenuItem.Size = New Size(449, 36)
+        UtiliserLaPoliceParDéfautToolStripMenuItem.Text = "Utiliser la police par défault"
         ' 
         ' ToolStripSeparator22
         ' 
         ToolStripSeparator22.Name = "ToolStripSeparator22"
-        ToolStripSeparator22.Size = New Size(357, 6)
+        ToolStripSeparator22.Size = New Size(399, 6)
         ' 
         ' CouleurToolStripMenuItem
         ' 
         CouleurToolStripMenuItem.Name = "CouleurToolStripMenuItem"
-        CouleurToolStripMenuItem.Size = New Size(360, 36)
+        CouleurToolStripMenuItem.Size = New Size(402, 36)
         CouleurToolStripMenuItem.Text = "Couleur"
         ' 
         ' ToolStripMenuItem6
         ' 
         ToolStripMenuItem6.Name = "ToolStripMenuItem6"
-        ToolStripMenuItem6.Size = New Size(357, 6)
+        ToolStripMenuItem6.Size = New Size(399, 6)
         ' 
         ' BoldToolStripMenuItem
         ' 
         BoldToolStripMenuItem.Image = CType(resources.GetObject("BoldToolStripMenuItem.Image"), Image)
         BoldToolStripMenuItem.Name = "BoldToolStripMenuItem"
         BoldToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.G
-        BoldToolStripMenuItem.Size = New Size(360, 36)
+        BoldToolStripMenuItem.Size = New Size(402, 36)
         BoldToolStripMenuItem.Text = "&Gras"
         ' 
         ' ItalicToolStripMenuItem
@@ -498,7 +506,7 @@ Partial Class frmMain
         ItalicToolStripMenuItem.Image = CType(resources.GetObject("ItalicToolStripMenuItem.Image"), Image)
         ItalicToolStripMenuItem.Name = "ItalicToolStripMenuItem"
         ItalicToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.Alt Or Keys.I
-        ItalicToolStripMenuItem.Size = New Size(360, 36)
+        ItalicToolStripMenuItem.Size = New Size(402, 36)
         ItalicToolStripMenuItem.Text = "&Italique"
         ' 
         ' UnderlineToolStripMenuItem
@@ -506,14 +514,14 @@ Partial Class frmMain
         UnderlineToolStripMenuItem.Image = CType(resources.GetObject("UnderlineToolStripMenuItem.Image"), Image)
         UnderlineToolStripMenuItem.Name = "UnderlineToolStripMenuItem"
         UnderlineToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.Alt Or Keys.S
-        UnderlineToolStripMenuItem.Size = New Size(360, 36)
+        UnderlineToolStripMenuItem.Size = New Size(402, 36)
         UnderlineToolStripMenuItem.Text = "&Souligné"
         ' 
         ' NormalToolStripMenuItem
         ' 
         NormalToolStripMenuItem.Name = "NormalToolStripMenuItem"
         NormalToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.D
-        NormalToolStripMenuItem.Size = New Size(360, 36)
+        NormalToolStripMenuItem.Size = New Size(402, 36)
         NormalToolStripMenuItem.Text = "Stan&dard"
         ' 
         ' SpecialToolStripMenuItem
@@ -1060,7 +1068,7 @@ Partial Class frmMain
         ContextMenuStrip1.ImageScalingSize = New Size(24, 24)
         ContextMenuStrip1.Items.AddRange(New ToolStripItem() {SurlignerToolStripMenuItem, AnnulerSurbrillanceToolStripMenuItem, ToolStripSeparator23, UtiliserLaPoliceParDéfaultToolStripMenuItem, ToolStripSeparator35, AutoCcontextToolStripMenuItem, ToolStripSeparator37, ToolStripMenuItemToutSel, ToolStripSeparator18, ToolStripMenuItemImage, InsertlocalfileContextToolStripMenuItem, ToolStripSeparator14, ResearchCenter_ContextMenuItem, ToolStripSeparator5, CopierToolStripMenuItem, CouperToolStripMenuItem, CollerToolStripMenuItem})
         ContextMenuStrip1.Name = "ContextMenuStrip1"
-        ContextMenuStrip1.Size = New Size(437, 447)
+        ContextMenuStrip1.Size = New Size(549, 447)
         ' 
         ' SurlignerToolStripMenuItem
         ' 
@@ -1073,6 +1081,18 @@ Partial Class frmMain
         AnnulerSurbrillanceToolStripMenuItem.Name = "AnnulerSurbrillanceToolStripMenuItem"
         AnnulerSurbrillanceToolStripMenuItem.Size = New Size(436, 34)
         AnnulerSurbrillanceToolStripMenuItem.Text = "Annuler la Surbrillance"
+        ' 
+        ' ToolStripSeparator23
+        ' 
+        ToolStripSeparator23.Name = "ToolStripSeparator23"
+        ToolStripSeparator23.Size = New Size(433, 6)
+        ' 
+        ' UtiliserLaPoliceParDéfaultToolStripMenuItem
+        ' 
+        UtiliserLaPoliceParDéfaultToolStripMenuItem.Name = "UtiliserLaPoliceParDéfaultToolStripMenuItem"
+        UtiliserLaPoliceParDéfaultToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.F
+        UtiliserLaPoliceParDéfaultToolStripMenuItem.Size = New Size(548, 34)
+        UtiliserLaPoliceParDéfaultToolStripMenuItem.Text = "Utiliser la police par défault"
         ' 
         ' ToolStripSeparator35
         ' 
@@ -1105,14 +1125,16 @@ Partial Class frmMain
         ' 
         ToolStripMenuItemImage.Image = CType(resources.GetObject("ToolStripMenuItemImage.Image"), Image)
         ToolStripMenuItemImage.Name = "ToolStripMenuItemImage"
-        ToolStripMenuItemImage.Size = New Size(436, 34)
+        ToolStripMenuItemImage.ShortcutKeys = Keys.Control Or Keys.I
+        ToolStripMenuItemImage.Size = New Size(548, 34)
         ToolStripMenuItemImage.Text = "&Insérer une image..."
         ' 
         ' InsertlocalfileContextToolStripMenuItem
         ' 
         InsertlocalfileContextToolStripMenuItem.Image = CType(resources.GetObject("InsertlocalfileContextToolStripMenuItem.Image"), Image)
         InsertlocalfileContextToolStripMenuItem.Name = "InsertlocalfileContextToolStripMenuItem"
-        InsertlocalfileContextToolStripMenuItem.Size = New Size(436, 34)
+        InsertlocalfileContextToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.Alt Or Keys.L
+        InsertlocalfileContextToolStripMenuItem.Size = New Size(548, 34)
         InsertlocalfileContextToolStripMenuItem.Text = "Insérer un lien vers un fichier local..."
         ' 
         ' ToolStripSeparator14
@@ -1466,17 +1488,6 @@ Partial Class frmMain
         rtbDoc.TabIndex = 2
         rtbDoc.Text = ""
         ' 
-        ' UtiliserLaPoliceParDéfaultToolStripMenuItem
-        ' 
-        UtiliserLaPoliceParDéfaultToolStripMenuItem.Name = "UtiliserLaPoliceParDéfaultToolStripMenuItem"
-        UtiliserLaPoliceParDéfaultToolStripMenuItem.Size = New Size(436, 34)
-        UtiliserLaPoliceParDéfaultToolStripMenuItem.Text = "Utiliser la police par défault"
-        ' 
-        ' ToolStripSeparator23
-        ' 
-        ToolStripSeparator23.Name = "ToolStripSeparator23"
-        ToolStripSeparator23.Size = New Size(433, 6)
-        ' 
         ' frmMain
         ' 
         AutoScaleDimensions = New SizeF(144F, 144F)
@@ -1694,4 +1705,5 @@ Partial Class frmMain
     Friend WithEvents SauvegarderLesMenusDeLaSemaineToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator23 As ToolStripSeparator
     Friend WithEvents UtiliserLaPoliceParDéfaultToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents UtiliserLaPoliceParDéfautToolStripMenuItem As ToolStripMenuItem
 End Class

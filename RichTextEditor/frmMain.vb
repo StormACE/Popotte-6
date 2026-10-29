@@ -204,6 +204,8 @@ Public Class frmMain
         UnderlineToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "30")
         NormalToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "31")
         CouleurToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - ToolBar Tooltips", "13")
+        UtiliserLaPoliceParDéfautToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - ContextMenu", "8")
+
 
         'Menu Carateres speciaux
         DateToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "32")
@@ -3136,6 +3138,10 @@ Public Class frmMain
         End Try
     End Sub
 
+    Private Sub UtiliserLaPoliceParDéfautToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UtiliserLaPoliceParDéfautToolStripMenuItem.Click
+        UtiliserLaPoliceParDéfaultToolStripMenuItem_Click(Me, e)
+    End Sub
+
 #End Region
 
 
@@ -3481,6 +3487,7 @@ Public Class frmMain
             SaveFileDialog1.Dispose()
         End Try
     End Sub
+
 
 #End Region
 

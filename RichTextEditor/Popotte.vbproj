@@ -24,6 +24,7 @@
     <Title>Popotte</Title>
     <Product>Popotte</Product>
     <PackageOutputPath />
+    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
