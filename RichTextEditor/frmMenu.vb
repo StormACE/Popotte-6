@@ -862,45 +862,49 @@ Public Class frmMenu
                 Case DialogResult.Cancel
                     Return
                 Case DialogResult.No
-                    Dim answerM As Integer = MessageBox.Show(LangINI.GetKeyValue("Popotte - EditorWindow - Messagebox", "10"), LangINI.GetKeyValue("Popotte - EditorWindow - Messagebox", "7"), MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation)
-                    Select Case answerM
-                        Case DialogResult.Cancel
-                        Case DialogResult.No
-                            frmMain.rtbDoc.Clear()
-                            Printmenu()
-                            frmMain.rtbDoc.SelectAll()
-                            frmMain.SetDefaultFont()
-                            frmMain.rtbDoc.Focus()
-                            frmMain.currentFile = ""
-                            frmMain.Text = "Popotte"
-                            frmMain.LivreOuvert = ""
-                            frmMain.rtbDoc.SelectionAlignment = ExtendedRichTextBox.TextAlign.Left
-                            frmMain.ToolStripButtonGauche.Checked = True
-                            frmMain.ToolStripButtonCentre.Checked = False
-                            frmMain.ToolStripButtonDroite.Checked = False
-                            frmMain.TexteÀGaucheToolStripMenuItem.Checked = True
-                            frmMain.TexteCentréToolStripMenuItem.Checked = False
-                            frmMain.TexteÀDroiteToolStripMenuItem.Checked = False
-                            Close()
-                        Case DialogResult.Yes
-                            frmMain.SaveToolStripMenuItem_Click(Me, e)
-                            frmMain.rtbDoc.Clear()
-                            Printmenu()
-                            frmMain.rtbDoc.SelectAll()
-                            frmMain.SetDefaultFont()
-                            frmMain.rtbDoc.Focus()
-                            frmMain.currentFile = ""
-                            frmMain.Text = "Popotte"
-                            frmMain.LivreOuvert = ""
-                            frmMain.rtbDoc.SelectionAlignment = ExtendedRichTextBox.TextAlign.Left
-                            frmMain.ToolStripButtonGauche.Checked = True
-                            frmMain.ToolStripButtonCentre.Checked = False
-                            frmMain.ToolStripButtonDroite.Checked = False
-                            frmMain.TexteÀGaucheToolStripMenuItem.Checked = True
-                            frmMain.TexteCentréToolStripMenuItem.Checked = False
-                            frmMain.TexteÀDroiteToolStripMenuItem.Checked = False
-                            Close()
-                    End Select
+                    If frmMain.rtbDoc.Modified = True Then
+                        Dim answerM As Integer = MessageBox.Show(LangINI.GetKeyValue("Popotte - EditorWindow - Messagebox", "10"), LangINI.GetKeyValue("Popotte - EditorWindow - Messagebox", "7"), MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation)
+                        Select Case answerM
+                            Case DialogResult.Cancel
+                            Case DialogResult.No
+                                frmMain.rtbDoc.Clear()
+                                Printmenu()
+                                frmMain.rtbDoc.SelectAll()
+                                frmMain.SetDefaultFont()
+                                frmMain.rtbDoc.Focus()
+                                frmMain.currentFile = ""
+                                frmMain.Text = "Popotte"
+                                frmMain.LivreOuvert = ""
+                                frmMain.rtbDoc.SelectionAlignment = ExtendedRichTextBox.TextAlign.Left
+                                frmMain.ToolStripButtonGauche.Checked = True
+                                frmMain.ToolStripButtonCentre.Checked = False
+                                frmMain.ToolStripButtonDroite.Checked = False
+                                frmMain.TexteÀGaucheToolStripMenuItem.Checked = True
+                                frmMain.TexteCentréToolStripMenuItem.Checked = False
+                                frmMain.TexteÀDroiteToolStripMenuItem.Checked = False
+                                ModifyMenu = False
+                                Close()
+                            Case DialogResult.Yes
+                                frmMain.SaveToolStripMenuItem_Click(Me, e)
+                                frmMain.rtbDoc.Clear()
+                                Printmenu()
+                                frmMain.rtbDoc.SelectAll()
+                                frmMain.SetDefaultFont()
+                                frmMain.rtbDoc.Focus()
+                                frmMain.currentFile = ""
+                                frmMain.Text = "Popotte"
+                                frmMain.LivreOuvert = ""
+                                frmMain.rtbDoc.SelectionAlignment = ExtendedRichTextBox.TextAlign.Left
+                                frmMain.ToolStripButtonGauche.Checked = True
+                                frmMain.ToolStripButtonCentre.Checked = False
+                                frmMain.ToolStripButtonDroite.Checked = False
+                                frmMain.TexteÀGaucheToolStripMenuItem.Checked = True
+                                frmMain.TexteCentréToolStripMenuItem.Checked = False
+                                frmMain.TexteÀDroiteToolStripMenuItem.Checked = False
+                                ModifyMenu = False
+                                Close()
+                        End Select
+                    End If
                 Case DialogResult.Yes
 
                     SaveCurrentWeek()
@@ -920,6 +924,7 @@ Public Class frmMenu
                         frmMain.TexteÀGaucheToolStripMenuItem.Checked = True
                         frmMain.TexteCentréToolStripMenuItem.Checked = False
                         frmMain.TexteÀDroiteToolStripMenuItem.Checked = False
+                        ModifyMenu = False
                         Close()
                     Else
                         Dim answerY As Integer = MessageBox.Show(LangINI.GetKeyValue("Popotte - EditorWindow - Messagebox", "10"), LangINI.GetKeyValue("Popotte - EditorWindow - Messagebox", "7"), MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation)
@@ -941,6 +946,7 @@ Public Class frmMenu
                                 frmMain.TexteÀGaucheToolStripMenuItem.Checked = True
                                 frmMain.TexteCentréToolStripMenuItem.Checked = False
                                 frmMain.TexteÀDroiteToolStripMenuItem.Checked = False
+                                ModifyMenu = False
                                 Close()
                             Case DialogResult.Yes
                                 frmMain.SaveToolStripMenuItem_Click(Me, e)
@@ -959,6 +965,7 @@ Public Class frmMenu
                                 frmMain.TexteÀGaucheToolStripMenuItem.Checked = True
                                 frmMain.TexteCentréToolStripMenuItem.Checked = False
                                 frmMain.TexteÀDroiteToolStripMenuItem.Checked = False
+                                ModifyMenu = False
                                 Close()
                         End Select
                     End If
@@ -983,6 +990,7 @@ Public Class frmMenu
                 frmMain.TexteÀGaucheToolStripMenuItem.Checked = True
                 frmMain.TexteCentréToolStripMenuItem.Checked = False
                 frmMain.TexteÀDroiteToolStripMenuItem.Checked = False
+                ModifyMenu = False
                 Close()
             Else
                 Dim answerM As Integer = MessageBox.Show(LangINI.GetKeyValue("Popotte - EditorWindow - Messagebox", "10"), LangINI.GetKeyValue("Popotte - EditorWindow - Messagebox", "7"), MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation)
@@ -1004,6 +1012,7 @@ Public Class frmMenu
                         frmMain.TexteÀGaucheToolStripMenuItem.Checked = True
                         frmMain.TexteCentréToolStripMenuItem.Checked = False
                         frmMain.TexteÀDroiteToolStripMenuItem.Checked = False
+                        ModifyMenu = False
                         Close()
                     Case DialogResult.Yes
                         frmMain.SaveToolStripMenuItem_Click(Me, e)
@@ -1022,6 +1031,7 @@ Public Class frmMenu
                         frmMain.TexteÀGaucheToolStripMenuItem.Checked = True
                         frmMain.TexteCentréToolStripMenuItem.Checked = False
                         frmMain.TexteÀDroiteToolStripMenuItem.Checked = False
+                        ModifyMenu = False
                         Close()
                 End Select
             End If
