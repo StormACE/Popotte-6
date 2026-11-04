@@ -49,7 +49,7 @@ Public Class dlgmodifymenu
         'the textbox suggest favorites
         Dim Favcollection As AutoCompleteStringCollection = New AutoCompleteStringCollection()
         TextBox1.AutoCompleteSource = AutoCompleteSource.CustomSource
-        Dim regKey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Favorites", True)
+        Dim regKey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Favorites", True)
         If regKey IsNot Nothing Then
             For Each subkeyname As String In regKey.GetSubKeyNames
                 Favcollection.Add(subkeyname)

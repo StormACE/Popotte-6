@@ -1,0 +1,52 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "Popotte/6.0.0.28": {
+        "dependencies": {
+          "AdvRTB": "2.0.0",
+          "AdvRTB.Reference": "2.0.0.0"
+        },
+        "runtime": {
+          "Popotte.dll": {}
+        }
+      },
+      "AdvRTB/2.0.0": {
+        "runtime": {
+          "AdvRTB.dll": {
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "AdvRTB.Reference/2.0.0.0": {
+        "runtime": {
+          "AdvRTB.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Popotte/6.0.0.28": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "AdvRTB/2.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "AdvRTB.Reference/2.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

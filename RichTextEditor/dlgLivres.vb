@@ -230,7 +230,7 @@ Public Class dlgLivres
         'the textbox suggest favorites
         Dim Favcollection As AutoCompleteStringCollection = New AutoCompleteStringCollection()
         TextBoxRecherche.AutoCompleteSource = AutoCompleteSource.CustomSource
-        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Favorites", True)
+        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Favorites", True)
         If regKey IsNot Nothing Then
             For Each subkeyname As String In regKey.GetSubKeyNames
                 Favcollection.Add(subkeyname)
@@ -429,11 +429,11 @@ Public Class dlgLivres
                         Dim NewSrcRecetteBaseRegKey As RegistryKey = NewSourceBaseRegKey.CreateSubKey(e.Label.ToString.Trim)
 
                         'Fix favorites
-                        Dim OldFavRegKey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Favorites\" & SourceRecetteLabel, True)
+                        Dim OldFavRegKey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Favorites\" & SourceRecetteLabel, True)
                         If OldFavRegKey IsNot Nothing Then
-                            Dim FavRegkey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Favorites", True)
+                            Dim FavRegkey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Favorites", True)
                             FavRegkey.CreateSubKey(e.Label.ToString.Trim)
-                            Dim NewFavRegkey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Favorites\" & e.Label.ToString.Trim, True)
+                            Dim NewFavRegkey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Favorites\" & e.Label.ToString.Trim, True)
                             NewFavRegkey.SetValue("Livre", LastLivre)
                             FavRegkey.DeleteSubKey(SourceRecetteLabel)
                         End If
@@ -1196,12 +1196,12 @@ Public Class dlgLivres
 
 
     Private Sub EnleverFavToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EnleverFavToolStripMenuItem.Click
-        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Favorites", True)
+        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Favorites", True)
         Dim NomRecette = ListViewRecherche.SelectedItems(0).Text
         regKey.DeleteSubKey(NomRecette)
         'remove item from list
         ListViewRecherche.FocusedItem.Remove()
-        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Favorites\" & NomRecette, True)
+        regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Favorites\" & NomRecette, True)
         If regKey IsNot Nothing Then
             MessageBox.Show(LangINI.GetKeyValue("Popotte - BooksDialog - MessageBox", "7"), LangINI.GetKeyValue("Popotte - BooksDialog - MessageBox", "8"), MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
@@ -1251,8 +1251,8 @@ Public Class dlgLivres
                     If subKeyName <> "" Then
                         LivreRegKey.DeleteSubKey(subKeyName)
                     End If
-                    Dim FavRegKey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Favorites\" & subKeyName, True)
-                    Dim FavRegKey2 As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Favorites\", True)
+                    Dim FavRegKey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Favorites\" & subKeyName, True)
+                    Dim FavRegKey2 As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Favorites\", True)
                     If FavRegKey IsNot Nothing Then
                         FavRegKey2.DeleteSubKey(subKeyName)
                     End If
@@ -1324,9 +1324,9 @@ Public Class dlgLivres
                     End If
 
                     'Remove Fav Key
-                    Dim FavRegKey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Favorites\" & NomRecette, True)
+                    Dim FavRegKey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Favorites\" & NomRecette, True)
                     If FavRegKey IsNot Nothing Then
-                        FavRegKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Favorites\", True)
+                        FavRegKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Favorites\", True)
                         FavRegKey.DeleteSubKey(NomRecette)
                     End If
 
@@ -1386,9 +1386,9 @@ Public Class dlgLivres
 
     Private Sub RecetteFavorisToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RecetteFavorisToolStripMenuItem.Click
         If ListViewRecettes.SelectedItems.Count = 1 Then
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Favorites", True)
+            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Favorites", True)
             If regKey Is Nothing Then
-                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings", True)
+                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte", True)
                 regKey.CreateSubKey("Favorites")
             End If
             Dim NomRecette As String = ListViewRecettes.SelectedItems(0).Text
@@ -1399,12 +1399,12 @@ Public Class dlgLivres
                 Livre = frmMain.LivreOuvert
             End If
 
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Favorites\" & NomRecette, True)
+            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Favorites\" & NomRecette, True)
 
             If regKey Is Nothing Then
-                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Favorites", True)
+                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Favorites", True)
                 regKey.CreateSubKey(NomRecette.Trim)
-                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Favorites\" & NomRecette, True)
+                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Favorites\" & NomRecette, True)
                 regKey.SetValue("Livre", Livre)
                 MessageBox.Show(Me, LangINI.GetKeyValue("Popotte - BooksDialog - MessageBox", "9"), LangINI.GetKeyValue("Popotte - BooksDialog - MessageBox", "8"), MessageBoxButtons.OK, MessageBoxIcon.Information)
             Else
@@ -1415,20 +1415,20 @@ Public Class dlgLivres
 
     Private Sub RechercheFavorisToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RechercheFavorisToolStripMenuItem.Click
         If ListViewRecherche.SelectedItems.Count = 1 Then
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Favorites", True)
+            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Favorites", True)
             If regKey Is Nothing Then
-                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings", True)
+                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte", True)
                 regKey.CreateSubKey("Favorites")
             End If
             Dim NomRecette As String = ListViewRecherche.SelectedItems(0).Text
             Dim Livre As String = ListViewRecherche.SelectedItems(0).SubItems(3).Text
 
-            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Favorites\" & NomRecette, True)
+            regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Favorites\" & NomRecette, True)
 
             If regKey Is Nothing Then
-                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Favorites", True)
+                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Favorites", True)
                 regKey.CreateSubKey(NomRecette.Trim)
-                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Favorites\" & NomRecette, True)
+                regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Favorites\" & NomRecette, True)
                 regKey.SetValue("Livre", Livre)
                 MessageBox.Show(Me, LangINI.GetKeyValue("Popotte - BooksDialog - MessageBox", "9"), LangINI.GetKeyValue("Popotte - BooksDialog - MessageBox", "8"), MessageBoxButtons.OK, MessageBoxIcon.Information)
             Else
