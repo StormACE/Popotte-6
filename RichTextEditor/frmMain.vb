@@ -606,46 +606,6 @@ Public Class frmMain
             regKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Version", True)
         End If
 
-
-        'Copy registry keys from "Software\Popotte\Settings\Menu" to "Software\Popotte\Menu"
-        Using sourceMenuKey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Menu", False)
-            If sourceMenuKey IsNot Nothing Then
-                Using destinationMenuKey As RegistryKey = Registry.CurrentUser.CreateSubKey("Software\Popotte\Menu")
-                    If destinationMenuKey Is Nothing Then
-                        Throw New InvalidOperationException("Unable to create the destination menu registry key.")
-                    End If
-                    CopyRegistryKey(sourceMenuKey, destinationMenuKey)
-                End Using
-                Registry.CurrentUser.DeleteSubKeyTree("Software\Popotte\Settings\Menu")
-            End If
-        End Using
-
-        'Copy registry keys from "Software\Popotte\Settings\Favorites" to "Software\Popotte\Favorites"
-        Using sourceMenuKey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\Favorites", False)
-            If sourceMenuKey IsNot Nothing Then
-                Using destinationMenuKey As RegistryKey = Registry.CurrentUser.CreateSubKey("Software\Popotte\Favorites")
-                    If destinationMenuKey Is Nothing Then
-                        Throw New InvalidOperationException("Unable to create the destination menu registry key.")
-                    End If
-                    CopyRegistryKey(sourceMenuKey, destinationMenuKey)
-                End Using
-                Registry.CurrentUser.DeleteSubKeyTree("Software\Popotte\Settings\Favorites")
-            End If
-        End Using
-
-        'Copy registry keys from "Software\Popotte\Settings\CentreRecherche" to "Software\Popotte\CentreRecherche"
-        Using sourceMenuKey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\CentreRecherche", False)
-            If sourceMenuKey IsNot Nothing Then
-                Using destinationMenuKey As RegistryKey = Registry.CurrentUser.CreateSubKey("Software\Popotte\CentreRecherche")
-                    If destinationMenuKey Is Nothing Then
-                        Throw New InvalidOperationException("Unable to create the destination menu registry key.")
-                    End If
-                    CopyRegistryKey(sourceMenuKey, destinationMenuKey)
-                End Using
-                Registry.CurrentUser.DeleteSubKeyTree("Software\Popotte\Settings\CentreRecherche")
-            End If
-        End Using
-
         'set current version in registry
         regKey.SetValue("", My.Application.Info.Version)
     End Sub
