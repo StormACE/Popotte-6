@@ -973,8 +973,8 @@ Public Class frmMain
 
     Private Sub rtbDoc_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles rtbDoc.KeyDown
 
-        'CTRL+V paste image from clipboard as bitmap in RichTextBox (if clipboard contains image)
-        If e.Control AndAlso e.KeyCode = Keys.V AndAlso Clipboard.ContainsImage() Then
+        ' Handle images through the custom paste path and ignore file drops.
+        If e.Control AndAlso e.KeyCode = Keys.V AndAlso (Clipboard.ContainsImage() OrElse Clipboard.ContainsFileDropList()) Then
             e.Handled = True
             e.SuppressKeyPress = True
             PasteToolStripMenuItem_Click(sender, EventArgs.Empty)
@@ -1469,35 +1469,14 @@ Public Class frmMain
         Dim iData As IDataObject = Clipboard.GetDataObject()
 
         Try
+            ' File drops are intentionally ignored; text and clipboard images still paste normally.
+            If iData.GetDataPresent(DataFormats.FileDrop) Then Return
+
             ' If clipboard already contains a bitmap, paste it directly
             If iData.GetDataPresent(DataFormats.Bitmap) Then
                 Dim df As DataFormats.Format = DataFormats.GetFormat(DataFormats.Bitmap)
                 If Me.rtbDoc.CanPaste(df) Then
                     Me.rtbDoc.Paste(df)
-                End If
-
-                ' If clipboard contains a file drop, and the first file is an image,
-                ' convert it to a Bitmap and paste it as bitmap so all image types
-                ' become bitmaps when inserted into the RTF control.
-            ElseIf iData.GetDataPresent(DataFormats.FileDrop) Then
-                Dim files() As String = CType(iData.GetData(DataFormats.FileDrop), String())
-                If files IsNot Nothing AndAlso files.Length > 0 Then
-                    Try
-                        Dim img As Image = Image.FromFile(files(0))
-                        Dim bmp As New Bitmap(img)
-                        Dim orgData As Object = Clipboard.GetDataObject()
-                        Clipboard.SetDataObject(bmp, True)
-                        Dim df As DataFormats.Format = DataFormats.GetFormat(DataFormats.Bitmap)
-                        If Me.rtbDoc.CanPaste(df) Then
-                            Me.rtbDoc.Paste(df)
-                        End If
-                        Clipboard.SetDataObject(orgData)
-                    Catch
-                        ' If not an image or cannot load, fall back to default paste
-                        rtbDoc.Paste()
-                    End Try
-                Else
-                    rtbDoc.Paste()
                 End If
 
                 ' If clipboard contains an Image object in another format, convert to Bitmap and paste
