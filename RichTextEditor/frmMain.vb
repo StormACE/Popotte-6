@@ -9,7 +9,7 @@ Imports Microsoft.Win32
 
 ''' <summary>
 ''' Popotte 6
-''' 05 sept 2026 au 29 octobre 2026
+''' 05 sept 2026 au  06 nov 2026
 ''' Work on Windows 7 sp1, windows 8, Windows 8.1, Windows 10, Windows 11  .Net10
 ''' Copyright Martin Laflamme 2003/2026
 ''' Read licence.txt
