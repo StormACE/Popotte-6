@@ -25,6 +25,8 @@ Public Class dlgLivres
     'Get Language
     Private LangINI As IniFile = frmMain.LangIni
 
+    Public NewRecette As String = ""
+
     Private Fav As Boolean = False
     Private _rechercheEnCours As Integer = 0
     Private _fermetureDemandee As Boolean = False
@@ -1278,7 +1280,7 @@ Public Class dlgLivres
                 End If
             End If
         Else
-            Dim ModR As New dlgInfoRecette(ListViewRecettes.SelectedItems(0).Text, LastLivre, False)
+            Dim ModR As New dlgInfoRecette(ListViewRecettes.SelectedItems(0).Text, LastLivre, False, Me)
             Dim dresult As Integer = ModR.ShowDialog()
             Select Case dresult
                 Case DialogResult.OK
@@ -1287,6 +1289,14 @@ Public Class dlgLivres
                     Else
                         GetRecettes(PopotteDir & frmMain.LivreOuvert)
                     End If
+                    Dim itm As ListViewItem
+                    With ListViewRecettes
+                        itm = .FindItemWithText(NewRecette, False, 0, True)
+                        If Not itm Is Nothing Then
+                            .Items.Item(itm.Index).Selected = True
+                            .Items.Item(itm.Index).EnsureVisible()
+                        End If
+                    End With
             End Select
         End If
     End Sub

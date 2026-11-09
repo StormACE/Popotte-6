@@ -18,6 +18,7 @@ Public Class dlgInfoRecette
     Private NomLivre As String = ""
     Private Saveit As Boolean = False
     Private regKey As RegistryKey
+    Private _livresDialog As dlgLivres
 
     'Get Language
     Private LangINI As IniFile = frmMain.LangIni
@@ -25,7 +26,7 @@ Public Class dlgInfoRecette
 
 #Region "Form Methods"
     'Constructor
-    Public Sub New(ByVal NRecette As String, ByVal Livre As String, ByVal Save As Boolean)
+    Public Sub New(ByVal NRecette As String, ByVal Livre As String, ByVal Save As Boolean, Optional ByVal livresDialog As dlgLivres = Nothing)
 
         ' This call is required by the Windows Form Designer.
         InitializeComponent()
@@ -34,6 +35,7 @@ Public Class dlgInfoRecette
         strText = NRecette
         NomLivre = Livre
         Saveit = Save
+        _livresDialog = livresDialog
     End Sub
 
     Private Sub frmInfoRecette_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -94,6 +96,9 @@ Public Class dlgInfoRecette
         Dim NewNote As String = NoteComboBox.SelectedIndex.ToString
         Dim NewLivre As String = Me.ComboBoxLivre.Text.Trim
         Dim NewDesc As String = DescTextBox.Text.Trim
+        If _livresDialog IsNot Nothing Then
+            _livresDialog.NewRecette = NewName
+        End If
         If Saveit = False Then
             If NewLivre <> "" Then
                 If NewLivre.ToLower <> NomLivre.ToLower Then 'need to move the file
