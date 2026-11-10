@@ -331,6 +331,8 @@ Public Class dlgLivres
             LastLivre = NomLivre
             GetRecettes(PopotteDir & NomLivre & "\")
             RevenirButton.Enabled = True
+            ListViewRecettes.Items.Item(0).Selected = True
+            ListViewRecettes.Items.Item(0).EnsureVisible()
             ListViewRecettes.Focus()
         End If
     End Sub
@@ -714,9 +716,9 @@ Public Class dlgLivres
             Else
                 Me.Text = "Popotte - " & LangINI.GetKeyValue("Popotte - BooksDialog", "12") & " " & frmMain.LivreOuvert & " (" & Rcount & ")"
             End If
-            'Flush Ram
-            GC.Collect()
         Next
+        'Flush Ram
+        GC.Collect()
     End Sub
 
     Private Function ConvertNote(ByVal Note As Integer) As String
@@ -1133,6 +1135,10 @@ Public Class dlgLivres
                     imgidx += 1
                 End If
             Next
+            ListViewRecherche.Items.Item(0).Selected = True
+            ListViewRecherche.Items.Item(0).EnsureVisible()
+            ListViewRecherche.Focus()
+
         End If
         GC.Collect()
     End Sub
