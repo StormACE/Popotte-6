@@ -222,6 +222,36 @@ Public Class frmMenu
         SaveCurrentWeek()
     End Sub
 
+    Private Sub LabelCurrentWeek_Click(sender As Object, e As EventArgs) Handles LabelCurrentWeek.Click
+        Dim calendarDialog As New dlgCalendarWeekPicker()
+        calendarDialog.SelectedWeekStart = CurrentWeekStart
+
+        If calendarDialog.ShowDialog(Me) = DialogResult.OK Then
+            If ModifyMenu Then
+                Dim answer As Integer = MessageBox.Show(LangINI.GetKeyValue("Popotte - EditorWindow - Messagebox", "53"), LangINI.GetKeyValue("Popotte - EditorWindow - Messagebox", "7"), MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation)
+                Select Case answer
+                    Case DialogResult.Cancel
+                        ' User cancelled, do nothing
+                    Case DialogResult.No
+                        ' Discard changes and change week
+                        CurrentWeekStart = calendarDialog.SelectedWeekStart
+                        LoadCurrentWeekMenu()
+                        ModifyMenu = False
+                    Case DialogResult.Yes
+                        ' Save changes and change week
+                        SaveCurrentWeek()
+                        CurrentWeekStart = calendarDialog.SelectedWeekStart
+                        LoadCurrentWeekMenu()
+                        ModifyMenu = False
+                End Select
+            Else
+                ' No unsaved changes, just change the week
+                CurrentWeekStart = calendarDialog.SelectedWeekStart
+                LoadCurrentWeekMenu()
+            End If
+        End If
+    End Sub
+
     Private Sub FrmMenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         CenterToScreen()
 

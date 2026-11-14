@@ -134,7 +134,8 @@ Partial Class frmMenu
         ' 
         ' LabelCurrentWeek
         ' 
-        LabelCurrentWeek.Font = New Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        LabelCurrentWeek.Cursor = Cursors.Hand
+        LabelCurrentWeek.Font = New Font("Segoe UI", 11.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         LabelCurrentWeek.Location = New Point(462, 16)
         LabelCurrentWeek.Name = "LabelCurrentWeek"
         LabelCurrentWeek.Size = New Size(370, 30)
