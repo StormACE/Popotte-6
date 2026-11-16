@@ -1,2 +1,6 @@
 .vs/
 RichTextEditor/obj/
+RichTextEditor/bin/
+ExtendedRichTextBox/obj/
+ExtendedRichTextBox/bin/
+
