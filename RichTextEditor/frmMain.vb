@@ -9,7 +9,7 @@ Imports Microsoft.Win32
 
 ''' <summary>
 ''' Popotte 6
-''' 05 sept 2026 au  09 nov 2026
+''' 05 sept 2026 au  17 nov 2026
 ''' Work on Windows 7 sp1, windows 8, Windows 8.1, Windows 10, Windows 11  .Net10
 ''' Copyright Martin Laflamme 2003/2026
 ''' Read licence.txt
@@ -31,6 +31,7 @@ Public Class frmMain
     Private DefaultFontName As String = "Calibri"
     Private DefaultFontSize As Integer = 16
     Private DefaultFontColor As Color = Color.Black
+    Private Const UndoHistoryLimit As Integer = 25
     Private HighlightColor As Color = Color.Yellow
     Private DefaultFontEffect As String
     Private FontLoaded As Boolean = False
@@ -57,6 +58,7 @@ Public Class frmMain
 #Region "RichEdit PInvoke"
     ' Constantes pour EM_SETCHARFORMAT
     Private Const EM_SETCHARFORMAT As Integer = &H444
+    Private Const EM_SETUNDOLIMIT As Integer = &H452
     Private Const SCF_SELECTION As Integer = 1
 
     ' Masques CHARFORMAT (utilisés en dwMask)
@@ -90,6 +92,10 @@ Public Class frmMain
     Private Shared Function SendMessage(hWnd As IntPtr, msg As Integer, wParam As IntPtr, ByRef cf As CHARFORMAT2) As IntPtr
     End Function
 
+    <DllImport("user32.dll", CharSet:=CharSet.Auto)>
+    Private Shared Function SendMessage(hWnd As IntPtr, msg As Integer, wParam As IntPtr, lParam As IntPtr) As IntPtr
+    End Function
+
     Private Sub ApplyCharFormatToSelection(face As String, Optional size As Single = -1)
         Dim cf As New CHARFORMAT2()
         cf.cbSize = Marshal.SizeOf(GetType(CHARFORMAT2))
@@ -116,6 +122,8 @@ Public Class frmMain
 
 #Region "Form Methods"
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+        SendMessage(rtbDoc.Handle, EM_SETUNDOLIMIT, New IntPtr(UndoHistoryLimit), IntPtr.Zero)
 
         CreateRegKey()
 
