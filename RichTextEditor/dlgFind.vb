@@ -25,12 +25,12 @@ Public Class dlgFind
         btnFindNext.Text = LangINI.GetKeyValue("Popotte - FindDialog", "5")
 
         'set min and max scrollbar positions
-        OpacityHScrollBar.Maximum = 100
+        OpacityHScrollBar.Maximum = 110
         OpacityHScrollBar.Minimum = 10
 
         'Get dlg opacity
         regkey = Registry.CurrentUser.OpenSubKey("Software\Popotte\Settings\SearchOpacity", True)
-        If regKey IsNot Nothing Then
+        If regkey IsNot Nothing Then
             Dim SearchOpacity As Double = Val(regkey.GetValue("", 100))
             OpacityHScrollBar.Value = CInt(SearchOpacity)
         Else

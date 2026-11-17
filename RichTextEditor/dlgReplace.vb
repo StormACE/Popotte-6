@@ -28,7 +28,7 @@ Public Class dlgReplace
         btnReplaceAll.Text = LangINI.GetKeyValue("Popotte - Search&Replace", "8")
 
         'set min and max scrollbar positions
-        OpacityHScrollBar.Maximum = 100
+        OpacityHScrollBar.Maximum = 110
         OpacityHScrollBar.Minimum = 10
 
         'Get dlg opacity
