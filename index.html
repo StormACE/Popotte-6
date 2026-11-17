@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Popotte 6 – Logiciel de gestion de recettes</title>
+<meta name="description" content="Popotte est un logiciel Windows pour écrire, lire et classer des recettes facilement.">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fbf8f8; --surface:#ffffff; --ink:#2a1216; --muted:#6a4f55; --line:#ead9dc;
+  --red:#c4122f; --red-deep:#8f0b21; --on-red:#ffffff; --link:#b00f2a;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#1a0d10; --surface:#251317; --ink:#f7eaec; --muted:#c9a9af; --line:#43242a;
+    --red:#d8213f; --red-deep:#7e0a1d; --on-red:#ffffff; --link:#ff8a9d;
+    color-scheme: dark;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:1.0625rem;line-height:1.6}
+a{color:var(--link)}
+:focus-visible{outline:3px solid #ffd166;outline-offset:3px;border-radius:4px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 1.25rem}
+html[lang="fr"] .en, html[lang="en"] .fr{display:none !important}
+
+/* Bandeau rouge */
+.band{background:linear-gradient(160deg,var(--red) 0%,var(--red-deep) 100%);color:var(--on-red)}
+.band a{color:inherit}
+.top{display:flex;justify-content:space-between;align-items:center;padding:1.1rem 0;gap:1rem}
+.brand{display:flex;align-items:center;gap:.7rem;font-weight:800;font-size:1.35rem;letter-spacing:-.02em;text-decoration:none}
+.brand img{width:40px;height:40px;object-fit:contain;border-radius:9px;background:#fff;padding:3px}
+.top nav{display:flex;align-items:center;gap:1.2rem}
+.top nav a{text-decoration:none;opacity:.9}
+.top nav a:hover{opacity:1;text-decoration:underline}
+#lang{font:inherit;font-weight:600;color:var(--on-red);background:transparent;border:2px solid rgba(255,255,255,.6);border-radius:999px;padding:.15rem .8rem;cursor:pointer}
+#lang:hover{background:rgba(255,255,255,.15)}
+
+.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:3rem;align-items:center;padding:3rem 0 4.5rem}
+h1{font-size:clamp(2.7rem,6.5vw,5rem);line-height:1;letter-spacing:-.04em;font-weight:800;margin:0 0 1.2rem}
+.lead{font-size:1.2rem;max-width:32em;margin:0 0 1.8rem;opacity:.95}
+.btn{display:inline-block;padding:.85rem 1.5rem;border-radius:999px;font-weight:600;text-decoration:none;border:2px solid #fff}
+.btn.solid{background:#fff;color:var(--red-deep)}
+.btn.line{margin-left:.5rem}
+.btn:hover{transform:translateY(-1px)}
+.badges{margin-top:1.4rem;display:flex;gap:.5rem;flex-wrap:wrap}
+.badge{font-size:.85rem;padding:.2rem .75rem;border-radius:999px;background:rgba(255,255,255,.16)}
+.logo-tile{justify-self:center;width:min(300px,70vw);aspect-ratio:1;background:#fff;border-radius:34px;display:grid;place-items:center;padding:1.5rem;box-shadow:0 24px 50px -20px rgba(0,0,0,.55);transform:rotate(-3deg)}
+.logo-tile img{max-width:100%;max-height:100%;object-fit:contain}
+
+section{padding:3.5rem 0;border-top:1px solid var(--line)}
+section:first-of-type{border-top:0}
+h2{font-size:clamp(1.8rem,3.5vw,2.4rem);letter-spacing:-.025em;margin:0 0 1.8rem;line-height:1.15}
+.feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.6rem 2.4rem;list-style:none;margin:0;padding:0}
+.feat li{padding-left:1rem;border-left:4px solid var(--red)}
+.feat strong{display:block;font-size:1.1rem;margin-bottom:.15rem}
+.feat span{color:var(--muted)}
+.intro{max-width:40em;color:var(--muted);margin:-.8rem 0 1.8rem}
+.steps{max-width:42em;padding-left:1.2rem}
+.steps li{margin-bottom:.5rem}
+code{background:var(--surface);border:1px solid var(--line);padding:.05rem .4rem;border-radius:5px;font-size:.92em}
+.warn{max-width:42em;padding:1rem 1.2rem;border-radius:12px;background:var(--surface);border:1px solid var(--red)}
+footer{padding:2rem 0 3rem;color:var(--muted);font-size:.92rem;border-top:1px solid var(--line)}
+
+@media (max-width:760px){
+  .hero{grid-template-columns:1fr;gap:2.5rem;padding-top:1.5rem}
+  .logo-tile{order:-1;width:170px;border-radius:26px}
+  .top nav a.hide-sm{display:none}
+  .btn.line{margin-left:0;margin-top:.6rem}
+}
+</style>
+</head>
+<body>
+<div class="band">
+  <div class="wrap">
+    <header class="top">
+      <a class="brand" href="#">
+        <img src="logo.png" alt="" onerror="this.style.display='none'">
+        Popotte
+      </a>
+      <nav>
+        <a class="hide-sm" href="#fonctions"><span class="fr">Fonctions</span><span class="en">Features</span></a>
+        <button id="lang" type="button" aria-label="Changer la langue / Switch language">EN</button>
+      </nav>
+    </header>
+
+    <div class="hero">
+      <div>
+        <h1><span class="fr">Écris, lis et classe tes recettes.</span><span class="en">Write, read and sort your recipes.</span></h1>
+        <p class="lead">
+          <span class="fr">Popotte est un logiciel de gestion de recettes pour Windows, avec une interface simple de type WYSIWYG, pensée pour les débutants comme pour les utilisateurs avancés.</span>
+          <span class="en">Popotte is recipe management software for Windows with a simple WYSIWYG interface, built for beginners and advanced users alike.</span>
+        </p>
+        <a class="btn solid" href="https://github.com/StormACE/Popotte-6"><span class="fr">Voir sur GitHub</span><span class="en">View on GitHub</span></a>
+        <a class="btn line" href="#fonctions"><span class="fr">Découvrir les fonctions</span><span class="en">See the features</span></a>
+        <div class="badges">
+          <span class="badge">Version 6.0.0.5 Alpha</span>
+          <span class="badge">.NET 10</span>
+          <span class="badge"><span class="fr">Multilingue</span><span class="en">Multilingual</span></span>
+        </div>
+      </div>
+      <div class="logo-tile">
+        <img src="logo.png" alt="Logo de Popotte" onerror="this.parentElement.style.display='none'">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <main>
+    <section id="fonctions">
+      <h2><span class="fr">Ce que Popotte sait faire</span><span class="en">What Popotte can do</span></h2>
+      <ul class="feat">
+        <li><strong><span class="fr">Écrire, lire et classer</span><span class="en">Write, read and sort</span></strong>
+          <span class="fr">Une interface graphique simple pour gérer toute ta collection.</span><span class="en">A simple graphical interface to manage your whole collection.</span></li>
+        <li><strong><span class="fr">Format RTF ou texte</span><span class="en">RTF or text format</span></strong>
+          <span class="fr">Sauvegarde en RTF par défaut, ou dans l’extension de ton choix.</span><span class="en">Saved as RTF by default, or with the extension you like.</span></li>
+        <li><strong><span class="fr">Images dans les recettes</span><span class="en">Images in recipes</span></strong>
+          <span class="fr">Insère des photos directement dans tes fiches.</span><span class="en">Insert pictures right into your recipes.</span></li>
+        <li><strong><span class="fr">Impression</span><span class="en">Printing</span></strong>
+          <span class="fr">Imprime tes recettes avec n’importe quelle imprimante.</span><span class="en">Print your recipes with any printer.</span></li>
+        <li><strong><span class="fr">Menu de la semaine</span><span class="en">Weekly menu</span></strong>
+          <span class="fr">Crée un menu pour la semaine et imprime-le.</span><span class="en">Create a menu for the week and print it.</span></li>
+        <li><strong><span class="fr">Moteurs de recherche</span><span class="en">Search engines</span></strong>
+          <span class="fr">Utilise ou ajoute tes propres moteurs de recherche.</span><span class="en">Use or add your own search engines.</span></li>
+        <li><strong><span class="fr">Convertisseur de 24 mesures</span><span class="en">24 measure conversions</span></strong>
+          <span class="fr">Passe d’une unité à l’autre sans sortir du logiciel.</span><span class="en">Switch between units without leaving the software.</span></li>
+        <li><strong><span class="fr">Copier-coller depuis le web</span><span class="en">Copy and paste from the web</span></strong>
+          <span class="fr">Fonctionne avec Chrome, Edge, Firefox, Opera, Vivaldi, etc.</span><span class="en">Works with Chrome, Edge, Firefox, Opera, Vivaldi, etc.</span></li>
+        <li><strong><span class="fr">Sauvegarde et synchronisation</span><span class="en">Backup and sync</span></strong>
+          <span class="fr">Avec Dropbox, Google Drive, OneDrive, Pydio, etc.</span><span class="en">With Dropbox, Google Drive, OneDrive, Pydio, etc.</span></li>
+        <li><strong><span class="fr">Multilingue</span><span class="en">Multi-language</span></strong>
+          <span class="fr">Le logiciel s’utilise dans plusieurs langues.</span><span class="en">The software can be used in several languages.</span></li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer>
+    Popotte 6 · <a href="https://github.com/StormACE/Popotte-6"><span class="fr">Code source sur GitHub</span><span class="en">Source code on GitHub</span></a>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('lang'), root=document.documentElement;
+  btn.addEventListener('click',function(){
+    var en=root.lang==='fr';
+    root.lang=en?'en':'fr';
+    btn.textContent=en?'FR':'EN';
+    document.title=en?'Popotte 6 – Recipe management software':'Popotte 6 – Logiciel de gestion de recettes';
+  });
+})();
+</script>
+</body>
+</html>
