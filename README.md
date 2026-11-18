@@ -7,6 +7,8 @@ Logiciel de gestion de recettes pour Windows x64 Lisez License.txt avant d'utili
 
 Recipes management software for Windows x64 Read licence.txt before use or modification!!!
 
+<a href="https://stormace.github.io/Popotte-6/">Page officiel / Official Page</a>
+
 -------------------------
 
 Popotte est un logiciel conçu pour Écrire, Lire et Classer des recettes facilement.
