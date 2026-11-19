@@ -1,6 +1,6 @@
 # Popotte 6 BETA
 
-<img src="https://github.com/StormACE/Popotte-6/blob/main/Logo.png" width="300">
+<img src="https://github.com/StormACE/Popotte-6/blob/main/logo.png" width="300">
 
 
 Logiciel de gestion de recettes pour Windows x64 Lisez License.txt avant d'utiliser ou modifier!!!
