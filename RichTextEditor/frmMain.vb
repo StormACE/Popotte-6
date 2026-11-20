@@ -2510,7 +2510,7 @@ Public Class frmMain
     End Sub
 
     Private Sub ToolStripMenuItemSiteWeb_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSiteWeb.Click
-        Process.Start("explorer", "https://github.com/StormACE/Popotte-6")
+        Process.Start("explorer", "https://stormace.github.io/Popotte-6/")
     End Sub
 
     Private Sub CourteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CourteToolStripMenuItem.Click
