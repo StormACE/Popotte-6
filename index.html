@@ -70,6 +70,14 @@ h2{font-size:clamp(1.8rem,3.5vw,2.4rem);letter-spacing:-.025em;margin:0 0 1.8rem
 .feat li{padding-left:1rem;border-left:4px solid var(--red)}
 .feat strong{display:block;font-size:1.1rem;margin-bottom:.15rem}
 .feat span{color:var(--muted)}
+.screenshots-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;border-radius:14px}
+.screenshot-slide{flex:0 0 100%;min-width:0;margin:0;padding:1rem;background:var(--surface);border:1px solid var(--line);border-radius:14px;scroll-snap-align:start}
+.screenshot-slide img{display:block;width:100%;height:min(68vh,680px);object-fit:contain}
+.screenshot-slide figcaption{text-align:center;color:var(--muted);margin-top:.75rem}
+.screenshot-controls{display:flex;align-items:center;justify-content:center;gap:1rem;margin-top:1rem}
+.screenshot-controls button{font:inherit;font-weight:600;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:.45rem 1rem;cursor:pointer}
+.screenshot-controls button:disabled{opacity:.5;cursor:default}
+.screenshot-count{min-width:3.5em;text-align:center;color:var(--muted);font-variant-numeric:tabular-nums}
 .intro{max-width:40em;color:var(--muted);margin:-.8rem 0 1.8rem}
 .steps{max-width:42em;padding-left:1.2rem}
 .steps li{margin-bottom:.5rem}
@@ -90,11 +98,12 @@ footer{padding:2rem 0 3rem;color:var(--muted);font-size:.92rem;border-top:1px so
   <div class="wrap">
     <header class="top">
       <a class="brand" href="#">
-        <img src="logo.png" alt="" onerror="this.style.display='none'">
+        <img src="Images Web/logo.png" alt="" onerror="this.style.display='none'">
         Popotte
       </a>
       <nav>
         <a class="hide-sm" href="#fonctions"><span class="fr">Fonctions</span><span class="en">Features</span></a>
+        <a class="hide-sm" href="#captures"><span class="fr">Images</span><span class="en">Screenshots</span></a>
         <button id="lang" type="button" aria-label="Changer la langue / Switch language">EN</button>
       </nav>
     </header>
@@ -150,6 +159,33 @@ footer{padding:2rem 0 3rem;color:var(--muted);font-size:.92rem;border-top:1px so
       </ul>
     </section>
 
+    <section id="captures">
+      <h2><span class="fr">Découvrez Popotte en images</span><span class="en">See Popotte in action</span></h2>
+      <div class="screenshots-track" id="screenshots-track" aria-label="Captures d’écran de Popotte / Popotte screenshots">
+        <figure class="screenshot-slide">
+          <img src="Images Web/Popotte SS1.png" alt="Popotte screenshot 1">
+          <figcaption><span class="fr">Capture 1</span><span class="en">Screenshot 1</span></figcaption>
+        </figure>
+        <figure class="screenshot-slide">
+          <img src="Images Web/Popotte SS2.png" alt="Popotte screenshot 2">
+          <figcaption><span class="fr">Capture 2</span><span class="en">Screenshot 2</span></figcaption>
+        </figure>
+        <figure class="screenshot-slide">
+          <img src="Images Web/Popotte SS3.png" alt="Popotte screenshot 3">
+          <figcaption><span class="fr">Capture 3</span><span class="en">Screenshot 3</span></figcaption>
+        </figure>
+      </div>
+      <div class="screenshot-controls">
+        <button id="screenshot-prev" type="button" aria-label="Capture précédente / Previous screenshot">
+          <span class="fr">Précédent</span><span class="en">Previous</span>
+        </button>
+        <span class="screenshot-count" id="screenshot-count" aria-live="polite" aria-atomic="true">1 / 3</span>
+        <button id="screenshot-next" type="button" aria-label="Capture suivante / Next screenshot">
+          <span class="fr">Suivant</span><span class="en">Next</span>
+        </button>
+      </div>
+    </section>
+
   </main>
 
   <footer>
@@ -166,6 +202,38 @@ footer{padding:2rem 0 3rem;color:var(--muted);font-size:.92rem;border-top:1px so
     btn.textContent=en?'FR':'EN';
     document.title=en?'Popotte – Free Recipe management software':'Popotte – Logiciel Gratuit de gestion de recettes';
   });
+
+  var track=document.getElementById('screenshots-track');
+  var slides=track.querySelectorAll('.screenshot-slide');
+  var prev=document.getElementById('screenshot-prev');
+  var next=document.getElementById('screenshot-next');
+  var count=document.getElementById('screenshot-count');
+  var current=0;
+  var scrollTimer;
+  function updateControls(){
+    count.textContent=(current+1)+' / '+slides.length;
+    prev.disabled=current===0;
+    next.disabled=current===slides.length-1;
+  }
+  function showSlide(index){
+    current=Math.max(0,Math.min(index,slides.length-1));
+    track.scrollTo({
+      left:current*track.clientWidth,
+      behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'
+    });
+    updateControls();
+  }
+  prev.addEventListener('click',function(){showSlide(current-1)});
+  next.addEventListener('click',function(){showSlide(current+1)});
+  track.addEventListener('scroll',function(){
+    window.clearTimeout(scrollTimer);
+    scrollTimer=window.setTimeout(function(){
+      current=Math.round(track.scrollLeft/track.clientWidth);
+      updateControls();
+    },100);
+  });
+  window.addEventListener('resize',function(){showSlide(current)});
+  showSlide(0);
 })();
 </script>
 </body>
