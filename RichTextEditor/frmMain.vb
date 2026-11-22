@@ -36,6 +36,13 @@ Public Class frmMain
     Private DefaultFontEffect As String
     Private FontLoaded As Boolean = False
     Private GCF As Boolean = False  'use to fix bug
+    Private imageContextMenu As ContextMenuStrip
+    Private saveImageBitmapMenuItem As ToolStripMenuItem
+    Private saveImageJpegMenuItem As ToolStripMenuItem
+    Private rightClickedImageIndex As Integer = -1
+    Private imageIndexForSave As Integer = -1
+    Private selectionStartBeforeImageContextMenu As Integer
+    Private selectionLengthBeforeImageContextMenu As Integer
 
     Private UserName As String = Environment.UserName
     Private demarrage As Boolean 'is the application starting up
@@ -308,6 +315,7 @@ Public Class frmMain
         AnnulerSurbrillanceToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "98")
         AutoCcontextToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - EditorWindow - Menu", "100")
         UtiliserLaPoliceParDéfaultToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - ContextMenu", "8")
+        InitializeImageContextMenu()
 
 
         'Vérifier si la form a été redimensionner
@@ -971,13 +979,231 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub rtbDoc_MouseUp(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rtbDoc.MouseUp
+    Private Sub rtbDoc_MouseUp(ByVal sender As System.Object, ByVal e As MouseEventArgs) Handles rtbDoc.MouseUp
         GetCharFormat()
+
+        If e.Button = MouseButtons.Right AndAlso rightClickedImageIndex >= 0 Then
+            imageContextMenu.Show(rtbDoc, e.Location)
+        End If
     End Sub
 
     Private Sub rtbDoc_SelectionChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rtbDoc.SelectionChanged
         GetCharFormat()
     End Sub
+
+    Private Sub InitializeImageContextMenu()
+        saveImageBitmapMenuItem = New ToolStripMenuItem(LangIni.GetKeyValue("Popotte - ContextMenu", "10"))
+        saveImageJpegMenuItem = New ToolStripMenuItem(LangIni.GetKeyValue("Popotte - ContextMenu", "11"))
+        imageContextMenu = New ContextMenuStrip() With {
+            .Font = ContextMenuStrip1.Font,
+            .ImageScalingSize = ContextMenuStrip1.ImageScalingSize
+        }
+        imageContextMenu.Items.AddRange(New ToolStripItem() {saveImageBitmapMenuItem, saveImageJpegMenuItem})
+
+        AddHandler saveImageBitmapMenuItem.Click, Sub(sender, e) SaveRightClickedImage(System.Drawing.Imaging.ImageFormat.Bmp, "bmp", imageIndexForSave)
+        AddHandler saveImageJpegMenuItem.Click, Sub(sender, e) SaveRightClickedImage(System.Drawing.Imaging.ImageFormat.Jpeg, "jpg", imageIndexForSave)
+        AddHandler imageContextMenu.Closed, AddressOf ImageContextMenu_Closed
+    End Sub
+
+    Private Sub rtbDoc_MouseDown(sender As Object, e As MouseEventArgs) Handles rtbDoc.MouseDown
+        If e.Button <> MouseButtons.Right Then Return
+
+        rightClickedImageIndex = -1
+        imageIndexForSave = -1
+        rtbDoc.ContextMenuStrip = ContextMenuStrip1
+        Dim charIndex As Integer = rtbDoc.GetCharIndexFromPosition(e.Location)
+        If charIndex < 0 OrElse charIndex >= rtbDoc.TextLength Then Return
+
+        selectionStartBeforeImageContextMenu = rtbDoc.SelectionStart
+        selectionLengthBeforeImageContextMenu = rtbDoc.SelectionLength
+
+        For candidateIndex As Integer = Math.Max(0, charIndex - 1) To Math.Min(rtbDoc.TextLength - 1, charIndex + 1)
+            rtbDoc.Select(candidateIndex, 1)
+            If rtbDoc.SelectedRtf.IndexOf("\pict", StringComparison.OrdinalIgnoreCase) >= 0 Then
+                rightClickedImageIndex = candidateIndex
+                imageIndexForSave = candidateIndex
+                rtbDoc.ContextMenuStrip = Nothing
+                Return
+            End If
+        Next
+
+        rtbDoc.Select(selectionStartBeforeImageContextMenu, selectionLengthBeforeImageContextMenu)
+    End Sub
+
+    Private Sub ImageContextMenu_Closed(sender As Object, e As ToolStripDropDownClosedEventArgs)
+        If rightClickedImageIndex >= 0 Then RestoreSelectionAfterImageContextMenu()
+
+        rightClickedImageIndex = -1
+        rtbDoc.ContextMenuStrip = ContextMenuStrip1
+    End Sub
+
+    Private Sub RestoreSelectionAfterImageContextMenu()
+        Dim selectionStart As Integer = Math.Min(selectionStartBeforeImageContextMenu, rtbDoc.TextLength)
+        Dim selectionLength As Integer = Math.Min(selectionLengthBeforeImageContextMenu, rtbDoc.TextLength - selectionStart)
+        rtbDoc.Select(selectionStart, selectionLength)
+    End Sub
+
+    Private Sub SaveRightClickedImage(imageFormat As System.Drawing.Imaging.ImageFormat, extension As String, imageIndex As Integer)
+        If imageIndex < 0 OrElse imageIndex >= rtbDoc.TextLength Then Return
+
+        Dim originalClipboard As IDataObject = Nothing
+        Dim clipboardSnapshotCaptured As Boolean = False
+        Dim extractedImage As Image = Nothing
+        Dim imageRtf As String = Nothing
+
+        Try
+            originalClipboard = Clipboard.GetDataObject()
+            clipboardSnapshotCaptured = True
+            rtbDoc.Select(imageIndex, 1)
+            imageRtf = rtbDoc.SelectedRtf
+            extractedImage = LoadImageFromRtf(imageRtf)
+
+            If extractedImage Is Nothing Then
+                rtbDoc.Copy()
+                extractedImage = Clipboard.GetImage()
+            End If
+
+            If extractedImage Is Nothing AndAlso Not String.IsNullOrEmpty(imageRtf) Then
+                Using imageRtfBox As New RichTextBox()
+                    imageRtfBox.Rtf = imageRtf
+                    imageRtfBox.SelectAll()
+                    imageRtfBox.Copy()
+                    extractedImage = Clipboard.GetImage()
+                End Using
+            End If
+
+            If extractedImage Is Nothing Then
+                Throw New InvalidOperationException(LangIni.GetKeyValue("Popotte - ContextMenu", "12"))
+            End If
+
+            Using saveDialog As New SaveFileDialog()
+                saveDialog.Title = LangIni.GetKeyValue("Popotte - ContextMenu", "9")
+                saveDialog.Filter = LangIni.GetKeyValue("Popotte - ContextMenu", If(extension = "bmp", "10", "11")) & "|*." & extension
+                saveDialog.DefaultExt = extension
+                saveDialog.AddExtension = True
+
+                If saveDialog.ShowDialog(Me) = DialogResult.OK Then
+                    SaveResizedImage(extractedImage, saveDialog.FileName, imageFormat, imageRtf)
+                    MessageBox.Show(LangIni.GetKeyValue("Popotte - ContextMenu", "13"),
+                                    "Popotte", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
+            End Using
+        Catch ex As Exception When TypeOf ex Is ExternalException OrElse
+                                   TypeOf ex Is IOException OrElse
+                                   TypeOf ex Is UnauthorizedAccessException OrElse
+                                   TypeOf ex Is InvalidOperationException OrElse
+                                   TypeOf ex Is ArgumentException OrElse
+                                   TypeOf ex Is NotSupportedException
+            MessageBox.Show(LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "12") & " " & ex.Message,
+                            LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "3"),
+                            MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If extractedImage IsNot Nothing Then extractedImage.Dispose()
+
+            If clipboardSnapshotCaptured Then
+                Try
+                    If originalClipboard Is Nothing Then
+                        Clipboard.Clear()
+                    Else
+                        Clipboard.SetDataObject(originalClipboard, True)
+                    End If
+                Catch ex As Exception When TypeOf ex Is ExternalException OrElse
+                                           TypeOf ex Is InvalidOperationException OrElse
+                                           TypeOf ex Is ArgumentException
+                    MessageBox.Show(LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "12") & " " & ex.Message,
+                                    LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "3"),
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                End Try
+            End If
+            RestoreSelectionAfterImageContextMenu()
+            imageIndexForSave = -1
+        End Try
+    End Sub
+
+    Private Sub SaveResizedImage(sourceImage As Image, filePath As String, imageFormat As System.Drawing.Imaging.ImageFormat, imageRtf As String)
+        Dim targetSize As Size = GetRtfImageSizeInPixels(imageRtf, sourceImage.Size, rtbDoc.DeviceDpi)
+        Dim targetWidth As Integer = targetSize.Width
+        Dim targetHeight As Integer = targetSize.Height
+        Dim isJpeg As Boolean = imageFormat.Guid = System.Drawing.Imaging.ImageFormat.Jpeg.Guid
+        Dim pixelFormat As System.Drawing.Imaging.PixelFormat = If(isJpeg,
+            System.Drawing.Imaging.PixelFormat.Format24bppRgb,
+            System.Drawing.Imaging.PixelFormat.Format32bppArgb)
+
+        Using resizedImage As New Bitmap(targetWidth, targetHeight, pixelFormat)
+            Using graphics As Graphics = Graphics.FromImage(resizedImage)
+                graphics.Clear(If(isJpeg, Color.White, Color.Transparent))
+                graphics.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBicubic
+                graphics.SmoothingMode = Drawing2D.SmoothingMode.HighQuality
+                graphics.PixelOffsetMode = Drawing2D.PixelOffsetMode.HighQuality
+                graphics.DrawImage(sourceImage, New Rectangle(0, 0, targetWidth, targetHeight))
+            End Using
+
+            If isJpeg Then
+                Dim jpegCodec As System.Drawing.Imaging.ImageCodecInfo = Nothing
+                For Each codec As System.Drawing.Imaging.ImageCodecInfo In System.Drawing.Imaging.ImageCodecInfo.GetImageEncoders()
+                    If codec.FormatID = System.Drawing.Imaging.ImageFormat.Jpeg.Guid Then
+                        jpegCodec = codec
+                        Exit For
+                    End If
+                Next
+
+                If jpegCodec Is Nothing Then Throw New InvalidOperationException("L’encodeur JPEG n’est pas disponible.")
+
+                Using encoderParameters As New System.Drawing.Imaging.EncoderParameters(1)
+                    encoderParameters.Param(0) = New System.Drawing.Imaging.EncoderParameter(System.Drawing.Imaging.Encoder.Quality, 85L)
+                    resizedImage.Save(filePath, jpegCodec, encoderParameters)
+                End Using
+            Else
+                resizedImage.Save(filePath, imageFormat)
+            End If
+        End Using
+    End Sub
+
+    Private Function GetRtfImageSizeInPixels(imageRtf As String, fallbackSize As Size, pixelsPerInch As Integer) As Size
+        Const twipsPerInch As Double = 1440.0R
+        Const maxDimension As Integer = 10000
+
+        Dim widthMatch = System.Text.RegularExpressions.Regex.Match(imageRtf, "\\picwgoal(\d+)", System.Text.RegularExpressions.RegexOptions.IgnoreCase)
+        Dim heightMatch = System.Text.RegularExpressions.Regex.Match(imageRtf, "\\pichgoal(\d+)", System.Text.RegularExpressions.RegexOptions.IgnoreCase)
+        Dim widthTwips As Integer
+        Dim heightTwips As Integer
+
+        If widthMatch.Success AndAlso heightMatch.Success AndAlso
+           Integer.TryParse(widthMatch.Groups(1).Value, widthTwips) AndAlso
+           Integer.TryParse(heightMatch.Groups(1).Value, heightTwips) AndAlso
+           widthTwips > 0 AndAlso heightTwips > 0 Then
+            Dim width As Integer = CInt(Math.Round(widthTwips * pixelsPerInch / twipsPerInch))
+            Dim height As Integer = CInt(Math.Round(heightTwips * pixelsPerInch / twipsPerInch))
+            If width > 0 AndAlso height > 0 AndAlso width <= maxDimension AndAlso height <= maxDimension Then
+                Return New Size(width, height)
+            End If
+        End If
+
+        Dim scale As Double = Math.Min(1.0R, 1200.0R / CDbl(Math.Max(fallbackSize.Width, fallbackSize.Height)))
+        Return New Size(Math.Max(1, CInt(Math.Round(fallbackSize.Width * scale))),
+                        Math.Max(1, CInt(Math.Round(fallbackSize.Height * scale))))
+    End Function
+
+    Private Function LoadImageFromRtf(imageRtf As String) As Image
+        If String.IsNullOrWhiteSpace(imageRtf) Then Return Nothing
+
+        Dim pictureData As System.Text.RegularExpressions.Match =
+            System.Text.RegularExpressions.Regex.Match(
+                imageRtf,
+                "\\(?:pngblip|jpegblip|emfblip|wmetafile\d+|dibitmap\d*)(?:\\[a-zA-Z]+-?\d*)*\s+([0-9A-Fa-f\s]+)",
+                System.Text.RegularExpressions.RegexOptions.IgnoreCase)
+        If Not pictureData.Success Then Return Nothing
+
+        Dim hexData As String = System.Text.RegularExpressions.Regex.Replace(pictureData.Groups(1).Value, "\s+", "")
+        If hexData.Length = 0 OrElse hexData.Length Mod 2 <> 0 Then Return Nothing
+
+        Dim imageBytes As Byte() = Convert.FromHexString(hexData)
+        Using stream As New MemoryStream(imageBytes)
+            Using sourceImage As Image = Image.FromStream(stream)
+                Return New Bitmap(sourceImage)
+            End Using
+        End Using
+    End Function
 
     Private Sub rtbDoc_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles rtbDoc.KeyDown
 
