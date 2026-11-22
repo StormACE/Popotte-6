@@ -1046,8 +1046,6 @@ Public Class frmMain
     Private Async Sub SaveRightClickedImage(imageFormat As System.Drawing.Imaging.ImageFormat, extension As String, imageIndex As Integer)
         If imageIndex < 0 OrElse imageIndex >= rtbDoc.TextLength Then Return
 
-        Dim originalClipboard As IDataObject = Nothing
-        Dim clipboardSnapshotCaptured As Boolean = False
         Dim extractedImage As Image = Nothing
         Dim imageRtf As String = Nothing
 
@@ -1071,8 +1069,6 @@ Public Class frmMain
                 Await Task.Yield()
                 Cursor.Current = Cursors.WaitCursor
 
-                originalClipboard = Clipboard.GetDataObject()
-                clipboardSnapshotCaptured = True
                 rtbDoc.Select(imageIndex, 1)
                 imageRtf = rtbDoc.SelectedRtf
 
@@ -1088,20 +1084,6 @@ Public Class frmMain
                 rtbDoc.Cursor = previousEditorCursor
                 Cursor.Current = previousCurrentCursor
             End Try
-
-            If extractedImage Is Nothing Then
-                rtbDoc.Copy()
-                extractedImage = Clipboard.GetImage()
-            End If
-
-            If extractedImage Is Nothing AndAlso Not String.IsNullOrEmpty(imageRtf) Then
-                Using imageRtfBox As New RichTextBox()
-                    imageRtfBox.Rtf = imageRtf
-                    imageRtfBox.SelectAll()
-                    imageRtfBox.Copy()
-                    extractedImage = Clipboard.GetImage()
-                End Using
-            End If
 
             If extractedImage Is Nothing Then
                 Throw New InvalidOperationException(LangIni.GetKeyValue("Popotte - ContextMenu", "12"))
@@ -1131,21 +1113,6 @@ Public Class frmMain
         Finally
             If extractedImage IsNot Nothing Then extractedImage.Dispose()
 
-            If clipboardSnapshotCaptured Then
-                Try
-                    If originalClipboard Is Nothing Then
-                        Clipboard.Clear()
-                    Else
-                        Clipboard.SetDataObject(originalClipboard, True)
-                    End If
-                Catch ex As Exception When TypeOf ex Is ExternalException OrElse
-                                           TypeOf ex Is InvalidOperationException OrElse
-                                           TypeOf ex Is ArgumentException
-                    MessageBox.Show(LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "12") & " " & ex.Message,
-                                    LangIni.GetKeyValue("Popotte - EditorWindow - Messagebox", "3"),
-                                    MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                End Try
-            End If
             RestoreSelectionAfterImageContextMenu()
             imageIndexForSave = -1
         End Try
