@@ -159,6 +159,9 @@ Partial Class frmMain
         PrintPreviewDialog1 = New PrintPreviewDialog()
         SaveFileDialog1 = New SaveFileDialog()
         ContextMenuStrip1 = New ContextMenuStrip(components)
+        ImageContextMenuStrip = New ContextMenuStrip(components)
+        SaveImageBitmapToolStripMenuItem = New ToolStripMenuItem()
+        SaveImageJpegToolStripMenuItem = New ToolStripMenuItem()
         SurlignerToolStripMenuItem = New ToolStripMenuItem()
         AnnulerSurbrillanceToolStripMenuItem = New ToolStripMenuItem()
         ToolStripSeparator23 = New ToolStripSeparator()
@@ -215,6 +218,7 @@ Partial Class frmMain
         rtbDoc = New ExtendedRichTextBox.AdvRichTextBoxPrintCtrl()
         MenuStrip1.SuspendLayout()
         ContextMenuStrip1.SuspendLayout()
+        ImageContextMenuStrip.SuspendLayout()
         ToolStrip2.SuspendLayout()
         ToolStrip1.SuspendLayout()
         SuspendLayout()
@@ -222,7 +226,7 @@ Partial Class frmMain
         ' MenuStrip1
         ' 
         MenuStrip1.BackColor = SystemColors.Control
-        MenuStrip1.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        MenuStrip1.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         MenuStrip1.ImageScalingSize = New Size(20, 20)
         MenuStrip1.Items.AddRange(New ToolStripItem() {FileToolStripMenuItem, EditToolStripMenuItem, FontToolStripMenuItem, SpecialToolStripMenuItem, ParagrapheToolStripMenuItem, OutilsToolStripMenuItem, OptionsToolStripMenuItem, AideToolStripMenuItem})
         MenuStrip1.Location = New Point(0, 0)
@@ -1064,12 +1068,32 @@ Partial Class frmMain
         ' 
         ' ContextMenuStrip1
         ' 
-        ContextMenuStrip1.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ContextMenuStrip1.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ContextMenuStrip1.ImageScalingSize = New Size(24, 24)
         ContextMenuStrip1.Items.AddRange(New ToolStripItem() {SurlignerToolStripMenuItem, AnnulerSurbrillanceToolStripMenuItem, ToolStripSeparator23, UtiliserLaPoliceParDéfaultToolStripMenuItem, ToolStripSeparator35, AutoCcontextToolStripMenuItem, ToolStripSeparator37, ToolStripMenuItemToutSel, ToolStripSeparator18, ToolStripMenuItemImage, InsertlocalfileContextToolStripMenuItem, ToolStripSeparator14, ResearchCenter_ContextMenuItem, ToolStripSeparator5, CopierToolStripMenuItem, CouperToolStripMenuItem, CollerToolStripMenuItem})
         ContextMenuStrip1.Name = "ContextMenuStrip1"
         ContextMenuStrip1.Size = New Size(549, 447)
-        ' 
+        '
+        ' ImageContextMenuStrip
+        '
+        ImageContextMenuStrip.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ImageContextMenuStrip.ImageScalingSize = New Size(24, 24)
+        ImageContextMenuStrip.Items.AddRange(New ToolStripItem() {SaveImageBitmapToolStripMenuItem, SaveImageJpegToolStripMenuItem})
+        ImageContextMenuStrip.Name = "ImageContextMenuStrip"
+        ImageContextMenuStrip.Size = New Size(240, 76)
+        '
+        ' SaveImageBitmapToolStripMenuItem
+        '
+        SaveImageBitmapToolStripMenuItem.Name = "SaveImageBitmapToolStripMenuItem"
+        SaveImageBitmapToolStripMenuItem.Size = New Size(239, 34)
+        SaveImageBitmapToolStripMenuItem.Text = "Bitmap (*.bmp)"
+        '
+        ' SaveImageJpegToolStripMenuItem
+        '
+        SaveImageJpegToolStripMenuItem.Name = "SaveImageJpegToolStripMenuItem"
+        SaveImageJpegToolStripMenuItem.Size = New Size(239, 34)
+        SaveImageJpegToolStripMenuItem.Text = "JPEG (*.jpg)"
+        '
         ' SurlignerToolStripMenuItem
         ' 
         SurlignerToolStripMenuItem.Name = "SurlignerToolStripMenuItem"
@@ -1320,7 +1344,7 @@ Partial Class frmMain
         ToolStripComboBoxPolices.AutoToolTip = True
         ToolStripComboBoxPolices.BackColor = SystemColors.GradientInactiveCaption
         ToolStripComboBoxPolices.DropDownStyle = ComboBoxStyle.DropDownList
-        ToolStripComboBoxPolices.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        ToolStripComboBoxPolices.Font = New Font("Segoe UI", 10.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         ToolStripComboBoxPolices.Margin = New Padding(3, 7, 3, 7)
         ToolStripComboBoxPolices.Name = "ToolStripComboBoxPolices"
         ToolStripComboBoxPolices.Size = New Size(375, 36)
@@ -1332,7 +1356,7 @@ Partial Class frmMain
         ToolStripComboBoxSize.AutoToolTip = True
         ToolStripComboBoxSize.BackColor = SystemColors.GradientInactiveCaption
         ToolStripComboBoxSize.DropDownWidth = 50
-        ToolStripComboBoxSize.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        ToolStripComboBoxSize.Font = New Font("Segoe UI", 10.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         ToolStripComboBoxSize.Margin = New Padding(3, 7, 3, 7)
         ToolStripComboBoxSize.Name = "ToolStripComboBoxSize"
         ToolStripComboBoxSize.Size = New Size(75, 36)
@@ -1463,7 +1487,7 @@ Partial Class frmMain
         ' 
         ToolStripButtonBulletList.AutoSize = False
         ToolStripButtonBulletList.DisplayStyle = ToolStripItemDisplayStyle.Image
-        ToolStripButtonBulletList.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        ToolStripButtonBulletList.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ToolStripButtonBulletList.Image = CType(resources.GetObject("ToolStripButtonBulletList.Image"), Image)
         ToolStripButtonBulletList.ImageTransparentColor = Color.Magenta
         ToolStripButtonBulletList.Name = "ToolStripButtonBulletList"
@@ -1477,7 +1501,7 @@ Partial Class frmMain
         rtbDoc.ContextMenuStrip = ContextMenuStrip1
         rtbDoc.Cursor = Cursors.IBeam
         rtbDoc.Dock = DockStyle.Fill
-        rtbDoc.Font = New Font("Calibri", 16F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        rtbDoc.Font = New Font("Calibri", 16.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         rtbDoc.HideSelection = False
         rtbDoc.ImeMode = ImeMode.NoControl
         rtbDoc.Location = New Point(0, 157)
@@ -1490,14 +1514,14 @@ Partial Class frmMain
         ' 
         ' frmMain
         ' 
-        AutoScaleDimensions = New SizeF(144F, 144F)
+        AutoScaleDimensions = New SizeF(144.0F, 144.0F)
         AutoScaleMode = AutoScaleMode.Dpi
         ClientSize = New Size(1176, 868)
         Controls.Add(rtbDoc)
         Controls.Add(ToolStrip1)
         Controls.Add(ToolStrip2)
         Controls.Add(MenuStrip1)
-        Font = New Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Font = New Font("Microsoft Sans Serif", 8.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         MainMenuStrip = MenuStrip1
         Margin = New Padding(4, 5, 4, 5)
@@ -1506,6 +1530,7 @@ Partial Class frmMain
         MenuStrip1.ResumeLayout(False)
         MenuStrip1.PerformLayout()
         ContextMenuStrip1.ResumeLayout(False)
+        ImageContextMenuStrip.ResumeLayout(False)
         ToolStrip2.ResumeLayout(False)
         ToolStrip2.PerformLayout()
         ToolStrip1.ResumeLayout(False)
@@ -1551,6 +1576,9 @@ Partial Class frmMain
     Friend WithEvents PrintPreviewDialog1 As System.Windows.Forms.PrintPreviewDialog
     Friend WithEvents PrintDocument1 As System.Drawing.Printing.PrintDocument
     Friend WithEvents SaveFileDialog1 As System.Windows.Forms.SaveFileDialog
+    Friend WithEvents ImageContextMenuStrip As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents SaveImageBitmapToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SaveImageJpegToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuUndo As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuRedo As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator6 As System.Windows.Forms.ToolStripSeparator

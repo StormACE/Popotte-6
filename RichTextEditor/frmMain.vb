@@ -36,9 +36,6 @@ Public Class frmMain
     Private DefaultFontEffect As String
     Private FontLoaded As Boolean = False
     Private GCF As Boolean = False  'use to fix bug
-    Private imageContextMenu As ContextMenuStrip
-    Private saveImageBitmapMenuItem As ToolStripMenuItem
-    Private saveImageJpegMenuItem As ToolStripMenuItem
     Private rightClickedImageIndex As Integer = -1
     Private imageIndexForSave As Integer = -1
     Private selectionStartBeforeImageContextMenu As Integer
@@ -983,7 +980,7 @@ Public Class frmMain
         GetCharFormat()
 
         If e.Button = MouseButtons.Right AndAlso rightClickedImageIndex >= 0 Then
-            imageContextMenu.Show(rtbDoc, e.Location)
+            ImageContextMenuStrip.Show(rtbDoc, e.Location)
         End If
     End Sub
 
@@ -992,17 +989,12 @@ Public Class frmMain
     End Sub
 
     Private Sub InitializeImageContextMenu()
-        saveImageBitmapMenuItem = New ToolStripMenuItem(LangIni.GetKeyValue("Popotte - ContextMenu", "10"))
-        saveImageJpegMenuItem = New ToolStripMenuItem(LangIni.GetKeyValue("Popotte - ContextMenu", "11"))
-        imageContextMenu = New ContextMenuStrip() With {
-            .Font = ContextMenuStrip1.Font,
-            .ImageScalingSize = ContextMenuStrip1.ImageScalingSize
-        }
-        imageContextMenu.Items.AddRange(New ToolStripItem() {saveImageBitmapMenuItem, saveImageJpegMenuItem})
+        SaveImageBitmapToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - ContextMenu", "10")
+        SaveImageJpegToolStripMenuItem.Text = LangIni.GetKeyValue("Popotte - ContextMenu", "11")
 
-        AddHandler saveImageBitmapMenuItem.Click, Sub(sender, e) SaveRightClickedImage(System.Drawing.Imaging.ImageFormat.Bmp, "bmp", imageIndexForSave)
-        AddHandler saveImageJpegMenuItem.Click, Sub(sender, e) SaveRightClickedImage(System.Drawing.Imaging.ImageFormat.Jpeg, "jpg", imageIndexForSave)
-        AddHandler imageContextMenu.Closed, AddressOf ImageContextMenu_Closed
+        AddHandler SaveImageBitmapToolStripMenuItem.Click, Sub(sender, e) SaveRightClickedImage(System.Drawing.Imaging.ImageFormat.Bmp, "bmp", imageIndexForSave)
+        AddHandler SaveImageJpegToolStripMenuItem.Click, Sub(sender, e) SaveRightClickedImage(System.Drawing.Imaging.ImageFormat.Jpeg, "jpg", imageIndexForSave)
+        AddHandler ImageContextMenuStrip.Closed, AddressOf ImageContextMenu_Closed
     End Sub
 
     Private Sub rtbDoc_MouseDown(sender As Object, e As MouseEventArgs) Handles rtbDoc.MouseDown
@@ -1053,7 +1045,7 @@ Public Class frmMain
         Dim previousEditorCursor As Cursor = rtbDoc.Cursor
         Dim previousFormUseWaitCursor As Boolean = Me.UseWaitCursor
         Dim previousEditorUseWaitCursor As Boolean = rtbDoc.UseWaitCursor
-        Dim previousMenuUseWaitCursor As Boolean = imageContextMenu.UseWaitCursor
+        Dim previousMenuUseWaitCursor As Boolean = ImageContextMenuStrip.UseWaitCursor
         Dim previousApplicationUseWaitCursor As Boolean = Application.UseWaitCursor
         Dim previousCurrentCursor As Cursor = Cursor.Current
 
@@ -1062,7 +1054,7 @@ Public Class frmMain
                 Application.UseWaitCursor = True
                 Me.UseWaitCursor = True
                 rtbDoc.UseWaitCursor = True
-                imageContextMenu.UseWaitCursor = True
+                ImageContextMenuStrip.UseWaitCursor = True
                 Me.Cursor = Cursors.WaitCursor
                 rtbDoc.Cursor = Cursors.WaitCursor
                 Cursor.Current = Cursors.WaitCursor
@@ -1077,7 +1069,7 @@ Public Class frmMain
                 extractedImage = Await imageReadTask
             Finally
                 Application.UseWaitCursor = previousApplicationUseWaitCursor
-                imageContextMenu.UseWaitCursor = previousMenuUseWaitCursor
+                ImageContextMenuStrip.UseWaitCursor = previousMenuUseWaitCursor
                 Me.UseWaitCursor = previousFormUseWaitCursor
                 rtbDoc.UseWaitCursor = previousEditorUseWaitCursor
                 Me.Cursor = previousFormCursor
