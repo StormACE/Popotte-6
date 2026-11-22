@@ -1043,7 +1043,7 @@ Public Class frmMain
         rtbDoc.Select(selectionStart, selectionLength)
     End Sub
 
-    Private Sub SaveRightClickedImage(imageFormat As System.Drawing.Imaging.ImageFormat, extension As String, imageIndex As Integer)
+    Private Async Sub SaveRightClickedImage(imageFormat As System.Drawing.Imaging.ImageFormat, extension As String, imageIndex As Integer)
         If imageIndex < 0 OrElse imageIndex >= rtbDoc.TextLength Then Return
 
         Dim originalClipboard As IDataObject = Nothing
@@ -1051,12 +1051,43 @@ Public Class frmMain
         Dim extractedImage As Image = Nothing
         Dim imageRtf As String = Nothing
 
+        Dim previousFormCursor As Cursor = Me.Cursor
+        Dim previousEditorCursor As Cursor = rtbDoc.Cursor
+        Dim previousFormUseWaitCursor As Boolean = Me.UseWaitCursor
+        Dim previousEditorUseWaitCursor As Boolean = rtbDoc.UseWaitCursor
+        Dim previousMenuUseWaitCursor As Boolean = imageContextMenu.UseWaitCursor
+        Dim previousApplicationUseWaitCursor As Boolean = Application.UseWaitCursor
+        Dim previousCurrentCursor As Cursor = Cursor.Current
+
         Try
-            originalClipboard = Clipboard.GetDataObject()
-            clipboardSnapshotCaptured = True
-            rtbDoc.Select(imageIndex, 1)
-            imageRtf = rtbDoc.SelectedRtf
-            extractedImage = LoadImageFromRtf(imageRtf)
+            Try
+                Application.UseWaitCursor = True
+                Me.UseWaitCursor = True
+                rtbDoc.UseWaitCursor = True
+                imageContextMenu.UseWaitCursor = True
+                Me.Cursor = Cursors.WaitCursor
+                rtbDoc.Cursor = Cursors.WaitCursor
+                Cursor.Current = Cursors.WaitCursor
+                Await Task.Yield()
+                Cursor.Current = Cursors.WaitCursor
+
+                originalClipboard = Clipboard.GetDataObject()
+                clipboardSnapshotCaptured = True
+                rtbDoc.Select(imageIndex, 1)
+                imageRtf = rtbDoc.SelectedRtf
+
+                Dim imageReadTask As Task(Of Image) = Task.Run(Function() LoadImageFromRtf(imageRtf))
+                Await Task.Delay(150)
+                extractedImage = Await imageReadTask
+            Finally
+                Application.UseWaitCursor = previousApplicationUseWaitCursor
+                imageContextMenu.UseWaitCursor = previousMenuUseWaitCursor
+                Me.UseWaitCursor = previousFormUseWaitCursor
+                rtbDoc.UseWaitCursor = previousEditorUseWaitCursor
+                Me.Cursor = previousFormCursor
+                rtbDoc.Cursor = previousEditorCursor
+                Cursor.Current = previousCurrentCursor
+            End Try
 
             If extractedImage Is Nothing Then
                 rtbDoc.Copy()

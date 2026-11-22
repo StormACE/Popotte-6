@@ -380,6 +380,11 @@ Public Class AdvRichTextBoxPrintCtrl
     End Function
 
     Private Sub UpdateEditorCursor(clientPoint As Point)
+        If UseWaitCursor OrElse Application.UseWaitCursor Then
+            Cursor = Cursors.WaitCursor
+            Return
+        End If
+
         Cursor = If(IsInSelectionMargin(clientPoint), Cursors.Arrow, Cursors.IBeam)
     End Sub
 
@@ -388,6 +393,12 @@ Public Class AdvRichTextBoxPrintCtrl
     Protected Overrides Sub WndProc(ByRef m As Message)
         If m.Msg = WM_SETCURSOR Then
             Try
+                If UseWaitCursor OrElse Application.UseWaitCursor Then
+                    SetCursor(Cursors.WaitCursor.Handle)
+                    m.Result = New IntPtr(1)
+                    Return
+                End If
+
                 Dim hitTest As Integer = CInt(m.LParam.ToInt64() And &HFFFFL)
                 If hitTest = HTVSCROLL OrElse hitTest = HTHSCROLL Then
                     SetCursor(Cursors.Arrow.Handle)
