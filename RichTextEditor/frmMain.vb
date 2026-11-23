@@ -901,6 +901,7 @@ Public Class frmMain
                 e.Cancel = True
             End If
         End If
+
     End Sub
 
     Public Function CloseApp(ByVal e As EventArgs) As DialogResult
@@ -911,11 +912,36 @@ Public Class frmMain
                     SaveToolStripMenuItem_Click(Me, e)
                     SaveSize()
 
+                    ' Close menu before closing main form
+                    Dim menuForm As frmMenu = Application.OpenForms.OfType(Of frmMenu)().FirstOrDefault()
+
+                    If menuForm IsNot Nothing Then
+                        menuForm.Close()
+
+                        ' If the user cancelled the menu closing, cancel the application closing
+                        If Not menuForm.IsDisposed Then
+                            Return DialogResult.Cancel
+                        End If
+                    End If
+
                     If Not restart Then
                         End
                     End If
                 Case DialogResult.No
                     SaveSize()
+
+                    ' Close menu before closing main form
+                    Dim menuForm As frmMenu = Application.OpenForms.OfType(Of frmMenu)().FirstOrDefault()
+
+                    If menuForm IsNot Nothing Then
+                        menuForm.Close()
+
+                        ' If the user cancelled the menu closing, cancel the application closing
+                        If Not menuForm.IsDisposed Then
+                            Return DialogResult.Cancel
+                        End If
+                    End If
+
 
                     If Not restart Then
                         End
@@ -925,6 +951,19 @@ Public Class frmMain
             End Select
         Else
             SaveSize()
+
+            ' Close menu before closing main form
+            Dim menuForm As frmMenu = Application.OpenForms.OfType(Of frmMenu)().FirstOrDefault()
+
+            If menuForm IsNot Nothing Then
+                menuForm.Close()
+
+                ' If the user cancelled the menu closing, cancel the application closing
+                If Not menuForm.IsDisposed Then
+                    Return DialogResult.Cancel
+                End If
+            End If
+
 
             If Not restart Then
                 End
