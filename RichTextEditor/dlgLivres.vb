@@ -896,6 +896,7 @@ Public Class dlgLivres
                 ListViewLivres.Focus()
             End If
         End If
+        LastLivre = ""
     End Sub
 
     Private Async Sub ButtonRecherche_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ButtonRecherche.Click
@@ -974,7 +975,7 @@ Public Class dlgLivres
         _rechercheReactivationTimer = Nothing
         System.Threading.Interlocked.Exchange(_rechercheEnCours, 0)
 
-
+        LastLivre = ""
         If Not IsDisposed Then
             Me.Cursor = Cursors.Arrow
             ButtonRecherche.Enabled = True
@@ -1144,35 +1145,32 @@ Public Class dlgLivres
     End Sub
 
     Private Sub ButtonRandom_Click(sender As Object, e As EventArgs) Handles ButtonRandom.Click
-        If (Directory.Exists(PopotteDir)) Then
+        If Directory.Exists(PopotteDir) Then
             Dim tmpList As New List(Of String)
-            Dim count As Integer = 0
-            For Each Folder As String In My.Computer.FileSystem.GetDirectories(PopotteDir)
-                'Retourne le nom du dossier
-                Dim FolderName As String = Path.GetFileName(Folder)
-                'set search parameters
-                Dim di As New DirectoryInfo(PopotteDir & FolderName)
-                Dim aryFi As FileInfo() = di.GetFiles("*.rtf")
-                Dim fi As FileInfo
 
-
-                For Each fi In aryFi
-                    Dim Filename As String = Strings.LCase(fi.FullName)
-                    'put file path into List
-                    tmpList.Add(Filename)
-                    count += 1
+            If LastLivre <> "" Then
+                Dim livreDirectory As String = Path.Combine(PopotteDir, LastLivre)
+                If Directory.Exists(livreDirectory) Then
+                    For Each filePath As String In Directory.GetFiles(livreDirectory, "*.rtf")
+                        tmpList.Add(Strings.LCase(filePath))
+                    Next
+                End If
+            Else
+                For Each folder As String In Directory.GetDirectories(PopotteDir)
+                    For Each filePath As String In Directory.GetFiles(folder, "*.rtf")
+                        tmpList.Add(Strings.LCase(filePath))
+                    Next
                 Next
-            Next
+            End If
 
-            If count > 0 Then
+            If tmpList.Count > 0 Then
                 Dim r As New Random()
-                Dim resultInt As Integer = r.Next(0, count - 1)
+                Dim resultInt As Integer = r.Next(tmpList.Count)
                 'Read file path from list at random index
                 Dim Filepath As String = tmpList.Item(resultInt)
                 Dim fn As String = Path.GetFileNameWithoutExtension(Filepath)
                 'Get Book folder name
                 Dim Livre As String = Path.GetDirectoryName(Filepath)
-                Livre &= ".xxx"
                 Livre = Path.GetFileNameWithoutExtension(Livre)
 
                 Dim result As Integer = MessageBox.Show(LangINI.GetKeyValue("Popotte - BooksDialog - MessageBox", "11") & Environment.NewLine & fn & Chr(13) & LangINI.GetKeyValue("Popotte - BooksDialog - MessageBox", "12"), LangINI.GetKeyValue("Popotte - BooksDialog - MessageBox", "13"), MessageBoxButtons.OKCancel, MessageBoxIcon.Information)
