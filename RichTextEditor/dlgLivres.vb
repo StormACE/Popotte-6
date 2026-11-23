@@ -1,6 +1,7 @@
 Imports System.IO
-Imports Microsoft.Win32
+Imports System.Runtime
 Imports System.Text
+Imports Microsoft.Win32
 
 ''' <summary>
 ''' Popotte v6
@@ -939,13 +940,18 @@ Public Class dlgLivres
                 Me.ListViewRecettes.Visible = False
                 Me.ListViewRecherche.Visible = True
                 Me.RevenirButton.Enabled = True
-                If ListViewRecherche.Items.Count > 0 Then ListViewRecherche.Items(ListViewRecherche.Items.Count - 1).EnsureVisible()
-                Me.Text = "Popotte - " & LangINI.GetKeyValue("Popotte - BooksDialog", "18") & RecetteTotalCount & LangINI.GetKeyValue("Popotte - BooksDialog", "19")
-                ListViewRecherche.Items(0).Selected = True
-                ListViewRecherche.Items(0).EnsureVisible()
-                If RecetteTotalCount = 0 Then
+
+                If ListViewRecherche.Items.Count > 0 Then
+                    ListViewRecherche.Items(ListViewRecherche.Items.Count - 1).EnsureVisible()
+                    Me.Text = "Popotte - " & LangINI.GetKeyValue("Popotte - BooksDialog", "18") & RecetteTotalCount & LangINI.GetKeyValue("Popotte - BooksDialog", "19")
+                    ListViewRecherche.Items(0).Selected = True
+                    ListViewRecherche.Items(0).EnsureVisible()
+                Else
+                    Me.Text = "Popotte - " & LangINI.GetKeyValue("Popotte - BooksDialog", "18") & "0" & LangINI.GetKeyValue("Popotte - BooksDialog", "19")
+
                     MsgBox(LangINI.GetKeyValue("Popotte - BooksDialog - MessageBox", "2"), MsgBoxStyle.Exclamation, "Popotte")
                 End If
+
             End If
             If Not _fermetureDemandee Then ListViewRecherche.Focus()
         Catch ex As OperationCanceledException
@@ -990,13 +996,64 @@ Public Class dlgLivres
         Dim searchThread As New System.Threading.Thread(
             Sub()
                 Try
-                    Dim recetteTotalCount As Integer = 0
-                    Using scanRichTextBox As New RichTextBox()
-                        If Directory.Exists(PopotteDir) Then
-                            For Each folder As String In Directory.GetDirectories(PopotteDir)
+                    If LastLivre = "" Then
+                        Dim recetteTotalCount As Integer = 0
+                        Using scanRichTextBox As New RichTextBox()
+                            If Directory.Exists(PopotteDir) Then
+                                For Each folder As String In Directory.GetDirectories(PopotteDir)
+                                    cancellationToken.ThrowIfCancellationRequested()
+                                    Dim folderName As String = Path.GetFileName(folder)
+                                    Dim files As FileInfo() = New DirectoryInfo(Path.Combine(PopotteDir, folderName)).GetFiles("*.rtf")
+
+                                    For Each file As FileInfo In files
+                                        cancellationToken.ThrowIfCancellationRequested()
+
+                                        Dim filename As String = Strings.LCase(file.Name)
+                                        Dim recipeName As String = Strings.Left(filename, filename.Length - 4)
+                                        Dim key As String = "Software\Popotte\Livres\" & folderName & "\" & recipeName
+                                        Dim note As Integer = -1
+                                        Dim description As String = ""
+                                        Dim firstCharacter As Integer = recipeName.IndexOf(RechercheTexte.Trim)
+                                        Dim position As Integer = -1
+
+                                        LireMetadonneesRecette(key, note, description)
+
+                                        Dim descriptionLower As String = Strings.LCase(description)
+                                        If firstCharacter = -1 AndAlso descriptionLower.IndexOf(RechercheTexte.Trim) = -1 Then
+                                            Dim recipePath As String = Path.Combine(PopotteDir, folderName, filename)
+                                            scanRichTextBox.LoadFile(recipePath, RichTextBoxStreamType.RichText)
+                                            If scanRichTextBox.Text.Length > 0 Then
+                                                position = scanRichTextBox.Find(RechercheTexte.Trim, 0, scanRichTextBox.Text.Length, RichTextBoxFinds.None)
+                                            End If
+                                        End If
+
+                                        If firstCharacter <> -1 OrElse descriptionLower.IndexOf(RechercheTexte.Trim) <> -1 OrElse position <> -1 Then
+                                            recetteTotalCount += 1
+                                            Dim result As New RechercheResultat With {
+                                                .Nom = Strings.Left(file.Name, file.Name.Length - 4),
+                                                .Note = note,
+                                                .Description = description,
+                                                .Livre = folderName,
+                                                .Position = position,
+                                                .TexteRecherche = RechercheTexte
+                                            }
+                                            cancellationToken.ThrowIfCancellationRequested()
+                                            Invoke(New Action(Of RechercheResultat)(AddressOf AjouterResultatRecherche), New Object() {result})
+                                        End If
+                                    Next
+                                Next
+                            End If
+                        End Using
+                        completion.TrySetResult(recetteTotalCount)
+                    Else
+                        Dim recetteTotalCount As Integer = 0
+                        Using scanRichTextBox As New RichTextBox()
+                            Dim Recherchedir As String = PopotteDir & LastLivre
+                            If Directory.Exists(Recherchedir) Then
+
                                 cancellationToken.ThrowIfCancellationRequested()
-                                Dim folderName As String = Path.GetFileName(folder)
-                                Dim files As FileInfo() = New DirectoryInfo(Path.Combine(PopotteDir, folderName)).GetFiles("*.rtf")
+                                Dim folderName As String = Path.GetFileName(LastLivre)
+                                Dim files As FileInfo() = New DirectoryInfo(Path.Combine(PopotteDir, LastLivre)).GetFiles("*.rtf")
 
                                 For Each file As FileInfo In files
                                     cancellationToken.ThrowIfCancellationRequested()
@@ -1013,7 +1070,7 @@ Public Class dlgLivres
 
                                     Dim descriptionLower As String = Strings.LCase(description)
                                     If firstCharacter = -1 AndAlso descriptionLower.IndexOf(RechercheTexte.Trim) = -1 Then
-                                        Dim recipePath As String = Path.Combine(PopotteDir, folderName, filename)
+                                        Dim recipePath As String = Path.Combine(PopotteDir, LastLivre, filename)
                                         scanRichTextBox.LoadFile(recipePath, RichTextBoxStreamType.RichText)
                                         If scanRichTextBox.Text.Length > 0 Then
                                             position = scanRichTextBox.Find(RechercheTexte.Trim, 0, scanRichTextBox.Text.Length, RichTextBoxFinds.None)
@@ -1023,21 +1080,21 @@ Public Class dlgLivres
                                     If firstCharacter <> -1 OrElse descriptionLower.IndexOf(RechercheTexte.Trim) <> -1 OrElse position <> -1 Then
                                         recetteTotalCount += 1
                                         Dim result As New RechercheResultat With {
-                                            .Nom = Strings.Left(file.Name, file.Name.Length - 4),
-                                            .Note = note,
-                                            .Description = description,
-                                            .Livre = folderName,
-                                            .Position = position,
-                                            .TexteRecherche = RechercheTexte
-                                        }
+                                                .Nom = Strings.Left(file.Name, file.Name.Length - 4),
+                                                .Note = note,
+                                                .Description = description,
+                                                .Livre = folderName,
+                                                .Position = position,
+                                                .TexteRecherche = RechercheTexte
+                                            }
                                         cancellationToken.ThrowIfCancellationRequested()
                                         Invoke(New Action(Of RechercheResultat)(AddressOf AjouterResultatRecherche), New Object() {result})
                                     End If
                                 Next
-                            Next
-                        End If
-                    End Using
-                    completion.TrySetResult(recetteTotalCount)
+                            End If
+                        End Using
+                        completion.TrySetResult(recetteTotalCount)
+                    End If
                 Catch ex As OperationCanceledException
                     completion.TrySetCanceled(cancellationToken)
                 Catch ex As Exception
