@@ -3403,8 +3403,12 @@ Public Class frmMain
         rtbDoc.Focus()
     End Sub
 
-    Private Sub ToolStripComboBoxSize_KeyUp(sender As Object, e As KeyEventArgs) Handles ToolStripComboBoxSize.KeyUp
+    Private Sub ToolStripComboBoxSize_KeyDown(sender As Object, e As KeyEventArgs) Handles ToolStripComboBoxSize.KeyDown
         If e.KeyCode = Keys.Enter Then
+            'enlève le son de ding du système
+            e.SuppressKeyPress = True
+            e.Handled = True
+
             SetFont()
             rtbDoc.Focus()
         End If
